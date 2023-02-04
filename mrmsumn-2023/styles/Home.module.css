@@ -151,6 +151,12 @@
   background-clip: content-box;
 }
 
+
+.bgImage{
+  /* transform:scale(1.1) !important; */
+  transition: all 1s ease;
+}
+
 /* Enable hover only on non-touch devices */
 @media (hover: hover) and (pointer: fine) {
   .card:hover {
@@ -174,6 +180,16 @@
 }
 
 /* Mobile */
+@media (max-width: 992px){
+  .leftTree{
+    left:-50px;
+  }
+  .rightTree{
+    right:-50px;
+  }
+}
+
+
 @media (max-width: 700px) {
   .content {
     padding: 4rem;

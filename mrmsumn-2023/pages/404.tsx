@@ -18,7 +18,7 @@ export default function Home() {
       <Box bg={"black"}>
         <img
           width={"60%"}
-          src="/Assets/Logo/Logo Mr & Ms UMN 2023 - Circle.png"
+          src="/Assets/Logo/LogoMrMsUMN2023.png"
         />
         <p className={styles.text_maintenance}>
           Mohon Maaf Website Mr. & Ms. UMN 2023 sedang dalam masa Maintenance
