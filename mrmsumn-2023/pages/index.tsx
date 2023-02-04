@@ -141,7 +141,9 @@ export default function Home(props: any) {
         bg="black"
         alignItems={"center"}
         justifyContent={"center"}
-        flexDir={"column"}></Flex>
+        flexDir={"column"}>
+          
+        </Flex>
     </div>
   );
 }
