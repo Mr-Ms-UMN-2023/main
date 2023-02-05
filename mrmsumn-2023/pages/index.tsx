@@ -1,41 +1,59 @@
 import Head from "next/head";
 import Image from "next/image";
-import { Inter } from "@next/font/google";
+
 import styles from "@/styles/Home.module.css";
 import { Box, Flex, Img, Text, Heading } from "@chakra-ui/react";
 import { useState, useRef, useEffect } from "react";
 import react from "react";
-const inter = Inter({ subsets: ["latin"] });
 
 
-const getWindowDimensions = () => {
-  const { innerWidth: width, innerHeight: height } = window;
-  return {
-    width,
-    height
-  };
-}
+
 
 export default function Home(props: any) {
 
-  const [bgWidth, setBgWidth] = useState(1536);
-  const [left, setLeft] = useState(0);
-  const [right, setRight] = useState(0);
+  const [scroll, setScroll] = useState(0);
+  const [brightness, setBrightness] = useState(1);
+  const [opacity, setOpacity] = useState(0);
 
-  const hasti = useRef<HTMLImageElement>();
-  const rightTree = useRef<HTMLImageElement>();
-  const leftTree = useRef<HTMLImageElement>();  
-
-  const shiningSoonImage = useRef<HTMLImageElement>();
-  const MRMS =  useRef<HTMLImageElement>();
 
   const handleScroll = () => {
-    const position = window.pageYOffset;
+    const scrollPosition = window.pageYOffset;
+    const percentage = scrollPosition / window.innerHeight;
+
+    if (percentage > 0.3){
+      setOpacity(scrollPosition / window.innerHeight);
+    } else {
+      setOpacity(0);
+    }
+
+
+    // min brightness 0.5
+    // max brightness 1
+    setBrightness((old) => {
+      if (percentage < 0.2){
+        return 1;
+      } else {
+        if (percentage > 0.5) return 0.5
+        else return (1 - (percentage * 0.9))
+      }
+    });
+
+
+    
+    setScroll(scrollPosition/5);
+
+  
   }
+
+
+
+  useEffect(() => {
+    console.log(brightness);
+  }, [brightness]);
+
 
   useEffect(() => {
     window.addEventListener('scroll', handleScroll);
-
     return () => {
       window.removeEventListener('scroll', handleScroll);
     }
@@ -53,7 +71,7 @@ export default function Home(props: any) {
       <Flex
         minH={"100vh"}
         w='100%'
-        h='1500px'
+        h='200vh'
         bg="black"
         flexDirection={'column'}
         alignItems={"center"}
@@ -61,23 +79,47 @@ export default function Home(props: any) {
         flexDir={"column"}
         top={'0'}
         overflowX={'hidden'}
+        position={'relative'}
         >
-            <Flex h='100vh' w='100%' position={'fixed'} top={'0'} flexDirection={'column'} alignItems={'center'}>
-            {/* <Flex h='100vh' w='100%' position={'fixed'} top={'0'} flexDirection={'column'} alignItems={'center'} backgroundImage={"/Assets/Images/hasti4k.png"} backgroundPosition={'center'} backgroundSize={'cover'}> */}
-              
-              <Img ref={hasti} className={styles.bgImage} src="/Assets/Images/hasti4k.png" objectFit={'cover'} h='100%' w={bgWidth} position='absolute' zIndex={-2}></Img>
-              <Flex w='100%' h='100%' maxW={'1536px'} minW={'1536px'} position='absolute' zIndex={-2} flexDirection={'column'} alignItems='center' justifyContent='center'>
-                {/* Backgrounds */}
-                <Img ref={rightTree} right={right}  src="/Assets/Images/leaf-left.png" objectFit={'cover'} w='50%' h='100vh'  position='absolute' zIndex={-2}></Img>          
-                <Img ref={leftTree} left={left} src="/Assets/Images/leaf-right.png" objectFit={'cover'} w='50%' h='100vh'  position='absolute' zIndex={-2}></Img>            
+          <Box
+            w='100%'
+            minW='1536px'
+            h='100vh'
+            position="fixed"
+            zIndex={0}
+            filter={`brightness(${brightness})`}            
+            transform={`scale(${1 + scroll / 3000})`}            
+            >
+              <Img minH='100%' minW='100%' src="/Assets/Images/hasti4k.png"></Img>                                       
+          </Box>
 
-                {/* Dynamic Content */}
-                {/* <Img mb='100px' h='200px' w='200px' src="/Assets/Images/shinning soon.png"></Img> */}
-                {/* <Img mb='100px' h='200px' w='200px' src="/Assets/Images/logo mr ms.png"></Img>                 */}
+          <Box
+            w='100%'
+            h='100vh'       
+            position="fixed"
+            filter={`brightness(${brightness})`}
+            zIndex={0}
+            >               
+              <Img  minH='100%' position={'fixed'} left={0} w={{ base: "18rem", md: "20rem", lg: "30rem", xl: "50rem" }}  transform={`translateX(-${scroll}px)`} src="/Assets/Images/pohonkiri.png"></Img>
+              <Img minH='100%' position={'fixed'} right={0} w={{ base: "18rem", md: "20rem", lg: "30rem", xl: "50rem" }}  transform={`translateX(${scroll}px)`} src="/Assets/Images/rumputkanan.png"></Img>                                    
+          </Box>        
+
+          <Box
+            w='100%'
+            h='100vh'       
+            position="fixed"
+            zIndex={1}
+            display='flex'
+            flexDirection={'column'}
+            justifyContent={'center'}
+            alignItems={'center'}
+            >            
+              <Img w='400px' h='400px' position='relative' top={`${170 - scroll/5}px`} opacity={opacity} transform={``} src="/Assets/Images/logo mr ms.png"></Img>               
+              <Img w='400px' h='400px' position='relative' top={`${-120 - scroll/5}px`} opacity={opacity}  transform={``}  src="/Assets/Images/shinning soon.png"></Img>
+
+          </Box>           
 
 
-              </Flex>              
-            </Flex>
         </Flex>
     </div>
   );
