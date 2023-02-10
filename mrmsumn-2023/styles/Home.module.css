@@ -12,3 +12,7 @@
 .leaf_right {
   object-position: top left;
 }
+
+.fixed {
+  position: fixed !important;
+}
