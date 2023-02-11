@@ -1,5 +1,4 @@
 import { Box, AspectRatio, Image, Text, position } from "@chakra-ui/react";
-import LoadingVideo from "@/public/Assets/Video/intro.mp4";
 
 
 const Loading = () => {
@@ -15,9 +14,9 @@ const Loading = () => {
         top='0' 
         left='0'
        >
-            <video src={'https://archive.org/download/BigBuckBunny_124/Content/big_buck_bunny_720p_surround.mp4'}
+            <video src={'/Assets/Video/intro.mp4'}
             autoPlay
-            muted
+            muted controls disablePictureInPicture
             width={'100%'}
             height={'100%'}
             style={{
@@ -26,7 +25,6 @@ const Loading = () => {
                 minHeight : '100vh'
             }}
             ></video>
-
        </Box>
     )
 

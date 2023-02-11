@@ -12,13 +12,19 @@ export default function Home(props: any) {
   const [scrollY2, setScrollY2] = useState(0);
   const [shiningShoonOp, setShiningShoonOp] = useState(0);
 
-  const [loading, setLoading] = useState(true);
+  
+  const [loading, setLoading] = useState(false);
+  const [preloadImage, setPreloadImage] = useState(true);
 
   const mainBg = useRef<HTMLDivElement>(null);
 
   const content = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
+
+    setLoading(true);
+    setPreloadImage(false);
+
     window.scrollTo(0, 0);
     window.addEventListener("scroll", () => {
       window.pageYOffset;
@@ -52,6 +58,15 @@ export default function Home(props: any) {
           );
       }
     });
+
+    // Set timer for loading
+
+    const loadingTimer = setTimeout(()=>{
+      setLoading(false);
+    }, 5500);
+
+    return () => clearTimeout(loadingTimer);
+
   }, []);
 
   return (
@@ -63,8 +78,23 @@ export default function Home(props: any) {
         <link rel="icon" href="/Assets/Logo/LogoMrMsUMN2023.png" />
       </Head>
 
-      {loading ? <Loading/> : 
+      {loading 
+        ? <Loading/> 
+        : 
       <>
+
+        {preloadImage  
+          &&
+            <Flex
+            h='100vh'
+            w='100vw'
+            position={'absolute'}
+            bg='black'
+            zIndex={20}
+            >
+            </Flex>          
+          }
+          
         <Flex
           alignItems={"flex-end"}
           justifyContent={"center"}
