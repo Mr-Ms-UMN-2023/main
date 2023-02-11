@@ -14,6 +14,7 @@ export default function Home(props: any) {
 
   
   const [loading, setLoading] = useState(false);
+  const [loadingOpacity, setLoadingOpacity] = useState(1);
   const [preloadImage, setPreloadImage] = useState(true);
 
   const mainBg = useRef<HTMLDivElement>(null);
@@ -59,11 +60,18 @@ export default function Home(props: any) {
       }
     });
 
-    // Set timer for loading
 
-    const loadingTimer = setTimeout(()=>{
+    // Set loading opacity timer
+
+    const loadingOpacityTimer = setTimeout(() => {
+        setLoadingOpacity(0);
+    }, 5000);
+
+
+    // Set timer for loading
+    const loadingTimer = setTimeout(() => {
       setLoading(false);
-    }, 5500);
+    }, 6000);
 
     return () => clearTimeout(loadingTimer);
 
@@ -79,7 +87,7 @@ export default function Home(props: any) {
       </Head>
 
       {loading 
-        ? <Loading/> 
+        ? <Loading loadingOpacity={loadingOpacity}/> 
         : 
       <>
 
@@ -94,7 +102,7 @@ export default function Home(props: any) {
             >
             </Flex>          
           }
-          
+
         <Flex
           alignItems={"flex-end"}
           justifyContent={"center"}

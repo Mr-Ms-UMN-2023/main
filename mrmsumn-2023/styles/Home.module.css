@@ -47,6 +47,15 @@
   transition: all 1s ease;
 }
 
+.loading_box{
+  transform: scale(1, .85);  
+}
+
+.loading_video{
+  min-height : 130vh;
+}
+
+
 /* Enable hover only on non-touch devices */
 @media (hover: hover) and (pointer: fine) {
   .card:hover {
@@ -57,6 +66,17 @@
   .card:hover span {
     transform: translateX(4px);
   }
+}
+
+@media screen and (max-width: 768px){
+    .loading_box{
+      transform: scale(.72, .65);
+    }
+
+    .loading_video{
+      min-height: 160vh;
+      min-width:140vw;
+    }
 }
 
 @media (prefers-reduced-motion) {

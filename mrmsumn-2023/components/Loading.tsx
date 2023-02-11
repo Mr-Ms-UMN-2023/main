@@ -1,28 +1,36 @@
 import { Box, AspectRatio, Image, Text, position } from "@chakra-ui/react";
+import styles from "@/styles/Home.module.css";
 
-
-const Loading = () => {
+const Loading = ({loadingOpacity} : {loadingOpacity : number}) => {
     return (
        <Box 
+       className={styles.loading_box}
        h='100vh' 
-       w='100%'  
+       w='100vw'  
        maxW='100%' 
+       maxH='100%'
        position='fixed'
        display='flex' 
        alignItems='center' 
        justifyContent={'center'}
-        top='0' 
-        left='0'
+       opacity={loadingOpacity}
+       transition={'opacity 1s ease-in-out'}
+       top='0' 
+       left='0'
        >
             <video src={'/Assets/Video/intro.mp4'}
+            className={styles.loading_video}
             autoPlay
-            muted controls disablePictureInPicture
+            muted controls disablePictureInPicture 
             width={'100%'}
             height={'100%'}
             style={{
+                pointerEvents : 'none',
+                touchAction : 'none',
                 objectFit : 'cover',
                 maxWidth : '100%',
-                minHeight : '100vh'
+                imageRendering : 'pixelated',
+                imageResolution : 'inherit'
             }}
             ></video>
        </Box>
