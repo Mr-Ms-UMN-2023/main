@@ -15,6 +15,7 @@ export default function Home(props: any) {
   const [loading, setLoading] = useState(false);
   const [loadingOpacity, setLoadingOpacity] = useState(1);
   const [preloadImage, setPreloadImage] = useState(true);
+  const [show, setShow] = useState('none');
 
   const mainBg = useRef<HTMLDivElement>(null);
 
@@ -70,6 +71,7 @@ export default function Home(props: any) {
     // Set timer for loading
     const loadingTimer = setTimeout(() => {
       setLoading(false);
+      setShow('block');
     }, 6000);
 
     // Fade in out animation
@@ -309,8 +311,14 @@ export default function Home(props: any) {
           </Flex>
 
 
-          <Flex
-            className={styles.show}
+
+        </>
+        
+      )}
+
+      
+        <Flex
+            className={styles.hidden}
             h='300px'
             w='70%'
             maxW='1366px'
@@ -321,8 +329,9 @@ export default function Home(props: any) {
             alignItems={'center'}
             mt='20px'
             ref={(el: HTMLDivElement) => texts.current.push(el!)}
+            display={show}
         > 
-            <Heading color='white' mb='10px' fontSize={'60px'}>MRMS UMN</Heading>
+            <Heading color='white' mb='10px' fontSize={'60px'} textAlign='center'>MRMS UMN</Heading>
 
             <Text textAlign={'justify'} color='white'>
               Mr. & Ms. UMN merupakan salah satu kegiatan mahasiswa yang dinaungi oleh 
@@ -333,12 +342,7 @@ export default function Home(props: any) {
               guna mewujudkan dampak positif bagi civitas akademika UMN serta lingkungan sekitar.            
             </Text>
 
-          </Flex> 
-        </>
-        
-      )}
-
-      
+          </Flex>       
 
 
 
