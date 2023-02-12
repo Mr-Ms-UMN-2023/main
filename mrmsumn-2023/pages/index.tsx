@@ -3,8 +3,7 @@ import styles from "@/styles/Home.module.css";
 import { Box, Img, Flex, Text, AspectRatio, Heading } from "@chakra-ui/react";
 import Loading from "@/components/Loading";
 import Image from "next/image";
-import { useInView } from "react-intersection-observer";
-import { useState, useEffect, useRef, HtmlHTMLAttributes } from "react";
+import { useState, useEffect, useRef } from "react";
 
 export default function Home(props: any) {
   const [scrollY, setScrollY] = useState(0);
@@ -15,53 +14,71 @@ export default function Home(props: any) {
   const [loading, setLoading] = useState(false);
   const [loadingOpacity, setLoadingOpacity] = useState(1);
   const [preloadImage, setPreloadImage] = useState(true);
+  const [autoPlayFlag, setAutoPlayFlag] = useState(false);
   const [show, setShow] = useState('none');
+
+  const [teaser, setTeaser] = useState('');
 
   const mainBg = useRef<HTMLDivElement>(null);
 
   const content = useRef<HTMLDivElement>(null);
 
-  const youtube = useRef<HTMLDivElement>(null);
+  const youtube = useRef<HTMLDivElement[]>([]);
 
   const texts = useRef<HTMLDivElement[]>([]);
+
+  const handleScroll =  () => {
+    window.pageYOffset;
+    let scroll = window.pageYOffset / 5;
+    setScrollY(scroll * 2.2);
+
+    setScrollY2(scroll);
+
+    let mainBgBright =
+      mainBg?.current?.offsetHeight &&
+      mainBg?.current?.offsetHeight - window.innerHeight > window.pageYOffset
+        ? 1 -
+          window.pageYOffset /
+            (mainBg?.current?.offsetHeight - window.innerHeight)
+        : 0;
+
+    setBrightness(mainBgBright);
+
+    if (mainBg?.current?.offsetHeight && 1 - mainBgBright < 0.45) {
+      setShiningShoonOp(0);
+    } else if (mainBg?.current?.offsetHeight && 1 - mainBgBright >= 0.8) {
+      setShiningShoonOp(
+        1 -
+          (window.pageYOffset - mainBg?.current?.offsetHeight * 0.4) /
+            (mainBg?.current?.offsetHeight * 0.3)
+      );
+    } else {
+      mainBg?.current?.offsetHeight &&
+        setShiningShoonOp(
+          (window.pageYOffset - mainBg?.current?.offsetHeight * 0.1) /
+            (mainBg?.current?.offsetHeight * 0.4)
+        );
+    }
+  }
   
   useEffect(() => {
+
+      // Check for browser
+      let userAgent = navigator.userAgent;
+
+      if(userAgent.match(/firefox|fxios/i)){
+        setTeaser("https://www.youtube.com/embed/Wk-TvlzGrkQ?");
+      }
+      else {
+        setTeaser("https://www.youtube.com/embed/Wk-TvlzGrkQ?mute=1");        
+      }    
+    
     setLoading(true);
     setPreloadImage(false);
 
     window.scrollTo(0, 0);
-    window.addEventListener("scroll", () => {
-      window.pageYOffset;
-      let scroll = window.pageYOffset / 5;
-      setScrollY(scroll * 2.2);
-      setScrollY2(scroll);
-
-      let mainBgBright =
-        mainBg?.current?.offsetHeight &&
-        mainBg?.current?.offsetHeight - window.innerHeight > window.pageYOffset
-          ? 1 -
-            window.pageYOffset /
-              (mainBg?.current?.offsetHeight - window.innerHeight)
-          : 0;
-
-      setBrightness(mainBgBright);
-
-      if (mainBg?.current?.offsetHeight && 1 - mainBgBright < 0.45) {
-        setShiningShoonOp(0);
-      } else if (mainBg?.current?.offsetHeight && 1 - mainBgBright >= 0.8) {
-        setShiningShoonOp(
-          1 -
-            (window.pageYOffset - mainBg?.current?.offsetHeight * 0.4) /
-              (mainBg?.current?.offsetHeight * 0.3)
-        );
-      } else {
-        mainBg?.current?.offsetHeight &&
-          setShiningShoonOp(
-            (window.pageYOffset - mainBg?.current?.offsetHeight * 0.1) /
-              (mainBg?.current?.offsetHeight * 0.4)
-          );
-      }
-    });
+    
+    window.addEventListener("scroll", handleScroll);
 
     // Set loading opacity timer
     const loadingOpacityTimer = setTimeout(() => {
@@ -71,7 +88,7 @@ export default function Home(props: any) {
     // Set timer for loading
     const loadingTimer = setTimeout(() => {
       setLoading(false);
-      setShow('block');
+      setShow('flex');
     }, 6000);
 
     // Fade in out animation
@@ -86,29 +103,36 @@ export default function Home(props: any) {
     });
 
 
+
     if(texts.current){
       const targets = texts.current;
-      console.log(targets);
       targets.forEach((el) => {
           observer.observe(el);
       });
     }
+    
 
-
-  
 
     return () => {
       clearTimeout(loadingOpacityTimer);
       clearTimeout(loadingTimer);
+      window.removeEventListener("scroll", handleScroll);      
       if (texts.current){
         observer.disconnect();
       }
-
     };
   }, []);
 
+
+  useEffect(() => {
+    if (scrollY >= 280 && !autoPlayFlag){
+      setAutoPlayFlag(true);
+      setTeaser(teaser => teaser + '&autoplay=1');
+    }
+  }, [scrollY]);
+
   return (
-    <>
+    <div>
       <Head>
         <title>Mr. & Ms. UMN 2023</title>
         <meta name="description" content="Website Mr. & Ms. UMN 2023" />
@@ -169,6 +193,7 @@ export default function Home(props: any) {
                         lg: "calc(100vw + " + scrollY + "px)",
                       }}
                       maxW="200vw"
+                      overflow={'hidden'}
                       ratio={16 / 9}>
                       <Img
                         loading="eager"
@@ -274,7 +299,7 @@ export default function Home(props: any) {
             </Flex>
           </Flex>
 
-          <Flex
+          <Flex       
             minH={"100vh"}
             minW={"100vw"}
             px="5vw"
@@ -284,7 +309,7 @@ export default function Home(props: any) {
             padding={"0px"}
             position={"relative"}>
             <AspectRatio
-              ref={youtube}
+              ref={(el : HTMLDivElement) => youtube.current.push(el!)}               
               transform={
                 "scale(" +
                 (content?.current?.offsetTop &&
@@ -303,7 +328,7 @@ export default function Home(props: any) {
               <iframe
                 width="560"
                 height="315"
-                src={`https://www.youtube.com/embed/Wk-TvlzGrkQ?autoplay=1`}
+                src={teaser}
                 title="YouTube video player"
                 allow="accelerometer; autoplay; unmute; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share; no user gesture is required"
                 allowFullScreen></iframe>
@@ -319,19 +344,20 @@ export default function Home(props: any) {
       
         <Flex
             className={styles.hidden}
-            h='300px'
+            display={show}            
+            h='100vh'
             w='70%'
             maxW='1366px'
             mx='auto'
-            my='0'
+            my='auto'
             flexDirection={'column'}
             justifyContent='center'
             alignItems={'center'}
             mt='100px'
+            position='relative'
             ref={(el: HTMLDivElement) => texts.current.push(el!)}
-            display={show}
         > 
-            <Heading color='white' mb='20px' fontSize={'60px'} textAlign='center'>MRMS UMN</Heading>
+            <Heading color='white' mb='20px' fontSize={'60px'} textAlign='center'>Mr. & Ms. UMN 2023</Heading>
 
             <Text textAlign={'justify'} color='white'>
               Mr. & Ms. UMN merupakan salah satu kegiatan mahasiswa yang dinaungi oleh 
@@ -341,9 +367,8 @@ export default function Home(props: any) {
               serta memaksimalisasikan potensi yang dimiliki oleh para mahasiswa/i UMN 
               guna mewujudkan dampak positif bagi civitas akademika UMN serta lingkungan sekitar.            
             </Text>
-
           </Flex>       
      
-    </>
+    </div>
   );
 }

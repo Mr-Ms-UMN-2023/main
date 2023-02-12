@@ -18,7 +18,7 @@ const Loading = ({loadingOpacity} : {loadingOpacity : number}) => {
        top='0' 
        left='0'
        >
-            <video src={'/Assets/Video/intro.mp4'}
+            <video src={'/Assets/Video/intro_2.mp4'}
             className={styles.loading_video}
             autoPlay
             muted controls disablePictureInPicture 

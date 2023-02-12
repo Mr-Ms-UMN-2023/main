@@ -9,7 +9,7 @@
 .hidden{
   opacity:0;
   transform: translateY(100px);
-  transition: all 1.2s ease-in-out;
+  transition: all 2.5s ease-in-out;
 }
 
 .show{
@@ -93,7 +93,7 @@
     }
 }
 
-@media (prefers-reduced-motion) {
+@media (prefers-reduced-motion){
   .thirteen::before {
     animation: none;
   }
