@@ -106,3 +106,28 @@ a {
     color-scheme: dark;
   }
 }
+
+@font-face {
+  font-family: TrajanPro-Bold;
+  src: url("/public/Font/TrajanPro-Bold.otf");
+}
+
+/* width */
+::-webkit-scrollbar {
+  width: 5px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #0c0802;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #c7b04f;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
