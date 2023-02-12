@@ -21,6 +21,8 @@ export default function Home(props: any) {
 
   const content = useRef<HTMLDivElement>(null);
 
+  const youtube = useRef<HTMLDivElement>(null);
+
   useEffect(() => {
 
     setLoading(true);
@@ -73,7 +75,12 @@ export default function Home(props: any) {
       setLoading(false);
     }, 6000);
 
-    return () => clearTimeout(loadingTimer);
+
+
+    return () => {
+      clearTimeout(loadingOpacityTimer);
+      clearTimeout(loadingTimer);
+    }
 
   }, []);
 
@@ -244,7 +251,8 @@ export default function Home(props: any) {
           alignItems="center"
           padding={"0px"}
           position={"relative"}>
-          <AspectRatio
+          <AspectRatio        
+            ref={youtube}               
             transform={
               "scale(" +
               (content?.current?.offsetTop &&
@@ -260,12 +268,13 @@ export default function Home(props: any) {
             minW={"90vw"}
             minH={"90vh"}
             ratio={{ base: 9 / 16, md: 16 / 9 }}>
-            <iframe
+            <iframe         
               width="560"
               height="315"
-              src="https://www.youtube.com/embed/Wk-TvlzGrkQ"
+              src={`https://www.youtube.com/embed/Wk-TvlzGrkQ?autoplay=1&mute=1`}
               title="YouTube video player"
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+        
+              allow="accelerometer; autoplay; unmute; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share; no user gesture is required"
               allowFullScreen></iframe>
           </AspectRatio>
         </Flex>      
