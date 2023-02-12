@@ -74,9 +74,15 @@
 }
 
 @font-face {
-  font-family: TrajanPro-Bold;
-  src: url("/public/Font/TrajanPro-Bold.otf");
+  font-family: 'TrajanPro-Bold';
+  src: url('../public/Font/TrajanPro-Bold.otf') format("opentype");
 }
+
+@font-face {
+  font-family: 'Baskerville';
+  src: url('../public/Font/baskvl.ttf') format("truetype")
+}
+
 
 * {
   box-sizing: border-box;
@@ -106,6 +112,14 @@ a {
   text-decoration: none;
 }
 
+h2 {
+  font-family: "TrajanPro-Bold" !important;
+  color : green;
+}
+
+h1, p {
+  font-family: 'Baskerville' !important;
+}
 
 
 

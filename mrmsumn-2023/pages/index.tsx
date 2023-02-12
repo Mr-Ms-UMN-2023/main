@@ -3,6 +3,7 @@ import styles from "@/styles/Home.module.css";
 import { Box, Img, Flex, Text, AspectRatio, Heading } from "@chakra-ui/react";
 import Loading from "@/components/Loading";
 import Image from "next/image";
+import { useInView } from "react-intersection-observer";
 import { useState, useEffect, useRef, HtmlHTMLAttributes } from "react";
 
 export default function Home(props: any) {
@@ -22,8 +23,7 @@ export default function Home(props: any) {
   const youtube = useRef<HTMLDivElement>(null);
 
   const texts = useRef<HTMLDivElement[]>([]);
-
-
+  
   useEffect(() => {
     setLoading(true);
     setPreloadImage(false);
@@ -75,32 +75,38 @@ export default function Home(props: any) {
     // Fade in out animation
 
     const observer = new IntersectionObserver((entries) => {
-      entries.forEach((entry) => {
+      const [entry] = entries;
         if (entry.isIntersecting){
           entry.target.classList.add(styles.show);
         } else {
           entry.target.classList.remove(styles.show);
         }
+    });
+
+
+    if(texts.current){
+      const targets = texts.current;
+      console.log(targets);
+      targets.forEach((el) => {
+          observer.observe(el);
       });
-    });
+    }
 
 
-    const targets = texts.current;
-
-    targets.forEach((el) => {
-        observer.observe(el);
-    });
   
 
     return () => {
       clearTimeout(loadingOpacityTimer);
       clearTimeout(loadingTimer);
-      observer.disconnect();
+      if (texts.current){
+        observer.disconnect();
+      }
+
     };
   }, []);
 
   return (
-    <div>
+    <>
       <Head>
         <title>Mr. & Ms. UMN 2023</title>
         <meta name="description" content="Website Mr. & Ms. UMN 2023" />
@@ -302,34 +308,42 @@ export default function Home(props: any) {
             </AspectRatio>
           </Flex>
 
+
           <Flex
-            className={styles.hidden}
+            className={styles.show}
             h='300px'
             w='70%'
             maxW='1366px'
-            bg='red'
             mx='auto'
             my='0'
             flexDirection={'column'}
             justifyContent='center'
             alignItems={'center'}
+            mt='20px'
             ref={(el: HTMLDivElement) => texts.current.push(el!)}
         > 
-          <Heading className={styles.heading}>Mr. & Ms. UMN</Heading>
+            <Heading color='white' mb='10px' fontSize={'60px'}>MRMS UMN</Heading>
 
-          <Text textAlign={'center'}>
-            Mr. & Ms. UMN merupakan salah satu kegiatan mahasiswa yang dinaungi oleh 
-            Badan Eksekutif Mahasiswa (BEM) Universitas Multimedia Nusantara sebagai 
-            ajang pencarian duta kampus UMN yang memiliki peranan untuk mewujudkan 
-            generasi penerus bangsa yang ekspresif, inovatif, kreatif, dan adaptif, 
-            serta memaksimalisasikan potensi yang dimiliki oleh para mahasiswa/i UMN 
-            guna mewujudkan dampak positif bagi civitas akademika UMN serta lingkungan sekitar.            
-          </Text>
+            <Text textAlign={'justify'} color='white'>
+              Mr. & Ms. UMN merupakan salah satu kegiatan mahasiswa yang dinaungi oleh 
+              Badan Eksekutif Mahasiswa (BEM) Universitas Multimedia Nusantara sebagai 
+              ajang pencarian duta kampus UMN yang memiliki peranan untuk mewujudkan 
+              generasi penerus bangsa yang ekspresif, inovatif, kreatif, dan adaptif, 
+              serta memaksimalisasikan potensi yang dimiliki oleh para mahasiswa/i UMN 
+              guna mewujudkan dampak positif bagi civitas akademika UMN serta lingkungan sekitar.            
+            </Text>
 
-        </Flex>
-
+          </Flex> 
         </>
+        
       )}
-    </div>
+
+      
+
+
+
+
+     
+    </>
   );
 }
