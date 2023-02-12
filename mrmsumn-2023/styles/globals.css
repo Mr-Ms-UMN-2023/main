@@ -73,6 +73,11 @@
   }
 }
 
+@font-face {
+  font-family: TrajanPro-Bold;
+  src: url("/public/Font/TrajanPro-Bold.otf");
+}
+
 * {
   box-sizing: border-box;
   padding: 0;
@@ -101,16 +106,17 @@ a {
   text-decoration: none;
 }
 
+
+
+
+
 @media (prefers-color-scheme: dark) {
   html {
     color-scheme: dark;
   }
 }
 
-@font-face {
-  font-family: TrajanPro-Bold;
-  src: url("/public/Font/TrajanPro-Bold.otf");
-}
+
 
 /* width */
 ::-webkit-scrollbar {

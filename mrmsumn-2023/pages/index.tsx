@@ -1,6 +1,6 @@
 import Head from "next/head";
 import styles from "@/styles/Home.module.css";
-import { Box, Img, Flex, Text, AspectRatio } from "@chakra-ui/react";
+import { Box, Img, Flex, Text, AspectRatio, Heading } from "@chakra-ui/react";
 import Loading from "@/components/Loading";
 import Image from "next/image";
 import { useState, useEffect, useRef, HtmlHTMLAttributes } from "react";
@@ -20,6 +20,9 @@ export default function Home(props: any) {
   const content = useRef<HTMLDivElement>(null);
 
   const youtube = useRef<HTMLDivElement>(null);
+
+  const texts = useRef<HTMLDivElement[]>([]);
+
 
   useEffect(() => {
     setLoading(true);
@@ -60,7 +63,6 @@ export default function Home(props: any) {
     });
 
     // Set loading opacity timer
-
     const loadingOpacityTimer = setTimeout(() => {
       setLoadingOpacity(0);
     }, 5000);
@@ -70,9 +72,30 @@ export default function Home(props: any) {
       setLoading(false);
     }, 6000);
 
+    // Fade in out animation
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting){
+          entry.target.classList.add(styles.show);
+        } else {
+          entry.target.classList.remove(styles.show);
+        }
+      });
+    });
+
+
+    const targets = texts.current;
+
+    targets.forEach((el) => {
+        observer.observe(el);
+    });
+  
+
     return () => {
       clearTimeout(loadingOpacityTimer);
       clearTimeout(loadingTimer);
+      observer.disconnect();
     };
   }, []);
 
@@ -278,6 +301,33 @@ export default function Home(props: any) {
                 allowFullScreen></iframe>
             </AspectRatio>
           </Flex>
+
+          <Flex
+            className={styles.hidden}
+            h='300px'
+            w='70%'
+            maxW='1366px'
+            bg='red'
+            mx='auto'
+            my='0'
+            flexDirection={'column'}
+            justifyContent='center'
+            alignItems={'center'}
+            ref={(el: HTMLDivElement) => texts.current.push(el!)}
+        > 
+          <Heading className={styles.heading}>Mr. & Ms. UMN</Heading>
+
+          <Text textAlign={'center'}>
+            Mr. & Ms. UMN merupakan salah satu kegiatan mahasiswa yang dinaungi oleh 
+            Badan Eksekutif Mahasiswa (BEM) Universitas Multimedia Nusantara sebagai 
+            ajang pencarian duta kampus UMN yang memiliki peranan untuk mewujudkan 
+            generasi penerus bangsa yang ekspresif, inovatif, kreatif, dan adaptif, 
+            serta memaksimalisasikan potensi yang dimiliki oleh para mahasiswa/i UMN 
+            guna mewujudkan dampak positif bagi civitas akademika UMN serta lingkungan sekitar.            
+          </Text>
+
+        </Flex>
+
         </>
       )}
     </div>

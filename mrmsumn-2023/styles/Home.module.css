@@ -1,9 +1,32 @@
+@font-face {
+  font-family: 'TrajanPro-Bold';
+  src: url('../public/Font/TrajanPro-Bold.otf') format("opentype");
+}
+
 .bg_shining {
   position: absolute !important;
   top: 0%;
   left: 50%;
   transform: translate(-50%);
 }
+
+.heading{
+  font-family: 'TrajanPro-Bold';
+  color:yellow;
+}
+
+.text{
+  font-family: "TrajanPro-Bold";
+}
+
+.hidden{
+  opacity:0;
+}
+
+.show{
+  opacity:1 !important;
+}
+
 
 .leaf_left {
   object-position: top right;
