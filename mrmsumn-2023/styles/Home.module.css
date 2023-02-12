@@ -8,11 +8,13 @@
 
 .hidden{
   opacity:0;
-  transition: opacity 1s ease-in;
+  transform: translateY(100px);
+  transition: all 1.2s ease-in-out;
 }
 
 .show{
   opacity:1 !important;
+  transform: translateY(0px);  
 }
 
 

@@ -327,11 +327,11 @@ export default function Home(props: any) {
             flexDirection={'column'}
             justifyContent='center'
             alignItems={'center'}
-            mt='20px'
+            mt='100px'
             ref={(el: HTMLDivElement) => texts.current.push(el!)}
             display={show}
         > 
-            <Heading color='white' mb='10px' fontSize={'60px'} textAlign='center'>MRMS UMN</Heading>
+            <Heading color='white' mb='20px' fontSize={'60px'} textAlign='center'>MRMS UMN</Heading>
 
             <Text textAlign={'justify'} color='white'>
               Mr. & Ms. UMN merupakan salah satu kegiatan mahasiswa yang dinaungi oleh 
@@ -343,10 +343,6 @@ export default function Home(props: any) {
             </Text>
 
           </Flex>       
-
-
-
-
      
     </>
   );
