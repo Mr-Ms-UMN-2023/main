@@ -15,9 +15,9 @@ export default function Home(props: any) {
   const [loadingOpacity, setLoadingOpacity] = useState(1);
   const [preloadImage, setPreloadImage] = useState(true);
   const [autoPlayFlag, setAutoPlayFlag] = useState(false);
-  const [show, setShow] = useState('none');
+  const [show, setShow] = useState("none");
 
-  const [teaser, setTeaser] = useState('');
+  const [teaser, setTeaser] = useState("");
 
   const mainBg = useRef<HTMLDivElement>(null);
 
@@ -27,7 +27,7 @@ export default function Home(props: any) {
 
   const texts = useRef<HTMLDivElement[]>([]);
 
-  const handleScroll =  () => {
+  const handleScroll = () => {
     window.pageYOffset;
     let scroll = window.pageYOffset / 5;
     setScrollY(scroll * 2.2);
@@ -59,25 +59,23 @@ export default function Home(props: any) {
             (mainBg?.current?.offsetHeight * 0.4)
         );
     }
-  }
-  
+  };
+
   useEffect(() => {
+    // Check for browser
+    let userAgent = navigator.userAgent;
 
-      // Check for browser
-      let userAgent = navigator.userAgent;
+    if (userAgent.match(/firefox|fxios/i)) {
+      setTeaser("https://www.youtube.com/embed/Wk-TvlzGrkQ?");
+    } else {
+      setTeaser("https://www.youtube.com/embed/Wk-TvlzGrkQ?mute=1");
+    }
 
-      if(userAgent.match(/firefox|fxios/i)){
-        setTeaser("https://www.youtube.com/embed/Wk-TvlzGrkQ?");
-      }
-      else {
-        setTeaser("https://www.youtube.com/embed/Wk-TvlzGrkQ?mute=1");        
-      }    
-    
     setLoading(true);
     setPreloadImage(false);
 
     window.scrollTo(0, 0);
-    
+
     window.addEventListener("scroll", handleScroll);
 
     // Set loading opacity timer
@@ -88,46 +86,41 @@ export default function Home(props: any) {
     // Set timer for loading
     const loadingTimer = setTimeout(() => {
       setLoading(false);
-      setShow('flex');
+      setShow("flex");
     }, 6000);
 
     // Fade in out animation
 
     const observer = new IntersectionObserver((entries) => {
       const [entry] = entries;
-        if (entry.isIntersecting){
-          entry.target.classList.add(styles.show);
-        } else {
-          entry.target.classList.remove(styles.show);
-        }
+      if (entry.isIntersecting) {
+        entry.target.classList.add(styles.show);
+      } else {
+        entry.target.classList.remove(styles.show);
+      }
     });
 
-
-
-    if(texts.current){
+    if (texts.current) {
       const targets = texts.current;
       targets.forEach((el) => {
-          observer.observe(el);
+        observer.observe(el);
       });
     }
-    
-
 
     return () => {
       clearTimeout(loadingOpacityTimer);
       clearTimeout(loadingTimer);
-      window.removeEventListener("scroll", handleScroll);      
-      if (texts.current){
+      window.removeEventListener("scroll", handleScroll);
+      if (texts.current) {
         observer.disconnect();
       }
     };
   }, []);
 
-
   useEffect(() => {
-    if (scrollY >= 280 && !autoPlayFlag){
+    if (scrollY >= 300 && !autoPlayFlag) {
       setAutoPlayFlag(true);
-      setTeaser(teaser => teaser + '&autoplay=1');
+      setTeaser((teaser) => teaser + "&autoplay=1");
     }
   }, [scrollY]);
 
@@ -193,7 +186,7 @@ export default function Home(props: any) {
                         lg: "calc(100vw + " + scrollY + "px)",
                       }}
                       maxW="200vw"
-                      overflow={'hidden'}
+                      overflow={"hidden"}
                       ratio={16 / 9}>
                       <Img
                         loading="eager"
@@ -299,7 +292,7 @@ export default function Home(props: any) {
             </Flex>
           </Flex>
 
-          <Flex       
+          <Flex
             minH={"100vh"}
             minW={"100vw"}
             px="5vw"
@@ -309,7 +302,7 @@ export default function Home(props: any) {
             padding={"0px"}
             position={"relative"}>
             <AspectRatio
-              ref={(el : HTMLDivElement) => youtube.current.push(el!)}               
+              ref={(el: HTMLDivElement) => youtube.current.push(el!)}
               transform={
                 "scale(" +
                 (content?.current?.offsetTop &&
@@ -334,41 +327,188 @@ export default function Home(props: any) {
                 allowFullScreen></iframe>
             </AspectRatio>
           </Flex>
-
-
-
         </>
-        
       )}
 
-      
-        <Flex
-            className={styles.hidden}
-            display={show}            
-            h='100vh'
-            w='70%'
-            maxW='1366px'
-            mx='auto'
-            my='auto'
-            flexDirection={'column'}
-            justifyContent='center'
-            alignItems={'center'}
-            mt='100px'
-            position='relative'
-            ref={(el: HTMLDivElement) => texts.current.push(el!)}
-        > 
-            <Heading color='white' mb='20px' fontSize={'60px'} textAlign='center'>Mr. & Ms. UMN 2023</Heading>
+      <Flex
+        className={styles.hidden}
+        display={show}
+        h="100vh"
+        w="70%"
+        maxW="1366px"
+        mx="auto"
+        my="auto"
+        flexDirection={"column"}
+        justifyContent="center"
+        alignItems={"center"}
+        mt="100px"
+        position="relative"
+        ref={(el: HTMLDivElement) => texts.current.push(el!)}>
+        <Heading
+          color="#c28824"
+          mb="20px"
+          fontSize={{ base: "2rem", md: "60px", lg: "5rem" }}
+          textAlign="center">
+          Mr. & Ms. UMN 2023
+        </Heading>
 
-            <Text textAlign={'justify'} color='white'>
-              Mr. & Ms. UMN merupakan salah satu kegiatan mahasiswa yang dinaungi oleh 
-              Badan Eksekutif Mahasiswa (BEM) Universitas Multimedia Nusantara sebagai 
-              ajang pencarian duta kampus UMN yang memiliki peranan untuk mewujudkan 
-              generasi penerus bangsa yang ekspresif, inovatif, kreatif, dan adaptif, 
-              serta memaksimalisasikan potensi yang dimiliki oleh para mahasiswa/i UMN 
-              guna mewujudkan dampak positif bagi civitas akademika UMN serta lingkungan sekitar.            
-            </Text>
-          </Flex>       
-     
+        <Text
+          fontSize={{ base: "auto", lg: "1.5rem" }}
+          textAlign={"justify"}
+          color="#c28824">
+          Mr. & Ms. UMN merupakan salah satu kegiatan mahasiswa yang dinaungi
+          oleh Badan Eksekutif Mahasiswa (BEM) Universitas Multimedia Nusantara
+          sebagai ajang pencarian duta kampus UMN yang memiliki peranan untuk
+          mewujudkan generasi penerus bangsa yang ekspresif, inovatif, kreatif,
+          dan adaptif, serta memaksimalisasikan potensi yang dimiliki oleh para
+          mahasiswa/i UMN guna mewujudkan dampak positif bagi civitas akademika
+          UMN serta lingkungan sekitar.
+        </Text>
+      </Flex>
+
+      <Flex
+        className={styles.hidden}
+        display={show}
+        h="100vh"
+        w="70%"
+        maxW="1366px"
+        mx="auto"
+        my="auto"
+        flexDirection={"column"}
+        justifyContent="center"
+        alignItems={"center"}
+        mt="100px"
+        position="relative"
+        ref={(el: HTMLDivElement) => texts.current.push(el!)}>
+        <Heading
+          color="#c28824"
+          mb="20px"
+          fontSize={{ base: "2rem", md: "60px", lg: "5rem" }}
+          textAlign="center">
+          Konsep Kegiatan <br /> Mr. & Ms. UMN 2023
+        </Heading>
+
+        <Text
+          fontSize={{ base: "auto", lg: "1.5rem" }}
+          mb="20px"
+          textAlign={"justify"}
+          color="#c28824">
+          Wiracarita Pagelaran Wayang Wiracarita Pagelaran Wayang atau Dongeng
+          Pertunjukan Wayang mengajarkan nilai - nilai baik yang berkaitan
+          dengan kehidupan yang dicerminkan melalui karakter tokoh, cerita, dan
+          unsur lainnya.
+        </Text>
+        <Text
+          fontSize={{ base: "auto", lg: "1.5rem" }}
+          mb="20px"
+          textAlign={"justify"}
+          color="#c28824">
+          Pewayangan Bharatayudha yang menceritakan tentang kisah Pandawa dan
+          Kurawa dalam memperebutkan takhta Hastinapura. Dalam perebutan
+          tersebut Pandawa dan Kurawa melewati banyak sayembara, peperangan, dan
+          rintangan.
+        </Text>
+        <Text
+          fontSize={{ base: "auto", lg: "1.5rem" }}
+          textAlign={"justify"}
+          color="#c28824">
+          Pewayangan Bharatayudha mengajarkan pendengar dan penonton untuk tidak
+          melawan saudara, teman-teman, serta orang yang disayangi. Dengan
+          Wiracarita Bharatayudha diharapkan para peserta dan internal Mr. & Ms.
+          UMN 2023 mampu memiliki semangat dan daya juang untuk mengejar hal
+          yang ia perjuangkan layaknya Pandawa saat melewati rintangan untuk
+          memperebutkan takhta.
+        </Text>
+      </Flex>
+
+      <Flex
+        className={styles.hidden}
+        display={show}
+        h={{ base: "130vh", lg: "100vh" }}
+        w="70%"
+        maxW="1366px"
+        mx="auto"
+        my="auto"
+        flexDirection={"column"}
+        justifyContent="center"
+        alignItems={"center"}
+        mt="100px"
+        position="relative"
+        ref={(el: HTMLDivElement) => texts.current.push(el!)}>
+        <Heading
+          color="#c28824"
+          mb="20px"
+          fontSize={{ base: "2rem", md: "60px", lg: "5rem" }}
+          textAlign="center">
+          Tema Mr. & Ms. UMN 2023
+        </Heading>
+
+        <Heading
+          fontSize={{ base: "1.5rem", md: "2rem" }}
+          mb="20px"
+          textAlign={"center"}
+          color="#c28824">
+          Arunika
+        </Heading>
+
+        <Text
+          fontSize={{ base: "auto", lg: "1.5rem" }}
+          textAlign={"justify"}
+          color="#c28824">
+          Arunika diambil dari bahasa Sansekerta dengan arti cahaya matahari
+          yang terbit. Seperti cahaya matahari yang terbit, Mr. & Ms. UMN 2023
+          mengangkat tema Arunika dengan harapan peserta Mr. & Ms. UMN 2023
+          mampu menemukan cahaya baru dalam dirinya, berkembang menjadi pribadi
+          yang lebih bersinar, dan dapat menjadi cahaya bagi orang lain dan
+          sekitar. Tema Mr. & Ms. UMN 2023 ini melanjutkan tema sebelumnya yaitu
+          Muruhita yang berarti Berguru dan Mengabdi. Dengan pembelajaran dan
+          bekal yang telah didapat, diharapkan tidak berhenti sebatas berguru
+          dan mengabdi saja, tetapi dapat disebarluaskan layaknya Arunika yang
+          memberi dampak luas ke lingkungan sekitar.
+        </Text>
+      </Flex>
+      <Flex
+        className={styles.hidden}
+        display={show}
+        h="100vh"
+        w="70%"
+        maxW="1366px"
+        mx="auto"
+        my="auto"
+        flexDirection={"column"}
+        justifyContent="center"
+        alignItems={"center"}
+        mt="100px"
+        position="relative"
+        ref={(el: HTMLDivElement) => texts.current.push(el!)}>
+        <Heading
+          color="#c28824"
+          mb="20px"
+          fontSize={{ base: "2rem", md: "60px", lg: "5rem" }}
+          textAlign="center">
+          Tagline <br />
+          Mr. & Ms. UMN 2023
+        </Heading>
+        <Heading
+          mb="20px"
+          fontSize={{ base: "1.5rem", md: "2rem" }}
+          textAlign={"center"}
+          color="#c28824">
+          {'"Shine To Create History"'}
+        </Heading>
+
+        <Text
+          fontSize={{ base: "auto", lg: "1.5rem" }}
+          textAlign={"justify"}
+          color="#c28824">
+          Sebuah pertunjukan wayang tidak akan berjalan tanpa adanya cahaya
+          latar Blencong. Wayang berwarna emas akan lebih bersinar dan hidup
+          jika terkena cahayanya. Melalui tagline ini, semua pihak Mr. & Ms. UMN
+          2023 diharapkan dapat mengembangkan karakteristik ekspresif, inovatif,
+          kreatif, dan adaptif lewat cahaya arunika sehingga mampu bersinar dan
+          membangun sejarah yang abadi.
+        </Text>
+      </Flex>
     </div>
   );
 }
