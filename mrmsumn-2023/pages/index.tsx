@@ -387,6 +387,13 @@ export default function Home(props: any) {
           textAlign="center">
           Konsep Kegiatan <br /> Mr. & Ms. UMN 2023
         </Heading>
+        <Heading
+          mb="20px"
+          fontSize={{ base: "1.5rem", md: "2rem" }}
+          textAlign={"center"}
+          color="#c28824">
+          Wiracarita Pagelaran Wayang
+        </Heading>
 
         <Text
           fontSize={{ base: "auto", lg: "1.5rem" }}
