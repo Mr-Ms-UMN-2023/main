@@ -67,7 +67,7 @@ export default function Home(props: any) {
     setTimeout(() => {
       setLoading(false);
       setShow('flex');
-    }, 2000);
+    }, 1100);
   }
   
   useEffect(() => {
