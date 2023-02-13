@@ -60,6 +60,15 @@ export default function Home(props: any) {
         );
     }
   }
+
+  const endVideo = () => {
+    setLoadingOpacity(0);    
+
+    setTimeout(() => {
+      setLoading(false);
+      setShow('flex');
+    }, 2000);
+  }
   
   useEffect(() => {
 
@@ -81,15 +90,9 @@ export default function Home(props: any) {
     window.addEventListener("scroll", handleScroll);
 
     // Set loading opacity timer
-    const loadingOpacityTimer = setTimeout(() => {
-      setLoadingOpacity(0);
-    }, 5000);
 
     // Set timer for loading
-    const loadingTimer = setTimeout(() => {
-      setLoading(false);
-      setShow('flex');
-    }, 6000);
+
 
     // Fade in out animation
 
@@ -114,8 +117,6 @@ export default function Home(props: any) {
 
 
     return () => {
-      clearTimeout(loadingOpacityTimer);
-      clearTimeout(loadingTimer);
       window.removeEventListener("scroll", handleScroll);      
       if (texts.current){
         observer.disconnect();
@@ -141,7 +142,7 @@ export default function Home(props: any) {
       </Head>
 
       {loading ? (
-        <Loading loadingOpacity={loadingOpacity} />
+        <Loading loadingOpacity={loadingOpacity} onEnded={endVideo}/>
       ) : (
         <>
           {preloadImage && (
@@ -341,7 +342,7 @@ export default function Home(props: any) {
         
       )}
 
-      
+      {/* Kalau mau add content kebawah ALWAYS add display={show} sama ref={.....} */}
         <Flex
             className={styles.hidden}
             display={show}            
@@ -367,7 +368,10 @@ export default function Home(props: any) {
               serta memaksimalisasikan potensi yang dimiliki oleh para mahasiswa/i UMN 
               guna mewujudkan dampak positif bagi civitas akademika UMN serta lingkungan sekitar.            
             </Text>
-          </Flex>       
+          </Flex>     
+
+
+           
      
     </div>
   );

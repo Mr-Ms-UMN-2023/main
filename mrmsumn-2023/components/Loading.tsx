@@ -1,7 +1,7 @@
 import { Box, AspectRatio, Image, Text, position } from "@chakra-ui/react";
 import styles from "@/styles/Home.module.css";
 
-const Loading = ({loadingOpacity} : {loadingOpacity : number}) => {
+const Loading = ({loadingOpacity, onEnded} : {loadingOpacity : number, onEnded : any}) => {
     return (
        <Box 
        className={styles.loading_box}
@@ -19,6 +19,7 @@ const Loading = ({loadingOpacity} : {loadingOpacity : number}) => {
        left='0'
        >
             <video src={'/Assets/Video/intro_2.mp4'}
+            onEnded={onEnded}
             className={styles.loading_video}
             autoPlay
             muted controls disablePictureInPicture 
