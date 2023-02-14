@@ -15,11 +15,11 @@ const Navbar = () => {
         scroll: StoryLine || 0,
       },
       {
-        title: "Storyline",
+        title: "About Us",
         scroll: AboutUs || 0,
       },
       {
-        title: "Storyline",
+        title: "Open Recruitment",
         scroll: oprec || 0,
       },
     ];
@@ -53,7 +53,7 @@ const Navbar = () => {
               key={index}
               style={{ cursor: "pointer" }}
               onClick={() => NavScroll(event.scroll)}
-              fontSize={"1.2rem"}
+              fontSize={{ base: "0.8rem", md: "1.2rem" }}
               color="white">
               {event.title}
             </Heading>
