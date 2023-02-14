@@ -2,6 +2,7 @@ import { Box, Flex, Text, Heading } from "@chakra-ui/react";
 import { useState, useEffect, useRef } from "react";
 const Navbar = () => {
   const [navbar, setNavbar] = useState<any>();
+  const [active, setActive] = useState(undefined);
 
   useEffect(() => {
     let AboutUs = document.getElementById("aboutUs")?.offsetTop;
@@ -27,11 +28,13 @@ const Navbar = () => {
     setNavbar(newNavbar);
   }, []);
 
-  const NavScroll = (e: any) => {
+  const NavScroll = (e: any, index: number) => {
     window.scrollTo({
       top: e,
       behavior: "smooth",
     });
+
+    setActive(index);
   };
 
   return (
@@ -52,10 +55,19 @@ const Navbar = () => {
             <Heading
               key={index}
               style={{ cursor: "pointer" }}
-              onClick={() => NavScroll(event.scroll)}
+              onClick={() => NavScroll(event.scroll, index)}
               fontSize={{ base: "0.8rem", md: "1.2rem" }}
               color="white">
               {event.title}
+              {active == index && (
+                <Box
+                  mt="0.5rem"
+                  mx="auto"
+                  w={"0.5rem"}
+                  h={"0.5rem"}
+                  borderRadius={"50%"}
+                  bg="white"></Box>
+              )}
             </Heading>
           );
         })}
