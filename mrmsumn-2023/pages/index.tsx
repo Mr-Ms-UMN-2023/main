@@ -145,6 +145,7 @@ export default function Home(props: any) {
               bg="black"
               zIndex={20}></Flex>
           )}
+          <Navbar />
 
           <Flex
             alignItems={"flex-end"}
@@ -331,6 +332,7 @@ export default function Home(props: any) {
       )}
 
       <Flex
+        id="aboutUs"
         className={styles.hidden}
         display={show}
         h={{ sm: "auto", md: "100vh" }}
