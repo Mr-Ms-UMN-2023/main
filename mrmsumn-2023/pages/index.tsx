@@ -167,7 +167,7 @@ export default function Home(props: any) {
               }
               h="100vh"
               w="100vw">
-              <Flex position={"relative"} minH="100vh">
+              <Flex id="storyLine" position={"relative"} minH="100vh">
                 <Flex
                   className={styles.bg_shining}
                   maxH="100vh"

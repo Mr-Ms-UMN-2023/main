@@ -6,7 +6,7 @@ const Navbar = () => {
   useEffect(() => {
     let AboutUs = document.getElementById("aboutUs")?.offsetTop;
 
-    let StoryLine = document.getElementById("storyLine")?.offsetTop;
+    let StoryLine = document.getElementById("storyLine")?.offsetHeight;
     let oprec = document.getElementById("oprec")?.offsetTop;
 
     let newNavbar = [
