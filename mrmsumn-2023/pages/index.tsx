@@ -1,7 +1,7 @@
 import Head from "next/head";
 import styles from "@/styles/Home.module.css";
 import { Box, Img, Flex, Text, AspectRatio, Heading } from "@chakra-ui/react";
-import Loading from "@/components/Loading";
+import { Loading, Navbar } from "@/components";
 import Image from "next/image";
 import { useState, useEffect, useRef } from "react";
 
@@ -59,17 +59,17 @@ export default function Home(props: any) {
             (mainBg?.current?.offsetHeight * 0.4)
         );
     }
-  }
+  };
 
   const endVideo = () => {
-    setLoadingOpacity(0);    
+    setLoadingOpacity(0);
 
     setTimeout(() => {
       setLoading(false);
-      setShow('flex');
+      setShow("flex");
     }, 1100);
-  }
-  
+  };
+
   useEffect(() => {
     // Check for browser
     let userAgent = navigator.userAgent;
@@ -110,8 +110,8 @@ export default function Home(props: any) {
     }
 
     return () => {
-      window.removeEventListener("scroll", handleScroll);      
-      if (texts.current){
+      window.removeEventListener("scroll", handleScroll);
+      if (texts.current) {
         observer.disconnect();
       }
     };
@@ -134,7 +134,7 @@ export default function Home(props: any) {
       </Head>
 
       {loading ? (
-        <Loading loadingOpacity={loadingOpacity} onEnded={endVideo}/>
+        <Loading loadingOpacity={loadingOpacity} onEnded={endVideo} />
       ) : (
         <>
           {preloadImage && (
@@ -333,7 +333,7 @@ export default function Home(props: any) {
       <Flex
         className={styles.hidden}
         display={show}
-        h={{sm : 'auto', md : '100vh'}}
+        h={{ sm: "auto", md: "100vh" }}
         w="70%"
         maxW="1366px"
         mx="auto"
@@ -369,9 +369,9 @@ export default function Home(props: any) {
       <Flex
         className={styles.hidden}
         display={show}
-        h={{sm : 'auto', md : '100vh'}}
+        h={{ sm: "auto", md: "100vh" }}
         w="70%"
-        maxW="1366px"     
+        maxW="1366px"
         mx="auto"
         my="auto"
         flexDirection={"column"}
@@ -431,7 +431,7 @@ export default function Home(props: any) {
       <Flex
         className={`${styles.hidden}`}
         display={show}
-        h={{sm : 'auto', md : '100vh'}}
+        h={{ sm: "auto", md: "100vh" }}
         w="70%"
         maxW="1366px"
         mx="auto"
@@ -477,9 +477,9 @@ export default function Home(props: any) {
       <Flex
         className={styles.hidden}
         display={show}
-        h={{sm : 'auto', md : '100vh'}}
+        h={{ sm: "auto", md: "100vh" }}
         w="70%"
-        maxW="1366px"        
+        maxW="1366px"
         mx="auto"
         my="auto"
         flexDirection={"column"}
@@ -503,7 +503,6 @@ export default function Home(props: any) {
           color="#c28824">
           {'"Shine To Create History"'}
         </Heading>
-
         <Text
           fontSize={{ base: "auto", lg: "1.5rem" }}
           textAlign={"justify"}
@@ -514,7 +513,8 @@ export default function Home(props: any) {
           2023 diharapkan dapat mengembangkan karakteristik ekspresif, inovatif,
           kreatif, dan adaptif lewat cahaya arunika sehingga mampu bersinar dan
           membangun sejarah yang abadi.
-        </Text>x
+        </Text>
+        x
       </Flex>
     </div>
   );
