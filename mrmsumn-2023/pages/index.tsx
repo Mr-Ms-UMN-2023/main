@@ -127,27 +127,27 @@ export default function Home(props: any) {
 
     // Fade in out animation
 
-    const observer = new IntersectionObserver((entries) => {
-      const [entry] = entries;
-      if (entry.isIntersecting) {
-        entry.target.classList.add(styles.show);
-      } else {
-        entry.target.classList.remove(styles.show);
-      }
-    });
+    // const observer = new IntersectionObserver((entries) => {
+    //   const [entry] = entries;
+    //   if (entry.isIntersecting) {
+    //     entry.target.classList.add(styles.show);
+    //   } else {
+    //     entry.target.classList.remove(styles.show);
+    //   }
+    // });
 
-    if (texts.current) {
-      const targets = texts.current;
-      targets.forEach((el) => {
-        observer.observe(el);
-      });
-    }
+    // if (texts.current) {
+    //   const targets = texts.current;
+    //   targets.forEach((el) => {
+    //     observer.observe(el);
+    //   });
+    // }
 
     return () => {
       window.removeEventListener("scroll", handleScroll);
-      if (texts.current) {
-        observer.disconnect();
-      }
+      // if (texts.current) {
+      //   observer.disconnect();
+      // }
     };
   }, []);
 
@@ -367,7 +367,7 @@ export default function Home(props: any) {
 
       <Flex
         id="aboutUs"
-        className={styles.hidden}
+        className={styles.show}
         display={show}
         h="100vh"
         w="70%"
@@ -402,7 +402,7 @@ export default function Home(props: any) {
       </Flex>
 
       <Flex
-        className={styles.hidden}
+        className={styles.show}
         display={show}
         h={{ sm: "auto", md: "100vh" }}
         w="70%"
@@ -464,7 +464,7 @@ export default function Home(props: any) {
       </Flex>
 
       <Flex
-        className={`${styles.hidden}`}
+        className={`${styles.show}`}
         display={show}
         h={{ sm: "auto", md: "100vh" }}
         w="70%"
@@ -510,7 +510,7 @@ export default function Home(props: any) {
         </Text>
       </Flex>
       <Flex
-        className={styles.hidden}
+        className={styles.show}
         display={show}
         h={{ sm: "auto", md: "100vh" }}
         w="70%"
@@ -553,9 +553,9 @@ export default function Home(props: any) {
 
       <Flex
         id="oprec"
-        className={styles.hidden}
+        className={styles.show}
         display={show}
-        h={{ sm: "auto", md: "100vh" }}
+        h={{ sm: "auto", md: "200vh" }}
         w="70%"
         maxW="1366px"
         mx="auto"
@@ -570,7 +570,7 @@ export default function Home(props: any) {
         <Heading
           color="#c28824"
           mb="20px"
-          fontSize={{ base: "2rem", md: "60px", lg: "5rem" }}
+          fontSize={{ base: "1rem", md: "25px", lg: "3rem" }}
           textAlign="center">
           Open <br />
           Recruitment
@@ -610,7 +610,7 @@ export default function Home(props: any) {
                   transition : "all .5s ease-in-out"              
                 }}                
                 >
-            <Heading fontSize={{md : "1rem"}}>
+            <Heading fontSize={{md : "1rem"}} mx={{base : '0', md : '30px'}}>
                 Foresee Your Destiny
             </Heading>
         </Button>

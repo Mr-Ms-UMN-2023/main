@@ -4,7 +4,7 @@ import styles from "@/styles/Home.module.css";
 
 const DivisionCard = ({logo} : {logo : any}) => {
     return (
-        <GridItem h='175px' w='175px' position={'relative'} _hover={{
+        <GridItem h='280px' w='280px' position={'relative'} _hover={{
             transform : 'scale(1.1)',
             transition : 'all .5s ease-in-out'
         }}>
