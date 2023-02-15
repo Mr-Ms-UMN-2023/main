@@ -1,8 +1,17 @@
 import Head from "next/head";
 import styles from "@/styles/Home.module.css";
 import { useRouter } from "next/router";
-import { Box, Img, Flex, Grid, Text, AspectRatio, Heading, Button } from "@chakra-ui/react";
-import { Loading, Navbar, DivisionCard} from "@/components";
+import {
+  Box,
+  Img,
+  Flex,
+  Grid,
+  Text,
+  AspectRatio,
+  Heading,
+  Button,
+} from "@chakra-ui/react";
+import { Loading, Navbar, DivisionCard } from "@/components";
 import Image from "next/image";
 import { useState, useEffect, useRef } from "react";
 
@@ -54,10 +63,12 @@ export default function Home(props: any) {
   const handleScroll = () => {
     window.pageYOffset;
     let scroll = window.pageYOffset / 5;
-    let oprec = document.getElementById("oprec")?.offsetTop;
-    if (window.pageYOffset > oprec - 100){
-        document.getElementById("oprec")?.classList.add(styles.show);      
-    }    
+    let oprec = document.getElementById("oprec")
+    ? document.getElementById("oprec")?.offsetTop
+    : 0;
+    if (oprec && window.pageYOffset > oprec - 100) {
+      document.getElementById("oprec")?.classList.add(styles.show);
+    }  
     setScrollY(scroll * 2.2);
 
     setScrollY2(scroll);
@@ -552,7 +563,7 @@ export default function Home(props: any) {
 
 
       <Flex
-        id='oprec'       
+        id="oprec"       
         className={styles.hidden}
         display={show}
         h={{ sm: "auto", md: "100vh" }}
@@ -560,7 +571,7 @@ export default function Home(props: any) {
         maxW="1366px"
         mx="auto"
         my="auto"
-        mb='100px'        
+        mb="100px"        
         flexDirection={"column"}
         justifyContent="center"
         alignItems={"center"}
@@ -572,37 +583,45 @@ export default function Home(props: any) {
           mb="20px"
           fontSize={{ base: "2rem", md: "60px", lg: "5rem" }}
           textAlign="center">
-          Open <br/>
+          Open <br />
           Recruitment
         </Heading>        
-        <Grid     
-          height='auto'
-          width='100%'
-          position='relative'
-          gap={'5px'}
-          placeItems={'center'}
-          alignItems='center'
-          justifyContent={'center'}
+        <Flex     
+          height="auto"
+          width="100%"
+          position="relative"
+          gap={"5px"}
+          placeItems={"center"}
+          alignItems="center"
+          justifyContent={"center"}
+          justifyItems={"center"}
+          flexWrap="wrap"
           // templateRows='1fr 1fr'
-          templateColumns='repeat(auto-fit,minmax(1rem, 180px));'        
+          // templateColumns={{
+          //     base : 'repeat(1, 1fr)',
+          //     sm : 'repeat(2, 1fr)', 
+          //     md : 'repeat(3, 1fr)',
+          //     lg : 'repeat(4, 1fr)',
+          //     xl : 'repeat(5, 1fr)'                                                       
+          // }}
         >
 
             {divisions.map((logo) => <DivisionCard logo={logo}/>)}
 
-        </Grid>
+        </Flex>
 
         <Button className={styles.oprecButton} colorScheme={'none'} mt='30px' border={'1px solid white'} borderRadius={'2px'}           
                 color="white" 
-                h='auto' 
-                px='10px'
-                py='15px'
-                onClick={() => router.push('https://google.com')}
+                h="auto" 
+                px="10px"
+                py="15px"
+                onClick={() => router.push("https://google.com")}
                 _hover={{
-                  transform : 'scale(1.1)',
-                  transition : 'all .5s ease-in-out'              
+                  transform : "scale(1.1)",
+                  transition : "all .5s ease-in-out"              
                 }}                
                 >
-            <Heading fontSize={{md : '1rem'}}>
+            <Heading fontSize={{md : "1rem"}}>
                 Foresee Your Destiny
             </Heading>
         </Button>

@@ -6,10 +6,17 @@ const Navbar = () => {
   const [active, setActive] = useState(undefined);
 
   useEffect(() => {
-    let AboutUs = document.getElementById("aboutUs")?.offsetTop;
+    let AboutUs =
+      document.getElementById("aboutUs") &&
+      document.getElementById("aboutUs")?.offsetTop;
 
-    let StoryLine = document.getElementById("storyLine")?.offsetHeight;
-    let oprec = document.getElementById("oprec")?.offsetTop - 100;
+      let StoryLine =
+      document.getElementById("storyLine") &&
+      document.getElementById("storyLine")?.offsetHeight;
+    let oprec;
+    if (document.getElementById("oprec") != null) {
+      oprec = document.getElementById("oprec")?.offsetTop;
+    }
 
     let newNavbar = [
       {
