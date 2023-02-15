@@ -1,13 +1,21 @@
 import Head from "next/head";
 import styles from "@/styles/Home.module.css";
 import { useRouter } from "next/router";
-import { Box, Img, Flex, Grid, Text, AspectRatio, Heading, Button } from "@chakra-ui/react";
-import { Loading, Navbar, DivisionCard} from "@/components";
+import {
+  Box,
+  Img,
+  Flex,
+  Grid,
+  Text,
+  AspectRatio,
+  Heading,
+  Button,
+} from "@chakra-ui/react";
+import { Loading, Navbar, DivisionCard } from "@/components";
 import Image from "next/image";
 import { useState, useEffect, useRef } from "react";
 
 export default function Home(props: any) {
-
   const router = useRouter();
 
   const [scrollY, setScrollY] = useState(0);
@@ -34,12 +42,8 @@ export default function Home(props: any) {
     "SRIKANDI.png",
     "VYASA.jpg",
     "WISANGGENI.png",
-    "WISNU.png"
-  ])
-
-
-
-
+    "WISNU.png",
+  ]);
 
   const [teaser, setTeaser] = useState("");
 
@@ -54,10 +58,12 @@ export default function Home(props: any) {
   const handleScroll = () => {
     window.pageYOffset;
     let scroll = window.pageYOffset / 5;
-    let oprec = document.getElementById("oprec")?.offsetTop;
-    if (window.pageYOffset > oprec - 100){
-        document.getElementById("oprec")?.classList.add(styles.show);      
-    }    
+    let oprec = document.getElementById("oprec")
+      ? document.getElementById("oprec")?.offsetTop
+      : 0;
+    if (oprec && window.pageYOffset > oprec - 100) {
+      document.getElementById("oprec")?.classList.add(styles.show);
+    }
     setScrollY(scroll * 2.2);
 
     setScrollY2(scroll);
@@ -150,7 +156,6 @@ export default function Home(props: any) {
       setAutoPlayFlag(true);
       setTeaser((teaser) => teaser + "&autoplay=1");
     }
-
   }, [scrollY]);
 
   return (
@@ -546,13 +551,8 @@ export default function Home(props: any) {
         </Text>
       </Flex>
 
-
-
-
-
-
       <Flex
-        id='oprec'       
+        id="oprec"
         className={styles.hidden}
         display={show}
         h={{ sm: "auto", md: "100vh" }}
@@ -560,7 +560,7 @@ export default function Home(props: any) {
         maxW="1366px"
         mx="auto"
         my="auto"
-        mb='100px'        
+        mb="100px"
         flexDirection={"column"}
         justifyContent="center"
         alignItems={"center"}
@@ -572,49 +572,42 @@ export default function Home(props: any) {
           mb="20px"
           fontSize={{ base: "2rem", md: "60px", lg: "5rem" }}
           textAlign="center">
-          Open <br/>
+          Open <br />
           Recruitment
-        </Heading>        
-        <Grid     
-          height='auto'
-          width='100%'
-          position='relative'
-          gap={'5px'}
-          placeItems={'center'}
-          alignItems='center'
-          justifyContent={'center'}
+        </Heading>
+        <Grid
+          height="auto"
+          width="100%"
+          position="relative"
+          gap={"5px"}
+          placeItems={"center"}
+          alignItems="center"
+          justifyContent={"center"}
           // templateRows='1fr 1fr'
-          templateColumns='repeat(auto-fit,minmax(1rem, 180px));'        
-        >
-
-            {divisions.map((logo) => <DivisionCard logo={logo}/>)}
-
+          templateColumns="repeat(auto-fit,minmax(1rem, 180px));">
+          {divisions.map((logo, index) => (
+            <DivisionCard key={index} logo={logo} />
+          ))}
         </Grid>
 
-        <Button className={styles.oprecButton} colorScheme={'none'} mt='30px' border={'1px solid white'} borderRadius={'2px'}           
-                color="white" 
-                h='auto' 
-                px='10px'
-                py='15px'
-                onClick={() => router.push('https://google.com')}
-                _hover={{
-                  transform : 'scale(1.1)',
-                  transition : 'all .5s ease-in-out'              
-                }}                
-                >
-            <Heading fontSize={{md : '1rem'}}>
-                Foresee Your Destiny
-            </Heading>
+        <Button
+          className={styles.oprecButton}
+          colorScheme={"none"}
+          mt="30px"
+          border={"1px solid white"}
+          borderRadius={"2px"}
+          color="white"
+          h="auto"
+          px="10px"
+          py="15px"
+          onClick={() => router.push("https://google.com")}
+          _hover={{
+            transform: "scale(1.1)",
+            transition: "all .5s ease-in-out",
+          }}>
+          <Heading fontSize={{ md: "1rem" }}>Foresee Your Destiny</Heading>
         </Button>
-
-
-      </Flex>      
-
-
-
-
-
-
+      </Flex>
     </div>
   );
 }
