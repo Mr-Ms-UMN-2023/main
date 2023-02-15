@@ -11,7 +11,7 @@ import {
   Heading,
   Button,
 } from "@chakra-ui/react";
-import { Loading, Navbar, DivisionCard } from "@/components";
+import { Loading, Navbar, DivisionCard, DivisionDetail } from "@/components";
 import Image from "next/image";
 import { useState, useEffect, useRef } from "react";
 
@@ -27,9 +27,13 @@ export default function Home(props: any) {
   const [loadingOpacity, setLoadingOpacity] = useState(1);
   const [preloadImage, setPreloadImage] = useState(true);
   const [autoPlayFlag, setAutoPlayFlag] = useState(false);
+  const [popup, setPopup] = useState(false);
+  const [popupData, setPopupData] = useState({});
   const [show, setShow] = useState("none");
 
+
   const [divisions, setDivisions] = useState([
+    "KRESNA.jpg",    
     "ANGGADA.png",
     "ANGGAJALI.png",
     "ARJUNA.png",
@@ -37,7 +41,6 @@ export default function Home(props: any) {
     "BIMA.jpg",
     "BRATALARAS.jpg",
     "HANOMAN.png",
-    "KRESNA.jpg",
     "NARADA.jpg",
     "SRIKANDI.png",
     "VYASA.jpg",
@@ -94,6 +97,11 @@ export default function Home(props: any) {
         );
     }
   };
+
+
+  const showDivisionDetail = (data : object) => {
+    
+  }
 
   const endVideo = () => {
     setLoadingOpacity(0);
@@ -435,7 +443,7 @@ export default function Home(props: any) {
           mb="20px"
           textAlign={"justify"}
           color="#c28824">
-          Wiracarita Pagelaran Wayang Wiracarita Pagelaran Wayang atau Dongeng
+          Wiracarita Pagelaran Wayang atau Dongeng
           Pertunjukan Wayang mengajarkan nilai - nilai baik yang berkaitan
           dengan kehidupan yang dicerminkan melalui karakter tokoh, cerita, dan
           unsur lainnya.
@@ -551,6 +559,10 @@ export default function Home(props: any) {
         </Text>
       </Flex>
 
+      {/* DISINI BUAT POPUPNYA */}
+      {popup && <DivisionDetail/>}
+
+
       <Flex
         id="oprec"
         className={styles.show}
@@ -595,8 +607,13 @@ export default function Home(props: any) {
           // }}
         >
 
-            {divisions.map((logo) => <DivisionCard key={logo} logo={logo}/>)}
+            {divisions.map((logo) => <DivisionCard 
+                                          key={logo} 
+                                          logo={logo}
+                                          onClick={showDivisionDetail} 
+                                          />)}
 
+            
         </Flex>
 
         <Button className={styles.oprecButton} colorScheme={'none'} mt='30px' border={'1px solid white'} borderRadius={'2px'}           

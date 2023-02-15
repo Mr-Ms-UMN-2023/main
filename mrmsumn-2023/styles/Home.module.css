@@ -132,6 +132,13 @@
   }
 }
 
+@media (max-height: 600px){
+  .hidden, .show{
+    max-height:none !important;
+    height:auto !important;
+  }
+}
+
 @media (max-width: 700px) {
   .content {
     padding: 4rem;
