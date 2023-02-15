@@ -13,9 +13,14 @@
 }
 
 .show {
-  scroll-margin-block: 0;
+  /* scroll-margin-block: 0; */
   opacity: 1 !important;
   transform: translateY(0px);
+}
+
+.oprecButton{
+  font-size: 2rem;
+  width: auto;
 }
 
 .leaf_left {
@@ -96,6 +101,15 @@
     min-height: 160vh;
     min-width: 140vw;
   }
+
+  .oprecButton{
+    font-size: .5rem;
+    width: auto;
+    /* background-color: red; */
+    white-space: nowrap;
+    line-height: 2;
+  }
+
 }
 
 @media (prefers-reduced-motion) {
