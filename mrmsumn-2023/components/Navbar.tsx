@@ -3,14 +3,14 @@ import styles from "@/styles/Home.module.css";
 import { useState, useEffect, useRef } from "react";
 const Navbar = () => {
   const [navbar, setNavbar] = useState<any>();
-  const [active, setActive] = useState(undefined);
+  const [active, setActive] = useState<number>();
 
   useEffect(() => {
     let AboutUs =
       document.getElementById("aboutUs") &&
       document.getElementById("aboutUs")?.offsetTop;
 
-      let StoryLine =
+    let StoryLine =
       document.getElementById("storyLine") &&
       document.getElementById("storyLine")?.offsetHeight;
     let oprec;
@@ -36,15 +36,14 @@ const Navbar = () => {
     setNavbar(newNavbar);
   }, []);
 
-  const NavScroll = (e : any, index : number) => {
-
+  const NavScroll = (e: any, index: number) => {
     window.scrollTo({
       top: e,
       behavior: "smooth",
     });
 
     if (index == 2) {
-      document.getElementById("oprec")?.classList.add(styles.show);          
+      document.getElementById("oprec")?.classList.add(styles.show);
     }
 
     setActive(index);

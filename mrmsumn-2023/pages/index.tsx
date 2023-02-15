@@ -16,7 +16,6 @@ import Image from "next/image";
 import { useState, useEffect, useRef } from "react";
 
 export default function Home(props: any) {
-
   const router = useRouter();
 
   const [scrollY, setScrollY] = useState(0);
@@ -43,12 +42,8 @@ export default function Home(props: any) {
     "SRIKANDI.png",
     "VYASA.jpg",
     "WISANGGENI.png",
-    "WISNU.png"
-  ])
-
-
-
-
+    "WISNU.png",
+  ]);
 
   const [teaser, setTeaser] = useState("");
 
@@ -64,11 +59,11 @@ export default function Home(props: any) {
     window.pageYOffset;
     let scroll = window.pageYOffset / 5;
     let oprec = document.getElementById("oprec")
-    ? document.getElementById("oprec")?.offsetTop
-    : 0;
+      ? document.getElementById("oprec")?.offsetTop
+      : 0;
     if (oprec && window.pageYOffset > oprec - 100) {
       document.getElementById("oprec")?.classList.add(styles.show);
-    }  
+    }
     setScrollY(scroll * 2.2);
 
     setScrollY2(scroll);
@@ -161,7 +156,6 @@ export default function Home(props: any) {
       setAutoPlayFlag(true);
       setTeaser((teaser) => teaser + "&autoplay=1");
     }
-
   }, [scrollY]);
 
   return (
@@ -557,13 +551,8 @@ export default function Home(props: any) {
         </Text>
       </Flex>
 
-
-
-
-
-
       <Flex
-        id="oprec"       
+        id="oprec"
         className={styles.hidden}
         display={show}
         h={{ sm: "auto", md: "100vh" }}
@@ -571,7 +560,7 @@ export default function Home(props: any) {
         maxW="1366px"
         mx="auto"
         my="auto"
-        mb="100px"        
+        mb="100px"
         flexDirection={"column"}
         justifyContent="center"
         alignItems={"center"}
@@ -625,15 +614,7 @@ export default function Home(props: any) {
                 Foresee Your Destiny
             </Heading>
         </Button>
-
-
-      </Flex>      
-
-
-
-
-
-
+      </Flex>
     </div>
   );
 }
