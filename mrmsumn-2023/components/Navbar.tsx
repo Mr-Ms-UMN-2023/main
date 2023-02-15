@@ -3,6 +3,7 @@ import styles from "@/styles/Home.module.css";
 import { useState, useEffect, useRef } from "react";
 const Navbar = () => {
   const [navbar, setNavbar] = useState<any>();
+  const [active, setActive] = useState(undefined);
 
   useEffect(() => {
     let AboutUs = document.getElementById("aboutUs")?.offsetTop;
@@ -16,11 +17,11 @@ const Navbar = () => {
         scroll: StoryLine || 0,
       },
       {
-        title: "Storyline",
+        title: "About Us",
         scroll: AboutUs || 0,
       },
       {
-        title: "Storyline",
+        title: "Open Recruitment",
         scroll: oprec || 0,
       },
     ];
@@ -29,16 +30,17 @@ const Navbar = () => {
   }, []);
 
   const NavScroll = (e : any, index : number) => {
-    console.log(e, index);
+
     window.scrollTo({
       top: e,
       behavior: "smooth",
     });
 
-    if (index == 2){
-      document.getElementById("oprec")?.classList.add(styles.show);
+    if (index == 2) {
+      document.getElementById("oprec")?.classList.add(styles.show);          
     }
 
+    setActive(index);
   };
 
   return (
@@ -60,9 +62,18 @@ const Navbar = () => {
               key={index}
               style={{ cursor: "pointer" }}
               onClick={() => NavScroll(event.scroll, index)}
-              fontSize={"1.2rem"}
+              fontSize={{ base: "0.8rem", md: "1.2rem" }}
               color="white">
               {event.title}
+              {active == index && (
+                <Box
+                  mt="0.5rem"
+                  mx="auto"
+                  w={"0.5rem"}
+                  h={"0.5rem"}
+                  borderRadius={"50%"}
+                  bg="white"></Box>
+              )}
             </Heading>
           );
         })}

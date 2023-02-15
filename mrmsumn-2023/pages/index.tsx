@@ -364,7 +364,7 @@ export default function Home(props: any) {
         id="aboutUs"
         className={styles.hidden}
         display={show}
-        h={{ sm: "auto", md: "100vh" }}
+        h="100vh"
         w="70%"
         maxW="1366px"
         mx="auto"
@@ -372,7 +372,6 @@ export default function Home(props: any) {
         flexDirection={"column"}
         justifyContent="center"
         alignItems={"center"}
-        mt="100px"
         position="relative"
         ref={(el: HTMLDivElement) => texts.current.push(el!)}>
         <Heading
