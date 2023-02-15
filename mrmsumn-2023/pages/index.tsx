@@ -595,7 +595,7 @@ export default function Home(props: any) {
           // }}
         >
 
-            {divisions.map((logo) => <DivisionCard logo={logo}/>)}
+            {divisions.map((logo) => <DivisionCard key={logo} logo={logo}/>)}
 
         </Flex>
 
@@ -604,7 +604,7 @@ export default function Home(props: any) {
                 h="auto" 
                 px="10px"
                 py="15px"
-                onClick={() => router.push("https://google.com")}
+                onClick={() => router.push("https://bit.ly/DaftarMahesa")}
                 _hover={{
                   transform : "scale(1.1)",
                   transition : "all .5s ease-in-out"              

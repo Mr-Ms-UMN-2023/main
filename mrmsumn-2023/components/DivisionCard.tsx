@@ -8,7 +8,7 @@ const DivisionCard = ({logo} : {logo : any}) => {
             transform : 'scale(1.1)',
             transition : 'all .5s ease-in-out'
         }}>
-            <Image w='100%' h='100%' src={`/Assets/Division/${logo}`}/>
+            <Image w='100%' h='100%' src={`/Assets/Division/${logo}`} alt='#'/>
         </GridItem>
     )
 }
