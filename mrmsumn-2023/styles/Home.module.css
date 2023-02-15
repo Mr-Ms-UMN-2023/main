@@ -18,6 +18,14 @@
   transform: translateY(0px);
 }
 
+.cards{
+  overflow-x: hidden;
+}
+
+.popup{
+  overflow-x: hidden;
+}
+
 .oprecButton{
   font-size: 2rem;
   width: auto;
@@ -129,6 +137,13 @@
   }
   .rightTree {
     right: -50px;
+  }
+}
+
+@media (max-width: 790px){
+  .popup{
+    width:100% !important;
+    height:100vh !important;
   }
 }
 

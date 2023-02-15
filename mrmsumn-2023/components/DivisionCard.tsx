@@ -5,7 +5,7 @@ import styles from "@/styles/Home.module.css";
 const DivisionCard = ({data, onClick} : {data : any, onClick : any}) => {
     return (
         <AspectRatio h='280px' w='280px' 
-                className={styles.card}
+                className={styles.cards}
                 position={'relative'} 
                 _hover={{
                     transform : 'scale(1.1)',

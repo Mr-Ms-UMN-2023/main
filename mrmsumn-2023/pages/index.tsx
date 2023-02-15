@@ -48,8 +48,6 @@ export default function Home(props: any) {
   const popupRef = useRef<any>(null);
 
   const handleClick = (e : any) => {
-
-      console.log(e.target.classList.contains(styles.popup));
       if (e.target.classList.contains(styles.popup) || e.target.classList.contains(styles.card)) return;
       setPopup(null);
   }
@@ -133,28 +131,28 @@ export default function Home(props: any) {
 
     // Fade in out animation
 
-    // const observer = new IntersectionObserver((entries) => {
-    //   const [entry] = entries;
-    //   if (entry.isIntersecting) {
-    //     entry.target.classList.add(styles.show);
-    //   } else {
-    //     entry.target.classList.remove(styles.show);
-    //   }
-    // });
+    const observer = new IntersectionObserver((entries) => {
+      const [entry] = entries;
+      if (entry.isIntersecting) {
+        entry.target.classList.add(styles.show);
+      } else {
+        entry.target.classList.remove(styles.show);
+      }
+    });
 
-    // if (texts.current) {
-    //   const targets = texts.current;
-    //   targets.forEach((el) => {
-    //     observer.observe(el);
-    //   });
-    // }
+    if (texts.current) {
+      const targets = texts.current;
+      targets.forEach((el) => {
+        observer.observe(el);
+      });
+    }
 
     return () => {
       window.removeEventListener("scroll", handleScroll);
       window.removeEventListener("click", handleClick);      
-      // if (texts.current) {
-      //   observer.disconnect();
-      // }
+      if (texts.current) {
+        observer.disconnect();
+      }
     };
   }, []);
 
@@ -374,7 +372,7 @@ export default function Home(props: any) {
 
       <Flex
         id="aboutUs"
-        className={styles.show}
+        className={styles.hidden}
         display={show}
         h="100vh"
         w="70%"
@@ -409,7 +407,7 @@ export default function Home(props: any) {
       </Flex>
 
       <Flex
-        className={styles.show}
+        className={styles.hidden}
         display={show}
         h={{ sm: "auto", md: "100vh" }}
         w="70%"
@@ -471,7 +469,7 @@ export default function Home(props: any) {
       </Flex>
 
       <Flex
-        className={`${styles.show}`}
+        className={`${styles.hidden}`}
         display={show}
         h={{ sm: "auto", md: "100vh" }}
         w="70%"
@@ -517,7 +515,7 @@ export default function Home(props: any) {
         </Text>
       </Flex>
       <Flex
-        className={styles.show}
+        className={styles.hidden}
         display={show}
         h={{ sm: "auto", md: "100vh" }}
         w="70%"
@@ -564,7 +562,7 @@ export default function Home(props: any) {
 
       <Flex
         id="oprec"
-        className={styles.show}
+        className={styles.hidden}
         display={show}
         h={{ sm: "auto", md: "200vh" }}
         w="70%"
