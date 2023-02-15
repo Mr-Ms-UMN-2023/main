@@ -14,6 +14,7 @@ import {
 import { Loading, Navbar, DivisionCard, DivisionDetail } from "@/components";
 import Image from "next/image";
 import { useState, useEffect, useRef } from "react";
+import { division } from "@/data/divisions";
 
 export default function Home(props: any) {
   const router = useRouter();
@@ -27,26 +28,12 @@ export default function Home(props: any) {
   const [loadingOpacity, setLoadingOpacity] = useState(1);
   const [preloadImage, setPreloadImage] = useState(true);
   const [autoPlayFlag, setAutoPlayFlag] = useState(false);
-  const [popup, setPopup] = useState(false);
+  const [popup, setPopup] = useState<object>(null);
   const [popupData, setPopupData] = useState({});
   const [show, setShow] = useState("none");
 
 
-  const [divisions, setDivisions] = useState([
-    "KRESNA.jpg",    
-    "ANGGADA.png",
-    "ANGGAJALI.png",
-    "ARJUNA.png",
-    "ASWIN.png",
-    "BIMA.jpg",
-    "BRATALARAS.jpg",
-    "HANOMAN.png",
-    "NARADA.jpg",
-    "SRIKANDI.png",
-    "VYASA.jpg",
-    "WISANGGENI.png",
-    "WISNU.png",
-  ]);
+  const [divisions, setDivisions] = useState(division);
 
   const [teaser, setTeaser] = useState("");
 
@@ -57,6 +44,15 @@ export default function Home(props: any) {
   const youtube = useRef<HTMLDivElement[]>([]);
 
   const texts = useRef<HTMLDivElement[]>([]);
+
+  const popupRef = useRef<any>(null);
+
+  const handleClick = (e : any) => {
+
+      console.log(e.target.classList.contains(styles.popup));
+      if (e.target.classList.contains(styles.popup) || e.target.classList.contains(styles.card)) return;
+      setPopup(null);
+  }
 
   const handleScroll = () => {
     window.pageYOffset;
@@ -100,7 +96,8 @@ export default function Home(props: any) {
 
 
   const showDivisionDetail = (data : object) => {
-    
+      if (popup) setPopup(null);
+      else setPopup(data);   
   }
 
   const endVideo = () => {
@@ -128,6 +125,7 @@ export default function Home(props: any) {
     window.scrollTo(0, 0);
 
     window.addEventListener("scroll", handleScroll);
+    window.addEventListener("click", handleClick);
 
     // Set loading opacity timer
 
@@ -153,6 +151,7 @@ export default function Home(props: any) {
 
     return () => {
       window.removeEventListener("scroll", handleScroll);
+      window.removeEventListener("click", handleClick);      
       // if (texts.current) {
       //   observer.disconnect();
       // }
@@ -560,7 +559,7 @@ export default function Home(props: any) {
       </Flex>
 
       {/* DISINI BUAT POPUPNYA */}
-      {popup && <DivisionDetail/>}
+      {popup && <DivisionDetail data={popup}/>}
 
 
       <Flex
@@ -607,12 +606,11 @@ export default function Home(props: any) {
           // }}
         >
 
-            {divisions.map((logo) => <DivisionCard 
-                                          key={logo} 
-                                          logo={logo}
-                                          onClick={showDivisionDetail} 
+            {divisions.map((data) => <DivisionCard 
+                                          key={data.name} 
+                                          data={data}
+                                          onClick={() => showDivisionDetail(data)} 
                                           />)}
-
             
         </Flex>
 
