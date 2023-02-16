@@ -77,7 +77,7 @@
 }
 
 .loading_box {
-  transform: scale(1, 0.85);
+  transform: scale(1, 0.90);
 }
 
 .loading_video {
@@ -147,7 +147,7 @@
   }
 }
 
-@media (max-height: 600px){
+@media (max-height: 750px){
   .hidden, .show{
     max-height:none !important;
     height:auto !important;
