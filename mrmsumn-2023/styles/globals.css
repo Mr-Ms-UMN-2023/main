@@ -105,7 +105,6 @@ body {
     )
     rgb(var(--background-start-rgb)); */
   background: black !important;
-  overflow-y: hidden;
 }
 
 a {
@@ -121,6 +120,8 @@ h1,
 p {
   font-family: Montserrat !important;
 }
+
+
 
 @media (prefers-color-scheme: dark) {
   html {

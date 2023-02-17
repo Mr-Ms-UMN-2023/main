@@ -16,6 +16,7 @@ const ShiningSoon = () => {
   const youtube = useRef<HTMLDivElement[]>([]);
 
   const handleScroll = () => {
+    console.log(window.scrollY);
     window.pageYOffset;
     let scroll = window.pageYOffset / 5;
     let oprec = document.getElementById("oprec")
