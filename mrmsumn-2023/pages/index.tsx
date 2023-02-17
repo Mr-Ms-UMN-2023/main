@@ -20,7 +20,7 @@ import {
   MrMsDetail,
 } from "@/components";
 import Image from "next/image";
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, createElement } from "react";
 import { division } from "@/data/divisions";
 
 export default function Home(props: any) {
@@ -32,7 +32,7 @@ export default function Home(props: any) {
   const [loadingOpacity, setLoadingOpacity] = useState(1);
   const [preloadImage, setPreloadImage] = useState(true);
 
-  const [popup, setPopup] = useState<object>(null);
+  const [popup, setPopup] = useState<object>();
   const [popupData, setPopupData] = useState({});
   const [show, setShow] = useState("none");
 
@@ -48,12 +48,15 @@ export default function Home(props: any) {
       e.target.classList.contains(styles.card)
     )
       return;
-    setPopup(null);
+    setPopup(undefined);
   };
 
   const showDivisionDetail = (data: object) => {
-    if (popup) setPopup(null);
-    else setPopup(data);
+    if (popup) {
+      setPopup(undefined);
+    } else {
+      setPopup(data);
+    }
   };
 
   const endVideo = () => {
