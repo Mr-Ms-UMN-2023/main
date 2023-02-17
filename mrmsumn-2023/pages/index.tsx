@@ -69,7 +69,6 @@ export default function Home(props: any) {
   };
 
   useEffect(() => {
-    
     setLoading(true);
     setPreloadImage(false);
 
@@ -209,7 +208,8 @@ export default function Home(props: any) {
             Foresee Your Destiny
           </Heading>
         </Button>
-      </Flex>{/*<h1 style={{color : 'white'}}>hello</h1>hello*/}
+      </Flex>
+      {/*<h1 style={{color : 'white'}}>hello</h1>hello*/}
     </div>
   );
 }

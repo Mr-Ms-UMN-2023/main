@@ -76,7 +76,7 @@
   transition: all 1s ease;
 }
 
-.comnet{
+.comnet {
   overflow-y: hidden;
 }
 
@@ -268,15 +268,15 @@
 
 /* Track */
 .customScroll::-webkit-scrollbar-track {
-  background: #c28824;
+  background: transparent;
 }
 
 /* Handle */
 .customScroll::-webkit-scrollbar-thumb {
-  background: #c28824;
+  background: transparent;
 }
 
 /* Handle on hover */
 .customScroll::-webkit-scrollbar-thumb:hover {
-  background: #c28824;
+  background: transparent;
 }

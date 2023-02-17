@@ -4,6 +4,7 @@ import styles from "@/styles/Home.module.css";
 const DivisionCard = ({ data, onClick }: { data: any; onClick: any }) => {
   return (
     <AspectRatio
+      cursor="pointer"
       minW="20rem"
       minH="16rem"
       overflow={"hidden"}

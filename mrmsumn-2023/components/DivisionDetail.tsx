@@ -1,48 +1,83 @@
-import { Box, GridItem, Img, Text, Heading, Flex } from "@chakra-ui/react";
+import {
+  Box,
+  GridItem,
+  Image,
+  Text,
+  Heading,
+  Flex,
+  useMediaQuery,
+} from "@chakra-ui/react";
 import styles from "@/styles/Home.module.css";
 
 const DivisionDetail = (data: any, ref: any) => {
   const detail = data.data;
+  const [isMobile] = useMediaQuery("(max-width: 700px)");
 
   return (
     <Flex
-      h={{ base: "80vh", lg: "60vh" }}
-      w={{ base: "80vw", lg: "50vw" }}
-      borderRadius={{ base: "0.5rem", md: "1rem" }}
-      zIndex={100}
-      bg="white"
+      alignItems={"center"}
+      justifyContent={"center"}
       position="fixed"
-      mx="auto"
-      my="auto"
-      left={"50%"}
-      top={"50%"}
-      transform={"translate(-50%, -50%)"}
-      backgroundColor="rgb(194, 136, 36)"
-      overflow="hidden"
-      //  ref={ref}
-    >
+      top="0px"
+      left="0px"
+      minWidth={"100vw"}
+      minHeight="100vh"
+      zIndex={"100"}
+      bgColor={"rgba(0, 0, 0, 0.8)"}>
       <Flex
-        className={styles.customScroll}
-        p="2rem"
-        flexDir={"column"}
-        alignItems="center"
-        overflowY={"scroll"}>
-        <Img
-          mb="2rem"
-          borderRadius={"50%"}
-          width={"10rem"}
-          src={"/Assets/Division/" + detail.Logo}
+        boxShadow={"0px 0px 30px 4px #e8d27d"}
+        color="#c28824"
+        h={{ base: "80vh", lg: "60vh" }}
+        w={{ base: "80vw", lg: "50vw" }}
+        borderRadius={{ base: "0.5rem", md: "1rem" }}
+        zIndex={100}
+        position="relative"
+        bg="white"
+        mx="auto"
+        my="auto"
+        bgSize="cover"
+        bgPosition={"center"}
+        background={{ base: "url('/Assets/Division/PopUp/website-02.png')" }}
+        overflow="hidden">
+        {/* frame */}
+        <Image
+          left="0px"
+          top={"0px"}
+          height="100%"
+          width={"100%"}
+          position={"absolute"}
+          alt="Divisi Panitia Mr. & Ms UMN"
+          src={
+            isMobile
+              ? "/Assets/Division/PopUp/website asse-01.png"
+              : "/Assets/Division/PopUp/website asse-02.png"
+          }
         />
+        <Flex
+          zIndex={"2"}
+          className={styles.customScroll}
+          m="5rem"
+          textAlign={"center"}
+          flexDir={"column"}
+          alignItems="center"
+          overflowY={"scroll"}>
+          <Image
+            mb="2rem"
+            borderRadius={"50%"}
+            width={"10rem"}
+            src={"/Assets/Division/" + detail.Logo}
+          />
 
-        <Heading fontWeight={"bold"}>{detail.name}</Heading>
+          <Heading fontWeight={"bold"}>{detail.name}</Heading>
 
-        <Text mb="2rem" fontWeight={"bold"}>
-          {detail.jobdesk}
-        </Text>
-        <Text mb="2rem" fontWeight={"bold"}>
-          {detail.description[0]}
-        </Text>
-        <Text fontWeight={"bold"}>{detail.description[1]}</Text>
+          <Text mb="2rem" fontWeight={"bold"}>
+            {detail.jobdesk}
+          </Text>
+          <Text mb="2rem" fontWeight={"bold"}>
+            {detail.description[0]}
+          </Text>
+          <Text fontWeight={"bold"}>{detail.description[1]}</Text>
+        </Flex>
       </Flex>
     </Flex>
   );
