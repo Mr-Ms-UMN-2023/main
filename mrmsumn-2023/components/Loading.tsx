@@ -1,4 +1,5 @@
 import { Box, AspectRatio, Image, Text, position } from "@chakra-ui/react";
+import { useEffect } from "react";
 import styles from "@/styles/Home.module.css";
 
 const Loading = ({
@@ -8,6 +9,12 @@ const Loading = ({
   loadingOpacity: number;
   onEnded: any;
 }) => {
+
+
+  useEffect(() => {
+    document.querySelector<HTMLVideoElement>(`.${styles.loading_video}`)!.play();
+  }, []); 
+
   return (
     <Box
       className={styles.loading_box}
@@ -27,7 +34,7 @@ const Loading = ({
         src={"/Assets/Video/intro_2.mp4"}
         onEnded={onEnded}
         className={styles.loading_video}
-        autoPlay
+        // autoPlay
         muted
         disablePictureInPicture
         width={"100%"}

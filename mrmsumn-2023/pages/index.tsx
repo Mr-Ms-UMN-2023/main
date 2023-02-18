@@ -69,8 +69,20 @@ export default function Home(props: any) {
   };
 
   useEffect(() => {
+
     setLoading(true);
     setPreloadImage(false);
+
+    setTimeout(() => {
+      setLoadingOpacity(0);
+      setTimeout(() => {
+        setLoading(false);
+        setShow("flex");
+      }, 1100);      
+    }, 8000);
+
+
+
 
     window.scrollTo(0, 0);
 
