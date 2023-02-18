@@ -176,7 +176,7 @@ const MrMsDetail = (props: any) => {
       <Flex
         className={styles.hidden}
         display={props.onShow}
-        h={{ sm: "auto", md: "100vh" }}
+        h={{ sm: "max-content", md: "100vh" }}
         w="70%"
         maxW="1366px"
         mx="auto"

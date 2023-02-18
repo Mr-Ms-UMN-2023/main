@@ -29,8 +29,12 @@ export default function Home(props: any) {
     if (
       e.target.classList.contains(styles.popup) ||
       e.target.classList.contains(styles.card)
-    )
+    ){
+      document.querySelector('html')!.style.overflowY = 'hidden';    
       return;
+    }
+
+    document.querySelector('html')!.style.overflowY = 'scroll';
     setPopup(undefined);
   };
 
@@ -107,7 +111,7 @@ export default function Home(props: any) {
           Recruitment
         </Heading>
         <Flex
-          height="auto"
+          height="max-content"
           width="100%"
           position="relative"
           gap={"5px"}
