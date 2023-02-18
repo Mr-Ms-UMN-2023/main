@@ -56,7 +56,9 @@ const DivisionDetail = (data: any, ref: any) => {
         <Flex
           zIndex={"2"}
           className={styles.customScroll}
-          m="5rem"
+          m={{base: '1rem', md : '5rem'}}
+          my={'3rem'}
+          p={{base : '1.5rem'}}
           textAlign={"center"}
           flexDir={"column"}
           alignItems="center"
