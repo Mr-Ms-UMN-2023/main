@@ -29,7 +29,6 @@ const Loading = ({
         className={styles.loading_video}
         autoPlay
         muted
-        controls
         disablePictureInPicture
         width={"100%"}
         height={"100%"}
