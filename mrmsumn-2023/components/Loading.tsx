@@ -1,53 +1,63 @@
-import { Box, AspectRatio, Image, Text, position } from "@chakra-ui/react";
-import { useEffect } from "react";
+import {
+  Box,
+  AspectRatio,
+  Image,
+  Text,
+  position,
+  Flex,
+} from "@chakra-ui/react";
+import { useEffect, useState } from "react";
 import styles from "@/styles/Home.module.css";
 
-const Loading = ({
-  loadingOpacity,
-  onEnded,
-}: {
-  loadingOpacity: number;
-  onEnded: any;
-}) => {
-
-
+const Loading = () => {
+  const [Loading, setLoading] = useState(1);
   useEffect(() => {
-    document.querySelector<HTMLVideoElement>(`.${styles.loading_video}`)!.play();
-  }, []); 
+    document.body.classList.add("stop-scrolling");
+
+    setTimeout(() => {
+      setLoading(0);
+      document.body.classList.contains("stop-scrolling")
+        ? document.body.classList.remove("stop-scrolling")
+        : null;
+    }, 8000);
+  }, []);
+
+  const onEnded = () => {
+    document.body.classList.remove("stop-scrolling");
+    setLoading(0);
+  };
 
   return (
-    <Box
-      className={styles.loading_box}
-      h="100vh"
-      w="100vw"
-      maxW="100%"
-      maxH="100%"
-      position="fixed"
-      display="flex"
+    <Flex
+      minH="100vh"
+      minW="100vw"
+      maxH="200vh"
+      maxW="200vw"
+      position={"fixed"}
+      display={Loading == 0 ? "none" : "block"}
       alignItems="center"
       justifyContent={"center"}
-      opacity={loadingOpacity}
-      transition={"opacity 1s ease-in-out"}
+      opacity={Loading}
+      transition={"opacity 2s ease-out"}
       top="0"
-      left="0">
+      left="0"
+      zIndex={"100"}
+      bg="black">
       <video
         src={"/Assets/Video/intro_2.mp4"}
-        onEnded={onEnded}
+        onEnded={() => onEnded()}
         className={styles.loading_video}
-        // autoPlay
-        muted
+        playsInline
+        autoPlay={true}
+        muted={true}
         disablePictureInPicture
-        width={"100%"}
-        height={"100%"}
         style={{
           pointerEvents: "none",
           touchAction: "none",
-          objectFit: "cover",
-          maxWidth: "100%",
           imageRendering: "pixelated",
-          imageResolution: "inherit",
+          imageResolution: "inherit !important",
         }}></video>
-    </Box>
+    </Flex>
   );
 };
 

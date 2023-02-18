@@ -34,7 +34,6 @@ const MrMsDetail = (props: any) => {
       <Flex
         id="aboutUs"
         className={styles.hidden}
-        display={props.onShow}
         h="100vh"
         w="70%"
         maxW="1366px"

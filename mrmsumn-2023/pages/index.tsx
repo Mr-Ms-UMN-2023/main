@@ -1,16 +1,7 @@
 import Head from "next/head";
 import styles from "@/styles/Home.module.css";
 import { useRouter } from "next/router";
-import {
-  Box,
-  Img,
-  Flex,
-  Grid,
-  Text,
-  AspectRatio,
-  Heading,
-  Button,
-} from "@chakra-ui/react";
+import { Box, Flex, Heading, Button } from "@chakra-ui/react";
 import {
   Loading,
   Navbar,
@@ -19,28 +10,20 @@ import {
   ShiningSoon,
   MrMsDetail,
 } from "@/components";
-import Image from "next/image";
-import { useState, useEffect, useRef, createElement } from "react";
+
+import { useState, useEffect, useRef } from "react";
 import { division } from "@/data/divisions";
 
 export default function Home(props: any) {
   const router = useRouter();
 
-  const [scrollY, setScrollY] = useState(0);
-
-  const [loading, setLoading] = useState(false);
-  const [loadingOpacity, setLoadingOpacity] = useState(1);
-  const [preloadImage, setPreloadImage] = useState(true);
+  const [divisions, setDivisionData] = useState(division);
 
   const [popup, setPopup] = useState<object>();
-  const [popupData, setPopupData] = useState({});
-  const [show, setShow] = useState("none");
 
-  const [divisions, setDivisions] = useState(division);
+  // const [show, setShow] = useState("none");
 
   const texts = useRef<HTMLDivElement[]>([]);
-
-  const popupRef = useRef<any>(null);
 
   const handleClick = (e: any) => {
     if (
@@ -59,40 +42,10 @@ export default function Home(props: any) {
     }
   };
 
-  const endVideo = () => {
-    setLoadingOpacity(0);
-
-    setTimeout(() => {
-      setLoading(false);
-      setShow("flex");
-    }, 1100);
-  };
-
   useEffect(() => {
-
-    setLoading(true);
-    setPreloadImage(false);
-
-    setTimeout(() => {
-      setLoadingOpacity(0);
-      setTimeout(() => {
-        setLoading(false);
-        setShow("flex");
-      }, 1100);      
-    }, 8000);
-
-
-
-
     window.scrollTo(0, 0);
 
     window.addEventListener("click", handleClick);
-
-    // Set loading opacity timer
-
-    // Set timer for loading
-
-    // Fade in out animation
 
     const observer = new IntersectionObserver((entries) => {
       const [entry] = entries;
@@ -119,32 +72,13 @@ export default function Home(props: any) {
   }, []);
 
   return (
-    <div>
-      <Head>
-        <title>Mr. & Ms. UMN 2023</title>
-        <meta name="description" content="Website Mr. & Ms. UMN 2023" />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <link rel="icon" href="/Assets/Logo/LogoMrMsUMN2023.png" />
-      </Head>
+    <>
+      <Loading />
 
-      {loading ? (
-        <Loading loadingOpacity={loadingOpacity} onEnded={endVideo} />
-      ) : (
-        <>
-          {preloadImage && (
-            <Flex
-              h="100vh"
-              w="100vw"
-              position={"absolute"}
-              bg="black"
-              zIndex={20}></Flex>
-          )}
-          <Navbar />
-          <ShiningSoon />
-        </>
-      )}
+      <ShiningSoon />
+      <Navbar />
 
-      <MrMsDetail onShow={show} />
+      <MrMsDetail />
 
       {/* DISINI BUAT POPUPNYA */}
       {popup && <DivisionDetail data={popup} />}
@@ -152,7 +86,6 @@ export default function Home(props: any) {
       <Flex
         id="oprec"
         className={styles.hidden}
-        display={show}
         h={{ sm: "auto", md: "200vh" }}
         w="70%"
         maxW="1366px"
@@ -168,7 +101,7 @@ export default function Home(props: any) {
         <Heading
           color="#c28824"
           mb="20px"
-          fontSize={{ base: "1rem", md: "25px", lg: "3rem" }}
+          fontSize={{ base: "2rem", md: "60px", lg: "5rem" }}
           textAlign="center">
           Open <br />
           Recruitment
@@ -182,17 +115,8 @@ export default function Home(props: any) {
           alignItems="center"
           justifyContent={"center"}
           justifyItems={"center"}
-          flexWrap="wrap"
-          // templateRows='1fr 1fr'
-          // templateColumns={{
-          //     base : 'repeat(1, 1fr)',
-          //     sm : 'repeat(2, 1fr)',
-          //     md : 'repeat(3, 1fr)',
-          //     lg : 'repeat(4, 1fr)',
-          //     xl : 'repeat(5, 1fr)'
-          // }}
-        >
-          {divisions.map((data) => (
+          flexWrap="wrap">
+          {divisions.map((data: any) => (
             <DivisionCard
               key={data.name}
               data={data}
@@ -221,7 +145,6 @@ export default function Home(props: any) {
           </Heading>
         </Button>
       </Flex>
-      {/*<h1 style={{color : 'white'}}>hello</h1>hello*/}
-    </div>
+    </>
   );
 }

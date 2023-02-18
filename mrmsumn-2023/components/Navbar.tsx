@@ -59,7 +59,7 @@ const Navbar = () => {
       alignItems={"center"}
       minHeight="10vh"
       minW={"100vw"}
-      zIndex={"100"}
+      zIndex={"10"}
       fontFamily={"TrajanPro-Bold"}>
       {navbar &&
         navbar?.map((event: any, index: number) => {

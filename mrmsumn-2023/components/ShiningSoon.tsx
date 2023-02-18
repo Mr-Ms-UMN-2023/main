@@ -16,7 +16,7 @@ const ShiningSoon = () => {
   const youtube = useRef<HTMLDivElement[]>([]);
 
   const handleScroll = () => {
-    console.log(window.scrollY);
+    // console.log(window.scrollY);
     window.pageYOffset;
     let scroll = window.pageYOffset / 5;
     let oprec = document.getElementById("oprec")
@@ -71,14 +71,15 @@ const ShiningSoon = () => {
     return () => {
       window.removeEventListener("scroll", handleScroll);
     };
-  });
+  }, []);
 
   useEffect(() => {
     if (scrollY >= 300 && !autoPlayFlag) {
       setAutoPlayFlag(true);
       setTeaser((teaser) => teaser + "&autoplay=1");
     }
-  }, [scrollY]);
+    console.log("scroll", scrollY);
+  }, [scrollY, autoPlayFlag]);
 
   return (
     <>
@@ -256,7 +257,7 @@ const ShiningSoon = () => {
             height="315"
             src={teaser}
             title="YouTube video player"
-            allow="accelerometer; autoplay; unmute; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share; no user gesture is required"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share; no user gesture is required"
             allowFullScreen></iframe>
         </AspectRatio>
       </Flex>

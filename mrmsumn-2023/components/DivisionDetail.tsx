@@ -9,9 +9,14 @@ import {
 } from "@chakra-ui/react";
 import styles from "@/styles/Home.module.css";
 
-const DivisionDetail = (data: any, ref: any) => {
+const DivisionDetail = (data: any) => {
   const detail = data.data;
   const [isMobile] = useMediaQuery("(max-width: 700px)");
+  // document.body.classList.add("stop-scrolling");
+
+  // const popOut = () => {
+  //   document.body.classList.remove("stop-scrolling");
+  // };
 
   return (
     <Flex
@@ -56,9 +61,9 @@ const DivisionDetail = (data: any, ref: any) => {
         <Flex
           zIndex={"2"}
           className={styles.customScroll}
-          m={{base: '1rem', md : '5rem'}}
-          my={'3rem'}
-          p={{base : '1.5rem'}}
+          m={{ base: "1rem", md: "5rem" }}
+          my={"3rem"}
+          p={{ base: "1.5rem" }}
           textAlign={"center"}
           flexDir={"column"}
           alignItems="center"
