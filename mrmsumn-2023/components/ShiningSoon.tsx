@@ -78,7 +78,7 @@ const ShiningSoon = () => {
       setAutoPlayFlag(true);
       setTeaser((teaser) => teaser + "&autoplay=1");
     }
-    console.log("scroll", scrollY);
+    // console.log("scroll", scrollY);
   }, [scrollY, autoPlayFlag]);
 
   return (
