@@ -46,8 +46,16 @@ export default async function handler(
             email : user.email
         }
 
-        jwt.sign(payload, process.env.JWT_SIGNATURE, {expiresIn : process.env.JWT_LIFETIME}, 
+        jwt.sign(payload, process.env.JWT_SIGNATURE, {expiresIn : process.env.JWT_LIFETIME + 'd'}, 
             (err : any , token : any) => {
+
+                if (err) {
+                    return res.status(200).json({
+                        status : "FAILED",
+                        code : 403, 
+                        message : "Failed to navigate to requested page"
+                    })                    
+                }
 
                 return res.status(200).json({
                     status : "SUCCESS",
@@ -55,6 +63,7 @@ export default async function handler(
                     data : {user, token}
                 })
             });     
+            
         return; 
         
     } else {
