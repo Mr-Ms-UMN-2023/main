@@ -15,6 +15,10 @@ import { useState, useEffect, useRef } from "react";
 import { division } from "@/data/divisions";
 
 export default function Home(props: any) {
+  const [tanggal, setTanggal] = useState("");
+  const [jam, setJam] = useState(0);
+  const [tutup, setTutup] = useState(false);
+
   const router = useRouter();
 
   const [divisions, setDivisionData] = useState(division);
@@ -29,12 +33,12 @@ export default function Home(props: any) {
     if (
       e.target.classList.contains(styles.popup) ||
       e.target.classList.contains(styles.card)
-    ){
-      document.querySelector('html')!.style.overflowY = 'hidden';    
+    ) {
+      document.querySelector("html")!.style.overflowY = "hidden";
       return;
     }
 
-    document.querySelector('html')!.style.overflowY = 'scroll';
+    document.querySelector("html")!.style.overflowY = "scroll";
     setPopup(undefined);
   };
 
@@ -74,6 +78,38 @@ export default function Home(props: any) {
       }
     };
   }, []);
+
+  const time = () => {
+    let now = new Date();
+    let day = now.getDate();
+    let month = now.getMonth() + 1;
+    let year = now.getFullYear();
+    let hour = now.getHours();
+
+    let date: string = String(year) + String(month) + String(day);
+    // console.log(date);
+
+    setTanggal(date);
+    setJam(hour);
+  };
+
+  useEffect(() => {
+    let nowTime = setInterval(() => time(), 1000);
+
+    return () => clearInterval(nowTime);
+  }, []);
+
+  useEffect(() => {
+    // console.log("tanggal", tanggal);
+    // console.log("jam", jam);
+
+    console.log(tanggal);
+    if (tanggal > "2023219" && jam >= 0) {
+      console.log("tutup");
+
+      setTutup(true);
+    }
+  }, [tanggal, jam]);
 
   return (
     <>
@@ -128,26 +164,29 @@ export default function Home(props: any) {
             />
           ))}
         </Flex>
-
-        <Button
-          className={styles.oprecButton}
-          colorScheme={"none"}
-          mt="30px"
-          border={"1px solid white"}
-          borderRadius={"2px"}
-          color="white"
-          h="auto"
-          px="10px"
-          py="15px"
-          onClick={() => router.push("https://bit.ly/DaftarMahesa")}
-          _hover={{
-            transform: "scale(1.1)",
-            transition: "all .5s ease-in-out",
-          }}>
-          <Heading fontSize={{ md: "1rem" }} mx={{ base: "0", md: "30px" }}>
-            Foresee Your Destiny
-          </Heading>
-        </Button>
+        {tutup ? (
+          ""
+        ) : (
+          <Button
+            className={styles.oprecButton}
+            colorScheme={"none"}
+            mt="30px"
+            border={"1px solid white"}
+            borderRadius={"2px"}
+            color="white"
+            h="auto"
+            px="10px"
+            py="15px"
+            onClick={() => router.push("https://bit.ly/DaftarMahesa")}
+            _hover={{
+              transform: "scale(1.1)",
+              transition: "all .5s ease-in-out",
+            }}>
+            <Heading fontSize={{ md: "1rem" }} mx={{ base: "0", md: "30px" }}>
+              Foresee Your Destiny
+            </Heading>
+          </Button>
+        )}
       </Flex>
     </>
   );
