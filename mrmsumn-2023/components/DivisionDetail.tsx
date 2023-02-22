@@ -12,11 +12,6 @@ import styles from "@/styles/Home.module.css";
 const DivisionDetail = (data: any) => {
   const detail = data.data;
   const [isMobile] = useMediaQuery("(max-width: 700px)");
-  // document.body.classList.add("stop-scrolling");
-
-  // const popOut = () => {
-  //   document.body.classList.remove("stop-scrolling");
-  // };
 
   return (
     <Flex

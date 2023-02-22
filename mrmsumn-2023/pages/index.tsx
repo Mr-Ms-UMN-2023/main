@@ -9,6 +9,8 @@ import {
   DivisionDetail,
   ShiningSoon,
   MrMsDetail,
+  Dedikasi,
+  ButtonDedikasi,
 } from "@/components";
 
 import { useState, useEffect, useRef } from "react";
@@ -18,6 +20,7 @@ export default function Home(props: any) {
   const [tanggal, setTanggal] = useState("");
   const [jam, setJam] = useState(0);
   const [tutup, setTutup] = useState(false);
+  const [dedikasi, setDedikasi] = useState(false);
 
   const router = useRouter();
 
@@ -113,9 +116,12 @@ export default function Home(props: any) {
 
   return (
     <>
+      {dedikasi && <Dedikasi Dedikasi={setDedikasi} />}
+      <ButtonDedikasi Dedikasi={setDedikasi} />
       <Loading />
 
       <ShiningSoon />
+
       <Navbar />
 
       <MrMsDetail />
