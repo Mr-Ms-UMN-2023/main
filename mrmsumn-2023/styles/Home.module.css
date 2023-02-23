@@ -281,3 +281,27 @@
 .customScroll::-webkit-scrollbar-thumb:hover {
   background: transparent;
 }
+
+.MrMsFav:hover {
+  filter: grayscale(0%) !important;
+}
+
+.MrMsFav {
+  filter: grayscale(100%);
+}
+
+.animateLine {
+  content: "";
+  width: 3rem;
+  animation: lineAnimate 2s infinite;
+}
+
+@keyframes lineAnimate {
+  0% {
+    width: 0px;
+  }
+
+  100% {
+    width: 3rem;
+  }
+}
