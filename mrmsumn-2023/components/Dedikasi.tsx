@@ -45,14 +45,15 @@ const Dedikasi = (props: any) => {
       alignItems={"center"}
       flexDir={"column"}
       color={"white"}
-      overflowY={"scroll"}
+      // overflowY={"scroll"}
       overflowX={"hidden"}
-      zIndex={"100"}
+      // zIndex={"100"}
       w="100vw"
-      h="100vh"
+      // h="100vh"
       bgColor={"black"}
-      position={"fixed"}>
-      <Flex
+      // position={"fixed"}
+    >
+      {/* <Flex
         zIndex={"100"}
         cursor={"pointer"}
         onClick={() => props.Dedikasi(false)}
@@ -66,7 +67,7 @@ const Dedikasi = (props: any) => {
         </Box>
 
         <Text>Back to Home</Text>
-      </Flex>
+      </Flex> */}
       <Flex
         flexDir={{ base: "column-reverse", md: "row" }}
         textAlign={{ base: "center", md: "right" }}
@@ -124,7 +125,7 @@ const Dedikasi = (props: any) => {
               Mr. Dave Hapien Indrianto
             </Heading>
             <Text fontSize={{ base: "0.8rem", md: "1.2rem" }}>
-              Stategic Communication - 2020
+              Strategic Communication - 2020
             </Text>
           </Box>
 
@@ -159,6 +160,7 @@ const Dedikasi = (props: any) => {
             return (
               <GridItem key={index} colSpan={{ base: 12, md: 6, xl: 3 }}>
                 <Box
+                  h="70vh"
                   borderRadius={"1rem"}
                   overflow="hidden"
                   position={"relative"}
@@ -168,6 +170,7 @@ const Dedikasi = (props: any) => {
                   border={"1px solid #c28824"}>
                   <Img w="100%" src={item.foto} />
                   <Flex
+                    p="1rem"
                     alignItems={"center"}
                     justifyContent={"center"}
                     w="100%"
@@ -180,7 +183,9 @@ const Dedikasi = (props: any) => {
                       <Heading textAlign={"center"} color="#c28824">
                         {item.nama}
                       </Heading>
-                      <Text>{item.jurusan}</Text>
+                      <Text textAlign={{ base: "center", md: "start" }}>
+                        {item.jurusan}
+                      </Text>
                     </Box>
                   </Flex>
                 </Box>
