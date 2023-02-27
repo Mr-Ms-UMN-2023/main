@@ -48,7 +48,9 @@ const MrMsDetail = (props: any) => {
           color="#c28824"
           mb="20px"
           fontSize={{ base: "2rem", md: "60px", lg: "5rem" }}
-          textAlign="center">
+          textAlign="center"
+          filter={'drop-shadow(0 0 10px #c28824)'}
+          >
           Mr. & Ms. UMN 2023
         </Heading>
 
@@ -84,6 +86,7 @@ const MrMsDetail = (props: any) => {
           color="#c28824"
           mb="20px"
           fontSize={{ base: "2rem", md: "60px", lg: "5rem" }}
+          filter={'drop-shadow(0 0 10px #c28824)'}          
           textAlign="center">
           Konsep Kegiatan <br /> Mr. & Ms. UMN 2023
         </Heading>
@@ -145,6 +148,7 @@ const MrMsDetail = (props: any) => {
           color="#c28824"
           mb="20px"
           fontSize={{ base: "2rem", md: "60px", lg: "5rem" }}
+          filter={'drop-shadow(0 0 10px #c28824)'}          
           textAlign="center">
           Tema Mr. & Ms. UMN 2023
         </Heading>
@@ -191,6 +195,7 @@ const MrMsDetail = (props: any) => {
           color="#c28824"
           mb="20px"
           fontSize={{ base: "2rem", md: "60px", lg: "5rem" }}
+          filter={'drop-shadow(0 0 10px #c28824)'}          
           textAlign="center">
           Tagline <br />
           Mr. & Ms. UMN 2023

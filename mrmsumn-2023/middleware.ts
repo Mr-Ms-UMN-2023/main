@@ -23,13 +23,13 @@ export default async function middleware(req : NextRequest, res : NextResponse){
     
     if (data.code === 401){ // Has invalid token
         if (protectedRoutes.includes(req.nextUrl.pathname)){
-            return NextResponse.redirect(new URL('/login', req.url))
+            return NextResponse.redirect(new URL('/loginwisanggeniadmin', req.url))
         }
         return;
     } 
 
     // Redirect from login and register page if authenticated
-    if (req.nextUrl.pathname == '/login' || req.nextUrl.pathname == '/register'){
+    if (req.nextUrl.pathname == '/loginwisanggeniadmin' || req.nextUrl.pathname == '/register'){
         return NextResponse.redirect(new URL('/', req.url))        
     }
 

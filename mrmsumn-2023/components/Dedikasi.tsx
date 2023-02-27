@@ -119,17 +119,17 @@ const Dedikasi = (props: any) => {
         <Heading mb="2rem" color="#c28824">
           Runner Up
         </Heading>
-        <Flex alignItems={"center"} justifyContent={"space-evenly"}>
-          <Box w={{ base: "50vw", lg: "30vw" }}>
-            <Heading color="#c28824" fontSize={{ base: "1.2rem", md: "2rem" }}>
+        <Flex w={{base : "90vw", md : 'auto'}} flexDirection={{base : 'column', lg : 'row'}} alignItems={"center"} justifyContent={"space-evenly"} gap={{md : '0rem', lg : '8rem'}}>
+          <Box w={{ base: "80vw", lg: "30vw" }} my={{base : ".5rem", md : '0'}}>
+            <Heading color="#c28824" fontSize={{ base: "1.2rem", md: "2rem" }} w={{base : "100%", md : 'auto'}}>
               Mr. Dave Hapien Indrianto
             </Heading>
-            <Text fontSize={{ base: "0.8rem", md: "1.2rem" }}>
+            <Text fontSize={{ base: "0.8rem", md: "1.2rem" }} w={{base : "100%", md : 'auto'}}>
               Strategic Communication - 2020
             </Text>
           </Box>
 
-          <Box w={{ base: "50vw", lg: "30vw" }}>
+          <Box w={{ base: "80vw", lg: "30vw" }} my={{base : ".5rem", md : '0'}}>
             <Heading color="#c28824" fontSize={{ base: "1.2rem", md: "2rem" }}>
               Ms. Clara Shinta Purnama
             </Heading>
@@ -183,7 +183,7 @@ const Dedikasi = (props: any) => {
                       <Heading textAlign={"center"} color="#c28824">
                         {item.nama}
                       </Heading>
-                      <Text textAlign={{ base: "center", md: "start" }}>
+                      <Text textAlign="center">
                         {item.jurusan}
                       </Text>
                     </Box>

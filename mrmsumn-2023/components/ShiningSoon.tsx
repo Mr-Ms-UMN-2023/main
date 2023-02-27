@@ -194,7 +194,7 @@ const ShiningSoon = () => {
               alt="Logo Mr. & Ms. UMN"
             />
           </AspectRatio>
-          <AspectRatio
+          {/* <AspectRatio
             zIndex="100"
             w={{ base: "80vw", md: "40vw", xl: "20vw" }}
             ratio={20 / 9}>
@@ -203,7 +203,7 @@ const ShiningSoon = () => {
               src="/Assets/ShiningSoon/shinningsoon.png"
               alt="text Shining Soon"
             />
-          </AspectRatio>
+          </AspectRatio> */}
         </Flex>
       </Flex>
     </>

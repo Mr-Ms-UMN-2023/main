@@ -82,17 +82,17 @@ const Divisi = () => {
     return () => clearInterval(nowTime);
   }, []);
 
-  useEffect(() => {
-    // console.log("tanggal", tanggal);
-    // console.log("jam", jam);
+  // useEffect(() => {
+  //   // console.log("tanggal", tanggal);
+  //   // console.log("jam", jam);
 
-    console.log(tanggal);
-    if (tanggal > "2023219" && jam >= 0) {
-      console.log("tutup");
+  //   console.log(tanggal);
+  //   if (tanggal > "2023219" && jam >= 0) {
+  //     console.log("tutup");
 
-      setTutup(true);
-    }
-  }, [tanggal, jam]);
+  //     setTutup(true);
+  //   }
+  // }, [tanggal, jam]);
 
   return (
     <>
@@ -125,7 +125,7 @@ const Divisi = () => {
         </Heading>
         <Flex
           height="max-content"
-          width="100%"
+          width="85vw"
           position="relative"
           gap={"5px"}
           placeItems={"center"}
