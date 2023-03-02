@@ -79,6 +79,10 @@
   overflow-y: hidden;
 }
 
+.oprec_list{
+  background-color: none;
+}
+
 /* .loading_box {
   transform: scale(1, 0.9);
 } */
@@ -151,11 +155,19 @@
   }
 }
 
-@media (max-height: 750px) {
+@media (max-height: 620px) {
   .hidden,
   .show {
     max-height: none !important;
     height: auto !important;
+    margin-top:8rem !important;
+  }
+}
+
+@media (max-height:344px) {
+  .oprec_list{
+    height:auto !important;
+    overflow: hidden !important;
   }
 }
 

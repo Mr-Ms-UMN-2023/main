@@ -102,8 +102,8 @@ const Divisi = () => {
 
       <Flex
         id="oprec"
-        className={styles.hidden}
-        h={{ sm: "auto", md: "200vh" }}
+        className={`${styles.hidden} ${styles.oprec_list}`}
+        h="100vh"
         w="70%"
         maxW="1366px"
         mx="auto"
@@ -112,13 +112,14 @@ const Divisi = () => {
         flexDirection={"column"}
         justifyContent="center"
         alignItems={"center"}
-        mt="100px"
+        mt={{base : "150px",sm : "60px"}}
         position="relative"
         ref={(el: HTMLDivElement) => texts.current.push(el!)}>
         <Heading
           color="#c28824"
           mb="20px"
           fontSize={{ base: "2rem", md: "60px", lg: "5rem" }}
+          filter={'drop-shadow(0 0 10px #c28824)'}
           textAlign="center">
           Open <br />
           Recruitment
@@ -154,6 +155,7 @@ const Divisi = () => {
             h="auto"
             px="10px"
             py="15px"
+            mb='100px'
             onClick={() => router.push("https://bit.ly/DaftarMahesa")}
             _hover={{
               transform: "scale(1.1)",
