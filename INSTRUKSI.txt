@@ -1,2 +1,7 @@
+<<<<<<< HEAD
+1. Silahkan lakukan div centering pada tiga template yang sudah diberikan, dengan tiga cara yang berbeda.
+2. Silahkan push directory pekerjaanmu pada branch "interview". Nama directory pekerjaanmu adalah nama lengkapmu.
+=======
 1. Silahkan lakukan div centering pada tiga template yang sudah diberikan, dengan minimal dua cara dan maksimal tiga cara yang berbeda.
 2. Silahkan push directory pekerjaanmu pada branch "interview" dengan summmary nama lengkap kamu
+>>>>>>> ab75b16d0ce5f8dd2a4f2286d75188727787eb2c
