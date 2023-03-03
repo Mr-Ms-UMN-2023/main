@@ -82,17 +82,21 @@ const Divisi = () => {
     return () => clearInterval(nowTime);
   }, []);
 
-  // useEffect(() => {
-  //   // console.log("tanggal", tanggal);
-  //   // console.log("jam", jam);
+  useEffect(() => {
+    console.log("tanggal", tanggal);
+    console.log("jam", jam);
 
-  //   console.log(tanggal);
-  //   if (tanggal > "2023219" && jam >= 0) {
-  //     console.log("tutup");
+    console.log(tanggal);
+    if (tanggal > "202333") {
+      console.log("tutup");
 
-  //     setTutup(true);
-  //   }
-  // }, [tanggal, jam]);
+      setTutup(true);
+    } else if (tanggal == "202333" && jam >= 20) {
+      console.log("tutup");
+
+      setTutup(true);
+    }
+  }, [tanggal, jam]);
 
   return (
     <>
@@ -101,25 +105,22 @@ const Divisi = () => {
       {popup && <DivisionDetail data={popup} />}
 
       <Flex
+        py={{ base: "10rem", md: "auto" }}
         id="oprec"
         className={`${styles.hidden} ${styles.oprec_list}`}
-        h="100vh"
-        w="70%"
-        maxW="1366px"
-        mx="auto"
-        my="auto"
-        mb="100px"
+        minH="100vh"
+        maxH={{ md: "100vh " }}
+        w="100%"
         flexDirection={"column"}
-        justifyContent="center"
+        justifyContent={"center"}
         alignItems={"center"}
-        mt={{base : "150px",sm : "60px"}}
         position="relative"
         ref={(el: HTMLDivElement) => texts.current.push(el!)}>
         <Heading
           color="#c28824"
           mb="20px"
           fontSize={{ base: "2rem", md: "60px", lg: "5rem" }}
-          filter={'drop-shadow(0 0 10px #c28824)'}
+          filter={"drop-shadow(0 0 10px #c28824)"}
           textAlign="center">
           Open <br />
           Recruitment
@@ -155,7 +156,7 @@ const Divisi = () => {
             h="auto"
             px="10px"
             py="15px"
-            mb='100px'
+            mb="100px"
             onClick={() => router.push("https://bit.ly/DaftarMahesa")}
             _hover={{
               transform: "scale(1.1)",
