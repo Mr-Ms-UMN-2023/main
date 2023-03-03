@@ -6,12 +6,17 @@ body {
   min-height: 100vh;
   min-width: 100vh;
   background: red;
+  
 }
 
 .c1 {
   background: blue;
   width: 100px;
   height: 100px;
+  position: fixed;
+  left: 50%;
+  top: 50%;
+
 }
 
 .p2 {
