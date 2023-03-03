@@ -1,0 +1,2 @@
+1. Silahkan lakukan div centering pada tiga template yang sudah diberikan, dengan tiga cara yang berbeda.
+2. Silahkan push directory pekerjaanmu pada branch "interview"
