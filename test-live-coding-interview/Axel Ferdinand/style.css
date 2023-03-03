@@ -6,6 +6,9 @@ body {
   min-height: 100vh;
   min-width: 100vh;
   background: red;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .c1 {
@@ -19,6 +22,8 @@ body {
   min-height: 100vh;
   min-width: 100vh;
   background: yellow;
+  display: grid;
+  place-items: center;
 }
 
 .c2 {
@@ -36,4 +41,8 @@ body {
   background: purple;
   width: 100px;
   height: 100px;
+  position: absolute;
+  top: 250%;
+  left: 50%;
+  transform: translate(-50%,-50%);
 }
