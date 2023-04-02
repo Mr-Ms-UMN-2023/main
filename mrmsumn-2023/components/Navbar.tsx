@@ -16,6 +16,10 @@ const Navbar = () => {
       link: "/aboutus",
     },
     {
+      title: "FAQ",
+      link: "/faq",
+    },    
+    {
       title: "Open Recruitment",
       link: "/recruitment",
     },
