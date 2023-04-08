@@ -1,0 +1,41 @@
+body {
+  margin: 0px !important;
+}
+
+.p1 {
+  min-height: 100vh;
+  min-width: 100vh;
+  background: red;
+}
+
+.c1 {
+  background: blue;
+  width: 100px;
+  height: 100px;
+  align-items: center;
+}
+
+.p2 {
+  min-height: 100vh;
+  min-width: 100vh;
+  background: yellow;
+  top: auto;
+  left: 50px;
+}
+
+.c2 {
+  background: green;
+  width: 100px;
+  height: 100px;
+}
+.p3 {
+  min-height: 100vh;
+  min-width: 100vh;
+  background: mediumturquoise;
+}
+
+.c3 {
+  background: purple;
+  width: 100px;
+  height: 100px;
+}

@@ -1,0 +1,118 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model user {
+  id               String   @default(uuid()) @id 
+  username         String? 
+  email            String?  @unique
+  password         String
+}
+
+model awarding {
+  Name             String @db.VarChar(255)
+  Email            String @id @db.VarChar(64)
+  PhoneNumber      String @db.VarChar(16)
+  TransactionProof String @db.VarChar(255)
+  Origin           String @db.VarChar(3)
+  TransactionDate  String @db.VarChar(255)
+}
+
+model ci_sessions {
+  id         String @id @db.VarChar(40)
+  ip_address String @db.VarChar(45)
+  timestamp  Int    @default(0) @db.UnsignedInt
+  data       Bytes  @db.Blob
+
+  @@index([timestamp], map: "ci_sessions_timestamp")
+}
+
+/// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by the Prisma Client.
+model finalis2020 {
+  Name    String @db.VarChar(255)
+  Major   String @db.VarChar(255)
+  Year    Int
+  Tagline String @db.VarChar(255)
+  Photo   String @db.VarChar(255)
+
+  @@ignore
+}
+
+model finalis2022 {
+  Name    String @db.VarChar(255)
+  Major   String @db.VarChar(255)
+  Year    Int
+  Tagline String @db.VarChar(255)
+  Photo   String @db.VarChar(255)
+  id      Int    @id
+}
+
+model metanoia {
+  Name             String @db.VarChar(255)
+  Email            String @id @db.VarChar(64)
+  PhoneNumber      String @db.VarChar(16)
+  TransactionProof String @db.VarChar(255)
+  Origin           String @db.VarChar(3)
+  TransactionDate  String @db.VarChar(255)
+}
+
+model peserta {
+  Name                   String   @db.VarChar(255)
+  StudentID              String   @id @db.VarChar(11)
+  Email                  String   @db.VarChar(64)
+  gender                 String   @db.VarChar(1)
+  BirthDate              DateTime @db.Date
+  BirthPlace             String   @db.VarChar(255)
+  Address                String   @db.VarChar(255)
+  PhoneNumber            String   @db.VarChar(16)
+  LineID                 String   @db.VarChar(255)
+  IGUsername             String   @db.VarChar(255)
+  Major                  String   @db.VarChar(255)
+  Year                   String   @db.VarChar(11)
+  GPA                    String   @db.VarChar(8)
+  gpaPict                String   @db.VarChar(255)
+  Height                 String   @db.VarChar(11)
+  Weight                 String   @db.VarChar(11)
+  clothesSize            String   @db.VarChar(11)
+  pantsSize              String   @db.VarChar(11)
+  shoeSize               Int
+  AboutMe                String   @db.Text
+  Motivation             String   @db.Text
+  Talents                String   @db.Text
+  OrganizationExperience String   @db.Text
+  Achievements           String   @db.Text
+  RoleModelCharacter     String   @db.Text
+  picture                String   @db.VarChar(255)
+  personality            String   @db.VarChar(255)
+  essai                  String   @db.VarChar(255)
+  Status                 Int
+  QuestionType           String   @db.Char(1)
+}
+
+/// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by the Prisma Client.
+model peserta_candidate {
+  StudentID      String @db.VarChar(11)
+  CandidateImage String @db.VarChar(255)
+
+  @@index([StudentID], map: "StudentID")
+  @@ignore
+}
+
+/// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by the Prisma Client.
+model peserta_tugas {
+  StudentID  String @db.VarChar(11)
+  tugas1     String @db.VarChar(255)
+  timeTugas1 String @db.VarChar(255)
+
+  @@ignore
+}
+
+model voting {
+  NIM    String @id @db.VarChar(11)
+  Voters Int
+}

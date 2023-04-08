@@ -1,0 +1,48 @@
+body {
+  margin: 0px !important;
+}
+
+.p1 {
+  min-height: 100vh;
+  min-width: 100vh;
+  background: red;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.c1 {
+  background: blue;
+  width: 100px;
+  height: 100px;
+  top:0;
+}
+
+.p2 {
+  min-height: 100vh;
+  min-width: 100vh;
+  background: yellow;
+  display: grid;
+  place-items: center;
+}
+
+.c2 {
+  background: green;
+  width: 100px;
+  height: 100px;
+}
+.p3 {
+  min-height: 100vh;
+  min-width: 100vh;
+  background: mediumturquoise;
+}
+
+.c3 {
+  background: purple;
+  width: 100px;
+  height: 100px;
+  position: absolute;
+  top: 250%;
+  left: 50%;
+  transform: translate(-50%,-50%);
+}

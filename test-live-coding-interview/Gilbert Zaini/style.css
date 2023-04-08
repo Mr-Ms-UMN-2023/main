@@ -1,0 +1,47 @@
+body {
+  margin: 0px !important;
+}
+
+.p1 {
+  min-height: 100vh;
+  min-width: 100vh;
+  background: red;
+  display: flex;
+  flex-direction: flex-column;
+  justify-content: center;
+}
+
+.c1 {
+  background: blue;
+  width: 100px;
+  height: 100px;
+}
+
+.p2 {
+  min-height: 100vh;
+  min-width: 100vh;
+  background: yellow;
+  
+}
+
+.c2 {
+  background: green;
+  width: 100px;
+  height: 100px;
+  
+  display: flex;
+  flex-direction: flex-column;
+  justify-content: center;
+}
+.p3 {
+  min-height: 100vh;
+  min-width: 100vh;
+  background: mediumturquoise;
+  
+}
+
+.c3 {
+  background: purple;
+  width: 100px;
+  height: 100px;
+}
