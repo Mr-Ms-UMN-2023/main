@@ -1,12 +1,12 @@
-import { AspectRatio, Box, GridItem, Image } from "@chakra-ui/react";
+import { AspectRatio, Box, GridItem, Flex, Image } from "@chakra-ui/react";
 import styles from "@/styles/Home.module.css";
 
 const DivisionCard = ({ data, onClick }: { data: any; onClick: any }) => {
   return (
     <AspectRatio
       cursor="pointer"
-      w="9rem"
-      h="9rem"
+      w={{ base: "12rem", md: "9rem" }}
+      h={{ base: "12rem", md: "9rem" }}
       overflow={"hidden"}
       borderRadius={"50%"}
       className={styles.cards}
@@ -23,12 +23,12 @@ const DivisionCard = ({ data, onClick }: { data: any; onClick: any }) => {
       bg="none">
       <Image
         loading="eager"
-        boxSizing={"border-box"}        
+        boxSizing={"border-box"}
         bg="none"
         w="100%"
         h="100%"
         minW="9rem"
-        minH="9rem"        
+        minH="9rem"
         src={"/Assets/Division/Transparant/" + data.LogoTrans}
         m="0"
         p="0"

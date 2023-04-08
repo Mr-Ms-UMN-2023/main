@@ -2,4 +2,13 @@ const protectedRoutes = [
     '/test'
 ];
 
-export default protectedRoutes;
+const publicRoutes = [
+    '/',
+    '/aboutus',
+    '/faq',
+    '/recruitment',
+    '/loginwisanggeniadmin'
+
+];
+
+export {protectedRoutes, publicRoutes};
