@@ -1,4 +1,4 @@
-import { Flex, Box, AspectRatio, Img } from "@chakra-ui/react";
+import { Flex, Box, AspectRatio, Img, Text } from "@chakra-ui/react";
 import Image from "next/image";
 import { useState, useRef, useEffect } from "react";
 import styles from "@/styles/Home.module.css";
@@ -7,6 +7,7 @@ const ShiningSoon = () => {
   const [brightness, setBrightness] = useState(1);
   const [scrollY2, setScrollY2] = useState(0);
   const [shiningShoonOp, setShiningShoonOp] = useState(0);
+  const [hastiOp, setHastiOp] = useState(0);
 
   const [scrollY, setScrollY] = useState(0);
   const mainBg = useRef<HTMLDivElement>(null);
@@ -34,21 +35,41 @@ const ShiningSoon = () => {
         : 0;
 
     setBrightness(mainBgBright);
+    console.log(mainBgBright);
 
-    if (mainBg?.current?.offsetHeight && 1 - mainBgBright < 0.45) {
-      setShiningShoonOp(0);
-    } else if (mainBg?.current?.offsetHeight && 1 - mainBgBright >= 0.8) {
+    if (
+      mainBg?.current?.offsetHeight &&
+      mainBgBright > 0.5 &&
+      mainBgBright <= 0.8
+    ) {
       setShiningShoonOp(
         1 -
-          (window.pageYOffset - mainBg?.current?.offsetHeight * 0.4) /
+          (window.pageYOffset - mainBg?.current?.offsetHeight * 0.2) /
             (mainBg?.current?.offsetHeight * 0.3)
       );
     } else {
+      setShiningShoonOp(0);
+    }
+
+    if (
       mainBg?.current?.offsetHeight &&
-        setShiningShoonOp(
-          (window.pageYOffset - mainBg?.current?.offsetHeight * 0.1) /
+      mainBgBright > 0.2 &&
+      mainBgBright <= 0.5
+    ) {
+      setHastiOp(
+        (window.pageYOffset - mainBg?.current?.offsetHeight * 0.2) /
+          (mainBg?.current?.offsetHeight * 0.3)
+      );
+    } else {
+      setHastiOp(0);
+    }
+
+    if (mainBg?.current?.offsetHeight && mainBgBright <= 0.2) {
+      setHastiOp(
+        1 -
+          (window.pageYOffset - mainBg?.current?.offsetHeight * 0.3) /
             (mainBg?.current?.offsetHeight * 0.4)
-        );
+      );
     }
   };
 
@@ -69,7 +90,7 @@ const ShiningSoon = () => {
         justifyContent={"center"}
         ref={mainBg}
         id="bg-main"
-        minH={"260vh"}
+        minH={"300vh"}
         position={"relative"}>
         <Box
           top={"0px"}
@@ -178,8 +199,7 @@ const ShiningSoon = () => {
           transform={"translate(-50%, calc(-50%))"}
           position={
             mainBg?.current?.offsetHeight &&
-            window.pageYOffset <=
-              mainBg?.current?.offsetHeight - window.innerHeight * 0.5
+            window.pageYOffset <= mainBg?.current?.offsetHeight / 3
               ? "fixed"
               : "relative"
           }
@@ -204,6 +224,37 @@ const ShiningSoon = () => {
               alt="text Shining Soon"
             />
           </AspectRatio> */}
+        </Flex>
+        <Flex
+          opacity={hastiOp}
+          zIndex={2}
+          top={"50%"}
+          left={"50%"}
+          transform={"translate(-50%, calc(-50%))"}
+          position={
+            mainBg?.current?.offsetHeight &&
+            window.pageYOffset <=
+              mainBg?.current?.offsetHeight - window.innerHeight * 0.5
+              ? "fixed"
+              : "relative"
+          }
+          minW={{ base: "80vw", md: "fit-content" }}
+          flexDir={"column"}
+          alignItems={"center"}
+          justifyContent={"center"}>
+          <Img
+            w={{ base: "40rem", md: "30vw", lg: "20vw" }}
+            src="/Assets/Hastinapura/hastinapura.png"
+          />
+          <Text
+            fontSize={{ base: "1.2rem", md: "1.8rem" }}
+            textShadow={"0 0 40px #ffe49d"}
+            textAlign={"center"}
+            color="#efd094">
+            Hastinapura disebut juga sebagai Grand Opening Mr. & Ms. UMN 2023.
+            Kerajaan Hastinapura adalah awal mula dari perjalanan para Pandawa
+            melakukan perebutan takhta.
+          </Text>
         </Flex>
       </Flex>
     </>

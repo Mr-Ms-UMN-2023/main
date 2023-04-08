@@ -12,6 +12,8 @@ body {
   background: blue;
   width: 100px;
   height: 100px;
+ margin-left: 50px;
+ margin-top: 10px;
 }
 
 .p2 {
@@ -36,3 +38,4 @@ body {
   width: 100px;
   height: 100px;
 }
+
