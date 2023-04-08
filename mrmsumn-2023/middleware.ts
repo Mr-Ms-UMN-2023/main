@@ -4,6 +4,7 @@ import { NextResponse } from "next/server";
 import {protectedRoutes, publicRoutes} from "./helpers/routes";
 
 export default async function middleware(req : NextRequest, res : NextResponse){
+    const APP_URL = process.env.NODE_ENV == 'production' ? process.env.APP_URL : 'http://localhost:3000';
 
     if (req.nextUrl.pathname.startsWith('/_next') || req.nextUrl.pathname.startsWith('/api') || req.nextUrl.pathname.startsWith('/favicon') || req.nextUrl.pathname.startsWith('/_error') || req.nextUrl.pathname.startsWith('/404')){
         return NextResponse.next();        
@@ -18,7 +19,7 @@ export default async function middleware(req : NextRequest, res : NextResponse){
     const jwt = cookies.get('token')?.value || '';
 
 
-    const response = await fetch('http://localhost:3000/api/middleware/auth', {
+    const response = await fetch(APP_URL + '/api/middleware/auth', {
         headers : {
             Authorization : 'Bearer ' + jwt
         }
