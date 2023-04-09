@@ -7,7 +7,8 @@ const publicRoutes = [
     '/aboutus',
     '/faq',
     '/recruitment',
-    '/loginwisanggeniadmin'
+    '/loginwisanggeniadmin',
+    '/form'
 
 ];
 

@@ -7,3 +7,4 @@ export { MrMsDetail } from "./MrMsDetail";
 export { Faq } from "./Faq";
 export { Dedikasi, ButtonDedikasi } from "./Dedikasi";
 export { Teaser } from "./Teaser";
+export { FormRecruit } from "./FormRecruit";
