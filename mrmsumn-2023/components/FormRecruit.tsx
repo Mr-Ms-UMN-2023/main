@@ -1,19 +1,30 @@
 import { Flex, Box, Heading, Text } from "@chakra-ui/react";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { ErrorMessage } from "@hookform/error-message";
+// import * as yup from "yup";
 
 type Inputs = {
     nama: string,
-    notelp: string,
+    notelp: number,
     tempatlahir: string,
     tanggallahir: string,
-    foto: file,
-    porto: file,
+    foto: string,
+    porto: string,
 };
+
+// const schema = yup.object().shape({
+//     picture: yup
+//     .mixed().required("You need to provide a file")
+//     .test("type", "This input only accept jpeg", (value) => {
+//         return value && value[0].type == "image/jpeg";
+//     }),
+// })
 
 const FormRecruit = () => {
     const { register, handleSubmit, formState: { errors } } = useForm<Inputs>({criteriaMode: "all"}); 
-    const onSubmit: SubmitHandler<Inputs> = data => console.log(data);
+    const onSubmit: SubmitHandler<Inputs> = data => {
+        console.log(data);
+    }
 
     let array = [
         {
@@ -52,17 +63,24 @@ const FormRecruit = () => {
             "Pertanyaan":"Foto",
             "Name":"foto",
             "PropertyName":"file",
-            "Required":"",
+            "Required":"This input is required",
             "PatternValue":"",
-            "PatternMessage":""
+            "PatternMessage":"",
+            "Formats":"image/png",
+            "Formats1":"image/jpg",
+            "Formats2":"image/jpeg",
+            "Formats3":"image/webp",
+            "FormatMessage":"This input only accept picture"
         },
         {
             "Pertanyaan":"Portofolio",
             "Name":"porto",
             "PropertyName":"file",
-            "Required":"",
+            "Required":"This input is required",
             "PatternValue":"",
-            "PatternMessage":""
+            "PatternMessage":"",
+            "Formats":"application/pdf",
+            "FormatMessage":"This input only accept PDF"
         },
     ]
 
@@ -90,19 +108,27 @@ const FormRecruit = () => {
             const Required = e.Required;
             const PatternValue = e.PatternValue;
             const PatternMessage = e.PatternMessage;
+            const Formats = [e.Formats, e.Formats1, e.Formats2, e.Formats3];
+            console.log(Formats);
+            const FormatMessage = e.FormatMessage;
             return (
                 <div style={{ marginBottom:'2vw', width:'60%', marginLeft:'auto', marginRight:'auto' }}>
                     <label style={Label}>{e.Pertanyaan}</label>
-                    
                     <input type={e.PropertyName} name={e.Name} 
                         {...register(InputName, { 
                             required: Required,
                             pattern: {
                                 value: PatternValue,
                                 message: PatternMessage,
+                            },
+                            validate: {
+                                acceptedFormats: (files) => 
+                                Formats.includes(
+                                files[0]?.type
+                                ) || FormatMessage
                             }
                         })} 
-                        style={{ width:'100%', borderRadius:'15px', color:'white' }}/>
+                        style={{ width:'100%', borderRadius:'15px'}}/>
                     <ErrorMessage
                         errors={errors}
                         name={e.Name}
@@ -115,9 +141,6 @@ const FormRecruit = () => {
                             : null;
                         }}
                     />
-                    
-                    {/* <input type={e.PropertyName} name={e.Name} {...register(InputName, { required: true })} style={{ width:'100%', borderRadius:'15px' }}/>
-                    {errors.nama && <span style={{ color:'red', fontFamily:'TrajanPro-Bold' }}>This field is required</span>} */}
                 </div>
             )
         }   
@@ -133,8 +156,7 @@ const FormRecruit = () => {
             mx="auto"
             my="5vw"
             flexDirection={"column"}
-            justifyContent="center"
-            position="relative">
+            justifyContent="center">
                 <form onSubmit={handleSubmit(onSubmit)} style={{ border:'2px solid #c28824', borderRadius:'15px', padding:'3vw 0' }}>
                     {listItems}
                     <div style={{ display:'flex', justifyContent:'center'}}>
