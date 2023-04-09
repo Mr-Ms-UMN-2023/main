@@ -9,7 +9,7 @@ const publicRoutes : any = [
     '/recruitment',
     '/loginwisanggeniadmin',
     '/form-regis',
-    '/form'
+    '/registration'
 
 ];
 
