@@ -114,6 +114,7 @@ const Divisi = () => {
         flexDirection={"column"}
         justifyContent={"center"}
         alignItems={"center"}
+        mt={{ base: "150px", sm: "60px" }}
         position="relative"
         ref={(el: HTMLDivElement) => texts.current.push(el!)}>
         <Heading

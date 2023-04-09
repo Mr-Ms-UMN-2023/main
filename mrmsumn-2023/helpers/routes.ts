@@ -8,7 +8,11 @@ const publicRoutes : any = [
     '/faq',
     '/recruitment',
     '/loginwisanggeniadmin',
+<<<<<<< HEAD
     '/form-regis'
+=======
+    '/form'
+>>>>>>> b6597e8722f077e51dab0d836b2852189b4b8ba2
 
 ];
 

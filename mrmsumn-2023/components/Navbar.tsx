@@ -6,6 +6,7 @@ import { useRouter } from "next/router";
 const Navbar = () => {
   const [active, setActive] = useState<number>();
   const router = useRouter();
+
   let navbar = [
     {
       title: "Home",

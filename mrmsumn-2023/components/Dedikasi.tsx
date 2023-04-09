@@ -36,7 +36,7 @@ let ArrMrMsFav = [
   },
 ];
 
-const Dedikasi = (props: any) => {
+const Dedikasi = () => {
   return (
     <Flex
       pb="5rem"
@@ -81,8 +81,10 @@ const Dedikasi = (props: any) => {
           <Text fontSize={"1.2rem"}>Visual Communication Design - 2020</Text>
         </Box>
         <Img
+        
           w={{ base: "100vw", md: "50vw" }}
-          src="/Assets/dedikasi/fotoMr2022.png"
+          src="/Assets/Dedikasi/fotoMr2022.PNG"
+          alt="Mr. UMN 2022"
         />
       </Flex>
       <Flex
@@ -94,7 +96,9 @@ const Dedikasi = (props: any) => {
         justifyContent={{ base: "center", md: "left" }}>
         <Img
           w={{ base: "100vw", md: "50vw" }}
-          src="/Assets/dedikasi/fotoMs2022.png"
+          src="/Assets/Dedikasi/fotoMs2022.PNG"
+          alt="Ms. UMN 2022"
+          
         />
         <Box>
           <Heading color="#c28824">Ms. UMN 2022</Heading>
@@ -114,7 +118,8 @@ const Dedikasi = (props: any) => {
         <Img
           transform="rotateY(180deg)"
           maxW={{ base: "200vw", md: "70vw" }}
-          src="/Assets/dedikasi/runnerUp2022.png"
+          src="/Assets/Dedikasi/runnerUp2022.PNG"
+          alt="Runner Up Mr. & Ms. UMN 2022"
         />
         <Heading mb="2rem" color="#c28824">
           Runner Up
@@ -160,7 +165,7 @@ const Dedikasi = (props: any) => {
             return (
               <GridItem key={index} colSpan={{ base: 12, md: 6, xl: 3 }}>
                 <Box
-                  h="70vh"
+                  w={{base:"80vw", md:"40vw",xl:"23vw"}}
                   borderRadius={"1rem"}
                   overflow="hidden"
                   position={"relative"}
