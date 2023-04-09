@@ -1,13 +1,14 @@
-const protectedRoutes = [
+const protectedRoutes : any = [
     '/test'
 ];
 
-const publicRoutes = [
+const publicRoutes : any = [
     '/',
     '/aboutus',
     '/faq',
     '/recruitment',
-    '/loginwisanggeniadmin'
+    '/loginwisanggeniadmin',
+    '/form-regis'
 
 ];
 
