@@ -1,6 +1,7 @@
 import { profile } from "console";
 import type { NextApiRequest, NextApiResponse } from "next";
 import prisma from "../../lib/prisma";
+import { use } from "react";
 const formidable = require('formidable');
 const path = require('path');
 const fs = require('fs/promises');
@@ -33,6 +34,9 @@ const processInput = (req : NextApiRequest, saveLocally: boolean) => {
             const userData : any = {};
 
             let {
+                name = '',
+                nim = '',
+                email_student = '',
                 birth_date = '',
                 birth_place = '',
                 gender = '',
@@ -56,8 +60,41 @@ const processInput = (req : NextApiRequest, saveLocally: boolean) => {
                 achievements = ''
             } = fields;
 
+            const hasLetter = /[^\d]/;
 
             // XXX - ID (auto-increment / NIM) ------------------------------------------------------------------------------
+
+
+            // Name -------------------------------------------------
+            // Check for empty entry
+            if (!name || name == ''){
+                validationErrorList.push({errorType : "EMPTY_NAME", message : "Nama tidak boleh kosong."});
+            }     
+            userData.name = name;       
+                    
+            // NIM ---------------------------------------------------
+            // - Check for empty entry
+            nim = nim.toString();
+            if (!nim || nim == ''){
+                validationErrorList.push({errorType : "EMPTY_NIM", message : "NIM tidak boleh kosong."});
+            }          
+            // - Check if nim has character other than numbers  
+            else if (hasLetter.test(nim)){
+                validationErrorList.push({errorType : "INVALID_NIM", message : "Format NIM tidak valid."});                
+            }            
+            userData.nim = nim;
+            
+            // Email -------------------------------------------------
+            // - Check for empty entry
+            const studentEmailPattern = /^(\w+(.\w+)*)(@student.umn.ac.id)$/gm;
+            if (!email_student || email_student == ''){
+                validationErrorList.push({errorType : "EMPTY_EMAIL", message : "Email tidak boleh kosong."});
+            } 
+            // - Check if input ends with @student.umn.ac.id
+            else if (!studentEmailPattern.test(email_student)) {
+                validationErrorList.push({errorType : "INVALID_EMAIL", message : "Harus menggunakan email student."});                
+            }
+            userData.email_student = email_student;
 
             // Birth Date ------------------------------------------------------------------------------            
             // - Check for empty entry
@@ -65,13 +102,13 @@ const processInput = (req : NextApiRequest, saveLocally: boolean) => {
                 validationErrorList.push({errorType : "EMPTY_BIRTH_DATE", message : "Tanggal lahir tidak boleh kosong."});
             }
             // - Check for format validity
-            userData.birth_date = new Date(birth_date);
-            if (isNaN(userData.birth_date.getDay())|| isNaN(userData.birth_date.getMonth())|| isNaN(userData.birth_date.getYear())){
+            const tempBirthDate = new Date(birth_date);
+            if (isNaN(tempBirthDate.getDay())|| isNaN(tempBirthDate.getMonth())){
                 validationErrorList.push({errorType : "INVALID_BIRTH_DATE", message : "Format tanggal lahir tidak valid."});                
             }
+            userData.birth_date = tempBirthDate;             
+               
             
-
-
             // Birth Place ------------------------------------------------------------------------------
             // - Check for empty entry
             if (!birth_place || birth_place == ''){
@@ -101,7 +138,6 @@ const processInput = (req : NextApiRequest, saveLocally: boolean) => {
             
             
             // Phone Number (mungkin depannya kasi prepend +62) ------------------------------------------------------------------------------            
-            const hasLetter = /[^\d]/;
             // - Check for empty entry
             phone_number = phone_number.toString();            
             if (!phone_number || phone_number == ''){
@@ -152,7 +188,7 @@ const processInput = (req : NextApiRequest, saveLocally: boolean) => {
 
             // GPA ------------------------------------------------------------------------------            
             // - Check for empty entry 
-            const gpaPattern = /^[0-3]([.]+[0-9]+)*$/gm;
+            const gpaPattern = /(^(4)$|^(4.0)$)|(^[0-3]([.]+[0-9]+)*$)/gm;
             gpa = gpa.toString();
             if (!gpa || gpa == ''){
                 validationErrorList.push({errorType : "EMPTY_GPA", message : "IPK tidak boleh kosong."});
@@ -263,7 +299,9 @@ const processInput = (req : NextApiRequest, saveLocally: boolean) => {
             // -----------------------------------------------
             // FILE INPUTS
             // -----------------------------------------------
-            const validImageExtensions = ['jpg', 'png', 'webp', 'gif'];               
+            const validImageExtensions = ['jpg', 'jpeg','png', 'webp'];               
+            const validGPAScreenshotExtensions = ['jpg', 'jpeg','png', 'webp', 'zip', 'pdf'];
+            const validStudentCardFileExtensions = ['jpg', 'jpeg','png', 'webp', 'pdf'];            
             const validFileExtensions = ['pdf', 'docx'];            
 
             // Picture ------------------------------------------------------------------------------            
@@ -301,7 +339,7 @@ const processInput = (req : NextApiRequest, saveLocally: boolean) => {
             else {
                 const personalityScreenshotExtension = personalityScreenshot.filepath.split('.').pop();                       
                 if (!validImageExtensions.includes(personalityScreenshotExtension)) {
-                    validationErrorList.push({errorType : "INVALID_PERSONALITY_SCREENSHOT_EXTENSION", message : "Jenis file tidak sesuai (harus .jpg, .png, .webp, atau .gif)"});                        
+                    validationErrorList.push({errorType : "INVALID_PERSONALITY_SCREENSHOT_EXTENSION", message : "Jenis file tidak sesuai (harus .jpg, .png, atau .webp)"});                        
                 } else {
                     // SUCCESS
                     const personalityScreenshotTargetDirectory = path.join(process.cwd(), '/public/images/personality_screenshots');
@@ -325,7 +363,7 @@ const processInput = (req : NextApiRequest, saveLocally: boolean) => {
             // - Check extension            
             else {
                 const gradesScreenshotExtension = gradesScreenshot.filepath.split('.').pop();                       
-                if (!validImageExtensions.includes(gradesScreenshotExtension)) {
+                if (!validGPAScreenshotExtensions.includes(gradesScreenshotExtension)) {
                     validationErrorList.push({errorType : "INVALID_GRADES_SCREENSHOT_EXTENSION", message : "Jenis file tidak sesuai (harus .jpg, .png, .webp, atau .gif)"});                        
                 } else {
                     // SUCCESS
@@ -349,7 +387,7 @@ const processInput = (req : NextApiRequest, saveLocally: boolean) => {
             // - Check extension            
             else {
                 const studentCardScreenshotExtension = studentCardScreenshot.filepath.split('.').pop();                       
-                if (!validImageExtensions.includes(studentCardScreenshotExtension)) {
+                if (!validStudentCardFileExtensions.includes(studentCardScreenshotExtension)) {
                     validationErrorList.push({errorType : "INVALID_STUDENT_CARD_SCREENSHOT_EXTENSION", message : "Jenis file tidak sesuai (harus .jpg, .png, .webp, atau .gif)"});                        
                 } else {
                     // SUCCESS

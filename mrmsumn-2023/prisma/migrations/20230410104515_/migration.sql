@@ -104,8 +104,11 @@ CREATE TABLE `peserta` (
 -- CreateTable
 CREATE TABLE `peserta_2023` (
     `id` INTEGER NOT NULL AUTO_INCREMENT,
-    `birth_date` DATE NOT NULL,
+    `name` VARCHAR(255) NOT NULL,
+    `nim` VARCHAR(255) NOT NULL,
+    `email_student` VARCHAR(255) NOT NULL,
     `birth_place` VARCHAR(255) NOT NULL,
+    `birth_date` DATE NOT NULL,
     `gender` VARCHAR(1) NOT NULL,
     `address` VARCHAR(255) NOT NULL,
     `phone_number` VARCHAR(16) NOT NULL,

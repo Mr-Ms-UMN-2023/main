@@ -96,8 +96,11 @@ model peserta {
 
 model peserta_2023 {
   id                      Int      @id @default(autoincrement())
-  birth_date              DateTime @db.Date
+  name                    String   @db.VarChar(255)
+  nim                     String   @db.VarChar(255)
+  email_student           String   @db.VarChar(255)
   birth_place             String   @db.VarChar(255)
+  birth_date              DateTime @db.Date
   gender                  String   @db.VarChar(1)
   address                 String   @db.VarChar(255)
   phone_number            String   @db.VarChar(16)
