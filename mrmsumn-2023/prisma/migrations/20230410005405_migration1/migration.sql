@@ -111,6 +111,7 @@ CREATE TABLE `peserta_2023` (
     `phone_number` VARCHAR(16) NOT NULL,
     `line_id` VARCHAR(255) NOT NULL,
     `instagram_username` VARCHAR(255) NOT NULL,
+    `tiktok_username` VARCHAR(255) NOT NULL,
     `major` VARCHAR(255) NOT NULL,
     `year` VARCHAR(11) NOT NULL,
     `gpa` VARCHAR(8) NOT NULL,

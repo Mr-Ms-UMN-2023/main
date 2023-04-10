@@ -103,6 +103,7 @@ model peserta_2023 {
   phone_number            String   @db.VarChar(16)
   line_id                 String   @db.VarChar(255)
   instagram_username      String   @db.VarChar(255)
+  tiktok_username         String   @db.VarChar(255)  
   major                   String   @db.VarChar(255)
   year                    String   @db.VarChar(11)
   gpa                     String   @db.VarChar(8)

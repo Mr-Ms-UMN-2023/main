@@ -40,6 +40,7 @@ const processInput = (req : NextApiRequest, saveLocally: boolean) => {
                 phone_number = '',
                 line_id = '',
                 instagram_username = '',
+                tiktok_username = '',
                 major = '',
                 year = '',
                 gpa = '',
@@ -54,6 +55,7 @@ const processInput = (req : NextApiRequest, saveLocally: boolean) => {
                 talents = '',
                 achievements = ''
             } = fields;
+
 
             // XXX - ID (auto-increment / NIM) ------------------------------------------------------------------------------
 
@@ -124,6 +126,9 @@ const processInput = (req : NextApiRequest, saveLocally: boolean) => {
                 validationErrorList.push({errorType : "EMPTY_INSTAGRAM_USERNAME", message : "Username Instagram tidak boleh kosong."});
             }          
             userData.instagram_username = instagram_username;   
+
+            // Tiktok Username ------------------------------------------------------------------------------                    
+            userData.tiktok_username = tiktok_username;            
 
             // Major ------------------------------------------------------------------------------            
             // - Check for empty entry
@@ -252,11 +257,7 @@ const processInput = (req : NextApiRequest, saveLocally: boolean) => {
             }   
             userData.talents = talents;            
 
-            // Achievements (opsional?) ------------------------------------------------------------------------------            
-            // - Check for empty entry
-            if (!achievements || achievements == ''){
-                validationErrorList.push({errorType : "EMPTY_ACHIEVEMENTS", message : "Prestasi tidak boleh kosong."});
-            }            
+            // Achievements (opsional?) ------------------------------------------------------------------------------              
             userData.achievements = achievements; 
 
             // -----------------------------------------------
@@ -414,7 +415,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
             data.personality_screenshot = APP_URL + data.personality_screenshot;            
             data.grades_screenshot = APP_URL + data.grades_screenshot;
             data.student_card_screenshot = APP_URL + data.student_card_screenshot;
-            return res.status(500).json({
+            return res.status(200).json({
                 status : "SUCCESS",
                 code : 200,
                 message : "Berhasil daftar",
