@@ -7,13 +7,16 @@ import {
   Text,
   FormControl,
   FormLabel,
+  Link,
   FormErrorMessage,
 } from "@chakra-ui/react";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { ErrorMessage } from "@hookform/error-message";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
-import { array } from "../data/formRegisterMrMs";
+
+import { LoadingView, ConfirmRegis, ListItems } from "./FromRecrutmentElement";
+
 // import * as yup from "yup";
 
 type Inputs = {
@@ -25,150 +28,19 @@ type Inputs = {
   porto: string;
 };
 
-// const schema = yup.object().shape({
-//     picture: yup
-//     .mixed().required("You need to provide a file")
-//     .test("type", "This input only accept jpeg", (value) => {
-//         return value && value[0].type == "image/jpeg";
-//     }),
-// })
-
-const Label = {
-  color: "#c28824",
-  fontFamily: "TrajanPro-Bold",
-  "@media (max-width: 600px)": {
-    fontSize: "0.5vw",
-  },
+const onPause = () => {
+  document.querySelector("html")!.style.overflowY = "hidden";
 };
 
-const ListItems = ({ register, errors }: any) => {
-  const [viewImage, setImage] = useState<any>();
-
-  const onChangeImage = (event: React.ChangeEvent<HTMLInputElement>) => {
-    console.log("ada lo");
-    const file = event.target.files?.[0];
-    if (file) {
-      const imageURL = URL.createObjectURL(file);
-      setImage(imageURL);
-    }
-  };
-  return (
-    <Flex flexDir={"column"} gap="1rem" mx={"5vw"}>
-      {array.map((e: any, index: number) => {
-        return (
-          <FormControl key={index} isInvalid={errors[e.Name as number] as any}>
-            <label style={Label}>{e.Pertanyaan}</label>
-            <Input
-              color="white"
-              type={e.PropertyName}
-              name={e.Name}
-              {...register(e.Name, {
-                required: {
-                  value: e.Required == "" ? false : true,
-                  message: e.Required,
-                },
-                pattern: {
-                  value: e.PatternValue,
-                  message: e.PatternMessage,
-                },
-                validate: {
-                  acceptedFormats: (files: any) => 
-                        e.Formats?.includes(files[0]?.type) || e.FormatMessage
-                },
-              })}
-              onChange={onChangeImage}
-            />
-            {errors[e.Name] && (
-              <FormErrorMessage>{errors[e.Name].message}</FormErrorMessage>
-            )}
-            {e.Name == "picture" && (
-              <Flex
-                alignItems={"center"}
-                justifyContent={{ base: "center", md: "start" }}
-                flexDir={{ base: "column", md: "row" }}>
-                <Box
-                  mx="1rem"
-                  my={"1rem"}
-                  boxShadow={"0 0 0 1px white"}
-                  width="7.5rem"
-                  height={"10rem"}
-                  style={{ aspectRatio: "3/4" }}
-                  overflow="revert">
-                  <Img height={"auto"} width="100%" src={viewImage} />
-                </Box>
-                <Box>
-                  <Text color="white">
-                    Jika foto melebihi atau kurang dari ukuran frame kemungkinan
-                    ukuran foto bukan 3 x 4 cm
-                  </Text>
-                </Box>
-              </Flex>
-            )}
-          </FormControl>
-        );
-      })}
-    </Flex>
-  );
+const onPlay = () => {
+  document.querySelector("html")!.style.overflowY = "scroll";
 };
-
-//     const InputName = e.Name;
-//     const Required = e.Required;
-//     const PatternValue = e.PatternValue;
-//     const PatternMessage = e.PatternMessage;
-//     const Formats = [e.Formats, e.Formats1, e.Formats2, e.Formats3];
-//     console.log(Formats);
-//     const FormatMessage = e.FormatMessage;
-
-//     return (
-//       <div
-//         key={index}
-//         style={{
-//           marginBottom: "2vw",
-//           width: "60%",
-//           marginLeft: "auto",
-//           marginRight: "auto",
-//         }}>
-
-//         <label style={Label}>{e.Pertanyaan}</label>
-//         <input
-//           type={e.PropertyName}
-//           name={e.Name}
-//           {...register(InputName, {
-//             required: Required,
-//             pattern: {
-//               value: PatternValue,
-//               message: PatternMessage,
-//             },
-//             validate: {
-//               acceptedFormats: (files: any) =>
-//                 Formats.includes(files[0]?.type) || FormatMessage,
-//             },
-//           })}
-//           style={{ width: "100%", borderRadius: "15px" }}
-//         />
-//         {errors.[e.name] && <ErrorMessage>hello</ErrorMessage> }
-//         {/* <ErrorMessage
-//           errors={errors}
-//           name={e.Name}
-//           render={(messages: any) => {
-//             // console.log("messages", messages);
-//             return messages
-//               ? Object.entries(messages).map(([type, message]) => (
-//                   <p
-//                     style={{ color: "red", fontFamily: "TrajanPro-Bold" }}
-//                     key={type}>
-//                     {message}
-//                   </p>
-//                 ))
-//               : null;
-//           }}
-//         /> */}
-//       </div>
-//     );
-//   });
 
 const FormRecruit = () => {
-  const [loading, setLoading] = useState<Boolean>();
+  const [loading, setLoading] = useState<Boolean>(false);
+  const [checkCatatan, setCatatan] = useState<boolean>(false);
+  const [checkCatatan2, setCatatan2] = useState<boolean>(false);
+  const [disable, setDisable] = useState<boolean>(true);
   const router = useRouter();
 
   const {
@@ -181,36 +53,36 @@ const FormRecruit = () => {
     console.log(data);
     setLoading(true);
 
-    const dataSend = {
-      name: data.name,
-      email_student: data.email_student,
-      nim: "000000" + data.nim,
-      birth_date: data.birth_date,
-      birth_place: data.birth_place,
-      gender: data.gender,
-      address: data.address,
-      phone_number: data.phone_number,
-      line_id: data.line_id,
-      instagram_username: data.instagram_username,
-      tiktok_username: data.tiktok_username,
-      major: data.major,
-      year: data.year,
-      gpa: data.gpa,
-      height: data.height,
-      weight: data.weight,
-      clothes_size: data.clothes_size,
-      shoe_size: data.shoe_size,
-      pants_size: data.pants_size,
-      about_me: data.about_me,
-      motivation: data.motivation,
-      personality: data.personality,
-      talents: data.talents,
-      achievements: data.achievements,
-      picture: data.picture,
-      personality_screenshot: data.personality_screenshot,
-      grades_screenshot: data.grades_screenshot,
-      student_card_screenshot: data.student_card_screenshot,
-    };
+    // const dataSend = {
+    //   name: data.name,
+    //   email_student: data.email_student,
+    //   nim: "000000" + data.nim,
+    //   birth_date: data.birth_date,
+    //   birth_place: data.birth_place,
+    //   gender: data.gender,
+    //   address: data.address,
+    //   phone_number: data.phone_number,
+    //   line_id: data.line_id,
+    //   instagram_username: data.instagram_username,
+    //   tiktok_username: data.tiktok_username,
+    //   major: data.major,
+    //   year: data.year,
+    //   gpa: data.gpa,
+    //   height: data.height,
+    //   weight: data.weight,
+    //   clothes_size: data.clothes_size,
+    //   shoe_size: data.shoe_size,
+    //   pants_size: data.pants_size,
+    //   about_me: data.about_me,
+    //   motivation: data.motivation,
+    //   personality: data.personality,
+    //   talents: data.talents,
+    //   achievements: data.achievements,
+    //   picture: data.picture,
+    //   personality_screenshot: data.personality_screenshot,
+    //   grades_screenshot: data.grades_screenshot,
+    //   student_card_screenshot: data.student_card_screenshot,
+    // };
 
     const entries = Object.entries(data);
 
@@ -233,34 +105,36 @@ const FormRecruit = () => {
 
     if (fetchData.code == 200) {
       let resData = {
-        name: data.name,
-        email_student: fetchData.data.email_student,
-        nim: "000000" + fetchData.data.nim,
-        birth_date: fetchData.data.birth_date,
-        birth_place: fetchData.data.birth_place,
-        gender: fetchData.data.gender,
-        address: fetchData.data.address,
-        phone_number: fetchData.data.phone_number,
-        line_id: fetchData.data.line_id,
-        instagram_username: fetchData.data.instagram_username,
-        tiktok_username: fetchData.data.tiktok_username,
-        major: fetchData.data.major,
-        year: fetchData.data.year,
-        gpa: fetchData.data.gpa,
-        height: fetchData.data.height,
-        weight: fetchData.data.weight,
-        clothes_size: fetchData.data.clothes_size,
-        shoe_size: fetchData.data.shoe_size,
-        pants_size: fetchData.data.pants_size,
-        about_me: fetchData.data.about_me,
-        motivation: fetchData.data.motivation,
-        personality: fetchData.data.personality,
-        talents: fetchData.data.talents,
-        achievements: fetchData.data.achievements,
-        picture: fetchData.data.picture,
-        personality_screenshot: fetchData.data.personality_screenshot,
-        grades_screenshot: fetchData.data.grades_screenshot,
-        student_card_screenshot: fetchData.data.student_card_screenshot,
+        NIM: "000000" + fetchData.data.nim,
+        "Nama Lengkap": fetchData.data.name,
+        "Email Student": fetchData.data.email_student,
+        "Tempat Lahir": fetchData.data.birth_place,
+        "Tanggal Lahir": fetchData.data.birth_date,
+        "Jenis Kelamin":
+          fetchData.data.gender == "m" ? "Laki - Laki" : "Perempuan",
+        Alamat: fetchData.data.address,
+        "Nomor Telepon": fetchData.data.phone_number,
+        "ID Line": fetchData.data.line_id,
+        Instagram: fetchData.data.instagram_username,
+        "Tik Tok": fetchData.data.tiktok_username,
+        Jurusan: fetchData.data.major,
+        Angkatan: fetchData.data.year,
+        IPK: fetchData.data.gpa,
+        "Tinggi Badan": fetchData.data.height,
+        "Berat Badan": fetchData.data.weight,
+        "Ukuran Baju": fetchData.data.clothes_size,
+        "Ukuran Sepatu": fetchData.data.shoe_size,
+        "Ukuran Celana": fetchData.data.pants_size,
+        "Tentang Saya ": fetchData.data.about_me,
+        "Motivasi mencalonkan diri sebagai Mr. & Ms. UMN 2023":
+          fetchData.data.motivation,
+        "Personality Type": fetchData.data.personality,
+        "Talenta yang dimiliki": fetchData.data.talents,
+        "Prestasi yang dimiliki": fetchData.data.achievements,
+        Foto: fetchData.data.picture,
+        "Screenshot Personality Test": fetchData.data.personality_screenshot,
+        "Screenshot Grades": fetchData.data.grades_screenshot,
+        "Fotokopi Kartu Mahasiswa": fetchData.data.student_card_screenshot,
       };
 
       const entries2 = Object.entries(resData);
@@ -271,20 +145,28 @@ const FormRecruit = () => {
 
       await fetch(
         //masih yg beta
-        "https://script.google.com/macros/s/AKfycbzrgOxoPx0cQ-I-K27hpGHYpaC7scC2GqcS1i0P-j99ZgIPhWxBIAiWZFpGnCQnqEw/exec",
+        "https://script.google.com/macros/s/AKfycbyGm-RXxs32V_J_7QXEoLPEkknh0CjnzaBkXCacyiDSxr3fxbp3zNas9pmFAobQZJok/exec",
         {
           method: "POST",
           body: formData2,
         }
       );
-      
-      router.push('/');
-      
+
+      setLoading(false);
+      <ConfirmRegis />;
     } else {
       console.log("gagal");
       return;
     }
   };
+
+  useEffect(() => {
+    loading ? onPause() : onPlay();
+  }, [loading]);
+
+  useEffect(() => {
+    checkCatatan && checkCatatan2 ? setDisable(false) : setDisable(true);
+  }, [checkCatatan, checkCatatan2]);
 
   function buttonHover(e: any) {
     e.target.style.boxShadow = "inset 0 0 0 2em #c28824";
@@ -299,12 +181,13 @@ const FormRecruit = () => {
   return (
     <Flex
       id="formRecruit"
-      w="70%"
+      w={{ base: "90vw", md: "70vw" }}
       maxW="1366px"
       mx="auto"
       my="5vw"
       flexDirection={"column"}
       justifyContent="center">
+      {loading && <LoadingView />}
       <form
         onSubmit={handleSubmit(onSubmit)}
         style={{
@@ -313,21 +196,46 @@ const FormRecruit = () => {
           padding: "3vw 0",
         }}>
         <ListItems register={register} errors={errors} />
-        <div style={{ display: "flex", justifyContent: "center" }}>
+        <Flex mx="5vw" mt="2rem" justify={"start"}>
           <input
+            style={{ width: "5rem" }}
+            type="checkbox"
+            id="demoCheckbox"
+            name="checkbox"
+            onClick={() => setCatatan((prev) => !prev)}></input>
+          <Text color="#c28824">
+            Pastikan anda telah membaca catatan yang diberikan dengan benar
+          </Text>
+        </Flex>
+
+        <Flex mx="5vw" mt="2rem" justify={"start"}>
+          <input
+            style={{ width: "5rem" }}
+            type="checkbox"
+            id="demoCheckbox"
+            name="checkbox"
+            onClick={() => setCatatan2((prev) => !prev)}></input>
+          <Text color="#c28824">
+            Pastikan anda telah membaca Kriteria yang diberikan dengan benar
+          </Text>
+        </Flex>
+
+        <div style={{ display: "flex", justifyContent: "center" }}>
+          <Input
+            disabled={disable}
+            my={{ base: "2rem" }}
             type="submit"
+            mx={"5vw"}
+            height={{ base: "4rem" }}
             onMouseOver={buttonHover}
             onMouseOut={buttonOut}
             style={{
-              width: "6vw",
-              height: "3vw",
               fontSize: "16px",
               fontFamily: "TrajanPro-Bold",
               color: "#c28824",
               backgroundColor: "black",
               border: "2px solid #c28824",
               borderRadius: "10px",
-              marginTop: "2vw",
               cursor: "pointer",
             }}
           />
