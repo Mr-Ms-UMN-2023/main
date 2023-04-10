@@ -12,6 +12,7 @@ import {
 import { useForm, SubmitHandler } from "react-hook-form";
 import { ErrorMessage } from "@hookform/error-message";
 import { useState } from "react";
+import { array } from "../data/formRegisterMrMs";
 // import * as yup from "yup";
 
 type Inputs = {
@@ -30,61 +31,6 @@ type Inputs = {
 //         return value && value[0].type == "image/jpeg";
 //     }),
 // })
-
-let array = [
-  {
-    Pertanyaan: "Nama Lengkap",
-    Name: "nama",
-    PropertyName: "text",
-    Required: "This input is required",
-    PatternValue: "",
-    PatternMessage: "",
-  },
-  {
-    Pertanyaan: "Nomor Telepon",
-    Name: "notelp",
-    PropertyName: "text",
-    Required: "This input is required",
-    PatternValue: /\d+/,
-    PatternMessage: "This input is number only",
-  },
-  {
-    Pertanyaan: "Tempat Lahir",
-    Name: "tempatlahir",
-    PropertyName: "text",
-    Required: "",
-    PatternValue: "",
-    PatternMessage: "",
-  },
-  {
-    Pertanyaan: "Tempat Lahir",
-    Name: "tanggallahir",
-    PropertyName: "date",
-    Required: "",
-    PatternValue: "",
-    PatternMessage: "",
-  },
-  {
-    Pertanyaan: "Foto",
-    Name: "foto",
-    PropertyName: "file",
-    Required: "This input is required",
-    PatternValue: "",
-    PatternMessage: "",
-    Formats: ["image/png", "image/jpg", "image/jpeg", "image/webp"],
-    FormatMessage: "This input only accept picture",
-  },
-  {
-    Pertanyaan: "Portofolio",
-    Name: "porto",
-    PropertyName: "file",
-    Required: "This input is required",
-    PatternValue: "",
-    PatternMessage: "",
-    Formats: ["application/pdf"],
-    FormatMessage: "This input only accept PDF",
-  },
-];
 
 const Label = {
   color: "#c28824",
@@ -134,7 +80,7 @@ const ListItems = ({ register, errors }: any) => {
             {errors[e.Name] && (
               <FormErrorMessage>{errors[e.Name].message}</FormErrorMessage>
             )}
-            {e.Name == "foto" && (
+            {e.Name == "picture" && (
               <Flex
                 alignItems={"center"}
                 justifyContent={{ base: "center", md: "start" }}
@@ -221,14 +167,120 @@ const ListItems = ({ register, errors }: any) => {
 //   });
 
 const FormRecruit = () => {
+  const [loading, setLoading] = useState<Boolean>();
+
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm<Inputs>({ criteriaMode: "all" });
 
-  const onSubmit: SubmitHandler<Inputs> = (data: any) => {
+  const onSubmit: SubmitHandler<Inputs> = async (data: any) => {
     console.log(data);
+    setLoading(true);
+
+    const dataSend = {
+      name: data.name,
+      email_student: data.email_student,
+      nim: "000000" + data.nim,
+      birth_date: data.birth_date,
+      birth_place: data.birth_place,
+      gender: data.gender,
+      address: data.address,
+      phone_number: data.phone_number,
+      line_id: data.line_id,
+      instagram_username: data.instagram_username,
+      tiktok_username: data.tiktok_username,
+      major: data.major,
+      year: data.year,
+      gpa: data.gpa,
+      height: data.height,
+      weight: data.weight,
+      clothes_size: data.clothes_size,
+      shoe_size: data.shoe_size,
+      pants_size: data.pants_size,
+      about_me: data.about_me,
+      motivation: data.motivation,
+      personality: data.personality,
+      talents: data.talents,
+      achievements: data.achievements,
+      picture: data.picture,
+      personality_screenshot: data.personality_screenshot,
+      grades_screenshot: data.grades_screenshot,
+      student_card_screenshot: data.student_card_screenshot,
+    };
+
+    const entries = Object.entries(data);
+
+    const formData = new FormData();
+
+    entries.map((item: any) => {
+      if (typeof item[1] != "object") {
+        formData.append(item[0], item[1]);
+      } else {
+        formData.append(item[0], item[1][0]);
+      }
+    });
+
+    const response = await fetch("/api/mahesa-registration", {
+      method: "POST",
+      body: formData,
+    });
+
+    const fetchData = await response.json();
+    console.log(fetchData);
+
+    if (fetchData.code == 200) {
+      console.log("berhasil masuk");
+      let resData = {
+        name: data.name,
+        email_student: fetchData.data.email_student,
+        nim: "000000" + fetchData.data.nim,
+        birth_date: fetchData.data.birth_fetchData.date,
+        birth_place: fetchData.data.birth_place,
+        gender: fetchData.data.gender,
+        address: fetchData.data.address,
+        phone_number: fetchData.data.phone_number,
+        line_id: fetchData.data.line_id,
+        instagram_username: fetchData.data.instagram_username,
+        tiktok_username: fetchData.data.tiktok_username,
+        major: fetchData.data.major,
+        year: fetchData.data.year,
+        gpa: fetchData.data.gpa,
+        height: fetchData.data.height,
+        weight: fetchData.data.weight,
+        clothes_size: fetchData.data.clothes_size,
+        shoe_size: fetchData.data.shoe_size,
+        pants_size: fetchData.data.pants_size,
+        about_me: fetchData.data.about_me,
+        motivation: fetchData.data.motivation,
+        personality: fetchData.data.personality,
+        talents: fetchData.data.talents,
+        achievements: fetchData.data.achievements,
+        picture: fetchData.data.picture,
+        personality_screenshot: fetchData.data.personality_screenshot,
+        grades_screenshot: fetchData.data.grades_screenshot,
+        student_card_screenshot: fetchData.data.student_card_screenshot,
+      };
+
+      const entries2 = Object.entries(resData);
+      const formData2 = new FormData();
+      entries2.map((item: any) => {
+        formData2.append(item[0], item[1]);
+      });
+
+      await fetch(
+        //masih yg beta
+        "https://script.google.com/macros/s/AKfycbzrgOxoPx0cQ-I-K27hpGHYpaC7scC2GqcS1i0P-j99ZgIPhWxBIAiWZFpGnCQnqEw/exec",
+        {
+          method: "POST",
+          body: formData2,
+        }
+      );
+    } else {
+      console.log("gagal");
+      return;
+    }
   };
 
   function buttonHover(e: any) {
