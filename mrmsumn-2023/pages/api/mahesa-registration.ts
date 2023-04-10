@@ -228,14 +228,9 @@ const processInput = (req : NextApiRequest, saveLocally: boolean) => {
 
             // Clothes Size ------------------------------------------------------------------------------            
            // - Check for empty entry            
-           clothes_size = clothes_size.toString();
            if (!clothes_size || clothes_size == ''){
                validationErrorList.push({errorType : "EMPTY_CLOTHES_SIZE", message : "Ukuran baju tidak boleh kosong."});
-           }       
-           // - Check if clothes size has other character other than numbers                  
-           else if (hasLetter.test(clothes_size)){
-               validationErrorList.push({errorType : "INVALID_CLOTHES_SIZE", message : "Format ukuran baju tidak valid."});                
-           }   
+           }         
            userData.clothes_size = clothes_size;
            
            
@@ -461,7 +456,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
             });              
         }).catch((err) => {
             const {code, message, errors} = err;
-            return res.status(500).json({
+            return res.status(400).json({
                 status : "FAIL",
                 code,
                 message,

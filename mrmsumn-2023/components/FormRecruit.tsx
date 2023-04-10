@@ -12,6 +12,7 @@ import {
 import { useForm, SubmitHandler } from "react-hook-form";
 import { ErrorMessage } from "@hookform/error-message";
 import { useState } from "react";
+import { useRouter } from "next/router";
 import { array } from "../data/formRegisterMrMs";
 // import * as yup from "yup";
 
@@ -71,8 +72,8 @@ const ListItems = ({ register, errors }: any) => {
                   message: e.PatternMessage,
                 },
                 validate: {
-                  acceptedFormats: (files: any) =>
-                    e.format?.includes(files[0]?.type) || e.FormatMessage,
+                  acceptedFormats: (files: any) => 
+                        e.Formats?.includes(files[0]?.type) || e.FormatMessage
                 },
               })}
               onChange={onChangeImage}
@@ -168,6 +169,7 @@ const ListItems = ({ register, errors }: any) => {
 
 const FormRecruit = () => {
   const [loading, setLoading] = useState<Boolean>();
+  const router = useRouter();
 
   const {
     register,
@@ -228,15 +230,13 @@ const FormRecruit = () => {
     });
 
     const fetchData = await response.json();
-    console.log(fetchData);
 
     if (fetchData.code == 200) {
-      console.log("berhasil masuk");
       let resData = {
         name: data.name,
         email_student: fetchData.data.email_student,
         nim: "000000" + fetchData.data.nim,
-        birth_date: fetchData.data.birth_fetchData.date,
+        birth_date: fetchData.data.birth_date,
         birth_place: fetchData.data.birth_place,
         gender: fetchData.data.gender,
         address: fetchData.data.address,
@@ -277,6 +277,9 @@ const FormRecruit = () => {
           body: formData2,
         }
       );
+      
+      router.push('/');
+      
     } else {
       console.log("gagal");
       return;
