@@ -1,12 +1,15 @@
 import { Flex, Img, Text } from "@chakra-ui/react";
 import { useState, useEffect } from "react";
+import { useRouter } from "next/router";
 
 const ConfirmRegis = () => {
   const [display, setDisplay] = useState("flex");
+  const router = useRouter();
 
   useEffect(() => {
     setTimeout(() => {
       setDisplay("none");
+      router.push('/');
     }, 4000);
   }, []);
   return (

@@ -1,7 +1,7 @@
 import { Flex, Img, Text } from "@chakra-ui/react";
 import { useState, useEffect } from "react";
 
-const RegisError = () => {
+const RegistError = () => {
   const [display, setDisplay] = useState("flex");
 
   useEffect(() => {
@@ -31,10 +31,10 @@ const RegisError = () => {
         color="#c28824"
         fontFamily="TrajanPro-Bold"
         fontSize={{ base: "1.8rem", md: "2rem" }}>
-        Pendaftaran Berhasil
+        Gagal melakukan pendaftaran
       </Text>
     </Flex>
   );
 };
 
-export { RegisError as RegisError };
+export { RegistError as RegistError };

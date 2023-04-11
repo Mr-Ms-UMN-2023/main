@@ -20,7 +20,7 @@ import {
   ConfirmRegis,
   ListItems,
   PopUp,
-  RegisError,
+  RegistError,
 } from "./FromRecrutmentElement";
 import styles from "@/styles/Home.module.css";
 
@@ -49,6 +49,8 @@ const FormRecruit = () => {
   const [checkCatatan2, setCatatan2] = useState<boolean>(false);
   const [disable, setDisable] = useState<boolean>(true);
   const [pop, setPop] = useState<any>(null);
+  const [feedback, setFeedback] = useState<boolean>(false);
+  const [failFeedback, setFailFeedback] = useState<boolean>(false);  
   const router = useRouter();
 
   const {
@@ -146,10 +148,10 @@ const FormRecruit = () => {
       );
 
       setLoading(false);
-      ConfirmRegis();
+      setFeedback(true);
     } else {
       setLoading(false);
-      RegisError();
+      setFailFeedback(true);
       console.log(fetchData);
       return;
     }
@@ -182,6 +184,10 @@ const FormRecruit = () => {
       my="5vw"
       flexDirection={"column"}
       justifyContent="center">
+
+      {feedback && <ConfirmRegis/>}
+      {failFeedback && <RegistError/>}
+
       <Heading
         fontSize={{ base: "1.5rem", md: "2.5rem" }}
         my="5rem"
