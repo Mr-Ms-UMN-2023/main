@@ -137,6 +137,7 @@ const ListItems = ({ register, errors }: any) => {
           <>
             <FormLabel
               border={"1px solid #c28824"}
+              borderRadius={'5px'}
               color="#c28824"
               _hover={{ bg: "#c28824", color: "black" }}
               htmlFor={e.Name}

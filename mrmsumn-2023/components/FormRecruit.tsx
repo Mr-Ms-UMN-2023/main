@@ -22,6 +22,7 @@ import {
   PopUp,
   RegisError,
 } from "./FromRecrutmentElement";
+import styles from "@/styles/Home.module.css";
 
 // import * as yup from "yup";
 
@@ -55,6 +56,22 @@ const FormRecruit = () => {
     handleSubmit,
     formState: { errors },
   } = useForm<Inputs>({ criteriaMode: "all" });
+
+
+  const handleClick = (e : any) => {
+    if (
+      e.target.classList.contains(styles.criteria) &&
+      !e.target.classList.contains(styles.catcrit_button)
+    ){
+        setPop(null);
+        return;
+    }
+  }
+
+  useEffect(() => {
+    window.addEventListener('click', handleClick);
+    return () => window.removeEventListener('click', handleClick);
+  }, []);
 
   const onSubmit: SubmitHandler<Inputs> = async (data: any) => {
     console.log(data);
@@ -184,6 +201,7 @@ const FormRecruit = () => {
         }}>
         <Flex mx="5vw" my="1rem" gap="1rem" justifyContent={"end"}>
           <Button
+            className={styles.catcrit_button}
             onClick={() => setPop(catatan)}
             fontWeight={"bold"}
             color="black"
@@ -191,6 +209,7 @@ const FormRecruit = () => {
             Catatan
           </Button>
           <Button
+            className={styles.catcrit_button}          
             onClick={() => setPop(kriteria)}
             fontWeight={"bold"}
             color="black"

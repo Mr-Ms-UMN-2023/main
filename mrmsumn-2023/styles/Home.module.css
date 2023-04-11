@@ -308,6 +308,10 @@
   animation: lineAnimate 2s infinite;
 }
 
+.catcrit_button, .criteria{
+  opacity: 1;
+}
+
 @keyframes lineAnimate {
   0% {
     width: 0px;
