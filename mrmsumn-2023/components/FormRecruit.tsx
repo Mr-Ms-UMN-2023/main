@@ -130,7 +130,7 @@ const FormRecruit = () => {
       setLoading(false);
       <ConfirmRegis />;
     } else {
-      console.log("gagal");
+      console.log(fetchData);
       return;
     }
   };
@@ -140,8 +140,8 @@ const FormRecruit = () => {
   }, [loading]);
 
   useEffect(() => {
-    checkCatatan && checkCatatan2 ? setDisable(false) : setDisable(true);
-  }, [checkCatatan, checkCatatan2]);
+    checkCatatan2 ? setDisable(false) : setDisable(true);
+  }, [checkCatatan2]);
 
   function buttonHover(e: any) {
     e.target.style.boxShadow = "inset 0 0 0 2em #c28824";
@@ -192,24 +192,10 @@ const FormRecruit = () => {
             fontWeight={"bold"}
             color="black"
             bg="#c28824">
-            Keriteria
+            Kriteria
           </Button>
         </Flex>
         <ListItems register={register} errors={errors} />
-        <Flex gap={"1rem"} mx="5vw" mt="2rem" justify={"start"}>
-          <Checkbox
-            iconSize={"4rem"}
-            color={"#c28824"}
-            width="100%"
-            type="checkbox"
-            id="demoCheckbox"
-            name="checkbox"
-            onChange={() => setCatatan((prev) => !prev)}>
-            <Text fontWeight={"bold"} color="#c28824">
-              Pastikan anda telah membaca catatan yang diberikan dengan benar
-            </Text>
-          </Checkbox>
-        </Flex>
 
         <Flex gap={"1rem"} mx="5vw" mt="2rem" justify={"start"}>
           <Checkbox
@@ -220,14 +206,16 @@ const FormRecruit = () => {
             id="demoCheckbox"
             name="checkbox"
             onChange={() => setCatatan2((prev) => !prev)}>
-            <Text fontWeight={"bold"} color="#c28824">
-              Pastikan anda telah membaca Kriteria yang diberikan dengan benar
+            <Text color="#c28824">
+            Saya telah membaca <b>catatan</b> dan <b>kriteria</b> calon Mr. & Ms. UMN dengan baik dan benar
             </Text>
           </Checkbox>
         </Flex>
 
         <div style={{ display: "flex", justifyContent: "center" }}>
           <Input
+            placeholder='Daftar'
+            value={'Daftar'}
             disabled={disable}
             my={{ base: "2rem" }}
             type="submit"

@@ -1,10 +1,12 @@
 import {
   Flex,
   Box,
+  Button,
   Text,
   Link,
   FormControl,
   FormErrorMessage,
+  FormLabel,
   Input,
   Img,
   Stack,
@@ -65,12 +67,6 @@ const ListItems = ({ register, errors }: any) => {
             overflow="revert">
             <Img height={"auto"} width="100%" src={viewImage} />
           </Box>
-          <Box>
-            <Text color="white">
-              Jika foto melebihi atau kurang dari ukuran frame kemungkinan
-              ukuran foto bukan 3 x 4 cm
-            </Text>
-          </Box>
         </Flex>
       );
     else {
@@ -81,7 +77,7 @@ const ListItems = ({ register, errors }: any) => {
       )
         return (
           <Link
-            color="white"
+            color="#c28824"
             rel="noreferrer"
             target={"_blank"}
             href={previewLink(e.Name)}>
@@ -105,7 +101,7 @@ const ListItems = ({ register, errors }: any) => {
         <Select
           borderColor={"#c28824"}
           marginTop={"0.5rem"}
-          color="white"
+          color="#c28824"
           type={e.PropertyName}
           name={e.Name}
           {...register(e.Name, {
@@ -136,30 +132,69 @@ const ListItems = ({ register, errors }: any) => {
         </Select>
       );
     } else {
-      return (
-        <Input
-          borderColor={"#c28824"}
-          marginTop={"0.5rem"}
-          color="white"
-          type={e.PropertyName}
-          name={e.Name}
-          {...register(e.Name, {
-            required: {
-              value: e.Required == "" ? false : true,
-              message: e.Required,
-            },
-            pattern: {
-              value: e.PatternValue,
-              message: e.PatternMessage,
-            },
-            validate: {
-              acceptedFormats: (files: any) =>
-                e.Formats?.includes(files[0]?.type) || e.FormatMessage,
-            },
-          })}
-          onChange={(x: any) => onChangeImage(e.Name, x)}
-        />
-      );
+
+      if (e.PropertyName == "file"){
+        return (
+            <FormLabel border={'1px solid #c28824'} color="#c28824" _hover={{bg : "#c28824", color : 'black'}} for={e.Name} w='auto' h='100%' textAlign='center' m='0 auto' verticalAlign='middle' px='1rem' display={'flex'} justifyContent={'flex-start'} alignItems={'center'} position='relative'>
+              Masukkan Gambar
+              <Input
+              display={'none'}
+            borderColor={"#c28824"}
+            marginTop={"0.5rem"}
+            w='100%'
+            h='100%'
+            color="#c28824"
+            type={e.PropertyName}
+            name={e.Name}
+            {...register(e.Name, {
+              required: {
+                value: e.Required == "" ? false : true,
+                message: e.Required,
+              },
+              pattern: {
+                value: e.PatternValue,
+                message: e.PatternMessage,
+              },
+              validate: {
+                acceptedFormats: (files: any) =>
+                  e.Formats?.includes(files[0]?.type) || e.FormatMessage,
+              },
+            })}
+            onChange={(x: any) => onChangeImage(e.Name, x)}
+          />
+            </FormLabel>            
+
+        );
+        
+      } else {
+        return (
+          <Input
+            borderColor={"#c28824"}
+            marginTop={"0.5rem"}
+            color="#c28824"
+            type={e.PropertyName}
+            name={e.Name}
+            {...register(e.Name, {
+              required: {
+                value: e.Required == "" ? false : true,
+                message: e.Required,
+              },
+              pattern: {
+                value: e.PatternValue,
+                message: e.PatternMessage,
+              },
+              validate: {
+                acceptedFormats: (files: any) =>
+                  e.Formats?.includes(files[0]?.type) || e.FormatMessage,
+              },
+            })}
+            onChange={(x: any) => onChangeImage(e.Name, x)}
+          />
+        );
+      }
+
+
+
     }
   };
 

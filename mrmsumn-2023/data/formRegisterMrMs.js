@@ -21,7 +21,7 @@ let array = [
     PropertyName: "text",
     Required: "Input ini wajib diisi",
     PatternValue: /^\d+$/,
-    PattternMessage: "Input ini harus diisi dengan angka",
+    PatternMessage: "Input ini harus diisi dengan angka",
   },
   {
     Pertanyaan: "Tempat Lahir",
@@ -58,7 +58,7 @@ let array = [
     PatternMessage: "",
   },
   {
-    Pertanyaan: "Nomor Telephone",
+    Pertanyaan: "Nomor Telepon",
     Name: "phone_number",
     PropertyName: "text",
     Required: "Input ini harus diisi",
@@ -82,7 +82,7 @@ let array = [
     PatternMessage: "",
   },
   {
-    Pertanyaan: "Username Tiktok",
+    Pertanyaan: "Username Tiktok (opsional)",
     Name: "tiktok_username",
     PropertyName: "text",
     Required: "",
@@ -93,11 +93,25 @@ let array = [
     Pertanyaan: "Jurusan",
     Name: "major",
     PropertyName: "DropDown",
-    ArrayDrop: ["Informatika", "Sistem Informasi", "Stratagic Comunication"],
+    ArrayDrop: [
+      "Informatika",
+      "Teknik Komputer",
+      "Teknik Elektro",
+      "Teknik Fisika",
+      "Sistem Informasi",
+      "Perhotelan",
+      "Akuntansi",
+      "Managemen",
+      "Komunikasi Strategis",
+      "Jurnalistik",
+      "Desain Komunikasi Visual",
+      "Arsitektur",
+      "Film & Animasi",
+    ],
     ArrayDropValue: [
       "Informatika",
       "Sistem Informasi",
-      "Stratagic Comunication",
+      "Strategic Comunication",
     ],
     Required: "Input ini harus diisi",
     PatternValue: "",
@@ -178,7 +192,7 @@ let array = [
     PatternMessage: "",
   },
   {
-    Pertanyaan: "Hasil Personality",
+    Pertanyaan: "Hasil Personality Type",
     Name: "personality",
     PropertyName: "text",
     Required: "Input ini harus diisi",
@@ -194,7 +208,7 @@ let array = [
     PatternMessage: "",
   },
   {
-    Pertanyaan: "Prestasi",
+    Pertanyaan: "Prestasi (opsional)",
     Name: "achievements",
     PropertyName: "text",
     Required: "",
@@ -212,7 +226,7 @@ let array = [
     FormatMessage: "Input ini hanya menerima gambar",
   },
   {
-    Pertanyaan: "Hasil Screenshot Personality",
+    Pertanyaan: "Hasil Screenshot Personality Type",
     Name: "personality_screenshot",
     PropertyName: "file",
     Required: "Input ini harus diisi",
@@ -225,6 +239,7 @@ let array = [
     Pertanyaan: "Screenshot Nilai IPK",
     Name: "grades_screenshot",
     PropertyName: "file",
+    Required: "Input ini wajib diisi",
     PatternValue: "",
     PatternMessage: "",
     Formats: [
@@ -236,7 +251,7 @@ let array = [
       "application/zip",
       "application/x-zip-compressed",
     ],
-    FormatMessage: "Input hanya menerima gambar",
+    FormatMessage: "Input hanya menerima gambar, pdf, atau zip",
   },
   {
     Pertanyaan: "Screenshot KTM",

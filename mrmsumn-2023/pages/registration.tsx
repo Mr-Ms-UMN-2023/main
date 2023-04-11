@@ -3,7 +3,7 @@ import { Loading, Navbar, FormRecruit } from "@/components";
 const Form = () => {
     return (
         <>
-        {/* <Loading /> */}
+        <Loading />
         <Navbar />
         
         <FormRecruit />
