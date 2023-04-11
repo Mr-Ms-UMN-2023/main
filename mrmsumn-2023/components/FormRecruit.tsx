@@ -20,6 +20,7 @@ import {
   ConfirmRegis,
   ListItems,
   PopUp,
+  RegisError,
 } from "./FromRecrutmentElement";
 
 // import * as yup from "yup";
@@ -128,8 +129,10 @@ const FormRecruit = () => {
       );
 
       setLoading(false);
-      <ConfirmRegis />;
+      ConfirmRegis();
     } else {
+      setLoading(false);
+      RegisError();
       console.log(fetchData);
       return;
     }
@@ -207,15 +210,16 @@ const FormRecruit = () => {
             name="checkbox"
             onChange={() => setCatatan2((prev) => !prev)}>
             <Text color="#c28824">
-            Saya telah membaca <b>catatan</b> dan <b>kriteria</b> calon Mr. & Ms. UMN dengan baik dan benar
+              Saya telah membaca <b>catatan</b> dan <b>kriteria</b> calon Mr. &
+              Ms. UMN dengan baik dan benar
             </Text>
           </Checkbox>
         </Flex>
 
         <div style={{ display: "flex", justifyContent: "center" }}>
           <Input
-            placeholder='Daftar'
-            value={'Daftar'}
+            placeholder="Daftar"
+            value={"Daftar"}
             disabled={disable}
             my={{ base: "2rem" }}
             type="submit"

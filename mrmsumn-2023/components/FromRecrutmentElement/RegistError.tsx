@@ -1,7 +1,7 @@
 import { Flex, Img, Text } from "@chakra-ui/react";
 import { useState, useEffect } from "react";
 
-const ConfirmRegis = () => {
+const RegisError = () => {
   const [display, setDisplay] = useState("flex");
 
   useEffect(() => {
@@ -37,4 +37,4 @@ const ConfirmRegis = () => {
   );
 };
 
-export { ConfirmRegis as ConfirmRegis };
+export { RegisError as RegisError };

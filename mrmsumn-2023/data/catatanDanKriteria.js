@@ -1,6 +1,6 @@
 let catatan = [
   {
-    Judul: "Catatan",
+    Judul: ["Catatan"],
     Isi: [
       "Terbuka untuk mahasiswa UMN angkatan 2021 dan 2022.",
       "Semua informasi WAJIB diisi kecuali bagian prestasi yang bersifat optional.",
@@ -20,7 +20,7 @@ let catatan = [
 
 let kriteria = [
   {
-    Judul: "KRITERIA CALON Mr. & Ms. UMN 2023",
+    Judul: ["KRITERIA CALON", "Mr. & Ms. UMN 2023"],
     Isi: [
       "Mahasiswa aktif Universitas Multimedia Nusantara angkatan 2021-2022.",
       "Memiliki IPK minimum 3.30.",

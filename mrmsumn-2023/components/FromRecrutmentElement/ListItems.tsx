@@ -61,7 +61,7 @@ const ListItems = ({ register, errors }: any) => {
           <Box
             mx="1rem"
             my={"1rem"}
-            boxShadow={"0 0 0 1px white"}
+            boxShadow={"0 0 0 1px #c28824"}
             width="7.5rem"
             height={"10rem"}
             style={{ aspectRatio: "3/4" }}

@@ -39,21 +39,25 @@ const PopUp = ({ data, setPop }: any) => {
         overflow="hidden">
         {/* frame */}
         <Button
-          right={"1rem"}
-          top="1rem"
+          display={{ base: "none", md: "block" }}
+          right={"0.5rem"}
+          top="0.5rem"
           position={"absolute"}
           bg="transparent"
-          border="1px solid #c28824"
           color="#c28824"
+          fontSize={"1.5rem"}
           onClick={() => exit()}>
           X
         </Button>
         <Heading
+          mx={"1vw"}
           fontSize={{ base: "1.5rem", md: "2rem" }}
           mt="3rem"
           textAlign={"center"}
           color="#c28824">
-          {data[0].Judul}
+          {data[0].Judul[0]}
+          <br />
+          {data[0].Judul[1]}
         </Heading>
 
         <Flex
