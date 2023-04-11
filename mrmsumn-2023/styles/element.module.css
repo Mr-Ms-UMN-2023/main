@@ -24,3 +24,27 @@
     transform: rotate(360deg);
   }
 }
+
+.custom_file_input::-webkit-file-upload-button {
+  visibility: hidden;
+}
+
+.custom_file_input::before {
+  content: "Select Some Files";
+  display: inline-block;
+  background: linear-gradient(top, #f9f9f9, #e3e3e3);
+  border-radius: 3px;
+  padding: 5px 8px;
+  outline: none;
+  white-space: nowrap;
+  -webkit-user-select: none;
+  cursor: pointer;
+  font-weight: 700;
+  font-size: 10pt;
+}
+.custom_file_input:hover::before {
+  border-color: black;
+}
+.custom_file_input:active::before {
+  background: -webkit-linear-gradient(top, #e3e3e3, #f9f9f9);
+}
