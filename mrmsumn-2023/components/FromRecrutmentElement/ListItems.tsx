@@ -132,40 +132,53 @@ const ListItems = ({ register, errors }: any) => {
         </Select>
       );
     } else {
-
-      if (e.PropertyName == "file"){
+      if (e.PropertyName == "file") {
         return (
-            <FormLabel border={'1px solid #c28824'} color="#c28824" _hover={{bg : "#c28824", color : 'black'}} for={e.Name} w='auto' h='100%' textAlign='center' m='0 auto' verticalAlign='middle' px='1rem' display={'flex'} justifyContent={'flex-start'} alignItems={'center'} position='relative'>
+          <>
+            <FormLabel
+              border={"1px solid #c28824"}
+              color="#c28824"
+              _hover={{ bg: "#c28824", color: "black" }}
+              for={e.Name}
+              w="auto"
+              h="100%"
+              textAlign="center"
+              m="0 auto"
+              verticalAlign="middle"
+              px="1rem"
+              display={"flex"}
+              justifyContent={"flex-start"}
+              alignItems={"center"}
+              position="relative">
               Masukkan Gambar
-              <Input
-              display={'none'}
-            borderColor={"#c28824"}
-            marginTop={"0.5rem"}
-            w='100%'
-            h='100%'
-            color="#c28824"
-            type={e.PropertyName}
-            name={e.Name}
-            {...register(e.Name, {
-              required: {
-                value: e.Required == "" ? false : true,
-                message: e.Required,
-              },
-              pattern: {
-                value: e.PatternValue,
-                message: e.PatternMessage,
-              },
-              validate: {
-                acceptedFormats: (files: any) =>
-                  e.Formats?.includes(files[0]?.type) || e.FormatMessage,
-              },
-            })}
-            onChange={(x: any) => onChangeImage(e.Name, x)}
-          />
-            </FormLabel>            
-
+            </FormLabel>
+            <Input
+              display={"none"}
+              borderColor={"#c28824"}
+              marginTop={"0.5rem"}
+              w="100%"
+              h="100%"
+              color="#c28824"
+              type={e.PropertyName}
+              name={e.Name}
+              {...register(e.Name, {
+                required: {
+                  value: e.Required == "" ? false : true,
+                  message: e.Required,
+                },
+                pattern: {
+                  value: e.PatternValue,
+                  message: e.PatternMessage,
+                },
+                validate: {
+                  acceptedFormats: (files: any) =>
+                    e.Formats?.includes(files[0]?.type) || e.FormatMessage,
+                },
+              })}
+              onChange={(x: any) => onChangeImage(e.Name, x)}
+            />
+          </>
         );
-        
       } else {
         return (
           <Input
@@ -192,9 +205,6 @@ const ListItems = ({ register, errors }: any) => {
           />
         );
       }
-
-
-
     }
   };
 
