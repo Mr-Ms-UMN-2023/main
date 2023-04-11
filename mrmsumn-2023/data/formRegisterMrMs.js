@@ -62,7 +62,7 @@ let array = [
     Name: "phone_number",
     PropertyName: "text",
     Required: "Input ini harus diisi",
-    PatternValue: /\d+/,
+    PatternValue: /^\d+$/,
     PatternMessage: "Input nomor telephone tidak valid",
   },
   {

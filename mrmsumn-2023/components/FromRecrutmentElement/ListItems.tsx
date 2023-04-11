@@ -14,7 +14,6 @@ import {
 } from "@chakra-ui/react";
 import { useState } from "react";
 import { array } from "../../data/formRegisterMrMs";
-import styles from "@/styles/element.module.css";
 
 const Label = {
   color: "#c28824",
@@ -61,7 +60,7 @@ const ListItems = ({ register, errors }: any) => {
           <Box
             mx="1rem"
             my={"1rem"}
-            boxShadow={"0 0 0 1px #c28824"}
+            boxShadow={"0 0 0 1px white"}
             width="7.5rem"
             height={"10rem"}
             style={{ aspectRatio: "3/4" }}
@@ -136,13 +135,33 @@ const ListItems = ({ register, errors }: any) => {
       if (e.PropertyName == "file") {
         return (
           <>
+            <FormLabel
+              border={"1px solid #c28824"}
+              color="#c28824"
+              _hover={{ bg: "#c28824", color: "black" }}
+              htmlFor={e.Name}
+              w="11rem"
+              h="100%"
+              textAlign="center"
+              verticalAlign="middle"
+              px="1rem"
+              display={"flex"}
+              justifyContent={"center"}
+              alignItems={"center"}
+              position="relative">
+              Masukkan Gambar
+            </FormLabel>
             <Input
-              className={styles.custom_file_input}
-              bg={"black"}
+              zIndex={10}
+              opacity='0'
+              // backgroundColor='red'
               borderColor={"#c28824"}
               marginTop={"0.5rem"}
-              w="100%"
+              w="11rem"
               h="100%"
+              top='0'
+              left='0'
+              position='absolute'
               color="#c28824"
               type={e.PropertyName}
               name={e.Name}
