@@ -3,8 +3,8 @@ let catatan = [
     Judul: "Catatan",
     Isi: [
       "Terbuka untuk mahasiswa UMN angkatan 2021 dan 2022.",
-      "Semua informasi <b>WAJIB</b> diisi kecuali bagian prestasi yang bersifat optional.",
-      "Foto yang dilampirkan <b>WAJIB</b> ukuran 3x4 cm, foto berwarna dan terbaru (maksimal 1 bulan).",
+      "Semua informasi WAJIB diisi kecuali bagian prestasi yang bersifat optional.",
+      "Foto yang dilampirkan WAJIB ukuran 3x4 cm, foto berwarna dan terbaru (maksimal 1 bulan).",
       "Lampirkan screenshot Personality Test lengkap dengan persentasenya.",
       "Lampirkan screenshot Grades dari myumn.",
       "Lampirkan 1 lembar fotokopi Kartu Mahasiswa.",
@@ -13,13 +13,6 @@ let catatan = [
       "Peserta yang lolos ke tahap berikutnya akan diumumkan melalui email student dan website Mr. & Ms. UMN 2023.",
       "Peserta yang lolos WAJIB mengikuti tahap seleksi pada hari Senin, 15 Mei 2023.",
       "Dresscode untuk tahap seleksi:",
-      [
-        "Blouse/kemeja putih sopan",
-        "Jeans berwarna gelap sopan",
-        "Pantofel/Sneakers (laki-laki)",
-        "Heels tertutup min. 5 cm (perempuan)",
-        "Make Up natural",
-      ],
       "Untuk informasi lebih lanjut hubungi via dm Instagram: @mrmsumn.",
     ],
   },
@@ -44,3 +37,5 @@ let kriteria = [
     ],
   },
 ];
+
+export { catatan, kriteria };

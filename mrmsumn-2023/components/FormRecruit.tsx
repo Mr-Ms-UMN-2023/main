@@ -5,17 +5,22 @@ import {
   Box,
   Heading,
   Text,
+  Button,
   FormControl,
-  FormLabel,
-  Link,
   FormErrorMessage,
+  Checkbox,
 } from "@chakra-ui/react";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { ErrorMessage } from "@hookform/error-message";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
-
-import { LoadingView, ConfirmRegis, ListItems } from "./FromRecrutmentElement";
+import { catatan, kriteria } from "../data/catatanDanKriteria";
+import {
+  LoadingView,
+  ConfirmRegis,
+  ListItems,
+  PopUp,
+} from "./FromRecrutmentElement";
 
 // import * as yup from "yup";
 
@@ -41,6 +46,7 @@ const FormRecruit = () => {
   const [checkCatatan, setCatatan] = useState<boolean>(false);
   const [checkCatatan2, setCatatan2] = useState<boolean>(false);
   const [disable, setDisable] = useState<boolean>(true);
+  const [pop, setPop] = useState<any>(null);
   const router = useRouter();
 
   const {
@@ -52,37 +58,6 @@ const FormRecruit = () => {
   const onSubmit: SubmitHandler<Inputs> = async (data: any) => {
     console.log(data);
     setLoading(true);
-
-    // const dataSend = {
-    //   name: data.name,
-    //   email_student: data.email_student,
-    //   nim: "000000" + data.nim,
-    //   birth_date: data.birth_date,
-    //   birth_place: data.birth_place,
-    //   gender: data.gender,
-    //   address: data.address,
-    //   phone_number: data.phone_number,
-    //   line_id: data.line_id,
-    //   instagram_username: data.instagram_username,
-    //   tiktok_username: data.tiktok_username,
-    //   major: data.major,
-    //   year: data.year,
-    //   gpa: data.gpa,
-    //   height: data.height,
-    //   weight: data.weight,
-    //   clothes_size: data.clothes_size,
-    //   shoe_size: data.shoe_size,
-    //   pants_size: data.pants_size,
-    //   about_me: data.about_me,
-    //   motivation: data.motivation,
-    //   personality: data.personality,
-    //   talents: data.talents,
-    //   achievements: data.achievements,
-    //   picture: data.picture,
-    //   personality_screenshot: data.personality_screenshot,
-    //   grades_screenshot: data.grades_screenshot,
-    //   student_card_screenshot: data.student_card_screenshot,
-    // };
 
     const entries = Object.entries(data);
 
@@ -187,7 +162,16 @@ const FormRecruit = () => {
       my="5vw"
       flexDirection={"column"}
       justifyContent="center">
+      <Heading
+        fontSize={{ base: "1.5rem", md: "2.5rem" }}
+        my="5rem"
+        textAlign={"center"}
+        color="#c28824">
+        Candidate Registration
+      </Heading>
+
       {loading && <LoadingView />}
+      {pop != null && <PopUp data={pop} setPop={setPop} />}
       <form
         onSubmit={handleSubmit(onSubmit)}
         style={{
@@ -195,29 +179,51 @@ const FormRecruit = () => {
           borderRadius: "15px",
           padding: "3vw 0",
         }}>
+        <Flex mx="5vw" my="1rem" gap="1rem" justifyContent={"end"}>
+          <Button
+            onClick={() => setPop(catatan)}
+            fontWeight={"bold"}
+            color="black"
+            bg="#c28824">
+            Catatan
+          </Button>
+          <Button
+            onClick={() => setPop(kriteria)}
+            fontWeight={"bold"}
+            color="black"
+            bg="#c28824">
+            Keriteria
+          </Button>
+        </Flex>
         <ListItems register={register} errors={errors} />
-        <Flex mx="5vw" mt="2rem" justify={"start"}>
-          <input
-            style={{ width: "5rem" }}
+        <Flex gap={"1rem"} mx="5vw" mt="2rem" justify={"start"}>
+          <Checkbox
+            iconSize={"4rem"}
+            color={"#c28824"}
+            width="100%"
             type="checkbox"
             id="demoCheckbox"
             name="checkbox"
-            onClick={() => setCatatan((prev) => !prev)}></input>
-          <Text color="#c28824">
-            Pastikan anda telah membaca catatan yang diberikan dengan benar
-          </Text>
+            onChange={() => setCatatan((prev) => !prev)}>
+            <Text fontWeight={"bold"} color="#c28824">
+              Pastikan anda telah membaca catatan yang diberikan dengan benar
+            </Text>
+          </Checkbox>
         </Flex>
 
-        <Flex mx="5vw" mt="2rem" justify={"start"}>
-          <input
-            style={{ width: "5rem" }}
+        <Flex gap={"1rem"} mx="5vw" mt="2rem" justify={"start"}>
+          <Checkbox
+            iconSize={"4rem"}
+            color={"#c28824"}
+            width="100%"
             type="checkbox"
             id="demoCheckbox"
             name="checkbox"
-            onClick={() => setCatatan2((prev) => !prev)}></input>
-          <Text color="#c28824">
-            Pastikan anda telah membaca Kriteria yang diberikan dengan benar
-          </Text>
+            onChange={() => setCatatan2((prev) => !prev)}>
+            <Text fontWeight={"bold"} color="#c28824">
+              Pastikan anda telah membaca Kriteria yang diberikan dengan benar
+            </Text>
+          </Checkbox>
         </Flex>
 
         <div style={{ display: "flex", justifyContent: "center" }}>
