@@ -19,12 +19,12 @@ let ArrMrMsFav = [
   },
   {
     foto: "/Assets/dedikasi/msFav2022.png",
-    jurusan: "Digital Journlism 2021",
+    jurusan: "Digital Journalism 2021",
     nama: "Chatarina Ivanka",
   },
   {
     foto: "/Assets/dedikasi/mrBestTalent2022.png",
-    jurusan: "Digital Journlism 2021",
+    jurusan: "Digital Journalism 2021",
 
     nama: "Sopater Daniel",
   },
@@ -81,7 +81,6 @@ const Dedikasi = () => {
           <Text fontSize={"1.2rem"}>Visual Communication Design - 2020</Text>
         </Box>
         <Img
-        
           w={{ base: "100vw", md: "50vw" }}
           src="/Assets/Dedikasi/fotoMr2022.PNG"
           alt="Mr. UMN 2022"
@@ -98,7 +97,6 @@ const Dedikasi = () => {
           w={{ base: "100vw", md: "50vw" }}
           src="/Assets/Dedikasi/fotoMs2022.PNG"
           alt="Ms. UMN 2022"
-          
         />
         <Box>
           <Heading color="#c28824">Ms. UMN 2022</Heading>
@@ -124,17 +122,27 @@ const Dedikasi = () => {
         <Heading mb="2rem" color="#c28824">
           Runner Up
         </Heading>
-        <Flex w={{base : "90vw", md : 'auto'}} flexDirection={{base : 'column', lg : 'row'}} alignItems={"center"} justifyContent={"space-evenly"} gap={{md : '0rem', lg : '8rem'}}>
-          <Box w={{ base: "80vw", lg: "30vw" }} my={{base : ".5rem", md : '0'}}>
-            <Heading color="#c28824" fontSize={{ base: "1.2rem", md: "2rem" }} w={{base : "100%", md : 'auto'}}>
+        <Flex
+          w={{ base: "90vw", md: "auto" }}
+          flexDirection={{ base: "column", lg: "row" }}
+          alignItems={"center"}
+          justifyContent={"space-evenly"}
+          gap={{ md: "0rem", lg: "8rem" }}>
+          <Box w={{ base: "80vw", lg: "30vw" }} my={{ base: ".5rem", md: "0" }}>
+            <Heading
+              color="#c28824"
+              fontSize={{ base: "1.2rem", md: "2rem" }}
+              w={{ base: "100%", md: "auto" }}>
               Mr. Dave Hapien Indrianto
             </Heading>
-            <Text fontSize={{ base: "0.8rem", md: "1.2rem" }} w={{base : "100%", md : 'auto'}}>
-              Strategic Communication - 2020
+            <Text
+              fontSize={{ base: "0.8rem", md: "1.2rem" }}
+              w={{ base: "100%", md: "auto" }}>
+              Strategic Communication - 2021
             </Text>
           </Box>
 
-          <Box w={{ base: "80vw", lg: "30vw" }} my={{base : ".5rem", md : '0'}}>
+          <Box w={{ base: "80vw", lg: "30vw" }} my={{ base: ".5rem", md: "0" }}>
             <Heading color="#c28824" fontSize={{ base: "1.2rem", md: "2rem" }}>
               Ms. Clara Shinta Purnama
             </Heading>
@@ -165,7 +173,7 @@ const Dedikasi = () => {
             return (
               <GridItem key={index} colSpan={{ base: 12, md: 6, xl: 3 }}>
                 <Box
-                  w={{base:"80vw", md:"40vw",xl:"23vw"}}
+                  w={{ base: "80vw", md: "40vw", xl: "23vw" }}
                   borderRadius={"1rem"}
                   overflow="hidden"
                   position={"relative"}
@@ -188,9 +196,7 @@ const Dedikasi = () => {
                       <Heading textAlign={"center"} color="#c28824">
                         {item.nama}
                       </Heading>
-                      <Text textAlign="center">
-                        {item.jurusan}
-                      </Text>
+                      <Text textAlign="center">{item.jurusan}</Text>
                     </Box>
                   </Flex>
                 </Box>

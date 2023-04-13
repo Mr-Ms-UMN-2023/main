@@ -25,7 +25,7 @@ const PopUp = ({ data, setPop }: any) => {
         flexDir={"column"}
         boxShadow={"0px 0px 30px 4px #e8d27d"}
         color="#c28824"
-        h={{ base: "80vh", lg: "60vh" }}
+        h={{ base: "80vh", lg: "75vh" }}
         w={{ base: "80vw", lg: "50vw" }}
         borderRadius={{ base: "0.5rem", md: "1rem" }}
         zIndex={100}

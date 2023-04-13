@@ -44,13 +44,13 @@ const onPlay = () => {
 };
 
 const FormRecruit = () => {
-  const [loading, setLoading] = useState<Boolean>(false);
+  const [loading, setLoading] = useState<Boolean>(true);
   const [checkCatatan, setCatatan] = useState<boolean>(false);
   const [checkCatatan2, setCatatan2] = useState<boolean>(false);
   const [disable, setDisable] = useState<boolean>(true);
   const [pop, setPop] = useState<any>(null);
   const [feedback, setFeedback] = useState<boolean>(false);
-  const [failFeedback, setFailFeedback] = useState<boolean>(false);  
+  const [failFeedback, setFailFeedback] = useState<boolean>(false);
   const router = useRouter();
 
   const {
@@ -59,20 +59,20 @@ const FormRecruit = () => {
     formState: { errors },
   } = useForm<Inputs>({ criteriaMode: "all" });
 
-
-  const handleClick = (e : any) => {
+  const handleClick = (e: any) => {
     if (
       e.target.classList.contains(styles.criteria) &&
       !e.target.classList.contains(styles.catcrit_button)
-    ){
-        setPop(null);
-        return;
+    ) {
+      setPop(null);
+      onPlay();
+      return;
     }
-  }
+  };
 
   useEffect(() => {
-    window.addEventListener('click', handleClick);
-    return () => window.removeEventListener('click', handleClick);
+    window.addEventListener("click", handleClick);
+    return () => window.removeEventListener("click", handleClick);
   }, []);
 
   const onSubmit: SubmitHandler<Inputs> = async (data: any) => {
@@ -184,9 +184,8 @@ const FormRecruit = () => {
       my="5vw"
       flexDirection={"column"}
       justifyContent="center">
-
-      {feedback && <ConfirmRegis/>}
-      {failFeedback && <RegistError/>}
+      {feedback && <ConfirmRegis />}
+      {failFeedback && <RegistError />}
 
       <Heading
         fontSize={{ base: "1.5rem", md: "2.5rem" }}
@@ -217,7 +216,7 @@ const FormRecruit = () => {
             Catatan
           </Button>
           <Button
-            className={styles.catcrit_button}          
+            className={styles.catcrit_button}
             onClick={() => setPop(kriteria)}
             fontWeight={"bold"}
             color="black"

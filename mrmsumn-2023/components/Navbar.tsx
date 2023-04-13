@@ -1,4 +1,13 @@
-import {Box,Flex,Text,Heading,Menu,MenuButton,MenuList,MenuItem,} from "@chakra-ui/react";
+import {
+  Box,
+  Flex,
+  Text,
+  Heading,
+  Menu,
+  MenuButton,
+  MenuList,
+  MenuItem,
+} from "@chakra-ui/react";
 import { ChevronDownIcon } from "@chakra-ui/icons";
 import styles from "@/styles/Home.module.css";
 import { useState, useEffect, useRef } from "react";
@@ -10,10 +19,13 @@ const Navbar = () => {
 
   let navbar = [
     {
+<<<<<<< HEAD
       title: "Mahesa 2023",
       link: "/recruitment",
     },
     {
+=======
+>>>>>>> 29adadd1037992a7b88af24030e46c1fe25ee173
       title: "Form Pendaftaran",
       link: "/registration",
     },
@@ -29,9 +41,13 @@ const Navbar = () => {
       title: "About Us",
       link: "/aboutus",
     },
+    {
+      title: "Mahesa2023",
+      link: "/recruitment",
+    },
   ];
 
-  const dropdownNavbar = navbar.slice(3);
+  const dropdownNavbar = navbar.slice(2);
 
   return (
     <Flex
@@ -44,17 +60,15 @@ const Navbar = () => {
       minHeight="10vh"
       minW={"100vw"}
       zIndex={"10"}
-      fontFamily={"TrajanPro-Bold"}
-    >
-      {navbar.slice(0, 3).map((event: any, index: number) => {
+      fontFamily={"TrajanPro-Bold"}>
+      {navbar.slice(0, 2).map((event: any, index: number) => {
         return (
           <Heading
             key={index}
             style={{ cursor: "pointer" }}
             onClick={() => router.push(event.link)}
             fontSize={{ base: "0.8rem", md: "1.2rem" }}
-            color="white"
-          >
+            color="white">
             {event.title}
             {active == index && (
               <Box
@@ -63,8 +77,7 @@ const Navbar = () => {
                 w={"0.5rem"}
                 h={"0.5rem"}
                 borderRadius={"50%"}
-                bg="white"
-              ></Box>
+                bg="white"></Box>
             )}
           </Heading>
         );
@@ -75,11 +88,9 @@ const Navbar = () => {
           fontSize={{ base: "0.8rem", md: "1.2rem" }}
           color="white"
           rightIcon={<ChevronDownIcon />}
-          style={{ cursor: "pointer" }}
-        >More
-          
-          <ChevronDownIcon ml="2">
-          </ChevronDownIcon>
+          style={{ cursor: "pointer" }}>
+          More
+          <ChevronDownIcon ml="2"></ChevronDownIcon>
         </MenuButton>
         <MenuList>
           {dropdownNavbar.map((event: any, index: number) => {
@@ -87,8 +98,7 @@ const Navbar = () => {
               <MenuItem
                 key={index}
                 onClick={() => router.push(event.link)}
-                _hover={{ bg: "gray", color: "black" }}
-              >
+                _hover={{ bg: "gray", color: "black" }}>
                 {event.title}
               </MenuItem>
             );

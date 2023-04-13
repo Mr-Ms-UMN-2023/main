@@ -32,7 +32,7 @@
 .custom_file_input::before {
   content: "Select Some Files";
   display: inline-block;
-  background: linear-gradient(top, #f9f9f9, #e3e3e3);
+
   border-radius: 3px;
   padding: 5px 8px;
   outline: none;
