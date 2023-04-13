@@ -15,6 +15,7 @@ import { useRouter } from "next/router";
 
 const Navbar = () => {
   const [active, setActive] = useState<number>();
+  const [navbarLength, setNavbarLength] = useState<number>(5);
   const router = useRouter();
 
   let navbar = [
@@ -40,7 +41,24 @@ const Navbar = () => {
     },
   ];
 
-  const dropdownNavbar = navbar.slice(2);
+  const [width, setWidth] = useState<any>();
+
+  const handleResize = () => {
+    setWidth(window.innerWidth);
+    if (window.innerWidth < 550) setNavbarLength(2);
+    else {
+      setNavbarLength(5);
+    }
+  }
+
+  useEffect(() => {
+    window.addEventListener("resize", handleResize);
+    handleResize();
+
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
+  const dropdownNavbar = navbar.slice(navbarLength);
 
   return (
     <Flex
@@ -54,7 +72,7 @@ const Navbar = () => {
       minW={"100vw"}
       zIndex={"10"}
       fontFamily={"TrajanPro-Bold"}>
-      {navbar.slice(0, 2).map((event: any, index: number) => {
+      {navbar.slice(0, navbarLength).map((event: any, index: number) => {
         return (
           <Heading
             key={index}
@@ -76,15 +94,20 @@ const Navbar = () => {
         );
       })}
       <Menu>
-        <MenuButton
-          as={Heading}
-          fontSize={{ base: "0.8rem", md: "1.2rem" }}
-          color="white"
-          rightIcon={<ChevronDownIcon />}
-          style={{ cursor: "pointer" }}>
-          More
-          <ChevronDownIcon ml="2"></ChevronDownIcon>
-        </MenuButton>
+
+        {width < 550 &&
+          <MenuButton
+            as={Heading}
+            fontSize={{ base: "0.8rem", md: "1.2rem" }}
+            color="white"
+            rightIcon={<ChevronDownIcon />}
+            style={{ cursor: "pointer" }}>
+            More
+            <ChevronDownIcon ml="2"></ChevronDownIcon>
+          </MenuButton>        
+        }
+
+
         <MenuList>
           {dropdownNavbar.map((event: any, index: number) => {
             return (
