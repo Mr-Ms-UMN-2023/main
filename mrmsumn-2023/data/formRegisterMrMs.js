@@ -247,6 +247,7 @@ let array = [
   },
   {
     Pertanyaan: "Screenshot Nilai IPK",
+    DescTambahan: "IPK besertakan IPS Semester lalu",
     Name: "grades_screenshot",
     PropertyName: "file",
     Required: "Input ini wajib diisi",

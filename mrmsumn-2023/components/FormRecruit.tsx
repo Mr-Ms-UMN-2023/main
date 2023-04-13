@@ -213,8 +213,7 @@ const FormRecruit = () => {
             fontWeight={"bold"}
             color="black"
             bg="#c28824"
-            fontFamily='Montserrat'			  
-			  >
+            fontFamily="Montserrat">
             Catatan
           </Button>
           <Button
@@ -223,8 +222,7 @@ const FormRecruit = () => {
             fontWeight={"bold"}
             color="black"
             bg="#c28824"
-            fontFamily='Montserrat'			  
-			  >
+            fontFamily="Montserrat">
             Kriteria
           </Button>
         </Flex>

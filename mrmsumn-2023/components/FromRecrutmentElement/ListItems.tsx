@@ -137,7 +137,7 @@ const ListItems = ({ register, errors }: any) => {
           <>
             <FormLabel
               border={"1px solid #c28824"}
-              borderRadius={'5px'}
+              borderRadius={"5px"}
               color="#c28824"
               _hover={{ bg: "#c28824", color: "black" }}
               htmlFor={e.Name}
@@ -150,21 +150,20 @@ const ListItems = ({ register, errors }: any) => {
               justifyContent={"center"}
               alignItems={"center"}
               position="relative"
-              fontFamily='Montserrat'              
-              >
+              fontFamily="Montserrat">
               Masukkan Gambar
             </FormLabel>
             <Input
               zIndex={10}
-              opacity='0'
+              opacity="0"
               // backgroundColor='red'
               borderColor={"#c28824"}
               marginTop={"0.5rem"}
               w="11rem"
               h="100%"
-              top='0'
-              left='0'
-              position='absolute'
+              top="0"
+              left="0"
+              position="absolute"
               color="#c28824"
               type={e.PropertyName}
               name={e.Name}
@@ -221,6 +220,15 @@ const ListItems = ({ register, errors }: any) => {
         return (
           <FormControl key={index} isInvalid={errors[e.Name as number] as any}>
             <label style={Label}>{e.Pertanyaan}</label>
+            {e.DescTambahan && (
+              <Text
+                color="#c28824"
+                my="0.5rem"
+                fontFamily="montserrat"
+                fontSize={"0.8rem"}>
+                {e.DescTambahan}
+              </Text>
+            )}
             {inputType(e)}
             {errors[e.Name] && (
               <FormErrorMessage>{errors[e.Name].message}</FormErrorMessage>
