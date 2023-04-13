@@ -141,7 +141,7 @@ const FormRecruit = () => {
 
       await fetch(
         //masih yg beta
-        "https://script.google.com/macros/s/AKfycbyGm-RXxs32V_J_7QXEoLPEkknh0CjnzaBkXCacyiDSxr3fxbp3zNas9pmFAobQZJok/exec",
+        "https://script.google.com/macros/s/AKfycbyYYhZDqvQ40o4-qiGjltWzu72mMuGIQGEEQeWAK2uwkf772WylO6G64F1JBEP9xRlG/exec",
         {
           method: "POST",
           body: formData2,
