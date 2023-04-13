@@ -102,6 +102,43 @@ CREATE TABLE `peserta` (
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
 -- CreateTable
+CREATE TABLE `peserta_2023` (
+    `id` INTEGER NOT NULL AUTO_INCREMENT,
+    `name` VARCHAR(255) NOT NULL,
+    `nim` VARCHAR(255) NOT NULL,
+    `email_student` VARCHAR(255) NOT NULL,
+    `birth_place` VARCHAR(255) NOT NULL,
+    `birth_date` DATE NOT NULL,
+    `gender` VARCHAR(1) NOT NULL,
+    `address` VARCHAR(255) NOT NULL,
+    `phone_number` VARCHAR(16) NOT NULL,
+    `line_id` VARCHAR(255) NOT NULL,
+    `instagram_username` VARCHAR(255) NOT NULL,
+    `tiktok_username` VARCHAR(255) NOT NULL,
+    `major` VARCHAR(255) NOT NULL,
+    `year` VARCHAR(11) NOT NULL,
+    `sub_gpa` VARCHAR(8) NOT NULL,
+    `gpa` VARCHAR(8) NOT NULL,
+    `height` VARCHAR(11) NOT NULL,
+    `weight` VARCHAR(11) NOT NULL,
+    `clothes_size` VARCHAR(11) NOT NULL,
+    `shoe_size` INTEGER NOT NULL,
+    `pants_size` VARCHAR(11) NOT NULL,
+    `about_me` TEXT NOT NULL,
+    `motivation` TEXT NOT NULL,
+    `personality` VARCHAR(255) NOT NULL,
+    `talents` TEXT NOT NULL,
+    `achievements` TEXT NOT NULL,
+    `picture` VARCHAR(255) NOT NULL,
+    `personality_screenshot` VARCHAR(255) NOT NULL,
+    `grades_screenshot` VARCHAR(255) NOT NULL,
+    `student_card_screenshot` VARCHAR(255) NOT NULL,
+    `created_at` TIMESTAMP(0) NOT NULL DEFAULT CURRENT_TIMESTAMP(0),
+
+    PRIMARY KEY (`id`)
+) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+
+-- CreateTable
 CREATE TABLE `peserta_candidate` (
     `StudentID` VARCHAR(11) NOT NULL,
     `CandidateImage` VARCHAR(255) NOT NULL,
@@ -122,41 +159,4 @@ CREATE TABLE `voting` (
     `Voters` INTEGER NOT NULL,
 
     PRIMARY KEY (`NIM`)
-) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
-
-
--- CreateTable
-CREATE TABLE `peserta_2023` (
-    `id` INTEGER NOT NULL AUTO_INCREMENT,
-    `name` VARCHAR(255) NOT NULL,
-    `nim` VARCHAR(255) NOT NULL,
-    `email_student` VARCHAR(255) NOT NULL,
-    `birth_place` VARCHAR(255) NOT NULL,
-    `birth_date` DATE NOT NULL,
-    `gender` VARCHAR(1) NOT NULL,
-    `address` VARCHAR(255) NOT NULL,
-    `phone_number` VARCHAR(16) NOT NULL,
-    `line_id` VARCHAR(255) NOT NULL,
-    `instagram_username` VARCHAR(255) NOT NULL,
-    `tiktok_username` VARCHAR(255) NOT NULL,
-    `major` VARCHAR(255) NOT NULL,
-    `year` VARCHAR(11) NOT NULL,
-    `gpa` VARCHAR(8) NOT NULL,
-    `height` VARCHAR(11) NOT NULL,
-    `weight` VARCHAR(11) NOT NULL,
-    `clothes_size` VARCHAR(11) NOT NULL,
-    `shoe_size` INTEGER NOT NULL,
-    `pants_size` VARCHAR(11) NOT NULL,
-    `about_me` TEXT NOT NULL,
-    `motivation` TEXT NOT NULL,
-    `personality` VARCHAR(255) NOT NULL,
-    `talents` TEXT NOT NULL,
-    `achievements` TEXT NOT NULL,
-    `picture` VARCHAR(255) NOT NULL,
-    `personality_screenshot` VARCHAR(255) NOT NULL,
-    `grades_screenshot` VARCHAR(255) NOT NULL,
-    `student_card_screenshot` VARCHAR(255) NOT NULL,
-    `created_at` TIMESTAMP(0) NOT NULL DEFAULT CURRENT_TIMESTAMP(0),
-
-    PRIMARY KEY (`id`)
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;

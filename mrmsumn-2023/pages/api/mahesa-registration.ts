@@ -47,6 +47,7 @@ const processInput = (req : NextApiRequest, saveLocally: boolean) => {
                 tiktok_username = '',
                 major = '',
                 year = '',
+                sub_gpa = '',
                 gpa = '',
                 height = '',
                 weight = '',
@@ -198,6 +199,18 @@ const processInput = (req : NextApiRequest, saveLocally: boolean) => {
                 validationErrorList.push({errorType : "INVALID_GPA", message : "Format IPK tidak valid."});                
             }            
             userData.gpa = gpa;
+
+            // Sub GPA (IPS) ---------------------------------
+            // - Check for empty entry            
+            sub_gpa = sub_gpa.toString();
+            if (!sub_gpa || sub_gpa == ''){
+                validationErrorList.push({errorType : "EMPTY_SUB_GPA", message : "IPS tidak boleh kosong."});
+            }             
+            // - Check if GPA has other character other than numbers            
+            else if (!gpaPattern.test(sub_gpa)){
+                validationErrorList.push({errorType : "INVALID_SUB_GPA", message : "Format IPS tidak valid."});                
+            }            
+            userData.sub_gpa = sub_gpa;        
 
             // Height ------------------------------------------------------------------------------            
             // - Check for empty entry            

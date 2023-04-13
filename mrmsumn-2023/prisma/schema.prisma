@@ -109,6 +109,7 @@ model peserta_2023 {
   tiktok_username         String   @db.VarChar(255)  
   major                   String   @db.VarChar(255)
   year                    String   @db.VarChar(11)
+  sub_gpa                 String   @db.VarChar(8)  
   gpa                     String   @db.VarChar(8)
 
   height                  String   @db.VarChar(11)
