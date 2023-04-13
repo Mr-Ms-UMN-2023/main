@@ -141,7 +141,7 @@ const ListItems = ({ register, errors }: any) => {
               color="#c28824"
               _hover={{ bg: "#c28824", color: "black" }}
               htmlFor={e.Name}
-              w="11rem"
+              w="12rem"
               h="100%"
               textAlign="center"
               verticalAlign="middle"
@@ -149,7 +149,9 @@ const ListItems = ({ register, errors }: any) => {
               display={"flex"}
               justifyContent={"center"}
               alignItems={"center"}
-              position="relative">
+              position="relative"
+              fontFamily='Montserrat'              
+              >
               Masukkan Gambar
             </FormLabel>
             <Input

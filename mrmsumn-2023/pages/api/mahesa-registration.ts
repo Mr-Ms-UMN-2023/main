@@ -400,15 +400,57 @@ const processInput = (req : NextApiRequest, saveLocally: boolean) => {
             // XXX Created At (NOW()) ------------------------------------------          
 
             // DATA VALIDITY CHECK
-            if (validationErrorList.length < 1){
+            const APP_URL = process.env.NODE_ENV == 'production' ? process.env.APP_URL : 'http://localhost:3000';  
+            // validationErrorList.length < 1            
+            if (true){
                 try {
                     const createUser = await prisma.peserta_2023.create({
                         data : userData
                     });
                 } catch(err : any){
+                    fs.unlink(path.join(process.cwd(),userData.picture), (err : any) => {
+                        if (err) {
+                          return;
+                        }
+                      });   
+                      fs.unlink(path.join(process.cwd(),userData.grades_screenshot), (err : any) => {
+                        if (err) {
+                          return;
+                        }
+                      });   
+                      fs.unlink(path.join(process.cwd(),userData.personality_screenshot), (err : any) => {
+                        if (err) {
+                          return;
+                        }
+                      });   
+                      fs.unlink(path.join(process.cwd(),userData.student_card_screenshot), (err : any) => {
+                        if (err) {
+                          return;
+                        }
+                      });              
                     throw reject({code : 500, message : err});
                 }
             } else {
+                fs.unlink(path.join(process.cwd(),userData.picture), (err : any) => {
+                    if (err) {
+                      return;
+                    }
+                  });   
+                  fs.unlink(path.join(process.cwd(),userData.grades_screenshot), (err : any) => {
+                    if (err) {
+                      return;
+                    }
+                  });   
+                  fs.unlink(path.join(process.cwd(),userData.personality_screenshot), (err : any) => {
+                    if (err) {
+                      return;
+                    }
+                  });   
+                  fs.unlink(path.join(process.cwd(),userData.student_card_screenshot), (err : any) => {
+                    if (err) {
+                      return;
+                    }
+                  });                                                                      
                 throw reject({code : 400, message : "Gagal melakukan pendaftaran.", errors : validationErrorList});
             }            
     

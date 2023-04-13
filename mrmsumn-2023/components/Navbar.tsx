@@ -10,7 +10,7 @@ const Navbar = () => {
 
   let navbar = [
     {
-      title: "Mahesa2023",
+      title: "Mahesa 2023",
       link: "/recruitment",
     },
     {

@@ -211,7 +211,9 @@ const FormRecruit = () => {
             onClick={() => setPop(catatan)}
             fontWeight={"bold"}
             color="black"
-            bg="#c28824">
+            bg="#c28824"
+            fontFamily='Montserrat'
+            >
             Catatan
           </Button>
           <Button
@@ -219,7 +221,9 @@ const FormRecruit = () => {
             onClick={() => setPop(kriteria)}
             fontWeight={"bold"}
             color="black"
-            bg="#c28824">
+            bg="#c28824"
+            fontFamily='Montserrat'            
+            >
             Kriteria
           </Button>
         </Flex>
