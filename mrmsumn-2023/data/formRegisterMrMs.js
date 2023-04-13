@@ -144,6 +144,14 @@ let array = [
     PatternMessage: "Format IPK tidak valid",
   },
   {
+    Pertanyaan: "IPS",
+    Name: "sub_gpa",
+    PropertyName: "text",
+    Required: "Input ini harus diisi",
+    PatternValue: /(^(4)$|^(4.0)$)|(^[0-3]([.]+[0-9]+)*$)/gm,
+    PatternMessage: "Format IPS tidak valid",
+  },
+  {
     Pertanyaan: "Tinggi Badan",
     Name: "height",
     PropertyName: "text",

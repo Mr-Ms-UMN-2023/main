@@ -44,6 +44,11 @@ const PopUp = ({ data, setPop }: any) => {
           top="0.5rem"
           position={"absolute"}
           bg="transparent"
+          _hover={{
+            bg: "transparent",
+            textShadow:
+              "1px 1px 20px #c28824, -1px -1px 20px #c28824,1px 1px 20px #c28824, -1px -1px 20px #c28824",
+          }}
           color="#c28824"
           fontSize={"1.5rem"}
           onClick={() => exit()}>
