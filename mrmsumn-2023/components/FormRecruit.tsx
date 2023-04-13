@@ -44,7 +44,7 @@ const onPlay = () => {
 };
 
 const FormRecruit = () => {
-  const [loading, setLoading] = useState<Boolean>(true);
+  const [loading, setLoading] = useState<Boolean>(false);
   const [checkCatatan, setCatatan] = useState<boolean>(false);
   const [checkCatatan2, setCatatan2] = useState<boolean>(false);
   const [disable, setDisable] = useState<boolean>(true);
@@ -211,8 +211,7 @@ const FormRecruit = () => {
             fontWeight={"bold"}
             color="black"
             bg="#c28824"
-            fontFamily='Montserrat'
-            >
+            fontFamily="Montserrat">
             Catatan
           </Button>
           <Button
@@ -221,8 +220,7 @@ const FormRecruit = () => {
             fontWeight={"bold"}
             color="black"
             bg="#c28824"
-            fontFamily='Montserrat'            
-            >
+            fontFamily="Montserrat">
             Kriteria
           </Button>
         </Flex>
