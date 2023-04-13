@@ -19,7 +19,11 @@ const Navbar = () => {
 
   let navbar = [
     {
-      title: "Form Pendaftaran",
+      title: "Home",
+      link: "/",
+    },    
+    {
+      title: "Candidate Registration",
       link: "/registration",
     },
     {
@@ -27,16 +31,12 @@ const Navbar = () => {
       link: "/faq",
     },
     {
-      title: "Home",
-      link: "/",
-    },
+      title: "Mahesa 2023",
+      link: "/recruitment",
+    },    
     {
       title: "About Us",
       link: "/aboutus",
-    },
-    {
-      title: "Mahesa2023",
-      link: "/recruitment",
     },
   ];
 
