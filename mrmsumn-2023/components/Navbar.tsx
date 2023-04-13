@@ -19,13 +19,6 @@ const Navbar = () => {
 
   let navbar = [
     {
-<<<<<<< HEAD
-      title: "Mahesa 2023",
-      link: "/recruitment",
-    },
-    {
-=======
->>>>>>> 29adadd1037992a7b88af24030e46c1fe25ee173
       title: "Form Pendaftaran",
       link: "/registration",
     },
