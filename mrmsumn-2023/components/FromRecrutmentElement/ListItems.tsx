@@ -141,8 +141,8 @@ const ListItems = ({ register, errors }: any) => {
               color="#c28824"
               _hover={{ bg: "#c28824", color: "black" }}
               htmlFor={e.Name}
-              w="12rem"
-              h="100%"
+              w="100%"
+              h="2.5rem"
               textAlign="center"
               verticalAlign="middle"
               px="1rem"
@@ -160,7 +160,7 @@ const ListItems = ({ register, errors }: any) => {
               borderColor={"#c28824"}
               marginTop={"0.5rem"}
               w="11rem"
-              h="100%"
+              h="5rem"
               top="0"
               left="0"
               position="absolute"

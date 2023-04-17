@@ -1,6 +1,7 @@
 import { Box, Flex, Img, Button, Text, Heading } from "@chakra-ui/react";
 import { onPause, onPlay } from "@/GeneralFunction";
 import styles from "@/styles/Home.module.css";
+import { CloseIcon } from "@chakra-ui/icons";
 
 const PopUp = ({ data, setPop }: any) => {
   onPause();
@@ -50,16 +51,17 @@ const PopUp = ({ data, setPop }: any) => {
               "1px 1px 20px #c28824, -1px -1px 20px #c28824,1px 1px 20px #c28824, -1px -1px 20px #c28824",
           }}
           color="#c28824"
-          fontSize={"1.5rem"}
+          fontSize={"1.2rem"}
           onClick={() => exit()}>
-          X
+          <CloseIcon />
         </Button>
         <Heading
           mx={"1vw"}
           fontSize={{ base: "1.5rem", md: "2rem" }}
           mt="3rem"
           textAlign={"center"}
-          color="#c28824">
+          color="#f2d544"
+          textShadow={"0px 0px 10px #ff5b00, 0px 0px 10px #ff5b00"}>
           {data[0].Judul[0]}
           <br />
           {data[0].Judul[1]}
@@ -68,13 +70,13 @@ const PopUp = ({ data, setPop }: any) => {
         <Flex
           zIndex={"2"}
           className={styles.customScroll}
-          m="1rem"
+          m={"1rem"}
           px={{ base: "1.5rem", md: "4rem" }}
           textAlign={"justify"}
+          fontSize={{ base: "calc(0.5vw + 0.8rem)", md: "1.2rem" }}
           flexDir={"column"}
-          alignItems="center"
+          alignItems={{ base: "flex-start", md: "center" }}
           overflowY={"scroll"}>
-          {" "}
           <ol type="1">
             {data[0].Isi.map((e: any, index: number) => {
               if (index == 1 && data[0].Judul == "Catatan") {
@@ -102,7 +104,7 @@ const PopUp = ({ data, setPop }: any) => {
                 return (
                   <li key={index}>
                     {e}
-                    <ul style={{ margin: "0.5rem 0" }}>
+                    <ul style={{ margin: "0px 0.5rem 0px 1rem" }}>
                       <li>Blouse/kemeja putih sopan</li>
                       <li>Jeans berwarna gelap sopan</li>
                       <li>Pantofel/Sneakers (laki-laki)</li>

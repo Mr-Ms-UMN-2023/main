@@ -9,12 +9,12 @@ import {
   MenuItem,
 } from "@chakra-ui/react";
 import { ChevronDownIcon } from "@chakra-ui/icons";
-import styles from "@/styles/Home.module.css";
+import styles from "@/styles/navbar.module.css";
 import { useState, useEffect, useRef } from "react";
 import { useRouter } from "next/router";
 
 const Navbar = () => {
-  const [active, setActive] = useState<number>();
+  const [active, setActive] = useState<string | undefined>("/");
   const [navbarLength, setNavbarLength] = useState<number>(5);
   const router = useRouter();
 
@@ -22,7 +22,7 @@ const Navbar = () => {
     {
       title: "Home",
       link: "/",
-    },    
+    },
     {
       title: "Candidate Registration",
       link: "/registration",
@@ -34,7 +34,7 @@ const Navbar = () => {
     {
       title: "Mahesa 2023",
       link: "/recruitment",
-    },    
+    },
     {
       title: "About Us",
       link: "/aboutus",
@@ -49,11 +49,14 @@ const Navbar = () => {
     else {
       setNavbarLength(5);
     }
-  }
+  };
 
   useEffect(() => {
     window.addEventListener("resize", handleResize);
     handleResize();
+
+    console.log(router.asPath);
+    setActive(router.asPath);
 
     return () => window.removeEventListener("resize", handleResize);
   }, []);
@@ -75,28 +78,24 @@ const Navbar = () => {
       {navbar.slice(0, navbarLength).map((event: any, index: number) => {
         return (
           <Heading
+            position="relative"
+            className={
+              active && active == event.link ? styles.active : undefined
+            }
+            textAlign={"center"}
             key={index}
             style={{ cursor: "pointer" }}
             onClick={() => router.push(event.link)}
             fontSize={{ base: "0.8rem", md: "1.2rem" }}
             color="white">
             {event.title}
-            {active == index && (
-              <Box
-                mt="0.5rem"
-                mx="auto"
-                w={"0.5rem"}
-                h={"0.5rem"}
-                borderRadius={"50%"}
-                bg="white"></Box>
-            )}
           </Heading>
         );
       })}
       <Menu>
-
-        {width < 550 &&
+        {width < 550 && (
           <MenuButton
+            textAlign={"center"}
             as={Heading}
             fontSize={{ base: "0.8rem", md: "1.2rem" }}
             color="white"
@@ -104,14 +103,16 @@ const Navbar = () => {
             style={{ cursor: "pointer" }}>
             More
             <ChevronDownIcon ml="2"></ChevronDownIcon>
-          </MenuButton>        
-        }
-
+          </MenuButton>
+        )}
 
         <MenuList>
           {dropdownNavbar.map((event: any, index: number) => {
             return (
               <MenuItem
+                bg={active && active == event.link ? "#030303" : undefined}
+                position="relative"
+                className={active == event.link ? styles.activeDrop : undefined}
                 key={index}
                 onClick={() => router.push(event.link)}
                 _hover={{ bg: "gray", color: "black" }}>

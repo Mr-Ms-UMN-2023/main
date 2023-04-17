@@ -106,6 +106,7 @@ const Dedikasi = () => {
       </Flex>
 
       <Flex
+        mt={{ md: "3rem" }}
         flexDir={"column"}
         w="100vw"
         minH="100vh"

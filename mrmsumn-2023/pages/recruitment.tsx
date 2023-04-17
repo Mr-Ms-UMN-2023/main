@@ -100,7 +100,6 @@ const Divisi = () => {
 
   return (
     <>
-      <Loading />
       <Navbar />
       {popup && <DivisionDetail data={popup} />}
 

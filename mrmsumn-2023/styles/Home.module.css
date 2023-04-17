@@ -7,14 +7,14 @@
 
 .hidden {
   opacity: 0;
-  transform: translateY(0px);
-  transition: all 2.5s ease-in-out;
+  transform: scale(96%);
+  transition: all 1.5s ease-in-out;
   scroll-margin-block: 0px !important;
 }
 
 .show {
   opacity: 1 !important;
-  transform: translateY(0px);
+  transform: scale(100%);
 }
 
 .cards {
@@ -79,7 +79,7 @@
   overflow-y: hidden;
 }
 
-.oprec_list{
+.oprec_list {
   background-color: none;
 }
 
@@ -160,13 +160,13 @@
   .show {
     max-height: none !important;
     height: auto !important;
-    margin-top:8rem !important;
+    margin-top: 8rem !important;
   }
 }
 
-@media (max-height:344px) {
-  .oprec_list{
-    height:auto !important;
+@media (max-height: 344px) {
+  .oprec_list {
+    height: auto !important;
     overflow: hidden !important;
   }
 }
@@ -308,7 +308,8 @@
   animation: lineAnimate 2s infinite;
 }
 
-.catcrit_button, .criteria{
+.catcrit_button,
+.criteria {
   opacity: 1;
 }
 

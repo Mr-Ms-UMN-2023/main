@@ -189,11 +189,13 @@ const FormRecruit = () => {
       {failFeedback && <RegistError />}
 
       <Heading
-        fontSize={{ base: "1.5rem", md: "2.5rem" }}
+        fontSize={{ base: "11vw", md: "5rem" }}
         my="5rem"
         textAlign={"center"}
-        color="#c28824">
-        Candidate Registration
+        color="#f2d544"
+        textShadow={"0px 0px 10px #ff5b00, 0px 0px 10px #ff5b00"}>
+        Candidate
+        <br /> Registration
       </Heading>
 
       {loading && <LoadingView />}
@@ -201,11 +203,80 @@ const FormRecruit = () => {
       <form
         onSubmit={handleSubmit(onSubmit)}
         style={{
-          border: "2px solid #c28824",
+          position: "relative",
           borderRadius: "15px",
           padding: "3vw 0",
         }}>
-        <Flex mx="5vw" my="1rem" gap="1rem" justifyContent={"end"}>
+        <Img
+          width={"45%"}
+          position={"absolute"}
+          left="0px"
+          h="0.2rem"
+          src="/Assets/Frame_PopUp/ornamen_garis_atas.png"
+        />
+        <Img
+          transform={"translate(-50%)"}
+          left={"50%"}
+          top={{ base: "-7vw", md: "-2vw" }}
+          position={"absolute"}
+          width={{ base: "50%", md: "30%" }}
+          src="/Assets/Frame_PopUp/ornamen_atas.png"
+        />
+        <Img
+          position={"absolute"}
+          right="0px"
+          width={"45%"}
+          h="0.2rem"
+          src="/Assets/Frame_PopUp/ornamen_garis_atas.png"
+        />
+
+        <Img
+          left={"0px"}
+          top={"3vw"}
+          position={"absolute"}
+          h={{ base: "98%", md: "97%", lg: "95%" }}
+          w="4px"
+          src="/Assets/Frame_PopUp/ornamen_garis.png"
+        />
+        <Img
+          right={"0px"}
+          top={"3vw"}
+          position={"absolute"}
+          h={{ base: "98%", md: "97%", lg: "95%" }}
+          w="4px"
+          src="/Assets/Frame_PopUp/ornamen_garis.png"
+        />
+        <Img
+          w={{ base: "40%", md: "20%" }}
+          left={"-1vw"}
+          bottom="0px"
+          position={"absolute"}
+          transform="scaleX(-1)"
+          src="/Assets/Frame_PopUp/bunga_bawah.png"
+        />
+        <Img
+          w={{ base: "40%", md: "20%" }}
+          right={"-1vw"}
+          bottom="0px"
+          position={"absolute"}
+          src="/Assets/Frame_PopUp/bunga_bawah.png"
+        />
+        <Img
+          h="4px"
+          w="80%"
+          left="50%"
+          transform={"translate(-50%)"}
+          bottom={{ base: "3vw", md: "1vw" }}
+          position={"absolute"}
+          src="/Assets/Frame_PopUp/ornamen_garis_bawah.png"
+        />
+
+        <Flex
+          mx="5vw"
+          mt={{ base: "10vw", md: "5vw" }}
+          mb="1rem"
+          gap="1rem"
+          justifyContent={"end"}>
           <Button
             className={styles.catcrit_button}
             onClick={() => setPop(catatan)}
