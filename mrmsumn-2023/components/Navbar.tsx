@@ -14,19 +14,155 @@ import { useState, useEffect, useRef } from "react";
 import { useRouter } from "next/router";
 
 const Navbar = () => {
+
+  const closeBatchOne = 4;
+  const openBatchTwo = 8;
+  const closeBatchTwo = 12;
+
   const [active, setActive] = useState<string | undefined>("/");
   const [navbarLength, setNavbarLength] = useState<number>(5);
+  const [tanggal, setTanggal] = useState("");
+  const [jam, setJam] = useState(0);
+  const [tutup, setTutup] = useState(false);  
+  const [dayTime, setDayTime] = useState<number>(new Date().getDate());
+  const [navbarList, setNavbarList] = useState(
+
+    (dayTime >= closeBatchOne && dayTime < openBatchTwo) || (dayTime > closeBatchTwo) 
+      ?
+        [
+          {
+            title: "Home",
+            link: "/",
+          },
+          // {
+          //   title: "Candidate Registration",
+          //   link: "/registration",
+          // },
+          {
+            title: "FAQ",
+            link: "/faq",
+          },
+          {
+            title: "Mahesa 2023",
+            link: "/recruitment",
+          },
+          {
+            title: "About Us",
+            link: "/aboutus",
+          },          
+        ]      
+      
+      : 
+
+      [
+        {
+          title: "Home",
+          link: "/",
+        },
+        {
+          title: "Candidate Registration",
+          link: "/registration",
+        },
+        {
+          title: "FAQ",
+          link: "/faq",
+        },
+        {
+          title: "Mahesa 2023",
+          link: "/recruitment",
+        },
+        {
+          title: "About Us",
+          link: "/aboutus",
+        },      
+      ]      
+
+
+  )
   const router = useRouter();
+
+  
+  const time = () => {
+    let now = new Date();
+    let day = now.getDate();
+    let month = now.getMonth() + 1;
+    let year = now.getFullYear();
+    let hour = now.getHours();
+
+    let date: string = String(year) + String(month) + String(day);
+    setDayTime(day);
+  };
+
+  // 202353
+
+  useEffect(() => {
+    let nowTime = setInterval(() => time(), 1000);
+
+    return () => clearInterval(nowTime);
+  }, []);
+
+  useEffect(() => {
+    if ((dayTime >= closeBatchOne && dayTime < openBatchTwo) || (dayTime > closeBatchTwo)){
+      setNavbarList(
+        [
+          {
+            title: "Home",
+            link: "/",
+          },
+          // {
+          //   title: "Candidate Registration",
+          //   link: "/registration",
+          // },
+          {
+            title: "FAQ",
+            link: "/faq",
+          },
+          {
+            title: "Mahesa 2023",
+            link: "/recruitment",
+          },
+          {
+            title: "About Us",
+            link: "/aboutus",
+          },          
+        ]
+      )
+    }  else {
+      setNavbarList([
+        {
+          title: "Home",
+          link: "/",
+        },
+        {
+          title: "Candidate Registration",
+          link: "/registration",
+        },
+        {
+          title: "FAQ",
+          link: "/faq",
+        },
+        {
+          title: "Mahesa 2023",
+          link: "/recruitment",
+        },
+        {
+          title: "About Us",
+          link: "/aboutus",
+        },         
+      ])
+    }  
+  }, [dayTime]);
+
 
   let navbar = [
     {
       title: "Home",
       link: "/",
     },
-    {
-      title: "Candidate Registration",
-      link: "/registration",
-    },
+    // {
+    //   title: "Candidate Registration",
+    //   link: "/registration",
+    // },
     {
       title: "FAQ",
       link: "/faq",
@@ -61,7 +197,7 @@ const Navbar = () => {
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
-  const dropdownNavbar = navbar.slice(navbarLength);
+  const dropdownNavbar = navbarList.slice(navbarLength);
 
   return (
     <Flex
@@ -75,7 +211,7 @@ const Navbar = () => {
       minW={"100vw"}
       zIndex={"10"}
       fontFamily={"TrajanPro-Bold"}>
-      {navbar.slice(0, navbarLength).map((event: any, index: number) => {
+      {navbarList.slice(0, navbarLength).map((event: any, index: number) => {
         return (
           <Heading
             position="relative"
