@@ -3,14 +3,16 @@ import { useRouter } from "next/router";
 import { useState, useEffect } from "react";
 
 const Form = () => {
-
   const router = useRouter();
 
   const closeBatchOne = 4;
   const openBatchTwo = 8;
   const closeBatchTwo = 12;
   const [dayTime, setDayTime] = useState<number>(new Date().getDate());
-  const [close, setClose] = useState((dayTime >= closeBatchOne && dayTime < openBatchTwo) || (dayTime > closeBatchTwo));
+  const [close, setClose] = useState(
+    (dayTime >= closeBatchOne && dayTime < openBatchTwo) ||
+      dayTime > closeBatchTwo
+  );
 
   const time = () => {
     let now = new Date();
@@ -24,37 +26,39 @@ const Form = () => {
   };
 
   useEffect(() => {
-
-    if ((dayTime >= closeBatchOne && dayTime < openBatchTwo) || (dayTime > closeBatchTwo)){
+    if (
+      (dayTime >= closeBatchOne && dayTime < openBatchTwo) ||
+      dayTime > closeBatchTwo
+    ) {
       setClose(true);
-      router.push('/');
+      router.push("/");
       return;
-    }    
+    }
 
     let nowTime = setInterval(() => time(), 1000);
 
     return () => clearInterval(nowTime);
   }, []);
 
-
   useEffect(() => {
-    if ((dayTime >= closeBatchOne && dayTime < openBatchTwo) || (dayTime > closeBatchTwo)){
+    if (
+      (dayTime >= closeBatchOne && dayTime < openBatchTwo) ||
+      dayTime > closeBatchTwo
+    ) {
       setClose(true);
-      router.push('/');
+      router.push("/");
       return;
     }
   }, [dayTime]);
 
   return (
     <>
-      {
-        !close && 
-          <>
-            <Navbar />
-            <FormRecruit />          
-          </>
-      }
-
+      {!close && (
+        <>
+          <Navbar />
+          <FormRecruit />
+        </>
+      )}
     </>
   );
 };

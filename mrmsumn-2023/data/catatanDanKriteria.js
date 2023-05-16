@@ -11,8 +11,6 @@ let catatan = [
       "Formulir dan semua berkas dikumpulkan dalam link google form yang sudah disediakan.",
       "Pengumpulan formulir paling lambat Kamis, 04 Mei 2023.",
       "Peserta yang lolos ke tahap berikutnya akan diumumkan melalui email student dan website Mr. & Ms. UMN 2023.",
-      "Peserta yang lolos WAJIB mengikuti tahap seleksi pada hari Senin, 15 Mei 2023.",
-      "Dresscode untuk tahap seleksi:",
       "Untuk informasi lebih lanjut hubungi via dm Instagram: @mrmsumn.",
     ],
   },

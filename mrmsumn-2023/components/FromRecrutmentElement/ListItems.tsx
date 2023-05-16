@@ -159,7 +159,7 @@ const ListItems = ({ register, errors }: any) => {
               // backgroundColor='red'
               borderColor={"#c28824"}
               marginTop={"0.5rem"}
-              w="11rem"
+              w="100%"
               h="5rem"
               top="0"
               left="0"

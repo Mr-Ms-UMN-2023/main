@@ -93,26 +93,6 @@ const PopUp = ({ data, setPop }: any) => {
                     berwarna dan terbaru (maksimal 1 bulan).
                   </li>
                 );
-              } else if (index == 9 && data[0].Judul == "Catatan") {
-                return (
-                  <li style={{ margin: "0.5rem 0" }} key={index}>
-                    Peserta yang lolos <b>WAJIB</b> mengikuti tahap seleksi pada
-                    hari Senin, 15 Mei 2023.
-                  </li>
-                );
-              } else if (index == 10 && data[0].Judul == "Catatan") {
-                return (
-                  <li key={index}>
-                    {e}
-                    <ul style={{ margin: "0px 0.5rem 0px 1rem" }}>
-                      <li>Blouse/kemeja putih sopan</li>
-                      <li>Jeans berwarna gelap sopan</li>
-                      <li>Pantofel/Sneakers (laki-laki)</li>
-                      <li>Heels tertutup min. 5 cm (perempuan)</li>
-                      <li>Make Up natural</li>
-                    </ul>
-                  </li>
-                );
               } else {
                 return (
                   <li style={{ margin: "0.5rem 0" }} key={index}>
