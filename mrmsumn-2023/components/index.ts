@@ -8,3 +8,4 @@ export { Faq } from "./Faq";
 export { Dedikasi, ButtonDedikasi } from "./Dedikasi";
 export { Teaser } from "./Teaser";
 export { FormRecruit } from "./FormRecruit";
+export { ListSponsor } from "./ListSponsor"; 
