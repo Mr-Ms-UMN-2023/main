@@ -13,23 +13,23 @@ import styles from "@/styles/Home.module.css";
 
 let ArrMrMsFav = [
   {
-    foto: "/Assets/dedikasi/mrFav2022.png",
+    foto: "/Assets/Dedikasi/mrFav2022.png",
     jurusan: "Visual Communication Design 2021",
     nama: "Jessen Gunawan",
   },
   {
-    foto: "/Assets/dedikasi/msFav2022.png",
+    foto: "/Assets/Dedikasi/msFav2022.png",
     jurusan: "Digital Journalism 2021",
     nama: "Chatarina Ivanka",
   },
   {
-    foto: "/Assets/dedikasi/mrBestTalent2022.png",
+    foto: "/Assets/Dedikasi/mrBestTalent2022.png",
     jurusan: "Digital Journalism 2021",
 
     nama: "Sopater Daniel",
   },
   {
-    foto: "/Assets/dedikasi/msBestTalent2022.png",
+    foto: "/Assets/Dedikasi/msBestTalent2022.png",
     jurusan: "Strategic Communication 2020",
 
     nama: "Felicia Ivana Tanu",
@@ -82,7 +82,7 @@ const Dedikasi = () => {
         </Box>
         <Img
           w={{ base: "100vw", md: "50vw" }}
-          src="/Assets/Dedikasi/fotoMr2022.PNG"
+          src="/Assets/Dedikasi/fotoMr2022.png"
           alt="Mr. UMN 2022"
         />
       </Flex>
@@ -95,7 +95,7 @@ const Dedikasi = () => {
         justifyContent={{ base: "center", md: "left" }}>
         <Img
           w={{ base: "100vw", md: "50vw" }}
-          src="/Assets/Dedikasi/fotoMs2022.PNG"
+          src="/Assets/Dedikasi/fotoMs2022.png"
           alt="Ms. UMN 2022"
         />
         <Box>
@@ -117,7 +117,7 @@ const Dedikasi = () => {
         <Img
           transform="rotateY(180deg)"
           maxW={{ base: "200vw", md: "70vw" }}
-          src="/Assets/Dedikasi/runnerUp2022.PNG"
+          src="/Assets/Dedikasi/runnerUp2022.png"
           alt="Runner Up Mr. & Ms. UMN 2022"
         />
         <Heading mb="2rem" color="#c28824">

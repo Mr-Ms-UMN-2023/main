@@ -29,9 +29,9 @@ const Teaser = () => {
     let userAgent = navigator.userAgent;
 
     if (userAgent.match(/firefox|fxios/i)) {
-      setTeaser("https://www.youtube.com/embed/Wk-TvlzGrkQ?");
+      setTeaser("https://www.youtube.com/embed/N8noHibx5lw?");
     } else {
-      setTeaser("https://www.youtube.com/embed/Wk-TvlzGrkQ?mute=1");
+      setTeaser("https://www.youtube.com/embed/N8noHibx5lw?mute=1");
     }
   }, []);
 

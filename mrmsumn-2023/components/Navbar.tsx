@@ -14,7 +14,6 @@ import { useState, useEffect, useRef } from "react";
 import { useRouter } from "next/router";
 
 const Navbar = () => {
-
   const closeBatchOne = 4;
   const openBatchTwo = 8;
   const closeBatchTwo = 12;
@@ -23,13 +22,12 @@ const Navbar = () => {
   const [navbarLength, setNavbarLength] = useState<number>(5);
   const [tanggal, setTanggal] = useState("");
   const [jam, setJam] = useState(0);
-  const [tutup, setTutup] = useState(false);  
+  const [tutup, setTutup] = useState(false);
   const [dayTime, setDayTime] = useState<number>(new Date().getDate());
   const [navbarList, setNavbarList] = useState(
-
-    (dayTime >= closeBatchOne && dayTime < openBatchTwo) || (dayTime > closeBatchTwo) 
-      ?
-        [
+    (dayTime >= closeBatchOne && dayTime < openBatchTwo) ||
+      dayTime > closeBatchTwo
+      ? [
           {
             title: "Home",
             link: "/",
@@ -49,39 +47,41 @@ const Navbar = () => {
           {
             title: "About Us",
             link: "/aboutus",
-          },          
-        ]      
-      
-      : 
-
-      [
-        {
-          title: "Home",
-          link: "/",
-        },
-        {
-          title: "Candidate Registration",
-          link: "/registration",
-        },
-        {
-          title: "FAQ",
-          link: "/faq",
-        },
-        {
-          title: "Mahesa 2023",
-          link: "/recruitment",
-        },
-        {
-          title: "About Us",
-          link: "/aboutus",
-        },      
-      ]      
-
-
-  )
+          },
+          {
+            title: "Sponsor",
+            link: "/sponsor",
+          },
+        ]
+      : [
+          {
+            title: "Home",
+            link: "/",
+          },
+          {
+            title: "Candidate Registration",
+            link: "/registration",
+          },
+          {
+            title: "FAQ",
+            link: "/faq",
+          },
+          {
+            title: "Mahesa 2023",
+            link: "/recruitment",
+          },
+          {
+            title: "About Us",
+            link: "/aboutus",
+          },
+          {
+            title: "Sponsor",
+            link: "/sponsor",
+          },
+        ]
+  );
   const router = useRouter();
 
-  
   const time = () => {
     let now = new Date();
     let day = now.getDate();
@@ -102,32 +102,37 @@ const Navbar = () => {
   }, []);
 
   useEffect(() => {
-    if ((dayTime >= closeBatchOne && dayTime < openBatchTwo) || (dayTime > closeBatchTwo)){
-      setNavbarList(
-        [
-          {
-            title: "Home",
-            link: "/",
-          },
-          // {
-          //   title: "Candidate Registration",
-          //   link: "/registration",
-          // },
-          {
-            title: "FAQ",
-            link: "/faq",
-          },
-          {
-            title: "Mahesa 2023",
-            link: "/recruitment",
-          },
-          {
-            title: "About Us",
-            link: "/aboutus",
-          },          
-        ]
-      )
-    }  else {
+    if (
+      (dayTime >= closeBatchOne && dayTime < openBatchTwo) ||
+      dayTime > closeBatchTwo
+    ) {
+      setNavbarList([
+        {
+          title: "Home",
+          link: "/",
+        },
+        // {
+        //   title: "Candidate Registration",
+        //   link: "/registration",
+        // },
+        {
+          title: "FAQ",
+          link: "/faq",
+        },
+        {
+          title: "Mahesa 2023",
+          link: "/recruitment",
+        },
+        {
+          title: "About Us",
+          link: "/aboutus",
+        },
+        {
+          title: "Sponsor",
+          link: "/sponsor",
+        },
+      ]);
+    } else {
       setNavbarList([
         {
           title: "Home",
@@ -148,11 +153,14 @@ const Navbar = () => {
         {
           title: "About Us",
           link: "/aboutus",
-        },         
-      ])
-    }  
+        },
+        {
+          title: "Sponsor",
+          link: "/sponsor",
+        },
+      ]);
+    }
   }, [dayTime]);
-
 
   let navbar = [
     {
