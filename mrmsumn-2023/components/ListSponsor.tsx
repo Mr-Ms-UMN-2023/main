@@ -1,4 +1,4 @@
-import { Flex, Box, Grid, GridItem, Image, Heading } from "@chakra-ui/react";
+import { Flex, Box, Grid, GridItem, Image, Heading, Link } from "@chakra-ui/react";
 import styles from "@/styles/Home.module.css";
 import { useEffect, useRef } from "react";
 
@@ -24,6 +24,20 @@ const ListSponsor = (props: any) => {
       nama: "Masami",
       url: "http://www.masamishouko.com/",
       bg: true,
+    },
+    {
+        // jenis: "sponsor",
+        src: "",
+        nama: "",
+        url: "",
+        bg: false,
+    },
+    {
+      jenis: "sponsor",
+      src: "Assets/Sponsor/LOGO_REVO_PRINT_SHOP.png",
+      nama: "Revo Print Shop",
+      url: "https://www.revoprintshop.com/",
+      bg: false,
     },
   ];
 
@@ -59,6 +73,7 @@ const ListSponsor = (props: any) => {
   list.forEach((list) => {
     const item = (
       <GridItem
+        // display={list.nama == "" ? {base: "none", lg: "block"} : "block"}
         w={{ base: "15rem", md: "15rem", lg: "15rem", xl: "17rem" }}
         _hover={{
           transform: "scale(1.1)",
@@ -66,16 +81,18 @@ const ListSponsor = (props: any) => {
           zIndex: "100",
         }}
         my="auto">
-        <a href={list.url}>
-          <Image
+        <Link href={list.url} target="_blank"
+        // display={list.nama == "" ? "none" : "block"}
+        >
+        <Image
             objectFit={"contain"}
             background={list.bg ? "white" : "transparent"}
             borderRadius={list.bg ? "14px" : "0"}
             p="2"
             src={list.src}
             alt={list.nama}
-          />
-        </a>
+        />
+        </Link>        
       </GridItem>
     );
 
@@ -88,7 +105,7 @@ const ListSponsor = (props: any) => {
         id="sponsors"
         className={styles.hidden}
         py={{ base: "10rem", md: "auto" }}
-        h="100vh"
+        h="auto"
         w="100%"
         maxW="1366px"
         mx="auto"
@@ -100,7 +117,8 @@ const ListSponsor = (props: any) => {
         ref={(el: HTMLDivElement) => texts.current.push(el!)}>
         <Heading
           color="#c28824"
-          mb="5rem"
+          mt={{base: "0", xl: "2rem"}}
+          mb={{base: "5rem", xl: "3rem"}}
           fontSize={{ base: "3rem", md: "5rem", lg: "5rem" }}
           textAlign="center"
           filter={"drop-shadow(0 0 10px #c28824)"}>
@@ -109,7 +127,8 @@ const ListSponsor = (props: any) => {
         <Grid
           id="gridSponsor"
           templateColumns={{ base: "repeat(1, 1fr)", lg: "repeat(3, 1fr)" }}
-          gap={{ base: "4rem", lg: "7rem" }}
+          columnGap="5rem"
+          rowGap={{base:"4rem", lg:"1rem"}}
           height="max-content"
           position="relative">
           {sponsorArr}
