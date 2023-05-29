@@ -26,7 +26,7 @@ const ListSponsor = (props: any) => {
       bg: true,
     },
     {
-        // jenis: "sponsor",
+        jenis: "sponsor",
         src: "",
         nama: "",
         url: "",
@@ -73,16 +73,16 @@ const ListSponsor = (props: any) => {
   list.forEach((list) => {
     const item = (
       <GridItem
-        // display={list.nama == "" ? {base: "none", lg: "block"} : "block"}
+        display={list.nama == "" ? {base: "none", lg: "block"} : "block"}
         w={{ base: "15rem", md: "15rem", lg: "15rem", xl: "17rem" }}
         _hover={{
           transform: "scale(1.1)",
           transition: "all .4s ease-in-out",
           zIndex: "100",
         }}
-        my="auto">
+        m="auto">
         <Link href={list.url} target="_blank"
-        // display={list.nama == "" ? "none" : "block"}
+        display={list.nama == "" ? "none" : "block"}
         >
         <Image
             objectFit={"contain"}
