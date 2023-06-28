@@ -94,6 +94,45 @@ model peserta {
   QuestionType           String   @db.Char(1)
 }
 
+model peserta_2023 {
+  id                      Int      @id @default(autoincrement())
+  name                    String   @db.VarChar(255)
+  nim                     String   @db.VarChar(255)
+  email_student           String   @db.VarChar(255)
+  birth_place             String   @db.VarChar(255)
+  birth_date              DateTime @db.Date
+  gender                  String   @db.VarChar(1)
+  address                 String   @db.VarChar(255)
+  phone_number            String   @db.VarChar(16)
+  line_id                 String   @db.VarChar(255)
+  instagram_username      String   @db.VarChar(255)
+  tiktok_username         String   @db.VarChar(255)  
+  major                   String   @db.VarChar(255)
+  year                    String   @db.VarChar(11)
+  sub_gpa                 String   @db.VarChar(8)  
+  gpa                     String   @db.VarChar(8)
+
+  height                  String   @db.VarChar(11)
+  weight                  String   @db.VarChar(11)
+  clothes_size            String   @db.VarChar(11)
+  shoe_size               Int  
+  pants_size              String   @db.VarChar(11)
+
+  about_me                String   @db.Text
+  motivation              String   @db.Text
+  personality             String   @db.VarChar(255)  
+  talents                 String   @db.Text
+  achievements            String   @db.Text  
+
+  picture                 String   @db.VarChar(255)
+  personality_screenshot  String   @db.VarChar(255)
+  grades_screenshot       String   @db.VarChar(255)
+  student_card_screenshot String   @db.VarChar(255)
+
+  created_at              DateTime @default(now()) @db.Timestamp(0)
+
+}
+
 /// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by the Prisma Client.
 model peserta_candidate {
   StudentID      String @db.VarChar(11)

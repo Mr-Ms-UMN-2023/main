@@ -100,7 +100,6 @@ const Divisi = () => {
 
   return (
     <>
-      <Loading />
       <Navbar />
       {popup && <DivisionDetail data={popup} />}
 
@@ -123,8 +122,7 @@ const Divisi = () => {
           fontSize={{ base: "2rem", md: "60px", lg: "5rem" }}
           filter={"drop-shadow(0 0 10px #c28824)"}
           textAlign="center">
-          Open <br />
-          Recruitment
+          Division
         </Heading>
         <Flex
           height="max-content"

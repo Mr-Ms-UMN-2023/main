@@ -31,8 +31,6 @@ const Loading = () => {
     <Flex
       minH="100vh"
       minW="100vw"
-      // maxH="200vh"
-      // maxW="200vw"
       position={"fixed"}
       display={Loading == 0 ? "none" : "block"}
       alignItems="center"
@@ -41,13 +39,13 @@ const Loading = () => {
       transition={"opacity 2s ease-out"}
       top="50%"
       left="50%"
-      transform='translate(-50%, -50%)'
+      transform="translate(-50%, -50%)"
       zIndex={"100"}
-      overflow='hidden'
+      overflow="hidden"
       bg="black">
       <video
-        height='100vh'
-        width='100vw'
+        height="100vh"
+        width="100vw"
         src={"/Assets/Video/intro_2.mp4"}
         onEnded={() => onEnded()}
         className={styles.loading_video}

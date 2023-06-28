@@ -34,7 +34,6 @@ export default function Home(props: any) {
 
   return (
     <>
-      <Loading />
       <Navbar />
       <ShiningSoon />
       <Dedikasi />
