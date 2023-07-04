@@ -25,13 +25,13 @@ const ListSponsor = (props: any) => {
       url: "http://www.masamishouko.com/",
       bg: true,
     },
-    {
-        jenis: "sponsor",
-        src: "",
-        nama: "",
-        url: "",
-        bg: false,
-    },
+    // {
+    //     jenis: "sponsor",
+    //     src: "",
+    //     nama: "",
+    //     url: "",
+    //     bg: false,
+    // },
     {
       jenis: "sponsor",
       src: "Assets/Sponsor/LOGO_REVO_PRINT_SHOP.png",
@@ -39,6 +39,20 @@ const ListSponsor = (props: any) => {
       url: "https://www.revoprintshop.com/",
       bg: false,
     },
+    {
+      jenis: "sponsor",
+      src: "Assets/Sponsor/LOGO_CJ.png",
+      nama: "Christoper John",
+      url: "",
+      bg: false,
+    },
+    // {
+    //   jenis: "sponsor",
+    //   src: "Assets/Sponsor/LOGO_CJ.png",
+    //   nama: "Christoper John",
+    //   url: "",
+    //   bg: false,
+    // },
   ];
 
   const texts = useRef<HTMLDivElement[]>([]);
@@ -69,6 +83,8 @@ const ListSponsor = (props: any) => {
 
   const sponsorArr: any = [];
   const medparArr: any = [];
+
+  useEffect(() => {console.log(sponsorArr.length)}, [sponsorArr])
 
   list.forEach((list) => {
     const item = (
@@ -124,15 +140,42 @@ const ListSponsor = (props: any) => {
           filter={"drop-shadow(0 0 10px #c28824)"}>
           SPONSOR
         </Heading>
-        <Grid
-          id="gridSponsor"
-          templateColumns={{ base: "repeat(1, 1fr)", lg: "repeat(3, 1fr)" }}
-          columnGap="5rem"
-          rowGap={{base:"4rem", lg:"1rem"}}
-          height="max-content"
-          position="relative">
-          {sponsorArr}
-        </Grid>
+
+        {sponsorArr.length % 3 == 0
+        
+            ?
+              <Grid
+                  // bg='yellow'
+                  id="gridSponsor"
+                  templateColumns={{ base: "repeat(1, 1fr)", lg: "repeat(3, 1fr)" }}
+                  columnGap="5rem"
+                  rowGap={{base:"4rem", lg:"1rem"}}
+                  height="max-content"
+                  justifyContent='center'
+                  alignItems='center'
+                  position="relative">
+                  {sponsorArr}
+              </Grid>
+
+            : <Flex 
+                m='0 auto'
+                w='85%'
+                // bg='red'
+                height="max-content"  
+                position="relative" 
+                placeItems={"center"}
+                alignItems="center"
+                justifyContent={"center"}
+                justifyItems={"center"} 
+                columnGap={{base : '2rem', lg : '4rem'}}
+                rowGap={{base:"4rem", lg:"1rem"}}                                                        
+                flexWrap="wrap"                
+              >
+                {sponsorArr}
+              </Flex>
+        }
+
+
       </Flex>
       {/* <Flex
         className={styles.hidden}
