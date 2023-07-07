@@ -12,6 +12,7 @@ import {
   Dedikasi,
   ButtonDedikasi,
   Teaser,
+  Footer,
 } from "@/components";
 
 import { useState, useEffect, useRef } from "react";
@@ -40,14 +41,15 @@ export default function Home(props: any) {
       <Teaser />
       {/* {dedikasi && <Dedikasi Dedikasi={setDedikasi} />}
       <ButtonDedikasi Dedikasi={setDedikasi} />
-
+      
       <ShiningSoon />
-
+      
       <Navbar />
-
-      <MrMsDetail /> */}
+      
+    <MrMsDetail /> */}
 
       {/* DISINI BUAT POPUPNYA */}
+    <Footer />
     </>
   );
 }
