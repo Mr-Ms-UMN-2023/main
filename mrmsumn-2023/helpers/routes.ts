@@ -10,7 +10,8 @@ const publicRoutes : any = [
     '/loginwisanggeniadmin',
     '/form-regis',
     '/registration',
-    '/sponsor'
+    '/sponsor',
+    '/vote'
 ];
 
 export {protectedRoutes, publicRoutes};
