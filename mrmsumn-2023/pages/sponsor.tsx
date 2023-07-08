@@ -3,7 +3,7 @@ import { Loading, Navbar, ListSponsor } from "@/components";
 const Sponsor = () => {
   return (
     <>
-      <Loading />
+      {/* <Loading /> */}
       <Navbar />
 
       < ListSponsor />

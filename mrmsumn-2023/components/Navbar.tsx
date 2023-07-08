@@ -58,10 +58,10 @@ const Navbar = () => {
             title: "Home",
             link: "/",
           },
-          {
-            title: "Candidate Registration",
-            link: "/registration",
-          },
+          // {
+          //   title: "Candidate Registration",
+          //   link: "/registration",
+          // },
           {
             title: "FAQ",
             link: "/faq",
@@ -138,10 +138,10 @@ const Navbar = () => {
           title: "Home",
           link: "/",
         },
-        {
-          title: "Candidate Registration",
-          link: "/registration",
-        },
+        // {
+        //   title: "Candidate Registration",
+        //   link: "/registration",
+        // },
         {
           title: "FAQ",
           link: "/faq",
@@ -191,7 +191,7 @@ const Navbar = () => {
     setWidth(window.innerWidth);
     if (window.innerWidth < 550) setNavbarLength(2);
     else {
-      setNavbarLength(5);
+      setNavbarLength(6);
     }
   };
 
