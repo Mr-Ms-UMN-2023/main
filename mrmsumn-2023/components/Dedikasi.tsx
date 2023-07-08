@@ -154,8 +154,12 @@ const Dedikasi = () => {
         </Flex>
       </Flex>
 
+      <Heading textAlign={'center'} mt='5rem' color="#c28824">
+        Mr. & Ms. Favorites
+      </Heading>      
+
       <Flex
-        mt="10vh"
+        mt="2vh"
         position={"relative"}
         p={"2rem"}
         w="100vw"
