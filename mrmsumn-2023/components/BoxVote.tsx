@@ -11,7 +11,7 @@ import {
 import { useState, useEffect } from "react";
 
 
-const BoxVote = () => {
+const BoxVote = (props) => {
     const [vote, setVote] = useState(0);
     const [voted, setVoted] = useState(false);
 
@@ -28,21 +28,47 @@ const BoxVote = () => {
 
     return(
         <Flex
-            w="18vw"
-            h="60vh"
+            w="20vw"
+            h="75vh"
             mx="auto"
             my="5vw"
             flexDirection={"column"}
-            bgColor={"white"}
+            bgColor={"transparant"}
+            border="1px"
+            borderColor="#c28824"
+            borderRadius="20px"
             >
-
+            <Text
+                color="#c28824"
+                my="1vw"
+                mx="auto"
+                fontSize="1.5vw"
+            >Pasangan {props.pasangan}</Text>
             <Img
                 src="/Assets/finalist22/54768.jpg"
                 maxH={{ base: "80vh", md: "60vh" }}
                 maxW={{ base: "70vw", md: "15vw" }}
                 mx="auto"
                 my="1vh"
+                border="1px"
+                borderColor="#c28824"
+                borderRadius="20px"
             />
+
+            <Flex
+                mt="1vw"
+                mx="auto"
+            >
+                <Text 
+                    mr="1vw"
+                    fontSize="1vw"
+                    color="#c28824"
+                >Nama Pasangan</Text>
+                <Text 
+                    fontSize="1vw"
+                    color="#c28824"
+                >Nama Pasangan</Text>
+            </Flex>
 
             <Button
                 w="70%"

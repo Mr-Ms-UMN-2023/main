@@ -10,8 +10,8 @@ const Vote = () => {
             <Flex
             
             >
-                <BoxVote />
-                <BoxVote />
+                <BoxVote pasangan={1}/>
+                <BoxVote pasangan={2}/>
             </Flex>
         </>
     );
