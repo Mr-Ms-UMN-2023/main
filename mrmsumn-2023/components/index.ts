@@ -12,3 +12,4 @@ export { ListSponsor } from "./ListSponsor";
 export { CandidatesMobile } from "./CandidatesMobile";
 export { CandidatesDesktop } from "./CandidatesDesktop"; 
 export { CandidatesIntro } from "./CandidatesIntro"; 
+export { BoxVote } from "./BoxVote";
