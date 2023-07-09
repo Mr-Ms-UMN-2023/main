@@ -1,8 +1,12 @@
-import { Flex, Box, Grid, GridItem, Image, Heading, Link } from "@chakra-ui/react";
+import { Flex, Box, Grid, GridItem, Image, Heading, Link, Skeleton } from "@chakra-ui/react";
 import styles from "@/styles/Home.module.css";
-import { useEffect, useRef } from "react";
+import React, { useState, Suspense, useEffect, useRef } from "react";
+import { ImageLoader } from './ImageLoader';
+import { SkeletonTheme } from "react-loading-skeleton";
 
 const ListSponsor = (props: any) => {
+  const [loaded, setLoaded] = useState(false); 
+
   const list = [
     {
       jenis: "sponsor",
@@ -25,13 +29,6 @@ const ListSponsor = (props: any) => {
       url: "http://www.masamishouko.com/",
       bg: true,
     },
-    // {
-    //     jenis: "sponsor",
-    //     src: "",
-    //     nama: "",
-    //     url: "",
-    //     bg: false,
-    // },
     {
       jenis: "sponsor",
       src: "Assets/Sponsor/LOGO_REVO_PRINT_SHOP.png",
@@ -45,15 +42,21 @@ const ListSponsor = (props: any) => {
       nama: "Christoper John",
       url: "",
       bg: false,
-    },
-    // {
-    //   jenis: "sponsor",
-    //   src: "Assets/Sponsor/LOGO_CJ.png",
-    //   nama: "Christoper John",
-    //   url: "",
-    //   bg: false,
-    // },
+    }
   ];
+
+  const sponsorArr: any = [];
+  const medparArr: any = [];
+
+  const skeletonArr:any = [];
+  for(let i:number = 0; i < list.length; i++){
+    const item = (
+      // <ImageLoader width={'15rem'} height={'15rem'}/>
+      <Skeleton width={'15rem'} height={'15rem'}></Skeleton>
+    )
+
+    skeletonArr.push(item);
+}
 
   const texts = useRef<HTMLDivElement[]>([]);
 
@@ -81,15 +84,20 @@ const ListSponsor = (props: any) => {
     };
   }, []);
 
-  const sponsorArr: any = [];
-  const medparArr: any = [];
+  useEffect(() => {
+    if(sponsorArr.length + medparArr.length === list.length){
+      setLoaded(true);
+    }
 
-  useEffect(() => {console.log(sponsorArr.length)}, [sponsorArr])
+    console.log(sponsorArr.length);
+    console.log(medparArr.length);
+    console.log(loaded);
+  }, [sponsorArr,  medparArr]);
 
   list.forEach((list) => {
     const item = (
       <GridItem
-        display={list.nama == "" ? {base: "none", lg: "block"} : "block"}
+        display="block"
         w={{ base: "15rem", md: "15rem", lg: "15rem", xl: "17rem" }}
         _hover={{
           transform: "scale(1.1)",
@@ -140,24 +148,7 @@ const ListSponsor = (props: any) => {
           filter={"drop-shadow(0 0 10px #c28824)"}>
           SPONSOR
         </Heading>
-
-        {sponsorArr.length % 3 == 0
-        
-            ?
-              <Grid
-                  // bg='yellow'
-                  id="gridSponsor"
-                  templateColumns={{ base: "repeat(1, 1fr)", lg: "repeat(3, 1fr)" }}
-                  columnGap="5rem"
-                  rowGap={{base:"4rem", lg:"1rem"}}
-                  height="max-content"
-                  justifyContent='center'
-                  alignItems='center'
-                  position="relative">
-                  {sponsorArr}
-              </Grid>
-
-            : <Flex 
+            <Flex 
                 m='0 auto'
                 w='85%'
                 // bg='red'
@@ -171,9 +162,18 @@ const ListSponsor = (props: any) => {
                 rowGap={{base:"4rem", lg:"1rem"}}                                                        
                 flexWrap="wrap"                
               >
-                {sponsorArr}
-              </Flex>
-        }
+                {/* <Suspense fallback={<SkeletonLoader/>}> */}
+                {/* <Suspense fallback={<Skeleton width={'15rem'} height={'15rem'}/>}> */}
+                  {/* {!loaded &&           
+                  <SkeletonTheme baseColor="#313131" highlightColor="#525252">
+              <Skeleton width={'15rem'} height={'15rem'}></Skeleton>
+          </SkeletonTheme>} */}
+                  {!loaded && skeletonArr}
+                  {/* {loaded && sponsorArr}   */}
+                  {loaded && sponsorArr}
+                {/* </Suspense> */}
+              </Flex>                      
+         {/* } */}
 
 
       </Flex>

@@ -322,3 +322,12 @@
     width: 3rem;
   }
 }
+
+.candidatesWrapper {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.candidatesWrapper::-webkit-scrollbar {
+  display: none;
+}

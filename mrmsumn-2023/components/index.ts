@@ -9,3 +9,6 @@ export { Dedikasi, ButtonDedikasi } from "./Dedikasi";
 export { Teaser } from "./Teaser";
 export { FormRecruit } from "./FormRecruit";
 export { ListSponsor } from "./ListSponsor"; 
+export { CandidatesMobile } from "./CandidatesMobile";
+export { CandidatesDesktop } from "./CandidatesDesktop"; 
+export { CandidatesIntro } from "./CandidatesIntro"; 

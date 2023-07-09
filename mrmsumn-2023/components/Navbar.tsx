@@ -217,7 +217,7 @@ const Navbar = () => {
       alignItems={"center"}
       minHeight="10vh"
       minW={"100vw"}
-      zIndex={"10"}
+      zIndex={"100"}
       fontFamily={"TrajanPro-Bold"}>
       {navbarList.slice(0, navbarLength).map((event: any, index: number) => {
         return (
