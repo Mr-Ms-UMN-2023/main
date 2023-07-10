@@ -1,12 +1,8 @@
 import {
   Flex,
   Box,
-  Grid,
-  GridItem,
   Image,
   Heading,
-  Link,
-  Skeleton,
 } from "@chakra-ui/react";
 import styles from "@/styles/Home.module.css";
 import React, { useEffect, useRef, useState } from "react";
@@ -36,7 +32,7 @@ const CandidatesMobile = (props: any) => {
 
   return (
     <Box
-      className="candidatesWrapper"
+      display={props.show ? "block" : "none"}
       minH="100vh"
       w="100wh"
       maxW="1366px"
@@ -98,7 +94,7 @@ const CandidatesMobile = (props: any) => {
         />
 
         <Image
-          zIndex={99}
+          zIndex={50}
           mt={orientation ? "8rem" : 0}
           pt={
             orientation

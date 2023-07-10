@@ -11,7 +11,7 @@ const publicRoutes : any = [
     '/form-regis',
     '/registration',
     '/sponsor',
-    '/candidates'
+    '/candidates',
     '/vote'
 ];
 
