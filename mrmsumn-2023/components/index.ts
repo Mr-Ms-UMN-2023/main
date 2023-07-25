@@ -9,4 +9,5 @@ export { Dedikasi, ButtonDedikasi } from "./Dedikasi";
 export { Teaser } from "./Teaser";
 export { FormRecruit } from "./FormRecruit";
 export { ListSponsor } from "./ListSponsor"; 
+export { ListMedpar } from "./ListMedpar"; 
 export { Footer } from "./Footer";
