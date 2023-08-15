@@ -1,4 +1,12 @@
-import { Flex, Box, Grid, GridItem, Image, Heading, Link } from "@chakra-ui/react";
+import {
+  Flex,
+  Box,
+  Grid,
+  GridItem,
+  Image,
+  Heading,
+  Link,
+} from "@chakra-ui/react";
 import styles from "@/styles/Home.module.css";
 import { useEffect, useRef } from "react";
 
@@ -25,13 +33,7 @@ const ListSponsor = (props: any) => {
       url: "http://www.masamishouko.com/",
       bg: true,
     },
-    // {
-    //     jenis: "sponsor",
-    //     src: "",
-    //     nama: "",
-    //     url: "",
-    //     bg: false,
-    // },
+
     {
       jenis: "sponsor",
       src: "Assets/Sponsor/LOGO_REVO_PRINT_SHOP.png",
@@ -43,41 +45,35 @@ const ListSponsor = (props: any) => {
       jenis: "sponsor",
       src: "Assets/Sponsor/LOGO_CJ.png",
       nama: "Christoper John",
-      url: "",
+      url: "https://www.instagram.com/christjhn",
       bg: false,
-    },{
-	  jenis: "sponsor",
+    },
+    {
+      jenis: "sponsor",
       src: "Assets/Sponsor/Logo Myca Tulisan Putih.png",
-      nama: "Christoper John",
-      url: "",
+      nama: "Myca",
+      url: "https://www.instagram.com/mycaflorist/",
       bg: false,
-	},
-	{
-	  jenis: "sponsor",
+    },
+    {
+      jenis: "sponsor",
       src: "Assets/Sponsor/Logo Libreath.png",
-      nama: "Christoper John",
-      url: "",
+      nama: "Libreath",
+      url: "https://www.instagram.com/libreath.florist",
       bg: false,
-	},
+    },
     {
       jenis: "sponsor",
       src: "Assets/Sponsor/Logo Dennis Catering.jpg",
       nama: "Catering",
-      url: "",
+      url: "https://www.instagram.com/denniscatering_",
       bg: false,
     },
     {
       jenis: "sponsor",
       src: "Assets/Sponsor/Logo Mile.jpg",
       nama: "Miliè",
-      url: "",
-      bg: false,
-    },
-    {
-      jenis: "sponsor",
-      src: "Assets/Sponsor/Logo Mile.jpg",
-      nama: "Miliè",
-      url: "",
+      url: "https://www.instagram.com/milieofficial",
       bg: false,
     },
     {
@@ -86,28 +82,42 @@ const ListSponsor = (props: any) => {
       nama: "Implora",
       url: "",
       bg: false,
-    },    
+    },
     {
       jenis: "sponsor",
       src: "Assets/Sponsor/LOGO_chi.jpg",
       nama: "Chi Forest",
-      url: "",
+      url: "https://chiforest.com",
       bg: false,
-    },      
+    },
     {
       jenis: "sponsor",
       src: "Assets/Sponsor/LOGO_msp.jpg",
       nama: "MSP Film Equipment",
       url: "https://msprental.com/",
       bg: false,
-    },        
-    // {
-    //   jenis: "sponsor",
-    //   src: "Assets/Sponsor/LOGO_CJ.png",
-    //   nama: "Christoper John",
-    //   url: "",
-    //   bg: false,
-    // },
+    },
+    {
+      jenis: "sponsor",
+      src: "https://cdn.discordapp.com/attachments/1125453534062719016/1141058868353445918/Logo_Roti_Bakar_88.png",
+      nama: "Rotbak 88",
+      url: "https://rotibakar88.id",
+      bg: false,
+    },
+    {
+      jenis: "sponsor",
+      src: "https://cdn.discordapp.com/attachments/1125453534062719016/1141058868105969745/logo-tiketbox.png",
+      nama: "Tiketbox",
+      url: "https://tiketbox.com",
+      bg: false,
+    },
+    {
+      jenis: "sponsor",
+      src: "https://cdn.discordapp.com/attachments/1125453534062719016/1141058867829166170/Logo_MuA_Gareulis_copy.png",
+      nama: "Gareulis",
+      url: "https://www.instagram.com/mua.gareulis",
+      bg: false,
+    },
   ];
 
   const texts = useRef<HTMLDivElement[]>([]);
@@ -139,12 +149,14 @@ const ListSponsor = (props: any) => {
   const sponsorArr: any = [];
   const medparArr: any = [];
 
-  useEffect(() => {console.log(sponsorArr.length)}, [sponsorArr])
+  useEffect(() => {
+    console.log(sponsorArr.length);
+  }, [sponsorArr]);
 
   list.forEach((list) => {
     const item = (
       <GridItem
-        display={list.nama == "" ? {base: "none", lg: "block"} : "block"}
+        display={list.nama == "" ? { base: "none", lg: "block" } : "block"}
         w={{ base: "15rem", md: "15rem", lg: "15rem", xl: "17rem" }}
         _hover={{
           transform: "scale(1.1)",
@@ -152,18 +164,19 @@ const ListSponsor = (props: any) => {
           zIndex: "100",
         }}
         m="auto">
-        <Link href={list.url} target="_blank"
-        display={list.nama == "" ? "none" : "block"}
-        >
-        <Image
+        <Link
+          href={list.url}
+          target="_blank"
+          display={list.nama == "" ? "none" : "block"}>
+          <Image
             objectFit={"contain"}
             background={list.bg ? "white" : "transparent"}
             borderRadius={list.bg ? "14px" : "0"}
             p="2"
             src={list.src}
             alt={list.nama}
-        />
-        </Link>        
+          />
+        </Link>
       </GridItem>
     );
 
@@ -188,49 +201,44 @@ const ListSponsor = (props: any) => {
         ref={(el: HTMLDivElement) => texts.current.push(el!)}>
         <Heading
           color="#c28824"
-          mt={{base: "0", xl: "2rem"}}
-          mb={{base: "5rem", xl: "3rem"}}
+          mt={{ base: "0", xl: "2rem" }}
+          mb={{ base: "5rem", xl: "3rem" }}
           fontSize={{ base: "3rem", md: "5rem", lg: "5rem" }}
           textAlign="center"
           filter={"drop-shadow(0 0 10px #c28824)"}>
           SPONSOR
         </Heading>
 
-        {sponsorArr.length % 3 == 0
-        
-            ?
-              <Grid
-                  // bg='yellow'
-                  id="gridSponsor"
-                  templateColumns={{ base: "repeat(1, 1fr)", lg: "repeat(3, 1fr)" }}
-                  columnGap="5rem"
-                  rowGap={{base:"4rem", lg:"1rem"}}
-                  height="max-content"
-                  justifyContent='center'
-                  alignItems='center'
-                  position="relative">
-                  {sponsorArr}
-              </Grid>
-
-            : <Flex 
-                m='0 auto'
-                w='85%'
-                // bg='red'
-                height="max-content"  
-                position="relative" 
-                placeItems={"center"}
-                alignItems="center"
-                justifyContent={"center"}
-                justifyItems={"center"} 
-                columnGap={{base : '2rem', lg : '4rem'}}
-                rowGap={{base:"4rem", lg:"1rem"}}                                                        
-                flexWrap="wrap"                
-              >
-                {sponsorArr}
-              </Flex>
-        }
-
-
+        {sponsorArr.length % 3 == 0 ? (
+          <Grid
+            // bg='yellow'
+            id="gridSponsor"
+            templateColumns={{ base: "repeat(1, 1fr)", lg: "repeat(3, 1fr)" }}
+            columnGap="5rem"
+            rowGap={{ base: "4rem", lg: "1rem" }}
+            height="max-content"
+            justifyContent="center"
+            alignItems="center"
+            position="relative">
+            {sponsorArr}
+          </Grid>
+        ) : (
+          <Flex
+            m="0 auto"
+            w="85%"
+            // bg='red'
+            height="max-content"
+            position="relative"
+            placeItems={"center"}
+            alignItems="center"
+            justifyContent={"center"}
+            justifyItems={"center"}
+            columnGap={{ base: "2rem", lg: "4rem" }}
+            rowGap={{ base: "4rem", lg: "1rem" }}
+            flexWrap="wrap">
+            {sponsorArr}
+          </Flex>
+        )}
       </Flex>
       {/* <Flex
         className={styles.hidden}
