@@ -14,8 +14,41 @@ export default function Test(){
         <Container maxW="container.lg" mt={8}>
         <Box p={6} shadow="md" borderWidth="1px" borderRadius="md">
           <Heading size="lg" color="white">Daftar Media Partner</Heading>
-          <Flex gap="1rem">
-          </Flex>
+          <Table variant="simple">
+            <Thead>
+                <Tr>
+                    <Th>Nama</Th>
+                    <Th>Foto</Th>
+                    <Th>Action</Th>
+                </Tr>
+            </Thead>
+            <Tbody>
+                <Tr>
+                    <Td>John Doe</Td>
+                    <Td>30</Td>
+                    <Td>
+                        <Button _hover={{bg : '#1be614'}} bg='green' color='white'>Edit</Button>
+                        <Button _hover={{bg : '#fe5858'}} bg='red' color='white'>Delete</Button>
+                    </Td>
+                </Tr>
+                <Tr>
+                    <Td>Jane Smith</Td>
+                    <Td>25</Td>
+                    <Td>
+                        <Button _hover={{bg : '#1be614'}} bg='green' color='white'>Edit</Button>
+                        <Button _hover={{bg : '#fe5858'}} bg='red' color='white'>Delete</Button>
+                    </Td>                
+                </Tr>
+                <Tr>
+                    <Td>Michael Johnson</Td>
+                    <Td>40</Td>
+                    <Td>
+                        <Button _hover={{bg : '#1be614'}} bg='green' color='white'>Edit</Button>
+                        <Button _hover={{bg : '#fe5858'}} bg='red' color='white'>Delete</Button>
+                    </Td>            
+                </Tr>
+            </Tbody>
+            </Table>
         </Box>
       </Container>
     );
