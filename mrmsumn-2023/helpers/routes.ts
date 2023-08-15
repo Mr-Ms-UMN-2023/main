@@ -1,5 +1,5 @@
 const protectedRoutes : any = [
-    '/test'
+
 ];
 
 const publicRoutes : any = [

@@ -43,7 +43,7 @@ export default function Login(){
             h="100vh"
             justifyContent='center'
             alignItems={'center'}
-        >
+        >   
             <Flex
                 bg="white"
                 w="100%"

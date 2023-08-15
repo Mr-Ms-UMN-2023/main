@@ -11,7 +11,7 @@ export default async function middleware(req : NextRequest, res : NextResponse){
     }
 
     // undefined routes (404) handler, to disable middleware on 404 (deadlock redirect)
-    if (!publicRoutes.includes(req.nextUrl.pathname) && !protectedRoutes.includes(req.nextUrl.pathname)){
+    if (!publicRoutes.includes(req.nextUrl.pathname) &&  !/^\/admin/.test(req.nextUrl.pathname)){
         return NextResponse.redirect(new URL('/', req.url))
     }
 
@@ -26,9 +26,10 @@ export default async function middleware(req : NextRequest, res : NextResponse){
     });
 
     const data = await response.json();
-    
+
     if (data.code === 401){ // Has invalid token
-        if (protectedRoutes.includes(req.nextUrl.pathname)){
+
+        if (protectedRoutes.includes(req.nextUrl.pathname) || /^\/admin/.test(req.nextUrl.pathname)){
             return NextResponse.redirect(new URL('/loginwisanggeniadmin', req.url))
         }
         return;

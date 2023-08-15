@@ -93,6 +93,13 @@ const ListSponsor = (props: any) => {
       nama: "Chi Forest",
       url: "",
       bg: false,
+    },      
+    {
+      jenis: "sponsor",
+      src: "Assets/Sponsor/LOGO_msp.jpg",
+      nama: "MSP Film Equipment",
+      url: "https://msprental.com/",
+      bg: false,
     },        
     // {
     //   jenis: "sponsor",
