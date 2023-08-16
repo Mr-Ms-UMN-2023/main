@@ -13,23 +13,23 @@ import styles from "@/styles/Home.module.css";
 
 let ArrMrMsFav = [
   {
-    foto: "/Assets/Dedikasi/mrFav2022.png",
+    foto: "/Assets/Dedikasi/mrFav2022.jpg",
     jurusan: "Visual Communication Design 2021",
     nama: "Jessen Gunawan",
   },
   {
-    foto: "/Assets/Dedikasi/msFav2022.png",
+    foto: "/Assets/Dedikasi/msFav2022.jpg",
     jurusan: "Digital Journalism 2021",
     nama: "Chatarina Ivanka",
   },
   {
-    foto: "/Assets/Dedikasi/mrBestTalent2022.png",
+    foto: "/Assets/Dedikasi/mrBestTalent2022.jpg",
     jurusan: "Digital Journalism 2021",
 
     nama: "Sopater Daniel",
   },
   {
-    foto: "/Assets/Dedikasi/msBestTalent2022.png",
+    foto: "/Assets/Dedikasi/msBestTalent2022.jpg",
     jurusan: "Strategic Communication 2020",
 
     nama: "Felicia Ivana Tanu",
@@ -154,9 +154,9 @@ const Dedikasi = () => {
         </Flex>
       </Flex>
 
-      <Heading textAlign={'center'} mt='5rem' color="#c28824">
+      <Heading textAlign={"center"} mt="5rem" color="#c28824">
         Mr. & Ms. Favorites
-      </Heading>      
+      </Heading>
 
       <Flex
         mt="2vh"

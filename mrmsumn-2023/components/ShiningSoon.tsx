@@ -35,7 +35,7 @@ const ShiningSoon = () => {
         : 0;
 
     setBrightness(mainBgBright);
-    console.log(mainBgBright);
+    // console.log(mainBgBright);
 
     if (
       mainBg?.current?.offsetHeight &&
@@ -150,6 +150,7 @@ const ShiningSoon = () => {
                 }}
                 minH={"100vh"}>
                 <Image
+                  loading="eager"
                   className={styles.leaf_left}
                   fill
                   alt="leaf"
@@ -172,6 +173,7 @@ const ShiningSoon = () => {
                 }}
                 minH={"100vh"}>
                 <Image
+                  loading="eager"
                   className={styles.leaf_right}
                   fill
                   alt="leaf"

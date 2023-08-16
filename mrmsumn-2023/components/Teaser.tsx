@@ -4,7 +4,7 @@ import { useRef, useEffect, useState } from "react";
 const Teaser = () => {
   const [scrollY, setScrollY] = useState(0);
   const [teaser, setTeaser] = useState("");
-  const [autoPlayFlag, setAutoPlayFlag] = useState(false);
+
   const content = useRef<HTMLDivElement>(null);
   const youtube = useRef<HTMLDivElement[]>([]);
 
@@ -16,8 +16,6 @@ const Teaser = () => {
   };
 
   useEffect(() => {
-    // Check for browser
-
     window.addEventListener("scroll", handleScroll);
 
     return () => {
@@ -26,22 +24,23 @@ const Teaser = () => {
   }, []);
 
   useEffect(() => {
-    let userAgent = navigator.userAgent;
+    if (
+      content?.current &&
+      (scrollY / 2.2) * 5 >=
+        content?.current?.offsetTop - content?.current?.offsetHeight
+    ) {
+      // Check for browser
+      let userAgent = navigator.userAgent;
 
-    if (userAgent.match(/firefox|fxios/i)) {
-      setTeaser("https://www.youtube.com/embed/N8noHibx5lw?");
-    } else {
-      setTeaser("https://www.youtube.com/embed/N8noHibx5lw?mute=1");
+      if (userAgent.match(/firefox|fxios/i)) {
+        setTeaser("https://www.youtube.com/embed/N8noHibx5lw?autoplay=1");
+      } else {
+        setTeaser(
+          "https://www.youtube.com/embed/N8noHibx5lw?mute=1&autoplay=1"
+        );
+      }
     }
-  }, []);
-
-  useEffect(() => {
-    if (scrollY >= 300 && !autoPlayFlag) {
-      setAutoPlayFlag(true);
-      setTeaser((teaser) => teaser + "&autoplay=1");
-    }
-    // console.log("scroll", scrollY);
-  }, [scrollY, autoPlayFlag]);
+  }, [scrollY]);
 
   return (
     <Flex
