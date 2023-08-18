@@ -9,6 +9,8 @@ import Head from "next/head";
 export default function App({ Component, pageProps }: AppProps) {
   const { user, setUser } = useContext(UserContext);
 
+  console.log("user", user);
+
   return (
     <UserContext.Provider value={{ user, setUser }}>
       <ChakraProvider>

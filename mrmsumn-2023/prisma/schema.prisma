@@ -155,3 +155,12 @@ model voting {
   NIM    String @id @db.VarChar(11)
   Voters Int
 }
+
+model sponsor_medpar{
+  Sponsor_MedparID String @default(uuid()) @id 
+  type Int 
+  src String @db.VarChar(1000)
+  nama String? @db.VarChar(255)
+  url String? @db.VarChar(2048)
+  bg Boolean @default(false)
+}

@@ -6,7 +6,7 @@ const Sponsor = () => {
       {/* <Loading /> */}
       <Navbar />
 
-      < ListSponsor />
+      <ListSponsor />
     </>
   );
 };

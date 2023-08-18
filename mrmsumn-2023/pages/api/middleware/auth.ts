@@ -2,9 +2,9 @@
 import type { NextApiRequest, NextApiResponse } from "next";
 const jwt = require("jsonwebtoken");
 
-type Data = {
-  message: string;
-};
+// type Data = {
+//   message: string;
+// };
 
 export default function handler(req: NextApiRequest, res: NextApiResponse) {
   if (req.method != "GET") {
