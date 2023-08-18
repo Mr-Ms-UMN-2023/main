@@ -16,37 +16,41 @@ export const GET = async (req: NextApiRequest, res: NextApiResponse) => {
 };
 
 const readFile = async (req: NextApiRequest, saveLocally: Boolean) => {
-  const options: formidable.Options = {};
+  const APP_URL =
+  process.env.NODE_ENV == "production"
+    ? process.env.APP_URL
+    : "http://localhost:8000";
+  const options: any = {};
 
   if (saveLocally) {
     options.uploadDir = path.join(process.cwd(), "/public/images2");
     options.filename = (name, ext, path, form) => {
       return Date.now().toString() + "_" + path.originalFilename;
     };
+    options.multiples = true;
   }
+
 
   const form = formidable(options);
   return new Promise((resolve, reject) => {
-    form.parse(req, async (err: any, fields: any, files: any) => {
-      if (err) {
-        reject(err);
-      } else {
-        try {
-          await prisma.sponsor_medpar.create({
-            data: {
-              type: fields.type,
-              src: files.src,
-              nama: fields.nama,
-              url: fields.url,
-              bg: fields.bg,
-            },
-          });
-
-          resolve({ fields, files });
-        } catch (err) {
-          reject(err);
-        }
+    form.parse(req, async (err, fields, files) => {
+      if (err) reject(err);
+      try {
+        console.log("WKKW");
+        const data = await prisma.sponsor_medpar.create({
+          data: {
+            type: fields.type,
+            src : fields.src,
+            nama: fields.nama,
+            url: fields.url,
+            bg: fields.bg,
+          },
+        });
+        // Resolve on success
+      } catch (err) {
+        reject(err); // Reject on catch block
       }
+      resolve({ fields, files });       
     });
   });
 };
@@ -59,14 +63,14 @@ export const POST = async (req: NextApiRequest, res: NextApiResponse) => {
   }
 
   try {
-    const result = await readFile(req, true);
+    const result = await readFile(req, true)
     return res.status(200).json({
       data: result,
       message: "Data berhasil dimasukkan",
     });
   } catch (err) {
     return res.status(500).json({
-      message: "Data tidak berhasil dimasukkan",
+      message: "Data tidak berhasil dimasukkan" + err,
     });
   }
 };
@@ -134,5 +138,12 @@ const handler = (req: NextApiRequest, res: NextApiResponse) => {
     }
   }
 };
+
+export const config = {
+  api: {
+    bodyParser: false,
+  },
+};
+
 
 export default handler;
