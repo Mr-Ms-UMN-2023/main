@@ -11,6 +11,7 @@ export const GET = async (req: NextApiRequest, res: NextApiResponse) => {
   const posts = await prisma.sponsor_medpar.findMany({});
   prisma.$disconnect();
   return res.status(200).json({
+    status : 200,
     data: posts,
   });
 };
@@ -39,7 +40,7 @@ export const POST = async (req: NextApiRequest, res: NextApiResponse) => {
   const BASE_PATH = process.env.NODE_ENV == "development" 
       ? "http://localhost:3000" 
       : process.env.APP_URL;
-      
+
   try {
     await fs.readdir(
       path.join(process.cwd() + "/public", "/images", "/Sponsor")
@@ -56,7 +57,7 @@ export const POST = async (req: NextApiRequest, res: NextApiResponse) => {
       const data = await prisma.sponsor_medpar.create({
         data: {
           type: Number(fields.type),
-          src: BASE_PATH + "/images/Sponsor/" + files.src.newFilename.toString(),
+          src: "/images/Sponsor/" + files.src.newFilename.toString(),
           nama: fields.nama,
           url: fields.url,
           bg: Boolean(fields.bg),

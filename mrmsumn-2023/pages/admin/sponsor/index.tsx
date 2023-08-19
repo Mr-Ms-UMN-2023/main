@@ -1,14 +1,13 @@
 import { useContext } from "react";
 import UserContext from "@/contexts/UserContext";
-import { Box, Container, Heading, Button, Flex, Table, Thead, Tbody, Tr, Th, Td } from '@chakra-ui/react';
+import { Image, Box, Container, Heading, Button, Flex, Table, Thead, Tbody, Tr, Th, Td } from '@chakra-ui/react';
 import styles from "@/styles/Home.module.css";
 import { useState, useEffect, useRef } from "react";
 
-
-
-export default function Test(){
+export default function Sponsor({data, fail = false, err = null}){
 
     const {user, setUser} = useContext(UserContext);
+    useEffect(()=>console.log(data), []);
 
     return (
         <Container maxW="container.lg" mt={8}>
@@ -24,36 +23,55 @@ export default function Test(){
                 </Tr>
             </Thead>
             <Tbody>
-                <Tr>
-                    <Td>John Doe</Td>
-                    <Td>30</Td>
-                    <Td>
-                        <Button _hover={{bg : '#1be614'}} bg='green' color='white'>Edit</Button>
-                        <Button _hover={{bg : '#fe5858'}} bg='red' color='white'>Delete</Button>
-                    </Td>
-                </Tr>
-                <Tr>
-                    <Td>Jane Smith</Td>
-                    <Td>25</Td>
-                    <Td>
-                        <Button _hover={{bg : '#1be614'}} bg='green' color='white'>Edit</Button>
-                        <Button _hover={{bg : '#fe5858'}} bg='red' color='white'>Delete</Button>
-                    </Td>           
-                </Tr>
-                <Tr>
-                    <Td>Michael Johnson</Td>
-                    <Td>40</Td>
-                    <Td>
-                        <Button _hover={{bg : '#1be614'}} bg='green' color='white'>Edit</Button>
-                        <Button _hover={{bg : '#fe5858'}} bg='red' color='white'>Delete</Button>
-                    </Td>                
-                </Tr>
+                {data.map(item => 
+                    <Tr>
+                        <Td>{item.nama}}</Td>
+                        <Image src={item.src}/>
+                        <Td>
+                            <Button _hover={{bg : '#1be614'}} bg='green' color='white'>Edit</Button>
+                            <Button _hover={{bg : '#fe5858'}} bg='red' color='white'>Delete</Button>
+                        </Td>
+                    </Tr>                    
+                )}
             </Tbody>
             </Table>
         </Box>
       </Container>
     );
 
-
-    
 }
+
+
+export async function getServerSideProps(context){
+    const { req, res, params } = context;
+    const APP_URL = process.env.NODE_ENV == "development" 
+    ? "http://localhost:3000" 
+    : process.env.APP_URL;
+
+    try {
+        
+        const response = await fetch(APP_URL + `/api/sponsor_medpar`);
+
+        const parsedResponse = await response.json();      
+        if (parsedResponse.status == 200){
+            const data = parsedResponse.data;
+            return {props : {data}}          
+        }      
+        
+        return {
+            props : {
+                fail : true
+            }
+        }
+  
+  
+    } catch (err) {
+        return {
+            props : {
+                fail : true, 
+                err
+            }
+        }
+    }
+  
+  }
