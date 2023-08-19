@@ -26,7 +26,7 @@ export default function Sponsor({data, fail = false, err = null}){
                 {data.map(item => 
                     <Tr>
                         <Td>{item.nama}}</Td>
-                        <Image src={item.src}/>
+                        <Image h="150px" w="150px" src={item.src}/>
                         <Td>
                             <Button _hover={{bg : '#1be614'}} bg='green' color='white'>Edit</Button>
                             <Button _hover={{bg : '#fe5858'}} bg='red' color='white'>Delete</Button>
