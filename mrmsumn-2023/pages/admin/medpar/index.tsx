@@ -22,9 +22,8 @@ export default function Test() {
   return (
     <Container maxW="container.lg" mt={8}>
       <Box p={6} shadow="md" borderWidth="1px" borderRadius="md">
-        <Heading size="lg" color="white">
-          Daftar Media Partner
-        </Heading>
+        <Heading size="lg" color="white">Daftar Media Partner</Heading>
+        <Button>Tambah Media Partner Baru</Button>        
         <Table variant="simple">
           <Thead>
             <Tr>

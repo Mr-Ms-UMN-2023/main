@@ -14,6 +14,7 @@ export default function Test(){
         <Container maxW="container.lg" mt={8}>
         <Box p={6} shadow="md" borderWidth="1px" borderRadius="md">
           <Heading size="lg" color="white">Daftar Sponsor</Heading>
+          <Button>Tambah Sponsor Baru</Button>
           <Table variant="simple">
             <Thead>
                 <Tr>

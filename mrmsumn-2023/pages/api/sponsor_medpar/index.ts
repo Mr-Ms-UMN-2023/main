@@ -39,6 +39,7 @@ export const POST = async (req: NextApiRequest, res: NextApiResponse) => {
   const BASE_PATH = process.env.NODE_ENV == "development" 
       ? "http://localhost:3000" 
       : process.env.APP_URL;
+      
   try {
     await fs.readdir(
       path.join(process.cwd() + "/public", "/images", "/Sponsor")
