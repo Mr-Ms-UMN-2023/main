@@ -30,13 +30,15 @@ const readFile = async (req: NextApiRequest, saveLocally: Boolean) => {
   return new Promise((resolve, reject) => {
     form.parse(req, async (err, fields: any, files: any) => {
       if (err) reject(err);
-
       resolve({ fields, files });
     });
   });
 };
 
 export const POST = async (req: NextApiRequest, res: NextApiResponse) => {
+  const BASE_PATH = process.env.NODE_ENV == "development" 
+      ? "http://localhost:3000" 
+      : process.env.APP_URL;
   try {
     await fs.readdir(
       path.join(process.cwd() + "/public", "/images", "/Sponsor")
@@ -48,12 +50,12 @@ export const POST = async (req: NextApiRequest, res: NextApiResponse) => {
   try {
     const { fields, files }: any = await readFile(req, true);
 
-    console.log(fields);
+
     try {
       const data = await prisma.sponsor_medpar.create({
         data: {
           type: Number(fields.type),
-          src: "/public/images/Sponsor/" + files.src.newFilename.toString(),
+          src: BASE_PATH + "/images/Sponsor/" + files.src.newFilename.toString(),
           nama: fields.nama,
           url: fields.url,
           bg: Boolean(fields.bg),
@@ -61,13 +63,14 @@ export const POST = async (req: NextApiRequest, res: NextApiResponse) => {
       });
 
       // Resolve on success
-      return res.status(200).json({
+      return res.status(201).json({
+        status : 201,
         data: data,
         message: "Data berhasil dimasukkan",
       });
     } catch (err) {
       return res.status(500).json({
-        message: "Data tidak berhasil dimasukkan",
+        message: "Data tidak berhasil dimasukkan" + err,
       });
     }
   } catch (err) {

@@ -14,6 +14,8 @@ export default async function middleware(req: NextRequest, res: NextResponse) {
     req.nextUrl.pathname.startsWith("/api") ||
     req.nextUrl.pathname.startsWith("/favicon") ||
     req.nextUrl.pathname.startsWith("/_error") ||
+    req.nextUrl.pathname.startsWith("/public") || 
+    req.nextUrl.pathname.startsWith("/images") ||
     req.nextUrl.pathname.startsWith("/404")
   ) {
     return NextResponse.next();
