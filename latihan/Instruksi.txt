@@ -1,0 +1,12 @@
+- Buat Table message
+ada id, message
+
+- Get value dari message 
+
+- Post Value ke table message
+
+- Get value berdasarkan ID yg diinginkan
+
+- Delete value
+
+
