@@ -8,7 +8,7 @@ import { useRouter } from "next/router";
 
 
 
-export default function Edit({data = null}){
+export default function Edit({data}){
 
     const router = useRouter();
     const {user, setUser} = useContext(UserContext);
@@ -20,11 +20,13 @@ export default function Edit({data = null}){
     const handleCheckboxChange = () => {
       setIsChecked(!isChecked);
     };
+    useEffect(() => console.log(data.Sponsor_MedparID), []);
 
 
     const onSubmit = async (data : Inputs) => {
       const formData = new FormData();
 
+      formData.append("id", data?.id);
       formData.append("type", data?.type);
       formData.append("src", selectedImage);
       formData.append("nama", data?.nama);
@@ -32,12 +34,12 @@ export default function Edit({data = null}){
       formData.append("bg", data?.bg);
 
       const response = await fetch("/api/sponsor_medpar", {
-        method: "POST",
+        method: "PUT",
         body: formData
       });
 
       const parsedResponse = await response.json(); 
-      if (parsedResponse?.status == 201){
+      if (parsedResponse?.status == 200){
         router.push('/admin/sponsor');
       }
   }
@@ -62,6 +64,7 @@ export default function Edit({data = null}){
    
 
     type Inputs = {
+      id : string,
       type : string, 
       src : FileList, 
       nama : string,
@@ -82,14 +85,20 @@ export default function Edit({data = null}){
           <form onSubmit={handleSubmit(onSubmit)}>
             <VStack spacing={4} align="start">
                 <FormControl>
-                    <Input type="text" {...register('type')} value={data?.type} hidden/>
-                    <Input type="text"  {...register('nama')} value={data?.nama} placeholder="Nama Sponsor" mb='1rem' required/>
-                    <Input type="text"  {...register('url')} value={data?.url} placeholder="Tautan" mb='1rem' />
+                    <Input type="text" {...register('type')} defaultValue={data?.type} hidden/>
+                    <Input type="text" {...register('id')} defaultValue={data?.Sponsor_MedparID} hidden/>
+                    <Input type="text"  {...register('nama')} defaultValue={data?.nama} placeholder="Nama Sponsor" mb='1rem' required/>
+                    <Input type="text"  {...register('url')} defaultValue={data?.url} placeholder="Tautan" mb='1rem' />
                     {previewImage && (
                         <Box maxW="300px">
                             <img src={previewImage} alt="Preview" style={{ maxWidth: "100%" }} />
                         </Box>
-                    )}                    
+                    )}  
+                    {(data.src && !previewImage) && (
+                        <Box maxW="300px">
+                            <img src={data.src} alt="Preview" style={{ maxWidth: "100%" }} />
+                        </Box>
+                    )}                                          
                     <Button as="label" htmlFor="fileInput" colorScheme="blue">
                         Tambahkan Foto
                     </Button>
@@ -128,7 +137,6 @@ export async function getServerSideProps(context){
         const response = await fetch(APP_URL + `/api/sponsor_medpar?id=${params.id}`);
 
         const parsedResponse = await response.json();      
-        console.log(parsedResponse);
         if (parsedResponse.status == 200){
             const data = parsedResponse.data;
             return {props : {data}}          
