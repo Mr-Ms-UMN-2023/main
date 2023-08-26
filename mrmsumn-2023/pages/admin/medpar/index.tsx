@@ -48,7 +48,7 @@ export default function Sponsor({data, fail = false, err = null}){
                         <Td>{item.nama}}</Td>
                         <Image h="150px" w="150px" src={item.src}/>
                         <Td>
-                            <Button _hover={{bg : '#1be614'}} bg='green' color='white'>Edit</Button>
+                            <Button _hover={{bg : '#1be614'}} onClick={()=>{router.push(`/admin/sponsor/edit/${item?.Sponsor_MedparID}`)}} bg='green' color='white'>Edit</Button>
                             <Button _hover={{bg : '#fe5858'}} onClick={(e)=>{deleteSponsor(e, item?.Sponsor_MedparID)}} bg='red' color='white'>Delete</Button>
                         </Td>
                     </Tr>                    

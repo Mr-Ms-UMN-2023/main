@@ -8,6 +8,19 @@ import fs from "fs/promises";
 const prisma = new PrismaClient();
 
 export const GET = async (req: NextApiRequest, res: NextApiResponse) => {
+  const id = req.query.id as string;
+  if (id){
+    const sponsor = await prisma.sponsor_medpar.findUnique({
+      where: {
+          Sponsor_MedparID: id
+      }
+    });
+    prisma.$disconnect();
+    return res.status(200).json({
+      status : 200,
+      data: sponsor,
+    });    
+  }
   const posts = await prisma.sponsor_medpar.findMany({});
   prisma.$disconnect();
   return res.status(200).json({
