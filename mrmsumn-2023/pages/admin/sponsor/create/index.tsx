@@ -62,7 +62,7 @@ export default function Create(){
    
 
     type Inputs = {
-      type : number, 
+      type : string, 
       src : FileList, 
       nama : string,
       url : string, 

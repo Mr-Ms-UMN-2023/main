@@ -96,7 +96,10 @@ export const DELETE = async (req: NextApiRequest, res: NextApiResponse) => {
       return res.status(500).json({ message: "Gagal Delete User" });
     }
 
-    return res.status(200).json({ message: "data berhasil dihapus" });
+    return res.status(200).json({ 
+      status : 200,
+      message: "data berhasil dihapus" 
+    });
   } catch (error) {
     return res.status(500).json({ message: error });
   } finally {
