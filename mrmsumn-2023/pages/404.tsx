@@ -1,9 +1,8 @@
 import Head from "next/head";
-import Image from "next/image";
 
 import styles from "@/styles/Home.module.css";
 import { useEffect } from "react";
-import { Box, Flex } from "@chakra-ui/react";
+import { Box, Flex, Image } from "@chakra-ui/react";
 
 import { useRouter } from "next/router";
 
@@ -23,7 +22,7 @@ export default function Home() {
         <link rel="icon" href="/Assets/Logo/LogoMrMsUMN2023.png" />
       </Head>
       <Flex bg={"black"} justifyContent="center" alignItems="center" >
-        <img
+        <Image
           width={"60%"}
           src="/Assets/Logo/LogoMrMsUMN2023.png"
         />

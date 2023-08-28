@@ -4,7 +4,7 @@ import { Image, Box, Container, Heading, Button, Flex, Table, Thead, Tbody, Tr, 
 import { useState, useEffect, useRef } from "react";
 import { useRouter } from "next/router";
 
-export default function Sponsor({data, fail = false, err = null}){
+export default function Sponsor({data, fail = false, err = null} : any){
 
     const router = useRouter();
     const {user, setUser} = useContext(UserContext);
@@ -46,9 +46,9 @@ export default function Sponsor({data, fail = false, err = null}){
                 </Tr>
             </Thead>
             <Tbody>
-                {serverSync && data.map(item => 
-                    <Tr>
-                        <Td>{item.nama}}</Td>
+                {serverSync && data.map((item : any) => 
+                    <Tr key={item.Sponsor_MedparID}>
+                        <Td>{item.nama}</Td>
                         <Image h="150px" w="150px" src={item.src}/>
                         <Td>
                             <Button _hover={{bg : '#1be614'}} onClick={()=>{router.push(`/admin/sponsor/edit/${item?.Sponsor_MedparID}`)}} bg='green' color='white'>Edit</Button>
@@ -65,7 +65,7 @@ export default function Sponsor({data, fail = false, err = null}){
 }
 
 
-export async function getServerSideProps(context){
+export async function getServerSideProps(context : any){
     const { req, res, params } = context;
     const APP_URL = process.env.NODE_ENV == "development" 
     ? "http://localhost:3000" 

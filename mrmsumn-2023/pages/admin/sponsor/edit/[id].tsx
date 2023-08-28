@@ -8,7 +8,7 @@ import { useRouter } from "next/router";
 
 
 
-export default function Edit({data}){
+export default function Edit({data} : {data : any}){
 
     const router = useRouter();
     const {user, setUser} = useContext(UserContext);
@@ -26,12 +26,14 @@ export default function Edit({data}){
     const onSubmit = async (data : Inputs) => {
       const formData = new FormData();
 
+      const bg = data?.bg ? true : false;
+
       formData.append("id", data?.id);
-      formData.append("type", data?.type);
+      formData.append("type", data?.type.toString());
       formData.append("src", selectedImage);
       formData.append("nama", data?.nama);
       formData.append("url", data?.url);
-      formData.append("bg", data?.bg);
+      formData.append("bg", new Boolean(data?.bg).toString());
 
       const response = await fetch("/api/sponsor_medpar", {
         method: "PUT",
@@ -126,7 +128,7 @@ export default function Edit({data}){
 }
 
 
-export async function getServerSideProps(context){
+export async function getServerSideProps(context : any){
     const { req, res, params } = context;
     const APP_URL = process.env.NODE_ENV == "development" 
     ? "http://localhost:3000" 

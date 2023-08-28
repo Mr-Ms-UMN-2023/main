@@ -25,11 +25,13 @@ export default function Create(){
     const onSubmit = async (data : Inputs) => {
       const formData = new FormData();
 
-      formData.append("type", data?.type);
+      const bg = data?.bg ? true : false;      
+
+      formData.append("type", String(data?.type.toString()));
       formData.append("src", selectedImage);
       formData.append("nama", data?.nama);
       formData.append("url", data?.url);
-      formData.append("bg", data?.bg);
+      formData.append("bg", new Boolean(data?.bg).toString());
 
       const response = await fetch("/api/sponsor_medpar", {
         method: "POST",
