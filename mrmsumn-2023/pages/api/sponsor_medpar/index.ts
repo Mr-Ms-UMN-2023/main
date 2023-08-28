@@ -94,7 +94,6 @@ export const POST = async (req: NextApiRequest, res: NextApiResponse) => {
   try {
     const { fields, files }: any = await readFile(req, true);
 
-
     try {
       const data = await prisma.sponsor_medpar.create({
         data: {
@@ -102,7 +101,7 @@ export const POST = async (req: NextApiRequest, res: NextApiResponse) => {
           src: "/images/Sponsor/" + files.src.newFilename.toString(),
           nama: fields.nama,
           url: fields.url,
-          bg: Boolean(fields.bg),
+          bg: fields.bg == 'true' ? true : false
         },
       });
 
@@ -170,7 +169,7 @@ export const PUT = async (req: NextApiRequest, res: NextApiResponse) => {
           src: "/images/Sponsor/" + files.src.newFilename.toString(),
           nama: fields.nama,
           url: fields.url,
-          bg: Boolean(fields.bg),
+          bg: fields.bg == 'true' ? true : false
         },
       });     
 
@@ -189,7 +188,7 @@ export const PUT = async (req: NextApiRequest, res: NextApiResponse) => {
       data: {
         nama: fields.nama,
         url: fields.url,
-        bg: Boolean(fields.bg),
+        bg: fields.bg == 'true' ? true : false
       },
     });
 

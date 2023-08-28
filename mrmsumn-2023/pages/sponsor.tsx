@@ -19,7 +19,7 @@ export async function getServerSideProps(context : any){
 
   try {
       
-      const response = await fetch(APP_URL + `/api/sponsor_medpar`);
+      const response = await fetch(APP_URL + `/api/sponsor_medpar?type=sponsor`);
 
       const parsedResponse = await response.json();      
       if (parsedResponse.status == 200){

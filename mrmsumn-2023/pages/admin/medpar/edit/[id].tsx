@@ -33,7 +33,7 @@ export default function Edit({data} : {data : any}){
       formData.append("src", selectedImage);
       formData.append("nama", data?.nama);
       formData.append("url", data?.url);
-      formData.append("bg", new Boolean(data?.bg).toString());
+      formData.append("bg", data?.bg);
 
       const response = await fetch("/api/sponsor_medpar", {
         method: "PUT",
@@ -71,7 +71,7 @@ export default function Edit({data} : {data : any}){
       src : FileList, 
       nama : string,
       url : string, 
-      bg : boolean,
+      bg : string,
     };
     
     const {
