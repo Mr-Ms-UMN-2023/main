@@ -11,17 +11,18 @@ import React, { useEffect, useRef, useState } from "react";
 const CandidatesIntro = (props: any) => {
   const intro = useRef<HTMLDivElement>(null);
   const imgZoom = useRef<HTMLDivElement>(null);
-  const btn = useRef<HTMLDivElement>(null);
+  const [start, setStart] = useState(false);
+  const img = useRef<HTMLDivElement>(null);
 
   const handleClick = () => {
+    console.log("clicked");
+    setStart(true);
     if(props.desktop){
       imgZoom.current.style.transform = "scale(1)";
     } else {
       intro.current.style.transform = "scale(10)";
     }
     intro.current.style.opacity = "0";
-
-    btn.current.style.display = "none";
 
     setTimeout(() => {
       intro.current.style.display = "none";
@@ -34,39 +35,36 @@ const CandidatesIntro = (props: any) => {
       <Button
         onClick={handleClick}
         position={"absolute"}
-        left={"50%"}
-        top={"50%"}
-        transform={"translate(-50%, -50%)"}
-        h={{ base: "80%", lg: "70%" }}
-        w={{ base: "80%", lg: "50%" }}
-        zIndex={99}
-        ref={btn}
+        my={{base: "20%" , xl:"15%"}}
+        mx={{base: "10%", xl:"25%"}}
+        h={{ base: "80%", xl: "40%" }}
+        w={{ base: "80%", xl: "50%" }}
+        maxH={'100vh'}
+        zIndex={2}
+        disabled={start}
         background={'transparent'}
-        _hover={{ 
-          background: 'transparent'
-        }}
-        _active={{
-          background: 'transparent'
-        }}
-        _focus={{
-          background: 'transparent'
-        }}
         overflow={'hidden'}
+        display={start ? 'none' : 'block'}
       >
         <Image
-        src="Assets/Candidate/meet_our_candidates.png"
+        src="https://cdn.discordapp.com/attachments/1125453534062719016/1148827878411218994/meet_our_candidates.png"
         _hover={{ 
-          transform: 'scale(1.1)'
+          transform: 'scale(1.1)',
+          animation: 'none',
         }}
+        // bg={'white'}
+        my={"-30%"}
+        className = {styles.pulse}
         transition={'all 1s ease-in-out'}
         transformOrigin={'center'}
+        zIndex={3}
         />
       </Button>
       <Box
         h={"100vh"}
         w={"100vw"}
         position={"absolute"}
-        zIndex={95}
+        zIndex={1}
         ref={intro}
         className={styles.zoom}
         overflow={'hidden'}
@@ -87,7 +85,7 @@ const CandidatesIntro = (props: any) => {
             loading="eager"
             h={"100vh"}
             w={"100vw"}
-            src="/Assets/Candidate/pintuLengkap.png"
+            src="https://cdn.discordapp.com/attachments/1125453534062719016/1148827877513637918/pintuLengkap.png"
           />
         </AspectRatio>
       </Box>

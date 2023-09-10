@@ -102,7 +102,7 @@ const CandidatesMobile = (props: any) => {
               : { base: "22rem", lg: "26rem" }
           }
           position={"absolute"}
-          src={"Assets/Candidate/potrait/all.png"}
+          src={"https://cdn.discordapp.com/attachments/1125453534062719016/1148821197363101747/all.png"}
         />
       </Flex>
     </Box>
