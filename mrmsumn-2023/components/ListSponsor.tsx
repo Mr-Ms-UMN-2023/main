@@ -10,120 +10,12 @@ import {
 import styles from "@/styles/Home.module.css";
 import { useState, useEffect, useRef } from "react";
 
-const ListSponsor = ({ list } : any) => {
-
-  // const list = [
-  //   {
-  //     jenis: "sponsor",
-  //     src: "Assets/Sponsor/LOGO_KAY_COLLECTION.png",
-  //     nama: "Kay Collection",
-  //     url: "https://www.kaycollection.com/",
-  //     bg: true,
-  //   },
-  //   {
-  //     jenis: "sponsor",
-  //     src: "Assets/Sponsor/Logo_PUYO_DEFAULT.png",
-  //     nama: "PUYO Desserts",
-  //     url: "https://www.puyodesserts.com/",
-  //     bg: false,
-  //   },
-  //   {
-  //     jenis: "sponsor",
-  //     src: "Assets/Sponsor/LOGO_MASAMI.png",
-  //     nama: "Masami",
-  //     url: "http://www.masamishouko.com/",
-  //     bg: true,
-  //   },
-
-  //   {
-  //     jenis: "sponsor",
-  //     src: "Assets/Sponsor/LOGO_REVO_PRINT_SHOP.png",
-  //     nama: "Revo Print Shop",
-  //     url: "https://www.revoprintshop.com/",
-  //     bg: false,
-  //   },
-  //   {
-  //     jenis: "sponsor",
-  //     src: "Assets/Sponsor/LOGO_CJ.png",
-  //     nama: "Christoper John",
-  //     url: "https://www.instagram.com/christjhn",
-  //     bg: false,
-  //   },
-  //   {
-  //     jenis: "sponsor",
-  //     src: "Assets/Sponsor/Logo Myca Tulisan Putih.png",
-  //     nama: "Myca",
-  //     url: "https://www.instagram.com/mycaflorist/",
-  //     bg: false,
-  //   },
-  //   {
-  //     jenis: "sponsor",
-  //     src: "Assets/Sponsor/Logo Libreath.png",
-  //     nama: "Libreath",
-  //     url: "https://www.instagram.com/libreath.florist",
-  //     bg: false,
-  //   },
-  //   {
-  //     jenis: "sponsor",
-  //     src: "Assets/Sponsor/Logo Dennis Catering.jpg",
-  //     nama: "Catering",
-  //     url: "https://www.instagram.com/denniscatering_",
-  //     bg: false,
-  //   },
-  //   {
-  //     jenis: "sponsor",
-  //     src: "Assets/Sponsor/Logo Mile.jpg",
-  //     nama: "Miliè",
-  //     url: "https://www.instagram.com/milieofficial",
-  //     bg: false,
-  //   },
-  //   {
-  //     jenis: "sponsor",
-  //     src: "Assets/Sponsor/LOGO_implora.jpg",
-  //     nama: "Implora",
-  //     url: "",
-  //     bg: false,
-  //   },
-  //   {
-  //     jenis: "sponsor",
-  //     src: "Assets/Sponsor/LOGO_chi.jpg",
-  //     nama: "Chi Forest",
-  //     url: "https://chiforest.com",
-  //     bg: false,
-  //   },
-  //   {
-  //     jenis: "sponsor",
-  //     src: "Assets/Sponsor/LOGO_msp.jpg",
-  //     nama: "MSP Film Equipment",
-  //     url: "https://msprental.com/",
-  //     bg: false,
-  //   },
-  //   {
-  //     jenis: "sponsor",
-  //     src: "https://cdn.discordapp.com/attachments/1125453534062719016/1141058868353445918/Logo_Roti_Bakar_88.png",
-  //     nama: "Rotbak 88",
-  //     url: "https://rotibakar88.id",
-  //     bg: false,
-  //   },
-  //   {
-  //     jenis: "sponsor",
-  //     src: "https://cdn.discordapp.com/attachments/1125453534062719016/1141058868105969745/logo-tiketbox.png",
-  //     nama: "Tiketbox",
-  //     url: "https://tiketbox.com",
-  //     bg: false,
-  //   },
-  //   {
-  //     jenis: "sponsor",
-  //     src: "https://cdn.discordapp.com/attachments/1125453534062719016/1141058867829166170/Logo_MuA_Gareulis_copy.png",
-  //     nama: "Gareulis",
-  //     url: "https://www.instagram.com/mua.gareulis",
-  //     bg: false,
-  //   },
-  // ];
+const ListSponsor = ({list} : any) => {
 
   const texts = useRef<HTMLDivElement[]>([]);
 
   useEffect(() => {
+    console.log("wj");
     console.log(list)
     const observer = new IntersectionObserver((entries) => {
       const [entry] = entries;
@@ -155,10 +47,10 @@ const ListSponsor = ({ list } : any) => {
     console.log(sponsorArr.length);
   }, [sponsorArr]);
 
-  list.forEach((list) => {
+  list.forEach((data : any) => {
     const item = (
       <GridItem
-        display={list.nama == "" ? { base: "none", lg: "block" } : "block"}
+        display={data.nama == "" ? { base: "none", lg: "block" } : "block"}
         w={{ base: "15rem", md: "15rem", lg: "15rem", xl: "17rem" }}
         _hover={{
           transform: "scale(1.1)",
@@ -167,22 +59,23 @@ const ListSponsor = ({ list } : any) => {
         }}
         m="auto">
         <Link
-          href={list.url}
+          href={data.url}
           target="_blank"
-          display={list.nama == "" ? "none" : "block"}>
+          display={data.nama == "" ? "none" : "block"}>
           <Image
             objectFit={"contain"}
-            background={list.bg ? "white" : "transparent"}
-            borderRadius={list.bg ? "14px" : "0"}
+            background={data.bg ? "white" : "transparent"}
+            borderRadius={data.bg ? "14px" : "0"}
             p="2"
-            src={list.src}
-            alt={list.nama}
+            src={data.src}
+            alt={data.nama}
           />
         </Link>
       </GridItem>
     );
 
-    list.type == 1 ? sponsorArr.push(item) : medparArr.push(item);
+//    list.type == 1 ? sponsorArr.push(item) : medparArr.push(item);
+	 sponsorArr.push(item)
   });
 
   return (

@@ -8,19 +8,37 @@ import { useRouter } from "next/router";
 
 
 
-export default function Edit({data} : {data : any}){
+export default function Edit({params} : {params : any}){
 
     const router = useRouter();
     const {user, setUser} = useContext(UserContext);
 
-    const [isChecked, setIsChecked] = useState(data.bg);
-    const [selectedImage, setSelectedImage] = useState(null);
-    const [previewImage, setPreviewImage] = useState(null);
+    const [isChecked, setIsChecked] = useState<any>(false);
+    const [selectedImage, setSelectedImage] = useState<any>(null);
+    const [previewImage, setPreviewImage] = useState<any>(null);
+    const [data, setData] = useState<any>({});
 
     const handleCheckboxChange = () => {
       setIsChecked(!isChecked);
     };
-    useEffect(() => console.log(data.Sponsor_MedparID), []);
+
+
+    const fetchData = async () => {
+      const response = await fetch(`/api/sponsor_medpar?id=${params.id}`);
+
+      const parsedResponse = await response.json();      
+      if (parsedResponse.status == 200){
+          const list = parsedResponse.data; 
+          setPreviewImage(list.src);
+          setIsChecked(list.bg);
+          setData(list);
+      }            
+    }
+
+
+    useEffect(() => {fetchData()}, []);
+
+    
 
 
     const onSubmit = async (data : Inputs) => {
@@ -30,7 +48,7 @@ export default function Edit({data} : {data : any}){
 
       formData.append("id", data?.id);
       formData.append("type", data?.type.toString());
-      formData.append("src", selectedImage);
+      formData.append("src", selectedImage ? selectedImage : "");
       formData.append("nama", data?.nama);
       formData.append("url", data?.url);
       formData.append("bg", data?.bg);
@@ -51,13 +69,16 @@ export default function Edit({data} : {data : any}){
       const file = e.target.files[0];
 
       if (file) {
+        const imageURL = URL.createObjectURL(file);        
         setSelectedImage(file);
+        setPreviewImage(imageURL);		  
+//        setSelectedImage(file);
 
-        const reader = new FileReader();
-        reader.onload = () => {
-          setPreviewImage(reader.result);
-        };
-        reader.readAsDataURL(file);
+//        const reader = new FileReader();
+//        reader.onload = () => {
+//          setPreviewImage(reader?.result ? reader?.result : null);
+//        };
+//       reader.readAsDataURL(file);
       } else {
         setSelectedImage(null);
         setPreviewImage(null);
@@ -68,7 +89,7 @@ export default function Edit({data} : {data : any}){
     type Inputs = {
       id : string,
       type : string, 
-      src : FileList, 
+      src : FileList | null, 
       nama : string,
       url : string, 
       bg : string,
@@ -82,6 +103,7 @@ export default function Edit({data} : {data : any}){
 
     return (
         <Container maxW="container.lg" mt={8}>
+                          <Button onClick={()=>{router.push('/admin/sponsor')}}>Kembali</Button>
         <Box p={6} shadow="md" borderWidth="1px" borderRadius="md">
           <Heading size="lg" color="white">Edit Sponsor</Heading>
           <form onSubmit={handleSubmit(onSubmit)}>
@@ -130,23 +152,13 @@ export default function Edit({data} : {data : any}){
 
 export async function getServerSideProps(context : any){
     const { req, res, params } = context;
-    const APP_URL = process.env.NODE_ENV == "development" 
-    ? "http://localhost:3000" 
-    : process.env.APP_URL;
+    const APP_URL = process.env.APP_URL;
 
     try {
         
-        const response = await fetch(APP_URL + `/api/sponsor_medpar?id=${params.id}`);
-
-        const parsedResponse = await response.json();      
-        if (parsedResponse.status == 200){
-            const data = parsedResponse.data;
-            return {props : {data}}          
-        }      
-        
         return {
             props : {
-                fail : true
+                params
             }
         }
   
@@ -155,7 +167,7 @@ export async function getServerSideProps(context : any){
         return {
             props : {
                 fail : true, 
-                err
+                params, err
             }
         }
     }

@@ -10,6 +10,7 @@ const prisma = new PrismaClient();
 export const GET = async (req: NextApiRequest, res: NextApiResponse) => {
   const id = req.query.id as string;
   const type = req.query.type as string;
+
   if (id){
     const sponsor = await prisma.sponsor_medpar.findUnique({
       where: {
@@ -29,6 +30,7 @@ export const GET = async (req: NextApiRequest, res: NextApiResponse) => {
           type : 1
       }
     });
+    console.log("sposorr", sponsor);
     prisma.$disconnect();
     return res.status(200).json({
       status : 200,
@@ -42,6 +44,7 @@ export const GET = async (req: NextApiRequest, res: NextApiResponse) => {
           type : 2
       }
     });
+    console.log('medparr', sponsor)
     prisma.$disconnect();
     return res.status(200).json({
       status : 200,

@@ -4,11 +4,12 @@ import { Image, Box, Container, Heading, Button, Flex, Table, Thead, Tbody, Tr, 
 import { useState, useEffect, useRef } from "react";
 import { useRouter } from "next/router";
 
-export default function Sponsor({data, fail = false, err = null} : any){
+export default function Sponsor(){
 
     const router = useRouter();
     const {user, setUser} = useContext(UserContext);
     const [serverSync, setServerSync] = useState(false);
+    const [data, setData] = useState<any>([]);
 
     const deleteSponsor = async (e : any, id : any) => {
         if (!id || id == "") return;
@@ -25,8 +26,21 @@ export default function Sponsor({data, fail = false, err = null} : any){
 
     
 
+    const fetchData = async () => {
+        const response = await fetch(`/api/sponsor_medpar?type=sponsor`);
+        const parsedResponse = await response.json();      
+
+        if (parsedResponse.status == 200){
+            const list = parsedResponse.data;
+            setData(list);
+        }     
+    }
+
 
     useEffect(()=>{
+
+        fetchData();
+
         if (typeof window != undefined){
             setServerSync(true);
         }
@@ -34,6 +48,7 @@ export default function Sponsor({data, fail = false, err = null} : any){
 
     return (
         <Container maxW="container.lg" mt={8}>
+        <Button onClick={()=>{router.push('/admin')}}>Kembali</Button>
         <Box p={6} shadow="md" borderWidth="1px" borderRadius="md">
           <Heading size="lg" color="white">Daftar Sponsor</Heading>
           <Button onClick={()=>{router.push('/admin/sponsor/create')}}>Tambah Sponsor Baru</Button>
@@ -65,36 +80,35 @@ export default function Sponsor({data, fail = false, err = null} : any){
 }
 
 
-export async function getServerSideProps(context : any){
-    const { req, res, params } = context;
-    const APP_URL = process.env.NODE_ENV == "development" 
-    ? "http://localhost:3000" 
-    : process.env.APP_URL;
+// export async function getServerSideProps(context : any){
+//     const { req, res, params } = context;
+//     const APP_URL = process.env.APP_URL;
 
-    try {
+//     try {
         
-        const response = await fetch(APP_URL + `/api/sponsor_medpar?type=sponsor`);
+//         const response = await fetch(APP_URL + `/api/sponsor_medpar?type=sponsor`);
 
-        const parsedResponse = await response.json();      
-        if (parsedResponse.status == 200){
-            const data = parsedResponse.data;
-            return {props : {data}}          
-        }      
+//         const parsedResponse = await response.json();      
+//         console.log(parsedResponse)
+//         if (parsedResponse.status == 200){
+//             const data = parsedResponse.data;
+//             return {props : {data}}          
+//         }      
         
-        return {
-            props : {
-                fail : true
-            }
-        }
+//         return {
+//             props : {
+//                 fail : true
+//             }
+//         }
   
   
-    } catch (err) {
-        return {
-            props : {
-                fail : true, 
-                err
-            }
-        }
-    }
+//     } catch (err) {
+//         return {
+//             props : {
+//                 fail : true, 
+//                 err
+//             }
+//         }
+//     }
   
-  }
+//   }

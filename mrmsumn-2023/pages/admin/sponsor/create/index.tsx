@@ -14,8 +14,8 @@ export default function Create(){
     const {user, setUser} = useContext(UserContext);
 
     const [isChecked, setIsChecked] = useState(false);
-    const [selectedImage, setSelectedImage] = useState(null);
-    const [previewImage, setPreviewImage] = useState(null);
+    const [selectedImage, setSelectedImage] = useState<any>(null);
+    const [previewImage, setPreviewImage] = useState<any>(null);
 
     const handleCheckboxChange = () => {
       setIsChecked(!isChecked);
@@ -27,7 +27,7 @@ export default function Create(){
       
 
       formData.append("type", String(data?.type.toString()));
-      formData.append("src", selectedImage);
+      formData.append("src", selectedImage ? selectedImage : "");
       formData.append("nama", data?.nama);
       formData.append("url", data?.url);
       formData.append("bg", data?.bg);
@@ -48,13 +48,16 @@ export default function Create(){
       const file = e.target.files[0];
 
       if (file) {
+        const imageURL = URL.createObjectURL(file);        
         setSelectedImage(file);
+        setPreviewImage(imageURL);		  
+        //setSelectedImage(file);
 
-        const reader = new FileReader();
-        reader.onload = () => {
-          setPreviewImage(reader.result);
-        };
-        reader.readAsDataURL(file);
+        //const reader = new FileReader();
+        //reader.onload = () => {
+          //setPreviewImage(reader?.result ? reader?.result : null);
+        //};
+        //reader.readAsDataURL(file);
       } else {
         setSelectedImage(null);
         setPreviewImage(null);
@@ -64,7 +67,7 @@ export default function Create(){
 
     type Inputs = {
       type : string, 
-      src : FileList, 
+      src : FileList | null, 
       nama : string,
       url : string, 
       bg : string,
@@ -78,6 +81,7 @@ export default function Create(){
 
     return (
         <Container maxW="container.lg" mt={8}>
+                <Button onClick={()=>{router.push('/admin/sponsor')}}>Kembali</Button>
         <Box p={6} shadow="md" borderWidth="1px" borderRadius="md">
           <Heading size="lg" color="white">Create New Sponsor</Heading>
           <form onSubmit={handleSubmit(onSubmit)}>
