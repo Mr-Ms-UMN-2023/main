@@ -1,7 +1,7 @@
 import Head from "next/head";
 import styles from "@/styles/Home.module.css";
 import { useRouter } from "next/router";
-import { Box, Flex, Heading, Button } from "@chakra-ui/react";
+import { Box, Flex, Heading, Button, useMediaQuery } from "@chakra-ui/react";
 import {
   Loading,
   Navbar,
@@ -12,6 +12,8 @@ import {
   Dedikasi,
   ButtonDedikasi,
   Teaser,
+  CandidatesDesktop,
+  CandidatesMobile
 } from "@/components";
 
 import { useState, useEffect, useRef } from "react";
@@ -26,6 +28,8 @@ export default function Home(props: any) {
 
   const [popup, setPopup] = useState<object>();
 
+  const [desktop] = useMediaQuery("(min-width: 1081px)");
+
   // const [show, setShow] = useState("none");
 
   useEffect(() => {
@@ -36,6 +40,7 @@ export default function Home(props: any) {
     <>
       <Navbar />
       <ShiningSoon />
+        {desktop ? <CandidatesDesktop show={true} /> : <CandidatesMobile show={true} />}
       <Dedikasi />
       <Teaser />
       {/* {dedikasi && <Dedikasi Dedikasi={setDedikasi} />}
