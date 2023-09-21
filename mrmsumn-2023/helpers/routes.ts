@@ -12,7 +12,8 @@ const publicRoutes : any = [
     '/registration',
     '/sponsor',
     '/candidates',
-    '/vote'
+    '/vote',
+    '/gallery'
 ];
 
 export {protectedRoutes, publicRoutes};

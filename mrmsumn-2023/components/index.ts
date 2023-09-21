@@ -13,3 +13,5 @@ export { CandidatesMobile } from "./CandidatesMobile";
 export { CandidatesDesktop } from "./CandidatesDesktop"; 
 export { CandidatesIntro } from "./CandidatesIntro"; 
 export { BoxVote } from "./BoxVote";
+export { Gallery } from "./Gallery";
+export { GalleryModal } from "./GalleryModal";
