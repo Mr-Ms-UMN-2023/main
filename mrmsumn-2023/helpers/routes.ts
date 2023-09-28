@@ -10,7 +10,10 @@ const publicRoutes : any = [
     '/loginwisanggeniadmin',
     '/form-regis',
     '/registration',
-    '/sponsor', 
+    '/sponsor',
+    '/candidates',
+    '/vote',
+    '/gallery' 
     '/medpar'    
 ];
 

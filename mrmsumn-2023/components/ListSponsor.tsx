@@ -12,6 +12,20 @@ import { useState, useEffect, useRef } from "react";
 
 const ListSponsor = ({list} : any) => {
 
+
+  const sponsorArr: any = [];
+  const medparArr: any = [];
+
+  const skeletonArr:any = [];
+  for(let i:number = 0; i < list.length; i++){
+    const item = (
+      // <ImageLoader width={'15rem'} height={'15rem'}/>
+      <Skeleton width={'15rem'} height={'15rem'}></Skeleton>
+    )
+
+    skeletonArr.push(item);
+}
+
   const texts = useRef<HTMLDivElement[]>([]);
 
   useEffect(() => {
@@ -40,8 +54,15 @@ const ListSponsor = ({list} : any) => {
     };
   }, []);
 
-  const sponsorArr: any = [];
-  const medparArr: any = [];
+  useEffect(() => {
+    if(sponsorArr.length + medparArr.length === list.length){
+      setLoaded(true);
+    }
+
+    console.log(sponsorArr.length);
+    console.log(medparArr.length);
+    console.log(loaded);
+  }, [sponsorArr,  medparArr]);
 
   useEffect(() => {
     console.log(sponsorArr.length);
@@ -104,6 +125,8 @@ const ListSponsor = ({list} : any) => {
           SPONSOR
         </Heading>
 
+
+
         {sponsorArr.length % 3 == 0 ? (
           <Grid
             // bg='yellow'
@@ -134,6 +157,7 @@ const ListSponsor = ({list} : any) => {
             {sponsorArr}
           </Flex>
         )}
+
       </Flex>
       {/* <Flex
         className={styles.hidden}
