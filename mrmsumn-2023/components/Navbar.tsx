@@ -131,6 +131,10 @@ const Navbar = () => {
           title: "Sponsor",
           link: "/sponsor",
         },
+        {
+          title: "Media Partner",
+          link: "/medpar",
+        },        
       ]);
     } else {
       setNavbarList([
@@ -157,6 +161,10 @@ const Navbar = () => {
         {
           title: "Sponsor",
           link: "/sponsor",
+        },
+        {
+          title: "Media Partner",
+          link: "/medpar",
         },
       ]);
     }

@@ -1,5 +1,5 @@
 const protectedRoutes : any = [
-    '/test'
+
 ];
 
 const publicRoutes : any = [
@@ -13,7 +13,8 @@ const publicRoutes : any = [
     '/sponsor',
     '/candidates',
     '/vote',
-    '/gallery'
+    '/gallery' 
+    '/medpar'    
 ];
 
 export {protectedRoutes, publicRoutes};
