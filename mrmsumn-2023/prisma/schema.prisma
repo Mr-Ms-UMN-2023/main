@@ -164,3 +164,15 @@ model sponsor_medpar{
   url String? @db.VarChar(2048)
   bg Boolean @default(false)
 }
+
+model finalis2023 {
+  finalisID String @default(uuid()) @id
+  image String? @db.VarChar(1000)
+}
+
+model vote_finalis2023{
+  voteID String @default(uuid()) @id
+  finalisID String 
+  userID String
+  timestamp DateTime @default(now())
+}
