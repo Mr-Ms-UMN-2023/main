@@ -9,7 +9,12 @@ const prisma = new PrismaClient();
 
 export const GET = async (req: NextApiRequest, res: NextApiResponse) => {
   try {
-    const get = await prisma.finalis2023.findMany();
+    const get = await prisma.vote_finalis2023.groupBy({
+      by: "finalisID",
+      _count: {
+        finalisID: true,
+      },
+    });
 
     return res.status(200).json({
       status: 200,
@@ -19,34 +24,6 @@ export const GET = async (req: NextApiRequest, res: NextApiResponse) => {
     return res.status(500).json({
       status: 500,
       message: "Tidak ada vote",
-    });
-  }
-};
-
-export const POST = async (req: NextApiRequest, res: NextApiResponse) => {
-  const BASE_PATH =
-    process.env.NODE_ENV == "development"
-      ? "http://localhost:3000"
-      : process.env.APP_URL;
-
-  const { finalisID, userID } = await req.body;
-
-  try {
-    const post = await prisma.vote_finalis2023.create({
-      data: {
-        finalisID: finalisID,
-        userID: userID,
-      },
-    });
-
-    return res.status(200).json({
-      status: 200,
-      data: post,
-    });
-  } catch (err) {
-    return res.status(500).json({
-      status: 200,
-      message: "Gagal melakukan voting",
     });
   }
 };
@@ -61,8 +38,7 @@ const handler = (req: NextApiRequest, res: NextApiResponse) => {
       GET(req, res);
       break;
     }
-    case "POST": {
-    }
+
     // case "DELETE": {
     //   DELETE(req, res);
     //   break;
