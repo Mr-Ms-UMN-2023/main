@@ -9,11 +9,16 @@ import {
   Input,
   Text,
 } from "@chakra-ui/react";
+import Head from 'next/head';
+import { useState, useEffect } from "react";
 import { ErrorMessage } from "@hookform/error-message";
 import { type } from "os";
 import { useForm } from "react-hook-form";
 
 const HimalayaKonfirm = () => {
+
+  const [snapToken, setSnapToken] = useState<any>(null);
+
   const {
     register,
     handleSubmit,
@@ -21,10 +26,11 @@ const HimalayaKonfirm = () => {
     getValues,
     watch,
   } = useForm({});
+  
 
   const formObject = [
     {
-      name: "name",
+      name: "nama",
       label: "Nama",
       type: "",
       validation: { required: { value: true, message: "Nama wajib diisi" } },
@@ -37,13 +43,13 @@ const HimalayaKonfirm = () => {
         required: { value: true, message: "email wajib diisi" },
         pattern: {
           value:
-            /^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-]+)(\.[a-zA-Z]{2,5}){1,2}$/,
+          /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,   
           message: "Email tidak valid",
         },
       },
     },
     {
-      name: "konfirm-email",
+      name: "konfirm_email",
       label: "Konfirmasi Email",
       type: "",
       validation: {
@@ -53,17 +59,20 @@ const HimalayaKonfirm = () => {
       },
     },
     {
-      name: "noTelp",
+      name: "whatsapp",
       label: "No. Telp",
-      type: "number",
+      type: "",
       validation: {
         required: { value: true, message: "Nomor Telephone wajib diisi" },
-        valueAsNumber: { value: true, message: "Masukkan angka" },
-        min: { value: 9, message: "Minimal 9-12 angka" },
+        pattern: {
+          value:
+          /^\d{9,12}$/,
+          message: "Nomor telephone harus berjumlah 9 - 12 angka.",
+        },
       },
     },
     {
-      name: "tiketAmount",
+      name: "jumlah",
       label: "Jumlah Tiket",
       type: "number",
       validation: {
@@ -74,12 +83,66 @@ const HimalayaKonfirm = () => {
     },
   ];
 
-  const onSubmit = (e: any) => {
-    console.log("value", e.value);
+  useEffect(() => {
+    console.log(process.env);
+    if (snapToken && typeof window !== undefined){
+      window.snap.pay(snapToken, {
+        onSuccess : async (res : any) => {
+          await fetch(process.env.NEXT_PUBLIC_API_URL + "/api/ticket/payment/notification", 
+            {
+              method : "POST", 
+              body : JSON.stringify(res)
+            }
+          );
+          console.log("berhasil");
+        }, 
+        onPending : async (res : any) => {
+          console.log("pending");
+        },
+        onError : async (err : any) => {
+          console.log("Error");
+        }
+      });
+    }
+  }, [snapToken]);
+
+  const onSubmit = async (e: any) => {
+
+    console.log(e);
+    if (e?.email != e?.konfirm_email){
+      // popup validasi / lgsung inline
+      return;
+    }
+
+    const formData = new FormData();
+    formData.append("nama", e.nama);
+    formData.append("email", e.email);
+    formData.append("whatsapp", e.whatsapp);
+    formData.append("jumlah", e.jumlah);
+
+    const response = await fetch(process.env.NEXT_PUBLIC_API_URL + "/api/ticket/register", {
+      method: "POST",
+      body: formData
+    });
+
+    const parsedResponse = await response.json();     
+    const token = parsedResponse.data?.token!;
+    setSnapToken(token);
   };
 
   return (
-    <Flex
+    <>
+          <Head>
+            <script
+              src={process.env.NEXT_PUBLIC_MIDTRANS_INTERFACE_URL}
+              type="text/javascript"
+              data-client-key={process.env.NEXT_PUBLIC_MIDTRANS_CLIENT_KEY}
+              token={snapToken}
+              async
+            />
+          </Head>                
+
+          <Flex
       position={"relative"}
       minW="100vw"
       minH={"100vh"}
@@ -151,6 +214,10 @@ const HimalayaKonfirm = () => {
         </form>
       </Box>
     </Flex>
+
+
+    </>
+
   );
 };
 

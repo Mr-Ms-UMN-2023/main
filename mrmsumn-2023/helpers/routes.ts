@@ -15,6 +15,7 @@ const publicRoutes: any = [
   "/medpar",
   "/tiket-himalaya",
   "/tiket-himalaya/konfirmasi",
+  "/tiket-himalaya/qr",
   "/scan-qr",
 ];
 

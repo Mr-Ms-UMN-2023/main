@@ -6,6 +6,7 @@ import {
   Image,
   Heading,
   Link,
+  Skeleton
 } from "@chakra-ui/react";
 import styles from "@/styles/Home.module.css";
 import { useState, useEffect, useRef } from "react";
@@ -15,6 +16,8 @@ const ListSponsor = ({list} : any) => {
 
   const sponsorArr: any = [];
   const medparArr: any = [];
+
+  const [loaded, setLoaded] = useState<any>(false);
 
   const skeletonArr:any = [];
   for(let i:number = 0; i < list.length; i++){

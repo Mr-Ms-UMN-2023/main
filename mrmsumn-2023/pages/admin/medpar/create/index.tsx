@@ -63,7 +63,7 @@ export default function Create(){
        // };
         //reader.readAsDataURL(file);
       } else {
-     setSelectedImage(null);
+        setSelectedImage(null);
         setPreviewImage(null);
       }
   }
