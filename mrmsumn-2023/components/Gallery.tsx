@@ -12,125 +12,19 @@ const Gallery = (props: any) => {
   const [openModal, setOpenModal] = useState(false);
   const [modalSource, setModalSource] = useState("");
   const [modalText, setModalText] = useState("");
+  let imageSource = props.source;
   
   // range speed: -10 sampai 10
-
-  const imageSources = [
-    {
-      src: "Assets/Gallery/pancala-day1-1.jpg",
-      kategori: "PANCALA - DAY 1",
-      alt: "",
-      speed: 5,
-      mt: "3rem",
-      w: "50%",
-      ml: "10%",
-    },
-    {
-      src: "Assets/Gallery/pancala-day1-2.jpg",
-      kategori: "PANCALA - DAY 1",
-      alt: "",
-      speed: 2,
-      mt: "2.67rem",
-      w: "38%",
-      ml: "35%",
-    },
-    {
-      src: "Assets/Gallery/pancala-day1-1.jpg",
-      kategori: "PANCALA - DAY 1",
-      alt: "",
-      speed: 3,
-      mt: "2.3rem",
-      w: "32%",
-      ml: "50%",
-    },
-    {
-      src: "Assets/Gallery/pancala-day1-2.jpg",
-      kategori: "PANCALA - DAY 1",
-      alt: "",
-      speed: 7,
-      mt: "2rem",
-      w: "38%",
-      ml: "37%",
-    },
-    {
-      src: "Assets/Gallery/pancala-day1-1.jpg",
-      kategori: "PANCALA - DAY 1",
-      alt: "",
-      speed: -4,
-      mt: "0rem",
-      w: "32%",
-      ml: "50%",
-    },
-    {
-      src: "Assets/Gallery/pancala-day1-2.jpg",
-      kategori: "PANCALA - DAY 1",
-      alt: "",
-      speed: 2,
-      mt: "2rem",
-      w: "40%",
-      ml: "60%",
-    },
-    {
-      src: "Assets/Gallery/pancala-day2-1.jpg",
-      kategori: "PANCALA - DAY 2",
-      alt: "",
-      speed: -5,
-      mt: "3rem",
-      w: "40%",
-      ml: "30%",
-    },
-    {
-      src: "Assets/Gallery/pancala-day2-2.jpg",
-      kategori: "PANCALA - DAY 2",
-      alt: "",
-      speed: 1,
-      mt: "1.4rem",
-      w: "36%",
-      ml: "32%",
-    },
-    {
-      src: "Assets/Gallery/pancala-day2-1.jpg",
-      kategori: "PANCALA - DAY 2",
-      alt: "",
-      speed: 2,
-      mt: "3rem",
-      w: "28%",
-      ml: "27%",
-    },
-    {
-      src: "Assets/Gallery/pancala-day2-2.jpg",
-      kategori: "PANCALA - DAY 2",
-      alt: "",
-      speed: 1,
-      mt: "2.2rem",
-      w: "40%",
-      ml: "56%",
-    },
-    {
-      src: "Assets/Gallery/pancala-day2-1.jpg",
-      kategori: "PANCALA - DAY 2",
-      alt: "",
-      speed: -2,
-      mt: "1rem",
-      w: "36%",
-      ml: "46%",
-    },
-    {
-      src: "Assets/Gallery/pancala-day2-2.jpg",
-      kategori: "PANCALA - DAY 2",
-      alt: "",
-      speed: 1,
-      mt: "2rem",
-      w: "36%",
-      ml: "50%",
-    },
-  ];
 
   // useEffect(() => {
   //   console.log(isHovered);
   //   console.log(hoverSource);
   //   console.log(hoverText);
   // }, [isHovered, hoverSource, hoverText]);
+
+  // useEffect(() => {
+  //   console.log(imageSource);
+  // }, [imageSource]);
 
   const handleClick = (source: string, text: string) => {
     setModalSource(source);
@@ -157,11 +51,12 @@ const Gallery = (props: any) => {
     setIsHovered(true);
   }
 
-  imageSources.forEach((source) => {
+  imageSource.forEach((source: any) => {
     const image = (
       <Parallax
         speed={source.speed}
         mt={source.mt}
+        key={source.src}
       >
         <Button onClick={() => handleClick(source.src, source.kategori)}
         w={source.w}
