@@ -17,6 +17,24 @@
   src: url("../public/Font/static/Montserrat-Light.ttf") format("truetype");
 }
 
+@font-face {
+  font-family: "Cinzel-Regular";
+  src: url("../public/Font/Cinzel_Decorative/CinzelDecorative-Regular.ttf")
+    format("truetype");
+}
+
+@font-face {
+  font-family: "Cinzel-Bold";
+  src: url("../public/Font/Cinzel_Decorative/CinzelDecorative-Bold.ttf")
+    format("truetype");
+}
+
+@font-face {
+  font-family: "Cinzel-Black";
+  src: url("../public/Font/Cinzel_Decorative/CinzelDecorative-Black.ttf")
+    format("truetype");
+}
+
 /* :root {
   --max-width: 1100px;
   --border-radius: 12px;
