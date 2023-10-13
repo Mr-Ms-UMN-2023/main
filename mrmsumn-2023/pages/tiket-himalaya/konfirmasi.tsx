@@ -7,7 +7,15 @@ import {
   FormLabel,
   Img,
   Input,
+  Modal,
+  ModalBody,
+  ModalCloseButton,
+  ModalContent,
+  ModalFooter,
+  ModalHeader,
+  ModalOverlay,
   Text,
+  useDisclosure,
 } from "@chakra-ui/react";
 import Head from "next/head";
 import { useState, useEffect } from "react";
@@ -23,7 +31,8 @@ declare global {
 
 const HimalayaKonfirm = () => {
   const [snapToken, setSnapToken] = useState<any>(null);
-
+  const [errSnapToken, setErrSnapToken] = useState<any>(null);
+  const { isOpen, onOpen, onClose } = useDisclosure();
   const {
     register,
     handleSubmit,
@@ -81,6 +90,11 @@ const HimalayaKonfirm = () => {
         required: { value: true, message: "Jumlah tiket wajib diisi" },
         valueAsNumber: { value: true, message: "Masukkan angka" },
         min: { value: 1, message: "Minimal membeli 1 tiket" },
+        max: {
+          value: 4,
+          message:
+            "Jumlah pembelian maksimal untuk satu sesi pembayaran adalah 4 tiket",
+        },
       },
     },
   ];
@@ -131,6 +145,26 @@ const HimalayaKonfirm = () => {
     const parsedResponse = await response.json();
     const token = parsedResponse.data?.token!;
     setSnapToken(token);
+
+    if (
+      parsedResponse.code != 200 &&
+      parsedResponse.message == "PRODUCT_UNAVAILABLE"
+    ) {
+      onOpen();
+      setErrSnapToken(
+        parsedResponse(
+          "Kuota pembelian Earlybird telah habis, anda dapat kembali lagi sesaat jika adanya pembatalan pembelian"
+        )
+      );
+    } else if (
+      parsedResponse.code != 200 &&
+      parsedResponse.message == "LIMITED_PURCHASE"
+    ) {
+      onOpen();
+      setErrSnapToken(
+        parsedResponse("Maximal 4 tiket yang dapat dibeli dalam 1 transaksi")
+      );
+    }
   };
 
   useEffect(() => {
@@ -138,10 +172,11 @@ const HimalayaKonfirm = () => {
 
     let scriptTag = document.createElement("script");
 
-    scriptTag.src = midtransUrl;
+    midtransUrl && (scriptTag.src = midtransUrl);
 
     const midtransCLientKey = process.env.NEXT_PUBLIC_MIDTRANS_CLIENT_KEY;
-    scriptTag.setAttribute("data-client-key", midtransCLientKey);
+    midtransCLientKey &&
+      scriptTag.setAttribute("data-client-key", midtransCLientKey);
 
     document.body.appendChild(scriptTag);
 
@@ -163,6 +198,20 @@ const HimalayaKonfirm = () => {
           />
         )}
       </Head> */}
+      <Modal isOpen={isOpen} onClose={onClose}>
+        <ModalOverlay />
+        <ModalContent>
+          <ModalHeader>Error Pembelian</ModalHeader>
+          <ModalCloseButton />
+          <ModalBody pb={6}>
+            <Text>{errSnapToken && errSnapToken}</Text>
+          </ModalBody>
+
+          <ModalFooter>
+            <Button onClick={onClose}>Cancel</Button>
+          </ModalFooter>
+        </ModalContent>
+      </Modal>
 
       <Flex
         position={"relative"}
@@ -214,7 +263,7 @@ const HimalayaKonfirm = () => {
                     {...register(e.name, e.validation)}></Input>
                   {errors[e.name] && (
                     <FormErrorMessage fontWeight={"bold"} color={"red"}>
-                      {errors[e.name].message?.toString() || ""}
+                      {errors[e.name]?.message?.toString() || ""}
                     </FormErrorMessage>
                   )}
                 </FormControl>

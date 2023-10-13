@@ -1,38 +1,39 @@
-import { Box, Flex, Img, Text } from "@chakra-ui/react";
-import { useSearchParams } from "next/navigation";
+import { Box, color, Flex, Img, Text } from "@chakra-ui/react";
+import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 
 const ETiket = () => {
-  const [tiketData, setTiketData] = useState();
-  const searchParams = useSearchParams();
-  //   const [qrToken, setQrToken] = useState([]);
-  const qrToken = ["koong", "hiap"];
-  //   setQrToken(["ojan", "Koong"]);
-
-  const TIKET = [
-    {
-      nama: "koong",
-      token: "token",
-      email: "koong@gmail.com",
-    },
-    { nama: "koong", token: "token", email: "koong@gmail.com" },
-  ];
-
-  console.log(searchParams.get("id"));
+  const [tiketData, setTiketData] = useState<any>();
+  const route = useRouter();
 
   const fetchData = async () => {
-    const response = await fetch("/api/e-ticket/" + searchParams.get("id"));
+    const pattern = /order_id=([A-Z0-9-]+)/;
+    const match = window.location.href.toString().match(pattern);
+    console.log(match);
+    if (match) {
+      const order_id = match[1];
+      console.log(order_id);
+      const response = await fetch(
+        process.env.NEXT_PUBLIC_API_URL + "/api/ticket/get/order_id/" + order_id
+      );
 
-    const parsedResponse = await response.json();
-    if (parsedResponse.status == 200) {
-      const res = parsedResponse.data;
-      setTiketData(res);
+      console.log(
+        process.env.NEXT_PUBLIC_API_URL + "/api/ticket/get/order_id/" + order_id
+      );
+
+      const parsedResponse = await response.json();
+
+      if (parsedResponse.code == 200) {
+        const res = parsedResponse.data;
+        console.log(res, parsedResponse);
+        setTiketData(res);
+      }
     }
   };
 
   useEffect(() => {
     fetchData();
-  });
+  }, []);
 
   return (
     <Flex
@@ -42,52 +43,65 @@ const ETiket = () => {
       alignItems="center"
       justify={"center"}
       w="100vw">
-      {/* {TIKET.map((e: any, index) => {
-        return <Tiket {...e} key={index} />;
-      })} */}
-
-      <Img
-        width={"40%"}
-        position={"absolute"}
-        top="0px"
-        right={"0px"}
-        maxW="20rem"
-        src="/Assets/TiketHimalaya/bunga.png"
-      />
-      <Img
-        zIndex={"0"}
-        width={"40%"}
-        maxW="40rem"
-        position={"absolute"}
-        bottom="0px"
-        left={"0px"}
-        src="/Assets/TiketHimalaya/wayang.png"
-      />
-      <Img
-        transform="rotateY(180deg)"
-        width={"40%"}
-        position={"absolute"}
-        top="0px"
-        left={"0px"}
-        maxW="20rem"
-        src="/Assets/TiketHimalaya/bunga.png"
-      />
-      <Img
-        transform="rotateY(180deg)"
-        zIndex={"0"}
-        width={"40%"}
-        maxW="40rem"
-        position={"absolute"}
-        bottom="0px"
-        right={"0px"}
-        src="/Assets/TiketHimalaya/wayang.png"
-      />
-      <Text
-        fontFamily={"TrajanPro-Bold"}
-        fontWeight={"black"}
-        color={"#f3d242"}>
-        E-Tiket belum tersedia saat ini silahkan kembali lagi nanti
-      </Text>
+      {tiketData ? (
+        tiketData.map((e: any, index: number) => {
+          return (
+            <>
+              <Tiket
+                {...e}
+                index={index + 1}
+                max={tiketData.length}
+                key={index}
+              />
+            </>
+          );
+        })
+      ) : (
+        <>
+          <Img
+            width={"40%"}
+            position={"absolute"}
+            top="0px"
+            right={"0px"}
+            maxW="20rem"
+            src="/Assets/TiketHimalaya/bunga.png"
+          />
+          <Img
+            zIndex={"0"}
+            width={"40%"}
+            maxW="40rem"
+            position={"absolute"}
+            bottom="0px"
+            left={"0px"}
+            src="/Assets/TiketHimalaya/wayang.png"
+          />
+          <Img
+            transform="rotateY(180deg)"
+            width={"40%"}
+            position={"absolute"}
+            top="0px"
+            left={"0px"}
+            maxW="20rem"
+            src="/Assets/TiketHimalaya/bunga.png"
+          />
+          <Img
+            transform="rotateY(180deg)"
+            zIndex={"0"}
+            width={"40%"}
+            maxW="40rem"
+            position={"absolute"}
+            bottom="0px"
+            right={"0px"}
+            src="/Assets/TiketHimalaya/wayang.png"
+          />
+          <Text
+            fontFamily={"TrajanPro-Bold"}
+            fontWeight={"black"}
+            color={"#f3d242"}>
+            Code E-Tiket Salah
+          </Text>
+        </>
+      )}
     </Flex>
   );
 };
@@ -95,31 +109,42 @@ const ETiket = () => {
 const Tiket = (props: any) => {
   return (
     <Box maxW={"800px"} w="100vw" p="1rem" color="white">
+      {props.max !== 1 && props.index !== 1 && (
+        <hr
+          style={{
+            marginBottom: "5rem",
+            color: "#f4cf41",
+            border: "1px dashed #f4cf41",
+          }}
+        />
+      )}
       <Img
         w="100%"
         src="https://cdn.discordapp.com/attachments/1125453534062719016/1162302877507784704/Banner_Ticket.png?ex=653b71e8&is=6528fce8&hm=b97686cec57f00ef08a7b30985c857004429ae330f7fa8b19e53a57afd92992a&"
       />
-      <Flex mt="2rem" w="100%">
+      <Text fontSize={"1.5rem"} mt={"1rem"} fontWeight={"bold"}>
+        Ticket {props.index} of {props.max}
+      </Text>
+      <Flex w="100%">
         <Img
           objectFit={"contain"}
           maxH={"60vh"}
-          mr="2rem"
           w="50%"
-          src={`https://image-charts.com/chart?chs=200x200&cht=qr&chl=${props.token}&choe=UTF-8`}
+          src={`https://image-charts.com/chart?chs=200x200&cht=qr&chl=${props.token}&choe=UTF-8&icqrb=000000&icqrf=f4cf41&chof=.png`}
         />
         <Flex flexDir={"column"} justify="center">
           <Box>
             <Text>Tiket No. / No. Tiket</Text>
-            <Text fontWeight={"bold"}>{props.token}</Text>
+            <Text fontWeight={"bold"}>{props.token.slice(7)}</Text>
           </Box>
-          <Box mt="1rem">
+          {/* <Box mt="1rem">
             <Text>Name / Nama</Text>
             <Text fontWeight={"bold"}>{props.nama}</Text>
           </Box>
           <Box mt="1rem">
             <Text>Email</Text>
             <Text fontWeight={"bold"}>{props.email}</Text>
-          </Box>
+          </Box> */}
         </Flex>
       </Flex>
       <Box mt="1rem" fontWeight={"bold"}>
@@ -128,10 +153,12 @@ const Tiket = (props: any) => {
       <Flex gap={"2rem"}>
         <Box>
           <Box>Open Gate</Box>
+          <Box>Date</Box>
           <Box>Vanue Event</Box>
         </Box>
         <Box>
           <Box>: 16.00 - 18.00 WIB</Box>
+          <Box>: 24 November 2023</Box>
           <Box>: QBIG Convention Hall</Box>
         </Box>
       </Flex>

@@ -24,7 +24,7 @@
         style="width: 100%"
         src="https://cdn.discordapp.com/attachments/1125453534062719016/1162302877507784704/Banner_Ticket.png?ex=653b71e8&is=6528fce8&hm=b97686cec57f00ef08a7b30985c857004429ae330f7fa8b19e53a57afd92992a&" />
 
-      <div style="font-size: 1.2rem">Hi Koong,</div>
+      <div style="font-size: 1.2rem">Hi <%= nama %>,</div>
       <div style="margin-top: 1rem">
         Selamat pembelian tiket anda telah berhasil
       </div>
@@ -67,15 +67,15 @@
         </div>
 
         <div style="padding-left: 1rem; font-weight: bold">
-          <div>: IEJIJIAIDOADSJ</div>
+          <div>: <%= transaction_id %></div>
           <div>: HIMALAYA: Awarding Night Mr. & Ms. UMN 2023</div>
-          <div>: 3</div>
-          <div>: Koong Hiap</div>
-          <div>: 08979463181</div>
-          <div>: Koonghiap@gmail.com</div>
+          <div>: <%= jumlah_ticket %></div>
+          <div>: <%= nama %></div>
+          <div>: <%= wa %></div>
+          <div>: <%= email %></div>
         </div>
       </div>
-      <a href="https://mrms.umn.ac.id/e-tiket?id=koong">
+      <a href="https://mrms.umn.ac.id/e-tiket?id=<%= transaction_id %>">
         <div
           style="
             margin-top: 2rem;
