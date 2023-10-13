@@ -19,8 +19,10 @@ import {
 
 import { useState, useEffect, useRef } from "react";
 import { division } from "@/data/divisions";
+import { useSearchParams } from "next/navigation";
 
 export default function Home(props: any) {
+  const searchParams = useSearchParams();
   // const [dedikasi, setDedikasi] = useState(false);
 
   const router = useRouter();
@@ -32,6 +34,14 @@ export default function Home(props: any) {
   const [desktop] = useMediaQuery("(min-width: 1081px)");
 
   // const [show, setShow] = useState("none");
+  // console.log(searchParams.get("order_id"));
+
+  if (
+    searchParams.get("order_id") &&
+    searchParams.get("status_code") == "200"
+  ) {
+    router.push("get-tiket");
+  }
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -41,7 +51,11 @@ export default function Home(props: any) {
     <>
       <Navbar />
       <ShiningSoon />
-        {desktop ? <CandidatesDesktop show={true} /> : <CandidatesMobile show={true} />}
+      {desktop ? (
+        <CandidatesDesktop show={true} />
+      ) : (
+        <CandidatesMobile show={true} />
+      )}
       <Dedikasi />
       <Teaser />
       {/* {dedikasi && <Dedikasi Dedikasi={setDedikasi} />}
@@ -54,7 +68,7 @@ export default function Home(props: any) {
     <MrMsDetail /> */}
 
       {/* DISINI BUAT POPUPNYA */}
-    <Footer />
+      <Footer />
     </>
   );
 }

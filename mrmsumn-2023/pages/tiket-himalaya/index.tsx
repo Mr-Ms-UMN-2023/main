@@ -1,5 +1,13 @@
 import { Box, Text, Img, Flex, HStack, Link } from "@chakra-ui/react";
+import router from "next/router";
 // import Link from "next/link";
+
+export const TIKET = {
+  tempat: "Q BIG Convention Hall",
+  tanggal: "24 November 2023",
+  jam: "16.00 - 18.00",
+  harga: 85000,
+};
 
 const TiketHimalaya = () => {
   return (
@@ -62,7 +70,7 @@ const TiketHimalaya = () => {
               src="/Assets/TiketHimalaya/icon-location.png"
             />
             <Text>
-              Lokasi: <b>QBIG Convention</b>
+              Lokasi: <b>{TIKET.tempat}</b>
             </Text>
           </HStack>
           <HStack>
@@ -73,7 +81,7 @@ const TiketHimalaya = () => {
               src="/Assets/TiketHimalaya/icon-calendar.png"
             />
             <Text>
-              Tangal: ̌<b>11 November 2023</b>
+              Tangal: ̌<b>{TIKET.tanggal}</b>
             </Text>
           </HStack>
           <HStack>
@@ -84,7 +92,7 @@ const TiketHimalaya = () => {
               src="/Assets/TiketHimalaya/icon-time.png"
             />
             <Text>
-              Jam: <b>16.00 WIB</b>
+              Open Gate: <b>{TIKET.jam.toString()} WIB</b>
             </Text>
           </HStack>
           <HStack>
@@ -95,7 +103,7 @@ const TiketHimalaya = () => {
               src="/Assets/TiketHimalaya/icon-price.png"
             />
             <Text>
-              Harga Tiket: <b>Rp. 20.000</b>
+              Harga Tiket: <b>Rp. {TIKET.harga.toLocaleString()}</b>
             </Text>
           </HStack>
           <Text fontSize={"0.8rem"} mt={"2rem"}>
@@ -104,16 +112,17 @@ const TiketHimalaya = () => {
           </Text>
           <Link href="https://docs.google.com/forms/d/e/1FAIpQLSedPpIfUO3BUyl6p7Cn-CzQqyBzqrSDnfpSbLhzl2HPrN4OaQ/viewform?usp=sf_link">
             <Text fontWeight={"bold"} color={"#FCD741"}>
-              Formulis Pengajuan Kendala
+              Formulir Pengajuan Kendala
             </Text>
           </Link>
 
-          <Link
+          <Box
+            cursor={"pointer"}
+            onClick={() => router.push("/tiket-himalaya/konfirmasi")}
             w={"fit-content"}
             alignSelf={"center"}
             justifySelf={"center"}
             textAlign={"center"}
-            href={"/tiket-himalaya/konfirmasi"}
             padding={"0.5rem"}
             mt={"2rem"}
             fontSize={{ base: "1rem", md: "1.5rem" }}
@@ -122,7 +131,7 @@ const TiketHimalaya = () => {
             width={"80%"}
             bg="#FCD741">
             DAPATKAN TIKET ANDA
-          </Link>
+          </Box>
         </Flex>
       </Flex>
     </>

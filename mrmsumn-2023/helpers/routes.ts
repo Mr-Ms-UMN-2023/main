@@ -17,6 +17,8 @@ const publicRoutes: any = [
   "/tiket-himalaya/konfirmasi",
   "/tiket-himalaya/qr",
   "/scan-qr",
+  "/get-tiket",
+  "/e-ticket",
 ];
 
 export { protectedRoutes, publicRoutes };
