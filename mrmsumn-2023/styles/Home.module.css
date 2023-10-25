@@ -97,6 +97,24 @@
   height: 100vh;
 }
 
+.zoomAnimation {
+  width: 100%;
+  animation-name: zoomOut;
+  animation-delay: 8s;
+  animation-duration: 3s;
+  animation-timing-function: ease;
+  /* animation: zoomOut 3s; */
+}
+
+@keyframes zoomOut {
+  0% {
+    transform: scale(2, 2);
+  }
+  100% {
+    transform: scale(1, 1);
+  }
+}
+
 /* Enable hover only on non-touch devices */
 @media (hover: hover) and (pointer: fine) {
   .card:hover {
@@ -353,3 +371,4 @@
   /* Define your pulse animation here */
   animation: pulse 2s infinite;
 }
+

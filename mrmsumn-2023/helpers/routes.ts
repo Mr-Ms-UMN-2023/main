@@ -19,6 +19,7 @@ const publicRoutes: any = [
   "/scan-qr",
   "/get-tiket",
   "/e-ticket",
+  "/indraprastha",
 ];
 
 export { protectedRoutes, publicRoutes };

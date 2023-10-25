@@ -20,7 +20,7 @@ export default function App({ Component, pageProps }: AppProps) {
           <meta name="viewport" content="width=device-width, initial-scale=1" />
           <link rel="icon" href="/Assets/Logo/LogoMrMsUMN2023.png" />
         </Head>
-        <Loading />
+        {/* <Loading /> */}
         <Component {...pageProps} />
       </ChakraProvider>
     </UserContext.Provider>
