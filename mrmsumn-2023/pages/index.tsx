@@ -51,11 +51,7 @@ export default function Home(props: any) {
     <>
       <Navbar />
       <ShiningSoon />
-      {desktop ? (
-        <CandidatesDesktop show={true} />
-      ) : (
-        <CandidatesMobile show={true} />
-      )}
+        {desktop ? <CandidatesDesktop show={true} /> : <CandidatesMobile show={true} brightness={1}/>}
       <Dedikasi />
       <Teaser />
       {/* {dedikasi && <Dedikasi Dedikasi={setDedikasi} />}

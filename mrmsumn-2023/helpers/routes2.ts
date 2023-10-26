@@ -9,7 +9,7 @@ const publicRoutes: any = [
   "/form-regis",
   "/registration",
   "/sponsor",
-  "/candidates",
+  "/pancala",
   "/vote",
   "/gallery",
   "/medpar",

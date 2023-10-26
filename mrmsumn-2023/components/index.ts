@@ -13,6 +13,8 @@ export { ListSponsor } from "./ListSponsor";
 export { CandidatesMobile } from "./CandidatesMobile";
 export { CandidatesDesktop } from "./CandidatesDesktop"; 
 export { CandidatesIntro } from "./CandidatesIntro"; 
+export { CandidatesWrapper } from "./CandidatesWrapper";
+
 export { BoxVote } from "./BoxVote";
 export { Gallery } from "./Gallery";
 export { GalleryModal } from "./GalleryModal";

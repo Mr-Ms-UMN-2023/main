@@ -1,8 +1,9 @@
 import { Gallery, Navbar } from "@/components"
 
-import {sources} from "@/data/sampleImageSource";
+import { sources } from "@/data/sampleImageSource";
 
 const gallery = () => {
+    
     return (
         <>
         <Navbar/>

@@ -12,9 +12,7 @@ const Gallery = (props: any) => {
   const [openModal, setOpenModal] = useState(false);
   const [modalSource, setModalSource] = useState("");
   const [modalText, setModalText] = useState("");
-  let imageSource = props.source;
-  
-  // range speed: -10 sampai 10
+  let imageSources = props.source;
 
   // useEffect(() => {
   //   console.log(isHovered);
@@ -23,8 +21,8 @@ const Gallery = (props: any) => {
   // }, [isHovered, hoverSource, hoverText]);
 
   // useEffect(() => {
-  //   console.log(imageSource);
-  // }, [imageSource]);
+  //   console.log(imageSources);
+  // }, [imageSources]);
 
   const handleClick = (source: string, text: string) => {
     setModalSource(source);
@@ -35,7 +33,7 @@ const Gallery = (props: any) => {
 
   const handleCloseFromModal = (cond: boolean) => {
     setOpenModal(cond);
-  }
+  };
 
   const handleImageHover = (kategori: string, source: string) => {
     setHoverSource(source);
@@ -49,34 +47,32 @@ const Gallery = (props: any) => {
 
   const handleOverlayHover = () => {
     setIsHovered(true);
-  }
+  };
 
-  imageSource.forEach((source: any) => {
+  imageSources.forEach((source: any) => {
     const image = (
-      <Parallax
-        speed={source.speed}
-        mt={source.mt}
-        key={source.src}
-      >
-        <Button onClick={() => handleClick(source.src, source.kategori)}
-        w={source.w}
-        ml={source.ml}
-        h={"auto"}
-        bg={"transparent"}
-        _hover={{
+      <Parallax speed={source.speed} key={source.src}>
+        <Button
+          onClick={() => handleClick(source.src, source.kategori)}
+          w={source.w}
+          mt={source.mt}
+          ml={source.ml}
+          h={"auto"}
+          bg={"transparent"}
+          _hover={{
             background: "transparent",
             transform: "scale(1.1)",
-        }}
-        _focus={{
-          background: "transparent"
-        }}
-        _active={{
-          background: "transparent"
-        }}
+          }}
+          _focus={{
+            background: "transparent",
+          }}
+          _active={{
+            background: "transparent",
+          }}
         >
           <Image
             objectFit="contain"
-            w={{base: "100%", xl: "40%"}}
+            w={{ base: "100%", xl: "40%" }}
             h={"auto"}
             src={source.src}
             onMouseEnter={() => handleImageHover(source.kategori, source.src)}
@@ -94,7 +90,12 @@ const Gallery = (props: any) => {
 
   return (
     <>
-      <GalleryModal openModal={openModal} closeModal={handleCloseFromModal} src={modalSource} text={modalText}/>
+      <GalleryModal
+        openModal={openModal}
+        closeModal={handleCloseFromModal}
+        src={modalSource}
+        text={modalText}
+      />
       <Box
         display={isHovered ? "block" : "none"}
         position="fixed"
@@ -109,7 +110,7 @@ const Gallery = (props: any) => {
           {hoverText}
         </Heading>
       </Box>
-      <Flex direction={"column"} overflow={"hidden"} pt={"5rem"} pb={"50rem"}>
+      <Flex direction={"column"} pt={"5rem"} pb={"50rem"}>
         {imageArr}
       </Flex>
     </>
