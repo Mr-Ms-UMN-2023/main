@@ -40,6 +40,7 @@ const HimalayaKonfirm = () => {
     getValues,
     watch,
   } = useForm({});
+  const [load, setLoad] = useState<any>();
 
   const formObject = [
     {
@@ -125,6 +126,7 @@ const HimalayaKonfirm = () => {
   }, [snapToken]);
 
   const onSubmit = async (e: any) => {
+    setLoad(true);
     console.log(e);
     if (e?.email != e?.konfirm_email) {
       // popup validasi / lgsung inline
@@ -145,6 +147,7 @@ const HimalayaKonfirm = () => {
     const parsedResponse = await response.json();
     const token = parsedResponse.data?.token!;
     setSnapToken(token);
+    setLoad(false);
 
     if (
       parsedResponse.code != 200 &&
@@ -198,6 +201,7 @@ const HimalayaKonfirm = () => {
           />
         )}
       </Head> */}
+
       <Modal isOpen={isOpen} onClose={onClose}>
         <ModalOverlay />
         <ModalContent>
@@ -219,6 +223,27 @@ const HimalayaKonfirm = () => {
         minH={"100vh"}
         justify={"center"}
         alignItems="center">
+        {load && (
+          <Box
+            bg={"rgba(0,0,0,0.5)"}
+            h={"100vh"}
+            w="100vw"
+            zIndex={"1"}
+            position={"fixed"}
+            top="50%"
+            left={"50%"}
+            transform={"translate(-50%, -50%)"}>
+            <Img
+              zIndex={"10"}
+              position={"fixed"}
+              top="50%"
+              left={"50%"}
+              transform={"translate(-50%, -50%)"}
+              src="/Assets/TiketHimalaya/load.svg"
+            />
+          </Box>
+        )}
+
         <Img
           width={"40%"}
           position={"absolute"}

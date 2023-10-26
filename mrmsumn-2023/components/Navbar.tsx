@@ -7,6 +7,7 @@ import {
   MenuButton,
   MenuList,
   MenuItem,
+  Highlight,
 } from "@chakra-ui/react";
 import { ChevronDownIcon } from "@chakra-ui/icons";
 import styles from "@/styles/navbar.module.css";
@@ -37,13 +38,15 @@ const Navbar = () => {
           //   link: "/registration",
           // },
           {
+            title: "Ticket Himalaya",
+            link: "/ticket-himalaya",
+            highlight: true,
+          },
+          {
             title: "FAQ",
             link: "/faq",
           },
-          {
-            title: "Mahesa 2023",
-            link: "/recruitment",
-          },
+
           {
             title: "About Us",
             link: "/aboutus",
@@ -52,11 +55,24 @@ const Navbar = () => {
             title: "Sponsor",
             link: "/sponsor",
           },
+          {
+            title: "Media Partner",
+            link: "/medpar",
+          },
+          {
+            title: "Mahesa 2023",
+            link: "/recruitment",
+          },
         ]
       : [
           {
             title: "Home",
             link: "/",
+          },
+          {
+            title: "Ticket Himalaya",
+            link: "/ticket-himalaya",
+            highlight: true,
           },
           // {
           //   title: "Candidate Registration",
@@ -66,10 +82,7 @@ const Navbar = () => {
             title: "FAQ",
             link: "/faq",
           },
-          {
-            title: "Mahesa 2023",
-            link: "/recruitment",
-          },
+
           {
             title: "About Us",
             link: "/aboutus",
@@ -77,6 +90,14 @@ const Navbar = () => {
           {
             title: "Sponsor",
             link: "/sponsor",
+          },
+          {
+            title: "Media Partner",
+            link: "/medpar",
+          },
+          {
+            title: "Mahesa 2023",
+            link: "/recruitment",
           },
         ]
   );
@@ -111,6 +132,11 @@ const Navbar = () => {
           title: "Home",
           link: "/",
         },
+        {
+          title: "Ticket Himalaya",
+          link: "/ticket-himalaya",
+          highlight: true,
+        },
         // {
         //   title: "Candidate Registration",
         //   link: "/registration",
@@ -119,10 +145,7 @@ const Navbar = () => {
           title: "FAQ",
           link: "/faq",
         },
-        {
-          title: "Mahesa 2023",
-          link: "/recruitment",
-        },
+
         {
           title: "About Us",
           link: "/aboutus",
@@ -134,7 +157,11 @@ const Navbar = () => {
         {
           title: "Media Partner",
           link: "/medpar",
-        },        
+        },
+        {
+          title: "Mahesa 2023",
+          link: "/recruitment",
+        },
       ]);
     } else {
       setNavbarList([
@@ -142,6 +169,11 @@ const Navbar = () => {
           title: "Home",
           link: "/",
         },
+        {
+          title: "Ticket Himalaya",
+          link: "/ticket-himalaya",
+          highlight: true,
+        },
         // {
         //   title: "Candidate Registration",
         //   link: "/registration",
@@ -165,6 +197,10 @@ const Navbar = () => {
         {
           title: "Media Partner",
           link: "/medpar",
+        },
+        {
+          title: "Mahesa 2023",
+          link: "/recruitment",
         },
       ]);
     }
@@ -175,6 +211,11 @@ const Navbar = () => {
       title: "Home",
       link: "/",
     },
+    {
+      title: "Ticket Himalaya",
+      link: "/ticket-himalaya",
+      highlight: true,
+    },
     // {
     //   title: "Candidate Registration",
     //   link: "/registration",
@@ -183,13 +224,25 @@ const Navbar = () => {
       title: "FAQ",
       link: "/faq",
     },
-    {
-      title: "Mahesa 2023",
-      link: "/recruitment",
-    },
+    // {
+    //   title: "Mahesa 2023",
+    //   link: "/recruitment",
+    // },
     {
       title: "About Us",
       link: "/aboutus",
+    },
+    {
+      title: "Sponsor",
+      link: "/sponsor",
+    },
+    {
+      title: "Media Partner",
+      link: "/medpar",
+    },
+    {
+      title: "Mahesa 2023",
+      link: "/recruitment",
     },
   ];
 
@@ -217,13 +270,15 @@ const Navbar = () => {
 
   return (
     <Flex
+      background={"rgba(0,0,0,0.1)"}
       left="0px"
       top="0px"
       position={"fixed"}
       minH={"10vh"}
       justifyContent={"space-around"}
       alignItems={"center"}
-      minHeight="10vh"
+      p="1rem"
+      // minHeight="10vh"
       minW={"100vw"}
       zIndex={"100"}
       fontFamily={"TrajanPro-Bold"}>
@@ -232,13 +287,21 @@ const Navbar = () => {
           <Heading
             position="relative"
             className={
-              active && active == event.link ? styles.active : undefined
+              active && active == event.link
+                ? styles.active
+                : event.highlight
+                ? styles.highlight
+                : undefined
             }
             textAlign={"center"}
             key={index}
             style={{ cursor: "pointer" }}
             onClick={() => router.push(event.link)}
-            fontSize={{ base: "0.8rem", md: "1.2rem" }}
+            fontSize={
+              event.highlight
+                ? { base: "1.2rem", md: "1.6rem" }
+                : { base: "0.8rem", md: "1.2rem" }
+            }
             color="white">
             {event.title}
           </Heading>
@@ -264,7 +327,13 @@ const Navbar = () => {
               <MenuItem
                 bg={active && active == event.link ? "#030303" : undefined}
                 position="relative"
-                className={active == event.link ? styles.activeDrop : undefined}
+                className={
+                  active == event.link
+                    ? styles.activeDrop
+                    : event.hightlight
+                    ? styles.highlight
+                    : undefined
+                }
                 key={index}
                 onClick={() => router.push(event.link)}
                 _hover={{ bg: "gray", color: "black" }}>
