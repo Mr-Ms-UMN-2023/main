@@ -4,6 +4,7 @@ const protectedRoutes : any = [
 
 const publicRoutes : any = [
     '/',
+    '/test',
     '/aboutus',
     '/faq',
     '/recruitment',
@@ -13,7 +14,7 @@ const publicRoutes : any = [
     '/sponsor',
     '/candidates',
     '/vote',
-    '/gallery' 
+    '/gallery', 
     '/medpar'    
 ];
 

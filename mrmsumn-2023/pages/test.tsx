@@ -15,8 +15,7 @@ import {
   CandidatesDesktop,
   CandidatesMobile,
   Footer,
-  ShiningSoon2,
-  Indraprastha_Hastinapura
+  ShiningSoon2
 } from "@/components";
 
 import { useState, useEffect, useRef } from "react";
@@ -41,23 +40,9 @@ export default function Home(props: any) {
 
   return (
     <>
-      <Navbar />
-      <ShiningSoon2 />
+      <ShiningSoon2/>
         {desktop ? <CandidatesDesktop show={true} /> : <CandidatesMobile show={true} />}
-      {/* <Indraprastha_Hastinapura/> */}
-      <Dedikasi />
-      <Teaser />
-      {/* {dedikasi && <Dedikasi Dedikasi={setDedikasi} />}
-      <ButtonDedikasi Dedikasi={setDedikasi} />
-      
-      <ShiningSoon />
-      
-      <Navbar />
-      
-    <MrMsDetail /> */}
-
-      {/* DISINI BUAT POPUPNYA */}
-    <Footer />
+   
     </>
   );
 }

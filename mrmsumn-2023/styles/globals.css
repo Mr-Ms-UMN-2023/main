@@ -17,6 +17,11 @@
   src: url("../public/Font/static/Montserrat-Light.ttf") format("truetype");
 }
 
+@font-face{
+  font-family: "Cinzel-Decorative";
+  src: url("../public/Font/CinzelDecorative-Regular.ttf") format("truetype");
+}
+
 /* :root {
   --max-width: 1100px;
   --border-radius: 12px;
