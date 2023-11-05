@@ -9,6 +9,7 @@ export { Dedikasi, ButtonDedikasi } from "./Dedikasi";
 export { Teaser } from "./Teaser";
 export { FormRecruit } from "./FormRecruit";
 export { ListSponsor } from "./ListSponsor"; 
+export { ShiningSoon2 } from "./ShiningSoon2";
 
 export { CandidatesMobile } from "./CandidatesMobile";
 export { CandidatesDesktop } from "./CandidatesDesktop"; 
@@ -19,4 +20,5 @@ export { GalleryModal } from "./GalleryModal";
 
 export { ListMedpar } from "./ListMedpar"; 
 export { Footer } from "./Footer";
+export {Indraprastha_Hastinapura} from "./Indraprastha_Hastinapura";
 

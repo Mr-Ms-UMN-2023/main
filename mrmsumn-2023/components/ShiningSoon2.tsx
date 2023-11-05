@@ -2,29 +2,33 @@ import { Flex, Box, AspectRatio, Img, Text } from "@chakra-ui/react";
 import Image from "next/image";
 import { useState, useRef, useEffect } from "react";
 import styles from "@/styles/Home.module.css";
+import { set } from "react-hook-form";
+import Link from "next/link";
 
-const ShiningSoon = () => {
-  const [brightness, setBrightness] = useState<number>(1);
-  const [scrollY2, setScrollY2] = useState<number>(0);
-  const [shiningShoonOp, setShiningShoonOp] = useState<number>(0);
-  const [hastiOp, setHastiOp] = useState<number>(0);
-
-  const [scrollY, setScrollY] = useState<number>(0);
+const ShiningSoon2 = () => {
+  const [brightness, setBrightness] = useState(1);
+  const [scrollY2, setScrollY2] = useState(0);
+  const [shiningShoonOp, setShiningShoonOp] = useState(0);
+  const [hastiOp, setHastiOp] = useState(0);
+  const [indraOp, setIndraOp] = useState(0);
+  const [scrollY, setScrollY] = useState(0);
   const mainBg = useRef<HTMLDivElement>(null);
 
   const handleScroll = () => {
     // console.log(window.scrollY);
     window.pageYOffset;
-    let scroll: number = window.pageYOffset / 5;
-    let oprec: HTMLElement | null = document.getElementById("oprec");
-    if (oprec && window.pageYOffset > oprec.offsetTop - 100) {
-      oprec.classList.add(styles.show);
+    let scroll = window.pageYOffset / 8;
+    let oprec = document.getElementById("oprec")
+      ? document.getElementById("oprec")?.offsetTop
+      : 0;
+    if (oprec && window.pageYOffset > oprec - 100) {
+      document.getElementById("oprec")?.classList.add(styles.show);
     }
     setScrollY(scroll * 2.2);
 
     setScrollY2(scroll);
 
-    let mainBgBright: number =
+    let mainBgBright =
       mainBg?.current?.offsetHeight &&
       mainBg?.current?.offsetHeight - window.innerHeight > window.pageYOffset
         ? 1 -
@@ -43,31 +47,10 @@ const ShiningSoon = () => {
       setShiningShoonOp(
         1 -
           (window.pageYOffset - mainBg?.current?.offsetHeight * 0.2) /
-            (mainBg?.current?.offsetHeight * 0.3) as number
+            (mainBg?.current?.offsetHeight * 0.3)
       );
     } else {
       setShiningShoonOp(0);
-    }
-
-    if (
-      mainBg?.current?.offsetHeight &&
-      mainBgBright > 0.2 &&
-      mainBgBright <= 0.5
-    ) {
-      setHastiOp(
-        (window.pageYOffset - mainBg?.current?.offsetHeight * 0.2) /
-          (mainBg?.current?.offsetHeight * 0.3) as number
-      );
-    } else {
-      setHastiOp(0);
-    }
-
-    if (mainBg?.current?.offsetHeight && mainBgBright <= 0.2) {
-      setHastiOp(
-        1 -
-          (window.pageYOffset - mainBg?.current?.offsetHeight * 0.3) /
-            (mainBg?.current?.offsetHeight * 0.4) as number
-      );
     }
   };
 
@@ -89,7 +72,8 @@ const ShiningSoon = () => {
         ref={mainBg}
         id="bg-main"
         minH={"300vh"}
-        position={"relative"}>
+        position={"relative"}
+        >
         <Box
           top={"0px"}
           padding={"0px"}
@@ -103,6 +87,7 @@ const ShiningSoon = () => {
           }
           h="100vh"
           w="100vw">
+          
           <Flex id="storyLine" position={"relative"} minH="100vh">
             <Flex className={styles.bg_shining} maxH="100vh" overflow="hidden">
               <Flex
@@ -126,7 +111,7 @@ const ShiningSoon = () => {
                     loading="eager"
                     minW={"100%"}
                     minH={"100%"}
-                    src="/Assets/ShiningSoon/hasti.png"
+                    src="/Assets/ShiningSoon/home-bg-2.png"
                     alt="shining-soon bg 1"
                   />
                 </AspectRatio>
@@ -136,52 +121,62 @@ const ShiningSoon = () => {
                 filter={"brightness(" + brightness + ")"}
                 ratio={1}
                 zIndex="1"
-                top="0px"
-                left={"0px"}
+                top={"30%"}
+                left={"-10%"}
                 transform={"translate(-" + scrollY2 + "px,0px)"}
                 position={"absolute"}
                 minW={{
                   base: "70vw",
                   md: "20rem",
-                  lg: "30rem",
+                  lg: "40rem",
                   xl: "50rem",
                 }}
-                minH={"100vh"}>
+                minH={{
+                  base: "100vh",
+                  md: "20rem",
+                  lg: "40rem",
+                  xl: "60rem",
+                }}>
                 <Image
                   loading="eager"
                   className={styles.leaf_left}
                   fill
                   alt="leaf"
-                  src="/Assets/ShiningSoon/leaf-left.png"
+                  src="/Assets/ShiningSoon/wayang-kiri.png"
                 />
               </AspectRatio>
               <AspectRatio
                 filter={"brightness(" + brightness + ")"}
                 ratio={12 / 16}
                 zIndex="1"
-                top="0px"
-                right={"0px"}
+                top={"30%"}
+                right={"-10%"}
                 position={"absolute"}
                 transform={"translate(" + scrollY2 + "px,0px)"}
                 minW={{
                   base: "70vw",
                   md: "20rem",
-                  lg: "30rem",
+                  lg: "40rem",
                   xl: "50rem",
                 }}
-                minH={"100vh"}>
+                minH={{
+                  base: "100vh",
+                  md: "20rem",
+                  lg: "40rem",
+                  xl: "60rem",
+                }}>
                 <Image
                   loading="eager"
                   className={styles.leaf_right}
                   fill
                   alt="leaf"
-                  src="/Assets/ShiningSoon/leaf-right.png"
+                  src="/Assets/ShiningSoon/wayang-kanan.png"
                 />
               </AspectRatio>
               <Img
                 zIndex={10}
                 opacity={scrollY <= 150 ? 1 : -scrollY / 230 + 1}
-                w={"4rem"} 
+                w={"4rem"}
                 position={"fixed"}
                 bottom={"60px"}
                 left={"50%"}
@@ -191,6 +186,8 @@ const ShiningSoon = () => {
             </Flex>
           </Flex>
         </Box>
+        {/* Logo */}
+        
         <Flex
           opacity={shiningShoonOp}
           zIndex={2}
@@ -203,52 +200,102 @@ const ShiningSoon = () => {
               ? "fixed"
               : "relative"
           }
-          minW={"fit-content"}
+          // minW={"fit-content"}
           flexDir={"column"}
+          minW={{ base: "80vw", md: "60vw", sm: "50vw" }}
           alignItems={"center"}
           justifyContent={"center"}>
-          <AspectRatio zIndex="100" w="20rem" ratio={1}>
+          <AspectRatio zIndex="100" w={{base: "80vw", md: "10 rem", sm: "10 rem"}} h={{base: "5vh", md: "10rem", sm: "5rem"}}>
+            {/* logo mrms */}
             <Image
               fill
-              src="/Assets/ShiningSoon/logomrmsfit.png"
+              src="/Assets/Hastinapura/logo.png"
               alt="Logo Mr. & Ms. UMN"
             />
           </AspectRatio>
-        </Flex>
-        <Flex
-          opacity={hastiOp}
+        </Flex>        
+        
+      </Flex>
+      <Flex
+      direction={"column"}
+      position={"relative"}>
+        {/* Hastinapura */}
+        <Link href="/hastinapura">
+          
+          <Flex
           zIndex={2}
-          top={"50%"}
-          left={"50%"}
+          left={"40%"}
           transform={"translate(-50%, calc(-50%))"}
-          position={
-            mainBg?.current?.offsetHeight &&
-            window.pageYOffset <=
-              mainBg?.current?.offsetHeight - window.innerHeight * 0.5
-              ? "fixed"
-              : "relative"
-          }
+          position={"relative"}
           minW={{ base: "80vw", md: "fit-content" }}
-          flexDir={"column"}
+          flexDir={"row"}
           alignItems={"center"}
           justifyContent={"center"}>
           <Img
-            w={{ base: "40rem", md: "30vw", lg: "20vw" }}
-            src="/Assets/Hastinapura/hastinapura.png"
+            w={{ base: "80rem" }}
+            src="/Assets/Hastinapura/hasti_1.png"
           />
+          <Flex
+          w={"fit-content"}
+          h={"fit-content"}
+          position={"absolute"}
+          top={"40%"}
+          left={"80%"}
+          >
+          
           <Text
-            fontSize={{ base: "1.2rem", md: "1.8rem" }}
+            fontSize={{ md: "2.5rem", sm: "2rem",lg:"3rem"}}
+            className="Cinzel-Decorative"
             textShadow={"0 0 40px #ffe49d"}
             textAlign={"center"}
+            justifyContent={"center"}
             color="#efd094">
-            Hastinapura disebut juga sebagai Grand Opening Mr. & Ms. UMN 2023.
-            Kerajaan Hastinapura adalah awal mula dari perjalanan para Pandawa
-            melakukan perebutan takhta.
+            Hastinapura
           </Text>
+          </Flex>
         </Flex>
+          
+        </Link>
+          
+        <Link href={"/indraprastha"}>
+          {/* Indraprastha */}
+        <Flex
+          // zIndex={2}
+          left={"60%"}
+          transform={"translate(-50%, calc(-50%))"}
+          position={"relative"}
+          minW={{ base: "80vw", md: "fit-content" }}
+          flexDir={"row"}
+          alignItems={"center"}
+          justifyContent={"center"}>
+            <Flex
+            w={"fit-content"}
+            h={"fit-content"}
+            position={"absolute"}
+            top={"45%"}
+            left={"0%"}
+            >
+            <Text
+              fontSize={{ md: "3rem", sm: "2rem",lg:"2.5rem" }}
+              style={{fontFamily: "Cinzel-Decorative"}}
+              fontFamily={"Cinzel-Decorative"}
+              textShadow={"0 0 40px #ffe49d"}
+              textAlign={"center"}
+              color="#efd094">
+              Indraprastha
+            </Text>
+
+            </Flex>
+          <Img
+            w={{ base: "80rem" }}
+            src="/Assets/Hastinapura/hasti_2.png"
+          />
+        </Flex>
+        </Link>
+        
       </Flex>
     </>
   );
 };
 
-export { ShiningSoon as ShiningSoon };
+export { ShiningSoon2 as ShiningSoon2 };

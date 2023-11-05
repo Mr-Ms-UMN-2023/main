@@ -353,3 +353,14 @@
   /* Define your pulse animation here */
   animation: pulse 2s infinite;
 }
+
+.image-responsive{
+  max-width: 100%;
+  height: auto;
+  width: auto\9;
+}
+
+@font-face{
+  font-family: "Cinzel-Decorative";
+  src: url("../public/Font/CinzelDecorative-Regular.ttf") format("truetype");
+}
