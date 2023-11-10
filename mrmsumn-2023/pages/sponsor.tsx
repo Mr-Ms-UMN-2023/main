@@ -2,18 +2,19 @@ import { Loading, Navbar, ListSponsor } from "@/components";
 import { useState, useEffect, useRef } from "react";
 
 const Sponsor = () => {
-
   const [list, setList] = useState<any>([]);
 
   const fetchData = async () => {
-    const response = await fetch("/api/sponsor_medpar?type=sponsor");
+    const response = await fetch(
+      "https://mrms2023.my.id/api/sponsor_medpar/get/sponsors"
+    );
 
-    const parsedResponse = await response.json();      
-    if (parsedResponse.status == 200){
-        const list = parsedResponse.data;
-        setList(list);
-    }     
-  }
+    const parsedResponse = await response.json();
+    if (parsedResponse.status == 200) {
+      const list = parsedResponse.data;
+      setList(list);
+    }
+  };
 
   useEffect(() => {
     fetchData();
@@ -24,7 +25,7 @@ const Sponsor = () => {
       {/* <Loading /> */}
       <Navbar />
 
-      <ListSponsor list={list}/>
+      <ListSponsor list={list} />
     </>
   );
 };
@@ -34,26 +35,25 @@ const Sponsor = () => {
 //   const APP_URL = process.env.APP_URL;
 
 //   try {
-      
+
 //       const response = await fetch(APP_URL + "/api/sponsor_medpar?type=sponsor");
 
-//       const parsedResponse = await response.json();      
+//       const parsedResponse = await response.json();
 //       if (parsedResponse.status == 200){
 //           const list = parsedResponse.data;
-//           return {props : {list}}          
-//       }      
-      
+//           return {props : {list}}
+//       }
+
 //       return {
 //           props : {
 //               fail : true
 //           }
 //       }
 
-
 //   } catch (err) {
 //       return {
 //           props : {
-//               fail : true, 
+//               fail : true,
 //           }
 //       }
 //   }

@@ -118,7 +118,7 @@ const TiketHimalaya = () => {
 
           <Box
             cursor={"pointer"}
-            onClick={() => router.push("/tiket-himalaya/konfirmasi")}
+            onClick={() => router.push("/ticket-himalaya/konfirmasi")}
             w={"fit-content"}
             alignSelf={"center"}
             justifySelf={"center"}

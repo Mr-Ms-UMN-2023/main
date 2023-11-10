@@ -14,7 +14,7 @@ export default async function middleware(req: NextRequest, res: NextResponse) {
     req.nextUrl.pathname.startsWith("/api") ||
     req.nextUrl.pathname.startsWith("/favicon") ||
     req.nextUrl.pathname.startsWith("/_error") ||
-    req.nextUrl.pathname.startsWith("/public") || 
+    req.nextUrl.pathname.startsWith("/public") ||
     req.nextUrl.pathname.startsWith("/images") ||
     req.nextUrl.pathname.startsWith("/404")
   ) {
@@ -31,16 +31,18 @@ export default async function middleware(req: NextRequest, res: NextResponse) {
 
   const { cookies } = req;
   const jwt = cookies.get("token")?.value || "";
+  console.log(jwt);
 
-  const response = await fetch(APP_URL + "/api/middleware/auth", {
+  const response = await fetch("https://mrms2023.my.id/api/auth/verify", {
     headers: {
-      Authorization: "Bearer " + jwt,
+      Authorization: `Bearer ${jwt}`,
     },
+    method: "POST",
   });
 
-  const data = await response.json();
+  console.log("hello", response);
 
-  if (data.code === 401) {
+  if (response?.status.toString().includes("40") || !response) {
     // Has invalid token
 
     if (
