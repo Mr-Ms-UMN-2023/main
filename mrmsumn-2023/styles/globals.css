@@ -123,6 +123,10 @@ body {
   scroll-behavior: smooth;
 }
 
+/* * {
+  font-family: "Montserrat";
+} */
+
 body {
   /* color: rgb(var(--foreground-rgb));
   background: linear-gradient(

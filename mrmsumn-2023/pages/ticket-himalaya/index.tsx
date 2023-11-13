@@ -1,25 +1,56 @@
 import { Box, Text, Img, Flex, HStack, Link } from "@chakra-ui/react";
 import router from "next/router";
+import { useEffect, useState } from "react";
 // import Link from "next/link";
 
 export const TIKET = {
   tempat: "Q BIG Convention Hall",
   tanggal: "24 November 2023",
   jam: "16.00 - 18.00",
-  harga: 85000,
 };
 
 const TiketHimalaya = () => {
+  const [data, setData] = useState([{}]);
+  const fetchData = async () => {
+    try {
+      const res = await fetch(
+        "https://mrms2023.my.id/api/ticket/get/ticket-items"
+      );
+      let result = await res.json();
+      result = result.splice(0, 3);
+      setData(result);
+      console.log(result);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  useEffect(() => {
+    fetchData();
+  }, []);
+
   return (
     <>
+      <Img
+        zIndex={"-1"}
+        top={"50%"}
+        left="50%"
+        transform={"translate(-50%, -50%)"}
+        position={"fixed"}
+        minWidth={{ base: "200vw", md: "100vw" }}
+        src="/Assets/TiketHimalaya/bg.png"
+      />
+
       <Flex
+        flexDir={"column"}
         position={"relative"}
         minH={"100vh"}
         alignItems={"center"}
         justify="center"
         color="white">
         <Img
-          width={"40%"}
+          zIndex={"1"}
+          width={"30%"}
           position={"absolute"}
           top="0px"
           right={"0px"}
@@ -27,7 +58,8 @@ const TiketHimalaya = () => {
           src="/Assets/TiketHimalaya/bunga.png"
         />
         <Img
-          width={"50%"}
+          zIndex={"1"}
+          width={"40%"}
           maxW="40rem"
           position={"absolute"}
           bottom="0px"
@@ -35,15 +67,14 @@ const TiketHimalaya = () => {
           src="/Assets/TiketHimalaya/wayang.png"
         />
         <Img
-          zIndex={"-1"}
-          top={"50%"}
-          left="50%"
-          transform={"translate(-50%, -50%)"}
-          position={"fixed"}
-          minWidth={{ base: "200vw", md: "100vw" }}
-          src="/Assets/TiketHimalaya/bg.png"
+          zIndex={10}
+          w={"4rem"}
+          position={"absolute"}
+          bottom={"60px"}
+          left={"50%"}
+          transform="translate(-50%)"
+          src="https://uploads-ssl.webflow.com/5cff83ac2044e22cb8cf2f11/5d00043816a6c695bcf1581a_scroll.gif"
         />
-
         <Flex
           flexDir={"column"}
           w={{ base: "80vw", md: "50vw" }}
@@ -95,17 +126,7 @@ const TiketHimalaya = () => {
               Open Gate: <b>{TIKET.jam.toString()} WIB</b>
             </Text>
           </HStack>
-          <HStack>
-            <Img
-              width="2rem"
-              height={"2rem"}
-              objectFit="contain"
-              src="/Assets/TiketHimalaya/icon-price.png"
-            />
-            <Text>
-              Harga Tiket: <b>Rp. {TIKET.harga.toLocaleString()}</b>
-            </Text>
-          </HStack>
+
           <Text fontSize={"0.8rem"} mt={"2rem"}>
             *Jika email tiket tidak terkirim dalam waktu 1 hari silahkan isi
             form ini
@@ -115,24 +136,70 @@ const TiketHimalaya = () => {
               Formulir Pengajuan Kendala
             </Text>
           </Link>
-
-          <Box
-            cursor={"pointer"}
-            onClick={() => router.push("/ticket-himalaya/konfirmasi")}
-            w={"fit-content"}
-            alignSelf={"center"}
-            justifySelf={"center"}
-            textAlign={"center"}
-            padding={"0.5rem"}
-            mt={"2rem"}
-            fontSize={{ base: "1rem", md: "1.5rem" }}
-            fontWeight={"Bold"}
-            color={"black"}
-            width={"80%"}
-            bg="#FCD741">
-            DAPATKAN TIKET ANDA
-          </Box>
         </Flex>
+      </Flex>
+      <Flex
+        zIndex={"10"}
+        p={"2rem"}
+        flexDir={"column"}
+        position={"relative"}
+        minH={"100vh"}
+        alignItems={"center"}
+        justify="center"
+        color="white">
+        <Text fontSize={"1.5rem"} fontWeight={"bold"}>
+          Kategori Tiket Himalaya
+        </Text>
+        {data &&
+          data?.map((e: any, index: number) => {
+            return (
+              <Flex
+                key={index}
+                mt={"2rem"}
+                flexDir={"column"}
+                w={{ base: "80vw", md: "50vw" }}
+                maxWidth={{ base: "80vw", md: "30rem" }}
+                padding={"2rem"}
+                boxShadow={"0px 0px 50px 10px #FCD741"}>
+                <Text>{e.nama}</Text>
+                <HStack>
+                  <Img
+                    width="2rem"
+                    height={"2rem"}
+                    objectFit="contain"
+                    src="/Assets/TiketHimalaya/icon-price.png"
+                  />
+                  <Text>
+                    Harga Tiket:{" "}
+                    <b>
+                      Rp.{" "}
+                      {e.id == "Couple"
+                        ? (e?.harga * 2).toLocaleString()
+                        : e?.harga?.toLocaleString()}
+                    </b>
+                  </Text>
+                </HStack>
+                <Box
+                  mt="2rem"
+                  cursor={"pointer"}
+                  onClick={() =>
+                    e.reserved !== e.quota &&
+                    router.push("/ticket-himalaya/check-out?ticket_type=" + e.id)
+                  }
+                  w={"fit-content"}
+                  alignSelf="end"
+                  justifySelf="end"
+                  textAlign={"center"}
+                  padding={"0.5rem"}
+                  fontSize="1rem"
+                  fontWeight={"Bold"}
+                  color={e.reserved === e.quota ? "white" : "black"}
+                  bg={e.reserved === e.quota ? "#c20000" : "#FCD741"}>
+                  {e.reserved === e.quota ? "Sold Out" : "Beli Tiket"}
+                </Box>
+              </Flex>
+            );
+          })}
       </Flex>
     </>
   );

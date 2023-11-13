@@ -22,6 +22,12 @@ import { useState, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { TIKET } from ".";
 
+const HARGA: any = {
+  Earlybird: 85000,
+  Presale: 100000,
+  Sale: 115000,
+};
+
 declare global {
   interface Window {
     // ⚠️ notice that "Window" is capitalized here
@@ -38,9 +44,19 @@ const HimalayaKonfirm = () => {
     handleSubmit,
     formState: { errors },
     getValues,
+    setValue,
     watch,
   } = useForm({});
   const [load, setLoad] = useState<any>();
+  const [typeID, setTypeID] = useState<any>("Earlybird");
+
+  useEffect(() => {
+    const pattern = /ticket_type=([a-zA-Z0-9-]+)/;
+    const match = window.location.href.toString().match(pattern);
+    match[1] == "Couple" && setValue("jumlah", 2);
+    console.log(match[1]);
+    setTypeID(match[1]);
+  }, []);
 
   const formObject = [
     {
@@ -97,6 +113,7 @@ const HimalayaKonfirm = () => {
             "Jumlah pembelian maksimal untuk satu sesi pembayaran adalah 4 tiket",
         },
       },
+      fixValue: typeID == "Couple" && 2,
     },
   ];
 
@@ -134,10 +151,12 @@ const HimalayaKonfirm = () => {
     }
 
     const formData = new FormData();
+
     formData.append("nama", e.nama);
     formData.append("email", e.email);
     formData.append("whatsapp", e.whatsapp);
     formData.append("jumlah", e.jumlah);
+    formData.append("item_id", typeID);
 
     const response = await fetch("https://mrms2023.my.id/api/ticket/register", {
       method: "POST",
@@ -283,9 +302,10 @@ const HimalayaKonfirm = () => {
                   key={"himalayaInput" + index}>
                   <FormLabel color={"white"}>{e.label}</FormLabel>
                   <Input
+                    disabled={e.fixValue ? true : false}
                     type={e.type}
                     bg="white"
-                    {...register(e.name, e.validation)}></Input>
+                    {...register(e.name, !e.fixValue && e.validation)}></Input>
                   {errors[e.name] && (
                     <FormErrorMessage fontWeight={"bold"} color={"red"}>
                       {errors[e.name]?.message?.toString() || ""}
@@ -308,9 +328,11 @@ const HimalayaKonfirm = () => {
               <Text>
                 Harga Total Tiket:{" "}
                 <b>
-                  Rp.{" "}
-                  {watch("jumlah")
-                    ? (watch("jumlah") * TIKET.harga).toLocaleString()
+                  Rp. {typeID == "Couple" && (170000).toLocaleString()}
+                  {typeID !== "Couple" && watch("jumlah")
+                    ? (
+                        watch("jumlah") * Number(HARGA[`${typeID}`])
+                      ).toLocaleString()
                     : "-"}
                 </b>
               </Text>

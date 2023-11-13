@@ -14,12 +14,13 @@ const publicRoutes: any = [
   "/gallery",
   "/medpar",
   "/ticket-himalaya",
-  "/ticket-himalaya/konfirmasi",
+  "/ticket-himalaya/check-out",
   "/ticket-himalaya/qr",
   "/scan-qr",
   "/get-tiket",
   "/e-ticket",
   "/indraprastha",
+  "/voting",
 ];
 
 export { protectedRoutes, publicRoutes };
