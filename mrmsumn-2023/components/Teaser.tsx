@@ -33,10 +33,12 @@ const Teaser = () => {
       let userAgent = navigator.userAgent;
 
       if (userAgent.match(/firefox|fxios/i)) {
-        setTeaser("https://www.youtube.com/embed/N8noHibx5lw?autoplay=1");
+        setTeaser(
+          "https://www.youtube.com/embed/jSSxhG8L16c?si=vUzfdEa7q8hzyvIy?autoplay=1"
+        );
       } else {
         setTeaser(
-          "https://www.youtube.com/embed/N8noHibx5lw?mute=1&autoplay=1"
+          "https://www.youtube.com/embed/jSSxhG8L16c?si=vUzfdEa7q8hzyvIy?mute=1&autoplay=1"
         );
       }
     }

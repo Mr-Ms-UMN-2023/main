@@ -74,7 +74,7 @@ const AdminTransaction = () => {
 
     const req = { order_id: transactionID.toString() };
     console.log(req);
-    const res = await fetch("http://localhost:8000/api/admin/ticket/resend", {
+    const res = await fetch("https://mrms2023.my.id/api/admin/ticket/resend", {
       body: JSON.stringify(req),
       method: "POST",
       headers: {

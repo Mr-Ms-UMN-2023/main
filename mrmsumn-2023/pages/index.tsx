@@ -15,6 +15,7 @@ import {
   CandidatesDesktop,
   CandidatesMobile,
   Footer,
+  Voting,
 } from "@/components";
 
 import { useState, useEffect, useRef } from "react";
@@ -45,15 +46,20 @@ export default function Home(props: any) {
 
   useEffect(() => {
     window.scrollTo(0, 0);
+    router.push("/voting");
   }, []);
 
   return (
     <>
-      <Navbar />
+      {/* <Navbar />
       <ShiningSoon />
-        {desktop ? <CandidatesDesktop show={true} /> : <CandidatesMobile show={true} brightness={1}/>}
+      {desktop ? (
+        <CandidatesDesktop show={true} />
+      ) : (
+        <CandidatesMobile show={true} brightness={1} />
+      )}
       <Dedikasi />
-      <Teaser />
+      <Teaser /> */}
       {/* {dedikasi && <Dedikasi Dedikasi={setDedikasi} />}
       <ButtonDedikasi Dedikasi={setDedikasi} />
       
@@ -64,7 +70,11 @@ export default function Home(props: any) {
     <MrMsDetail /> */}
 
       {/* DISINI BUAT POPUPNYA */}
-      <Footer />
+      {/* <Footer /> */}
+      <Navbar />
+      <Voting />
+      <Dedikasi />
+      <Teaser />
     </>
   );
 }
