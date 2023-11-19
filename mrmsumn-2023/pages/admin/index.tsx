@@ -15,6 +15,7 @@ import {
   Td,
 } from "@chakra-ui/react";
 import styles from "@/styles/Home.module.css";
+import { getCookies } from "cookies-next";
 import { useState, useEffect, useRef } from "react";
 
 export default function Test() {
@@ -22,45 +23,45 @@ export default function Test() {
   const router = useRouter();
 
   return (
-    <Container maxW="container.lg" mt={8}>
-      <Box p={6} shadow="md" borderWidth="1px" borderRadius="md">
-        <Heading size="lg" color="white">
-          Admin Dashboard
-        </Heading>
-        <Flex gap="1rem">
-          <Button
-            mt={4}
-            bg="#c28824"
-            onClick={() => {
-              router.push("/admin/sponsor");
-            }}>
-            Sponsor
-          </Button>
-          <Button
-            mt={4}
-            bg="#c28824"
-            onClick={() => {
-              router.push("/admin/medpar");
-            }}>
-            Media Partner
-          </Button>
-          <Button
-            mt={4}
-            bg="#c28824"
-            onClick={() => {
-              router.push("/admin/transaction");
-            }}>
-            Transaksi
-          </Button>
-        </Flex>
-      </Box>
-    </Container>
+    <AdminNav/>
   );
 }
 
 const AdminNav = () => {
   const { user, setUser } = useContext(UserContext);
+  // console.log(user);
   const router = useRouter();
+
+  const [ role, setRole ] = useState<any>();
+
+  const fetchData = async () => {
+    try {
+      const response = await fetch(
+        "https://mrms2023.my.id/api/self",
+        {
+          headers: {
+            Authorization: `Bearer ` + getCookies().token,
+          },
+        }
+      );
+
+      const parsedResponse = await response.json();
+
+      if (parsedResponse.code == 200) {
+          const data = parsedResponse.data;
+          console.log(data);
+          setRole(data?.role)
+      }
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+
+  useEffect(() => {
+    fetchData();
+  },[]);
+  
   return (
     <Container maxW="container.lg" mt={8}>
       <Box p={6} shadow="md" borderWidth="1px" borderRadius="md">
@@ -68,30 +69,59 @@ const AdminNav = () => {
           Admin Dashboard
         </Heading>
         <Flex gap="1rem">
-          <Button
-            mt={4}
-            bg="#c28824"
-            onClick={() => {
-              router.push("/admin/sponsor");
-            }}>
-            Sponsor
-          </Button>
-          <Button
-            mt={4}
-            bg="#c28824"
-            onClick={() => {
-              router.push("/admin/medpar");
-            }}>
-            MedPar
-          </Button>
-          <Button
-            mt={4}
-            bg="#c28824"
-            onClick={() => {
-              router.push("/admin/transaction");
-            }}>
-            Transaksi
-          </Button>
+
+          {
+            role == "bima" ?
+              <>
+              <Button
+                mt={4}
+                bg="#c28824"
+                onClick={() => {
+                  router.push("/admin/vote");
+                }}>
+                Voting
+              </Button>
+              </>
+
+              : 
+
+                <>
+                <Button
+                mt={4}
+                bg="#c28824"
+                onClick={() => {
+                  router.push("/admin/sponsor");
+                }}>
+                Sponsor
+              </Button>
+              <Button
+                mt={4}
+                bg="#c28824"
+                onClick={() => {
+                  router.push("/admin/medpar");
+                }}>
+                MedPar
+              </Button>
+              <Button
+                mt={4}
+                bg="#c28824"
+                onClick={() => {
+                  router.push("/admin/transaction");
+                }}>
+                Transaksi
+              </Button>
+              <Button
+                mt={4}
+                bg="#c28824"
+                onClick={() => {
+                  router.push("/admin/vote");
+                }}>
+                Voting
+              </Button>                
+                </>
+
+          }
+
         </Flex>
       </Box>
     </Container>
