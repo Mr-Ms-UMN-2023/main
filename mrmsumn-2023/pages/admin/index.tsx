@@ -85,41 +85,80 @@ const AdminNav = () => {
 
               : 
 
-                <>
-                <Button
-                mt={4}
-                bg="#c28824"
-                onClick={() => {
-                  router.push("/admin/sponsor");
-                }}>
-                Sponsor
-              </Button>
-              <Button
-                mt={4}
-                bg="#c28824"
-                onClick={() => {
-                  router.push("/admin/medpar");
-                }}>
-                MedPar
-              </Button>
-              <Button
-                mt={4}
-                bg="#c28824"
-                onClick={() => {
-                  router.push("/admin/transaction");
-                }}>
-                Transaksi
-              </Button>
-              <Button
-                mt={4}
-                bg="#c28824"
-                onClick={() => {
-                  router.push("/admin/vote");
-                }}>
-                Voting
-              </Button>                
-                </>
+              (
+                role == "wisanggeni" 
+                  ? 
+                  <>
+                  <Button
+                    mt={4}
+                    bg="#c28824"
+                    onClick={() => {
+                      router.push("/admin/ticket/scan");
+                    }}>
+                    Scan Tiket Himalaya
+                  </Button>
+                  <Button
+                    mt={4}
+                    bg="#c28824"
+                    onClick={() => {
+                      router.push("/admin/ticket");
+                    }}>
+                    Presensi Tiket
+                  </Button>                  
+                  </>
 
+                  :
+                  <>
+                  <Button
+                  mt={4}
+                  bg="#c28824"
+                  onClick={() => {
+                    router.push("/admin/sponsor");
+                  }}>
+                  Sponsor
+                </Button>
+                <Button
+                  mt={4}
+                  bg="#c28824"
+                  onClick={() => {
+                    router.push("/admin/medpar");
+                  }}>
+                  MedPar
+                </Button>
+                <Button
+                  mt={4}
+                  bg="#c28824"
+                  onClick={() => {
+                    router.push("/admin/transaction");
+                  }}>
+                  Transaksi
+                </Button>
+                <Button
+                  mt={4}
+                  bg="#c28824"
+                  onClick={() => {
+                    router.push("/admin/vote");
+                  }}>
+                  Voting
+                </Button>  
+                <Button
+                    mt={4}
+                    bg="#c28824"
+                    onClick={() => {
+                      router.push("/admin/ticket/scan");
+                    }}>
+                    Scan Tiket Himalaya
+                  </Button>
+                  <Button
+                    mt={4}
+                    bg="#c28824"
+                    onClick={() => {
+                      router.push("/admin/ticket");
+                    }}>
+                    Presensi Tiket
+                  </Button>                                 
+                  </>                  
+              )
           }
 
         </Flex>
