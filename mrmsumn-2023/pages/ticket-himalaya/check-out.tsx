@@ -21,6 +21,7 @@ import Head from "next/head";
 import { useState, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { TIKET } from ".";
+import { useRouter } from "next/navigation";
 
 const HARGA: any = {
   Earlybird: 85000,
@@ -50,7 +51,17 @@ const HimalayaKonfirm = () => {
   const [load, setLoad] = useState<any>();
   const [typeID, setTypeID] = useState<any>("Earlybird");
 
+  const router = useRouter();
+
   useEffect(() => {
+    let today = new Date();
+    console.log("today", today.toString());
+    if (today.toString() >= "Fri Nov 24 2023 18:00:00 GMT+0700") {
+      console.log("lewat mase");
+      router.push("/ticket-himalaya");
+    }
+    // let now = Date(Date.now());
+    // console.log("Now", now);
     const pattern = /ticket_type=([a-zA-Z0-9-]+)/;
     const match = window.location.href.toString().match(pattern);
     match[1] == "Couple" && setValue("jumlah", 2);

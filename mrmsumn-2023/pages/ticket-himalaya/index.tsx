@@ -1,4 +1,20 @@
-import { Box, Text, Img, Flex, HStack, Link } from "@chakra-ui/react";
+import {
+  Box,
+  Text,
+  Img,
+  Flex,
+  HStack,
+  Link,
+  Modal,
+  Button,
+  ModalBody,
+  ModalCloseButton,
+  ModalContent,
+  ModalFooter,
+  ModalHeader,
+  ModalOverlay,
+  useDisclosure,
+} from "@chakra-ui/react";
 import router from "next/router";
 import { useEffect, useState } from "react";
 // import Link from "next/link";
@@ -24,13 +40,41 @@ const TiketHimalaya = () => {
       console.log(err);
     }
   };
+  const { isOpen, onOpen, onClose } = useDisclosure();
+  const [tutup, setTutup] = useState<any>(false);
 
   useEffect(() => {
     fetchData();
+    let today = new Date();
+    console.log("today", today.toString());
+    if (today.toString() >= "Fri Nov 24 2023 18:00:00 GMT+0700") {
+      console.log("lewat mase");
+      // router.push("/ticket-himalaya");
+      setTutup(true);
+    }
   }, []);
 
   return (
     <>
+      <Modal isOpen={isOpen} onClose={onClose}>
+        <ModalOverlay />
+        <ModalContent>
+          <ModalHeader>Modal Title</ModalHeader>
+          <ModalCloseButton />
+          <ModalBody>
+            <Text>
+              Semua Pembelian Tiket setelah jam 18.00 dilakukan pada Q BIG
+              Convention Hall
+            </Text>
+          </ModalBody>
+
+          <ModalFooter>
+            <Button colorScheme="blue" mr={3} onClick={onClose}>
+              Close
+            </Button>
+          </ModalFooter>
+        </ModalContent>
+      </Modal>
       <Img
         zIndex={"-1"}
         top={"50%"}
@@ -112,7 +156,7 @@ const TiketHimalaya = () => {
               src="/Assets/TiketHimalaya/icon-calendar.png"
             />
             <Text>
-              Tangal: ̌<b>{TIKET.tanggal}</b>
+              Tanggal: ̌<b>{TIKET.tanggal}</b>
             </Text>
           </HStack>
           <HStack>
@@ -126,6 +170,11 @@ const TiketHimalaya = () => {
               Open Gate: <b>{TIKET.jam.toString()} WIB</b>
             </Text>
           </HStack>
+
+          <Text fontWeight={"bold"} color={"#FCD741"}>
+            Semua Pembelian Tiket setelah jam 18.00 dilakukan pada Q BIG
+            Convention Hall
+          </Text>
 
           <Text fontSize={"0.8rem"} mt={"2rem"}>
             *Jika email tiket tidak terkirim dalam waktu 1 hari silahkan isi
@@ -183,8 +232,11 @@ const TiketHimalaya = () => {
                   mt="2rem"
                   cursor={"pointer"}
                   onClick={() =>
-                    e.reserved !== e.quota &&
-                    router.push("/ticket-himalaya/check-out?ticket_type=" + e.id)
+                    e.reserved !== e.quota && tutup
+                      ? onOpen()
+                      : router.push(
+                          "/ticket-himalaya/check-out?ticket_type=" + e.id
+                        )
                   }
                   w={"fit-content"}
                   alignSelf="end"

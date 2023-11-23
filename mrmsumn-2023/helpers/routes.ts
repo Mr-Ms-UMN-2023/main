@@ -15,6 +15,7 @@ const publicRoutes: any = [
   "/medpar",
   "/ticket-himalaya",
   "/ticket-himalaya/check-out",
+  // "/ticket-himalaya/check-out?ticket_type=Couple",
   "/ticket-himalaya/qr",
   "/scan-qr",
   "/get-tiket",
