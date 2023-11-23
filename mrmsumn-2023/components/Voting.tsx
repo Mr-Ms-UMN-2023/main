@@ -27,6 +27,7 @@ const Voting = () => {
   const [scrollY, setScrollY] = useState<any>(0);
   const [vote, setVote] = useState([]);
   const [total, setTotal] = useState(0);
+  const [closeVote, setCloseVote] = useState<any>(false);
   const candidate = [
     {
       id: "8",
@@ -199,8 +200,23 @@ const Voting = () => {
 
     document.body.appendChild(scriptTag);
 
+    const targetDate = new Date('2023-11-24T20:00:00');
+
+    const countDownInterval = setInterval(() => {
+        if (closeVote) {console.log("CLOSE");return;}
+        const currentDate = new Date();
+        console.log("Target : ", targetDate);
+        console.log("Current : ", currentDate);
+
+        if (currentDate.getTime() >= targetDate.getTime()){
+          setCloseVote(true);
+        }
+        
+    }, 1000);
+
     return () => {
       document.body.removeChild(scriptTag);
+      clearInterval(countDownInterval);
     };
   }, []);
 
@@ -447,21 +463,26 @@ const Voting = () => {
                     );
                   })}
 
-                  <Box
-                    cursor={"pointer"}
-                    onClick={() => setOnVote(index)}
-                    mt="5rem"
-                    alignSelf={"end"}
-                    fontSize={"1.5rem"}
-                    borderRadius={"8px"}
-                    w={"fit-content"}
-                    bg="linear-gradient(-45deg, #fff09e 0%, #e2c062 100%)"
-                    p="1rem"
-                    color={"#443a25"}
-                    fontStyle="italic"
-                    fontWeight={"black"}>
-                    VOTE HERE
-                  </Box>
+                  {!closeVote && 
+
+                      <Box
+                      cursor={"pointer"}
+                      onClick={() => setOnVote(index)}
+                      mt="5rem"
+                      alignSelf={"end"}
+                      fontSize={"1.5rem"}
+                      borderRadius={"8px"}
+                      w={"fit-content"}
+                      bg="linear-gradient(-45deg, #fff09e 0%, #e2c062 100%)"
+                      p="1rem"
+                      color={"#443a25"}
+                      fontStyle="italic"
+                      fontWeight={"black"}>
+                      VOTE HERE
+                      </Box>                  
+                  
+                  }
+
                 </Flex>
               </Flex>
             );
